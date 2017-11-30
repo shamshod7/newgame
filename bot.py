@@ -7,7 +7,7 @@ import opr_data
 import math
 import random
 import threading
-from telebot import types
+import types
 
 token = os.environ['TELEGRAM_TOKEN']
 
