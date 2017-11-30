@@ -1,5 +1,5 @@
 redis
-os
+
 telebot
 math
 random
