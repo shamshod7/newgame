@@ -1,0 +1,7 @@
+redis
+os
+telebot
+math
+random
+threading
+types
