@@ -11,7 +11,7 @@ from telebot import types
 
 some_token = os.environ[SOME_TOKEN]
 
-bot = telebot.TeleBot(opr_config.token)
+bot = telebot.TeleBot(token)
 
 
 
