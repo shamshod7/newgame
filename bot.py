@@ -300,7 +300,7 @@ def abcd(id):
     elif opr_data.oprmove[id]['oprldef']==0:
         opr_data.text3 = 'Вы нанесли опричнику удар по ногам!'
     if opr_data.oprmove[id]['chlen']==1:
-        opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар по члену! опричник повержен!
+        opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар по члену! опричник повержен!'
 
 
 
