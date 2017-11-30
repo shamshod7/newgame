@@ -323,7 +323,7 @@ def timers(id):
     if id not in opr_data.ban:
         opr_data.ban.append(id)
         print(opr_data.ban)
-        removethread=threading.Timer(60.0, removeban,[id])
+        removethread=threading.Timer(900.0, removeban,[id])
         removethread.start()
         opr_data.oprmove[id]=createopr()
         opr_data.player.person[id] = createuser()
@@ -357,12 +357,12 @@ def play(id):
     else:
         if opr_data.player.person[id]['hp']<=0:
             bot.send_message(id, '*Опричник победил вас.*'+"\n"+
-                             '-Даже с больным коленом брошу тебя в темницу...')
+                             '-Даже с больным коленом брошу тебя в темницу...'+"\n"+'*Следующий бой через 15 минут после начала предыдущего)')
             print('Поражение '+str(id))
             #opr_data.player.person[id]['z'] = 0
         else:
             bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
-                             '-А ты силён... попадешь в темницу в другой раз')
+                             '-А ты силён... попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего)')
             print('Победа ' + str(id))
             #opr_data.player.person[id]['z']=0
 
