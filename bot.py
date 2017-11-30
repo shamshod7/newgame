@@ -8,7 +8,7 @@ import math
 import random
 import threading
 from telebot import types
-
+token = os.environ['TELEGRAM_TOKEN']
 some_token = os.environ[SOME_TOKEN]
 
 bot = telebot.TeleBot(token)
