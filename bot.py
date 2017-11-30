@@ -7,7 +7,7 @@ import math
 import random
 import threading
 from telebot import types
-bot = telebot.TeleBot(token)
+bot = telebot.TeleBot('TELEGRAM_TOKEN')
 
 
 
