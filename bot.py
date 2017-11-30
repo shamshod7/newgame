@@ -156,6 +156,7 @@ def createuser():
 
 def createopr():
     return {'tatk':0,
+         'chlen':0,
          'hatk':0,
          'latk':0,
          'tdef':0,
