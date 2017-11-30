@@ -359,12 +359,12 @@ def play(id):
             bot.send_message(id, '*Опричник победил вас.*'+"\n"+
                              '-Даже с больным коленом брошу тебя в темницу...')
             print('Поражение '+str(id))
-            opr_data.player.person[id]['z'] = 0
+            #opr_data.player.person[id]['z'] = 0
         else:
             bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
                              '-А ты силён... попадешь в темницу в другой раз')
             print('Победа ' + str(id))
-            opr_data.player.person[id]['z']=0
+            #opr_data.player.person[id]['z']=0
 
 
 
