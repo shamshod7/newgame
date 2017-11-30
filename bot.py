@@ -254,6 +254,10 @@ def pldmg(id):
 
     
     elif opr_data.player.person[id]['latk']==1:
+        chlen=random.randint(1, 100)
+        if chlen<6:
+            opr_data.oprmove[id]['hp']=0
+            opr_data.oprmove[id]['chlen']=1
         if opr_data.oprmove[id]['ldef']==1:
             oprldef=1
             opr_data.oprmove[id]['oprldef'] = oprldef
@@ -294,6 +298,8 @@ def abcd(id):
         opr_data.text3='Опричник ушел от удара по ногам'
     elif opr_data.oprmove[id]['oprldef']==0:
         opr_data.text3 = 'Вы нанесли опричнику удар по ногам!'
+    if opr_data.oprmove[id]['chlen']==1:
+        opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар по члену! опричник повержен!
 
 
 
@@ -359,12 +365,14 @@ def play(id):
             bot.send_message(id, '*Опричник победил вас.*'+"\n"+
                              '-Даже с больным коленом брошу тебя в темницу...'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
             print('Поражение '+str(id))
-            #opr_data.player.person[id]['z'] = 0
+            opr_data.oprmove[id]['chlen']=0
+            opr_data.player.person[id]['z'] = 0
         else:
             bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
                              '-А ты силён... попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
             print('Победа ' + str(id))
-            #opr_data.player.person[id]['z']=0
+            opr_data.oprmove[id]['chlen']=0
+            opr_data.player.person[id]['z']=0
 
 
 
