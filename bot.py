@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import redis
+import os
 import telebot
 import opr_config
 import opr_data
@@ -7,6 +8,9 @@ import math
 import random
 import threading
 from telebot import types
+
+some_token = os.environ[SOME_TOKEN]
+
 bot = telebot.TeleBot(opr_config.token)
 
 
