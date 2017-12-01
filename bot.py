@@ -393,7 +393,7 @@ def timers(id, fname):
     if id not in opr_data.ban:
         opr_data.ban.append(id) 
         print(opr_data.ban)
-        removethread=threading.Timer(900.0, removeban,[id])
+        removethread=threading.Timer(80.0, removeban,[id])
         removethread.start()
         opr_data.oprmove[id]=createopr()
         opr_data.player.person[id] = createuser()
@@ -403,7 +403,7 @@ def timers(id, fname):
     else:
         if id in opr_data.players:
           if opr_data.player.person[id]['endgame']==1:
-            return 'опричник отдыхает, приходите через 15 минут после начала предыдущего боя'
+            return 'опричник отдыхает, приходите через 2 минут после начала предыдущего боя'
           thr=threading.Thread(target=play, args=[id])
           thr.start()
         #play(id)
@@ -432,7 +432,7 @@ def play(id):
     else:
         if opr_data.player.person[id]['hp']<=0:
             bot.send_message(id, '*Опричник победил вас.*'+"\n"+
-                             '-Даже с больным коленом брошу тебя в темницу, '+opr_data.player.person[id]['name']+'!'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
+                             '-Даже с больным коленом брошу тебя в темницу, '+opr_data.player.person[id]['name']+'!'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
                              
             print('Поражение '+str(id))
             opr_data.oprmove[id]['chlen']=0
@@ -444,7 +444,7 @@ def play(id):
                 opr_data.oprmove[id]['hp']=100
         else:
             bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
-                             '-А ты силён, '+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
+                             '-А ты силён, '+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
             print('Победа ' + str(id))
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z']=0
