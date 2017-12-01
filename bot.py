@@ -377,9 +377,9 @@ def play(id):
         bot.send_message(id, 'Новый раунд!')
         opr_data.player.person[id]['x'] = 1
         Keyboard=types.InlineKeyboardMarkup()
+        Keyboard.add(types.InlineKeyboardButton(text="Голова", callback_data='head'))
         Keyboard.add(types.InlineKeyboardButton(text="Тело", callback_data='telo'))
         Keyboard.add(types.InlineKeyboardButton(text="Ноги", callback_data='leg'))
-        Keyboard.add(types.InlineKeyboardButton(text="Голова", callback_data='head'))
         msg=bot.send_message(id, '*Выберите место для атаки*',reply_markup=Keyboard)
     else:
         if opr_data.player.person[id]['hp']<=0:
