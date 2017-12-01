@@ -12,7 +12,7 @@ token = os.environ['TELEGRAM_TOKEN']
 
 bot = telebot.TeleBot(token)
 
-
+vip=[208094271, 314238081]
 
 def reboot(id):
     opr_data.oprmove[id]['tatk']=0
@@ -375,8 +375,9 @@ def endturn(id):
 
 
 def removeban(id):
-    opr_data.ban.remove(id)
-    opr.data.player.person[id]['endgame']=0
+    if id in opr_data.ban:
+      opr_data.ban.remove(id)
+      opr.data.player.person[id]['endgame']=0
 
 
 
@@ -437,6 +438,9 @@ def play(id):
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z']=0
             opr_data.player.person[id]['endgame']=1
+            if id in vip:
+                removeban(id)
+                
 
 
 
