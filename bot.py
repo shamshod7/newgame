@@ -323,21 +323,21 @@ def abc(id):
     if opr_data.player.person[id]['plhdef']==1:
         opr_data.text4='Вы заблокировали удар в голову!'
     elif opr_data.player.person[id]['plhdef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по голове, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
+        opr_data.text4 = 'Опричник поразил вас ударом в голову, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
     elif opr_data.player.person[id]['plldef']==1:
         opr_data.text4='Вы спаслись от удара по ногам!'
     elif opr_data.player.person[id]['plldef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по ногам, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
+        opr_data.text4 = 'Опричник ударил вас по ногам, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
     elif opr_data.player.person[id]['pltdef']==1:
         opr_data.text4='Вы ушли от удара по телу!'
     elif opr_data.player.person[id]['pltdef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по телу, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
+        opr_data.text4 = 'Опричник нанес вам удар по телу, уменьшив ваше хп на '+str(opr_data.oprmove[id]['yron'])+'!'
     if opr_data.oprmove[id]['krit']==1:
-        opr_data.text4='<b>Опричник разозлился</b> и испытал на вас свой коронный удар в голову, нанеся 45 урона!'
+        opr_data.text4='Опричник разозлился и испытал на вас свой коронный удар в голову, нанеся 45 урона!'
     if opr_data.oprmove[id]['miss']==1:
         opr_data.text4='Опричник промахнулся!'
     if opr_data.oprmove[id]['chlen']==1:
-        opr_data.text4='Опричник поразил вас в член! Вы в нокауте!'
+        opr_data.text4='Опричник поразил вас ударом между ног! Вы в нокауте!'
         
 
 
@@ -347,17 +347,17 @@ def abcd(id):
     if opr_data.oprmove[id]['oprtdef']==1:
         opr_data.text3='Опричник успешно отразил удар по телу;'
     elif opr_data.oprmove[id]['oprtdef']==0:
-        opr_data.text3='Вы нанесли опричнику удар по телу, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
+        opr_data.text3='Вы нанесли опричнику удар по телу, и убавили его ХП на '+str(opr_data.player.person[id]['yron'])+';'
     elif opr_data.oprmove[id]['oprhdef']==1:
         opr_data.text3='Опричник уклонился от удара, который шел ровно ему в голову;'
     elif opr_data.oprmove[id]['oprhdef']==0:
-        opr_data.text3 = 'Вы нанесли опричнику удар по голове, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
+        opr_data.text3 = 'Вы поразили опричника в голову, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
     elif opr_data.oprmove[id]['oprldef']==1:
         opr_data.text3='Опричник ушел от удара по ногам;'
     elif opr_data.oprmove[id]['oprldef']==0:
-        opr_data.text3 = 'Вы нанесли опричнику удар по ногам, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
+        opr_data.text3 = 'Вы ударили опричника по ногам, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
     if opr_data.player.person[id]['chlen']==1:
-        opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар по члену! опричник повержен;'
+        opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар между ног! опричник повержен;'
     if opr_data.player.person[id]['miss']==1:
         opr_data.text3='Вы промахнулись!'
     if opr_data.player.person[id]['krit']==1:
