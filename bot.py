@@ -224,7 +224,7 @@ def oprdmg(id):
             opr_data.player.person[id]['pltdef'] = pltdef
         elif opr_data.player.person[id]['tdef']==0:
             pltdef=0
-            a=random.randint(15,25)
+            a=random.randint(15,30)
             opr_data.player.person[id]['hp']-=a
             opr_data.player.person[id]['pltdef']=pltdef
             opr_data.oprmove[id]['yron']=a
@@ -261,7 +261,7 @@ def oprdmg(id):
             opr_data.player.person[id]['plldef'] = plldef
         elif opr_data.player.person[id]['ldef']==0:
             plldef=0
-            a=random.randint(15,25)
+            a=random.randint(15,20)
             opr_data.player.person[id]['hp']-=a
             opr_data.player.person[id]['plldef']=plldef
             opr_data.oprmove[id]['yron']=a
