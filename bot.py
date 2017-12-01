@@ -37,6 +37,7 @@ def reboot(id):
     opr_data.player.person[id]['miss']=0
     opr_data.oprmove[id]['krit']=0
     opr_data.oprmove[id]['miss']=0
+    opr_data.oprmove[id]['chlen']=0
     
     
 
@@ -167,6 +168,7 @@ def createuser():
 
 def createopr():
     return {'tatk':0,
+            'chlen':0,
             'krit':0,
             'miss':0,
             'yron':0,
@@ -250,6 +252,10 @@ def oprdmg(id):
 
 
     elif opr_data.oprmove[id]['latk']==1:
+        chl=random.randint(1,100)
+        if chl==1:
+            opr_data.player.person[id]['hp']=0
+            opr_data.player.person[id]['chlen']=1
         if opr_data.player.person[id]['ldef']==1:
             plldef=1
             opr_data.player.person[id]['plldef'] = plldef
@@ -330,6 +336,8 @@ def abc(id):
         opr_data.text4='<b>Опричник разозлился</b> и испытал на вас свой коронный удар в голову, нанеся 45 урона!'
     if opr_data.oprmove[id]['miss']==1:
         opr_data.text4='Опричник промахнулся!'
+    if opr_data.oprmove[id]['chlen']==1:
+        opr_data.text4='Опричник поразил вас в член! Вы в нокауте!'
         
 
 
