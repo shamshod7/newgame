@@ -155,7 +155,8 @@ def createuser():
            'hdef':0,
            'ldef':0,
            'hp':100,
-           'dmg':25
+           'dmg':25,
+           'endgame':0
             }
 
 
@@ -343,6 +344,7 @@ def endturn(id):
 
 def removeban(id):
     opr_data.ban.remove(id)
+    opr.data.player.person[id]['endgame']=0
 
 
 
@@ -388,12 +390,14 @@ def play(id):
             print('Поражение '+str(id))
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z'] = 0
+            opr_data.player.person[id]['endgame']=1
         else:
             bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
                              '-А ты силён... попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
             print('Победа ' + str(id))
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z']=0
+            opr_data.player.person[id]['endgame']=1
 
 
 
