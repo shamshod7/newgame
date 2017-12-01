@@ -261,7 +261,7 @@ def pldmg(id):
             if promax<=30:
                 opr_data.player.person[id]['miss']=1
             else:
-              if krit<=20:
+              if krit<=50:
                   opr_data.oprmove[id]['hp']-=40
                   opr_data.player.person[id]['krit']=1
               else:
