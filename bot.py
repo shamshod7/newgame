@@ -33,6 +33,10 @@ def reboot(id):
     opr_data.player.person[id]['tdef']=0
     opr_data.player.person[id]['hdef']=0
     opr_data.player.person[id]['ldef']=0
+    opr_data.player.person[id]['krit']=0
+    opr_data.player.person[id]['miss']=0
+    
+    
 
 
 def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
@@ -139,6 +143,8 @@ def createuser():
     return {'x':0,
             'y':0,
             'z':0,
+            'krit':0,
+            'miss':0,
            'pltdef':2,
            'plhdef':2,
            'plldef':2,
@@ -250,8 +256,17 @@ def pldmg(id):
             opr_data.oprmove[id]['oprhdef'] = oprhdef
         elif opr_data.oprmove[id]['hdef']==0:
             oprhdef=0
-            opr_data.oprmove[id]['hp']-=random.randint(15,25)
-            opr_data.oprmove[id]['oprhdef']=oprhdef
+            krit=random.randint(1,100)
+            promax=random.randint(1,100)
+            if promax<=30:
+                opr_data.player.person[id]['miss']=1
+            else:
+              if krit<=20:
+                  opr_data.oprmove[id]['hp']-=40
+                  opr_data.player.person[id]['krit']=1
+              else:
+                  opr_data.oprmove[id]['hp']-=random.randint(15,25)
+                  opr_data.oprmove[id]['oprhdef']=oprhdef
 
     
     elif opr_data.player.person[id]['latk']==1:
@@ -264,7 +279,7 @@ def pldmg(id):
             opr_data.oprmove[id]['oprldef'] = oprldef
         elif opr_data.oprmove[id]['ldef']==0:
             oprldef=0
-            opr_data.oprmove[id]['hp']-=random.randint(15,25)
+            opr_data.oprmove[id]['hp']-=random.randint(10,15)
             opr_data.oprmove[id]['oprldef']=oprldef
 
 
@@ -282,6 +297,7 @@ def abc(id):
         opr_data.text4='Вы ушли от удара по телу!'
     elif opr_data.player.person[id]['pltdef']==0:
         opr_data.text4 = 'Опричник нанес вам удар по телу!'
+        
 
 
 
@@ -301,6 +317,10 @@ def abcd(id):
         opr_data.text3 = 'Вы нанесли опричнику удар по ногам!'
     if opr_data.oprmove[id]['chlen']==1:
         opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар по члену! опричник повержен!'
+    if opr_data.player.person[id]['miss']==1:
+        opr_data.text3='Вы промахнулись!'
+    if opr_data.player.person[id]['krit']==1:
+        opr_data.text3='Вы нанесли опричнику критический удар!(40 урона)'
 
 
 
@@ -335,7 +355,9 @@ def timers(id):
         opr_data.oprmove[id]=createopr()
         opr_data.player.person[id] = createuser()
         opr_data.players.append(id)
-        return 'Вы не получали предупреждений, но теперь получили'
+        return 'Подсказки по бою: атакуя в ноги, вы наносите меньше урона, но'+
+         'имеете маленький шанс нанести опричнику критический урон. '+
+          'Атакуя в голову, у вас есть шанс нанести критический урон, но есть и шанс промаха'
     else:
         thr=threading.Thread(target=play, args=[id])
         thr.start()
