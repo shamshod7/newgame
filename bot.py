@@ -54,9 +54,9 @@ def inline(call):
             opr_data.player.person[call.from_user.id]['hatk'] = 0
             medit('Атака: тело', call.from_user.id, call.message.message_id)
             Keyboard = types.InlineKeyboardMarkup()
+            Keyboard.add(types.InlineKeyboardButton(text="Голова", callback_data='headd'))
             Keyboard.add(types.InlineKeyboardButton(text="Тело", callback_data='telod'))
             Keyboard.add(types.InlineKeyboardButton(text="Ноги", callback_data='legd'))
-            Keyboard.add(types.InlineKeyboardButton(text="Голова", callback_data='headd'))
             msg = bot.send_message(call.from_user.id, '*Выберите место для защиты*', reply_markup=Keyboard)
             opr_data.player.person[call.from_user.id]['x'] = 0
             opr_data.player.person[call.from_user.id]['y'] = 1
@@ -73,9 +73,9 @@ def inline(call):
             opr_data.player.person[call.from_user.id]['hatk'] = 0
             medit('Атака: ноги', call.from_user.id, call.message.message_id)
             Keyboard = types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="Тело", callback_data='telod'))
-            Keyboard.add(types.InlineKeyboardButton(text="Ноги", callback_data='legd'))
             Keyboard.add(types.InlineKeyboardButton(text="Голова", callback_data='headd'))
+            Keyboard.add(types.InlineKeyboardButton(text="Тело", callback_data='telo'))
+            Keyboard.add(types.InlineKeyboardButton(text="Ноги", callback_data='legd'))
             msg = bot.send_message(call.from_user.id, '*Выберите место для защиты*', reply_markup=Keyboard)
             opr_data.player.person[call.from_user.id]['x'] = 0
             opr_data.player.person[call.from_user.id]['y'] = 1
@@ -91,9 +91,9 @@ def inline(call):
             opr_data.player.person[call.from_user.id]['hatk'] = 1
             medit('Атака: голова', call.from_user.id, call.message.message_id)
             Keyboard = types.InlineKeyboardMarkup()
+            Keyboard.add(types.InlineKeyboardButton(text="Голова", callback_data='headd'))
             Keyboard.add(types.InlineKeyboardButton(text="Тело", callback_data='telod'))
             Keyboard.add(types.InlineKeyboardButton(text="Ноги", callback_data='legd'))
-            Keyboard.add(types.InlineKeyboardButton(text="Голова", callback_data='headd'))
             msg = bot.send_message(call.from_user.id, '*Выберите место для защиты*', reply_markup=Keyboard)
             opr_data.player.person[call.from_user.id]['x'] = 0
             opr_data.player.person[call.from_user.id]['y'] = 1
