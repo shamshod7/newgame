@@ -430,7 +430,7 @@ def play(id):
         Keyboard.add(types.InlineKeyboardButton(text="Ноги", callback_data='leg'))
         msg=bot.send_message(id, '*Выберите место для атаки*',reply_markup=Keyboard)
     else:
-        if opr_data.player.person[id]['hp']<=0:
+        if opr_data.player.person[id]['hp']<opr_data.oprmove[id]['hp']:
             bot.send_message(id, '*Опричник победил вас.*'+"\n"+
                              '-Даже с больным коленом брошу тебя в темницу, '+opr_data.player.person[id]['name']+'!'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
                              
@@ -442,7 +442,7 @@ def play(id):
                 opr_data.player.person[id]['endgame']=0
                 opr_data.player.person[id]['hp']=100
                 opr_data.oprmove[id]['hp']=100
-        else:
+        elif opr_data.player.person[id]['hp']>opr_data.oprmove[id]['hp']:
             bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
                              '-А ты силён, '+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
             print('Победа ' + str(id))
@@ -454,6 +454,9 @@ def play(id):
                 opr_data.player.person[id]['hp']=100
                 opr_data.oprmove[id]['hp']=100
                 
+        
+        else:
+            bot.send_message(id, 'Ничья! Схватка была равной, полегли оба.')
 
 
 
