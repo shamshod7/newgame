@@ -393,7 +393,7 @@ def play(id):
     else:
         if opr_data.player.person[id]['hp']<=0:
             bot.send_message(id, '*Опричник победил вас.*'+"\n"+
-                             '-А ты силён,'+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
+                             '-Даже с больным коленом брошу тебя в темницу, '+opr_data.player.person[id]['name']+'!'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
                              
             print('Поражение '+str(id))
             opr_data.oprmove[id]['chlen']=0
@@ -401,7 +401,7 @@ def play(id):
             opr_data.player.person[id]['endgame']=1
         else:
             bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
-                             '-А ты силён,'+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
+                             '-А ты силён, '+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
             print('Победа ' + str(id))
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z']=0
