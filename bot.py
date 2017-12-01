@@ -304,15 +304,15 @@ def abc(id):
     if opr_data.player.person[id]['plhdef']==1:
         opr_data.text4='Вы заблокировали удар в голову!'
     elif opr_data.player.person[id]['plhdef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по голове, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона;'
+        opr_data.text4 = 'Опричник нанес вам удар по голове, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
     elif opr_data.player.person[id]['plldef']==1:
-        opr_data.text4='Вы спаслись от удара по ногам;'
+        opr_data.text4='Вы спаслись от удара по ногам!'
     elif opr_data.player.person[id]['plldef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по ногам, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона;'
+        opr_data.text4 = 'Опричник нанес вам удар по ногам, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
     elif opr_data.player.person[id]['pltdef']==1:
         opr_data.text4='Вы ушли от удара по телу!'
     elif opr_data.player.person[id]['pltdef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по телу, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона;'
+        opr_data.text4 = 'Опричник нанес вам удар по телу, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
         
 
 
@@ -320,19 +320,19 @@ def abc(id):
 
 def abcd(id):
     if opr_data.oprmove[id]['oprtdef']==1:
-        opr_data.text3='Опричник успешно отразил удар по телу'
+        opr_data.text3='Опричник успешно отразил удар по телу;'
     elif opr_data.oprmove[id]['oprtdef']==0:
         opr_data.text3='Вы нанесли опричнику удар по телу, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
     elif opr_data.oprmove[id]['oprhdef']==1:
-        opr_data.text3='Опричник уклонился от удара, который шел ровно ему в голову!'
+        opr_data.text3='Опричник уклонился от удара, который шел ровно ему в голову;'
     elif opr_data.oprmove[id]['oprhdef']==0:
         opr_data.text3 = 'Вы нанесли опричнику удар по голове, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
     elif opr_data.oprmove[id]['oprldef']==1:
-        opr_data.text3='Опричник ушел от удара по ногам'
+        opr_data.text3='Опричник ушел от удара по ногам;'
     elif opr_data.oprmove[id]['oprldef']==0:
         opr_data.text3 = 'Вы нанесли опричнику удар по ногам, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
     if opr_data.oprmove[id]['chlen']==1:
-        opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар по члену! опричник повержен!'
+        opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар по члену! опричник повержен;'
     if opr_data.player.person[id]['miss']==1:
         opr_data.text3='Вы промахнулись!'
     if opr_data.player.person[id]['krit']==1:
@@ -348,7 +348,7 @@ def endturn(id):
     abcd(id)
     reboot(id)
     bot.send_message(id,'Результаты хода:'+"\n"+
-                     opr_data.text3+'"\n"'+opr_data.text4)
+                     opr_data.text3+"\n"+opr_data.text4)
     bot.send_message(id, 'Ваше ХП: '+str(opr_data.player.person[id]['hp'])+"\n"+'ХП Опричника: '+str(opr_data.oprmove[id]['hp']))
     play(id)
 
