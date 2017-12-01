@@ -255,7 +255,7 @@ def oprdmg(id):
         chl=random.randint(1,100)
         if chl==1:
             opr_data.player.person[id]['hp']=0
-            opr_data.player.person[id]['chlen']=1
+            opr_data.oprmove[id]['chlen']=1
         if opr_data.player.person[id]['ldef']==1:
             plldef=1
             opr_data.player.person[id]['plldef'] = plldef
@@ -306,7 +306,7 @@ def pldmg(id):
         chlen=random.randint(1, 100)
         if chlen==1:
             opr_data.oprmove[id]['hp']=0
-            opr_data.oprmove[id]['chlen']=1
+            opr_data.player.person[id]['chlen']=1
         if opr_data.oprmove[id]['ldef']==1:
             oprldef=1
             opr_data.oprmove[id]['oprldef'] = oprldef
@@ -356,7 +356,7 @@ def abcd(id):
         opr_data.text3='Опричник ушел от удара по ногам;'
     elif opr_data.oprmove[id]['oprldef']==0:
         opr_data.text3 = 'Вы нанесли опричнику удар по ногам, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
-    if opr_data.oprmove[id]['chlen']==1:
+    if opr_data.player.person[id]['chlen']==1:
         opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар по члену! опричник повержен;'
     if opr_data.player.person[id]['miss']==1:
         opr_data.text3='Вы промахнулись!'
