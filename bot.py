@@ -12,7 +12,7 @@ token = os.environ['TELEGRAM_TOKEN']
 
 bot = telebot.TeleBot(token)
 
-vip=[208094271, 314238081]
+vip=[208094271, 314238081, 84959870]
 
 def reboot(id):
     opr_data.oprmove[id]['tatk']=0
