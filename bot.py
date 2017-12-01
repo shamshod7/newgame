@@ -35,6 +35,8 @@ def reboot(id):
     opr_data.player.person[id]['ldef']=0
     opr_data.player.person[id]['krit']=0
     opr_data.player.person[id]['miss']=0
+    opr_data.oprmove[id]['krit']=0
+    opr_data.oprmove[id]['miss']=0
     
     
 
@@ -165,6 +167,8 @@ def createuser():
 
 def createopr():
     return {'tatk':0,
+            'krit':0,
+            'miss':0,
             'yron':0,
          'chlen':0,
          'hatk':0,
@@ -230,10 +234,19 @@ def oprdmg(id):
             opr_data.player.person[id]['plhdef'] = plhdef
         elif opr_data.player.person[id]['hdef']==0:
             plhdef=0
-            a=random.randint(15,25)
-            opr_data.player.person[id]['hp']-=a
-            opr_data.player.person[id]['plhdef']=plhdef
-            opr_data.oprmove[id]['yron']=a
+            kritdmg=random.randint(1,100)
+            missed=random.randint(1,100)
+            if missed<=15:
+                opr_data.oprmove[id]['miss']=1
+            else:
+              if kritdmg<=25:
+                a=45
+                opr_data.oprmove[id]['krit']=1
+              else:
+                a=random.randint(9,18)
+              opr_data.player.person[id]['hp']-=a
+              opr_data.player.person[id]['plhdef']=plhdef
+              opr_data.oprmove[id]['yron']=a
 
 
     elif opr_data.oprmove[id]['latk']==1:
@@ -313,6 +326,10 @@ def abc(id):
         opr_data.text4='Вы ушли от удара по телу!'
     elif opr_data.player.person[id]['pltdef']==0:
         opr_data.text4 = 'Опричник нанес вам удар по телу, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
+    if opr_data.oprmove[id]['krit']==1:
+        opr_data.text4='**Опричник разозлился** и испытал на вас свой коронный удар в голову, нанеся 45 урона!'
+    if opr_data.oprmove[id]['miss']==1:
+        opr_data.text4='Опричник промахнулся!'
         
 
 
