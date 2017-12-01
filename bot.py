@@ -141,6 +141,7 @@ def inline(call):
 
 def createuser():
     return {'x':0,
+            'yron':0,
             'y':0,
             'z':0,
             'krit':0,
@@ -164,6 +165,7 @@ def createuser():
 
 def createopr():
     return {'tatk':0,
+            'yron':0,
          'chlen':0,
          'hatk':0,
          'latk':0,
@@ -216,8 +218,10 @@ def oprdmg(id):
             opr_data.player.person[id]['pltdef'] = pltdef
         elif opr_data.player.person[id]['tdef']==0:
             pltdef=0
-            opr_data.player.person[id]['hp']-=random.randint(15,25)
+            a=random.randint(15,25)
+            opr_data.player.person[id]['hp']-=a
             opr_data.player.person[id]['pltdef']=pltdef
+            opr_data.oprmove[id]['yron']=a
 
             
     elif opr_data.oprmove[id]['hatk']==1:
@@ -226,8 +230,10 @@ def oprdmg(id):
             opr_data.player.person[id]['plhdef'] = plhdef
         elif opr_data.player.person[id]['hdef']==0:
             plhdef=0
-            opr_data.player.person[id]['hp']-=random.randint(15,25)
+            a=random.randint(15,25)
+            opr_data.player.person[id]['hp']-=a
             opr_data.player.person[id]['plhdef']=plhdef
+            opr_data.oprmove[id]['yron']=a
 
 
     elif opr_data.oprmove[id]['latk']==1:
@@ -236,8 +242,10 @@ def oprdmg(id):
             opr_data.player.person[id]['plldef'] = plldef
         elif opr_data.player.person[id]['ldef']==0:
             plldef=0
-            opr_data.player.person[id]['hp']-=random.randint(15,25)
+            a=random.randint(15,25)
+            opr_data.player.person[id]['hp']-=a
             opr_data.player.person[id]['plldef']=plldef
+            opr_data.oprmove[id]['yron']=a
 
 
 
@@ -248,8 +256,10 @@ def pldmg(id):
             opr_data.oprmove[id]['oprtdef'] = oprtdef
         elif opr_data.oprmove[id]['tdef']==0:
             oprtdef=0
-            opr_data.oprmove[id]['hp']-=random.randint(15,25)
+            a=random.randint(15,25)
+            opr_data.oprmove[id]['hp']-=a
             opr_data.oprmove[id]['oprtdef']=oprtdef
+            opr_data.player.person[id]['yron']=a
 
 
     elif opr_data.player.person[id]['hatk']==1:
@@ -267,8 +277,10 @@ def pldmg(id):
                   opr_data.oprmove[id]['hp']-=32
                   opr_data.player.person[id]['krit']=1
               else:
-                  opr_data.oprmove[id]['hp']-=random.randint(15,25)
+                  a=random.randint(15,25)
+                  opr_data.oprmove[id]['hp']-=a
                   opr_data.oprmove[id]['oprhdef']=oprhdef
+                  opr_data.player.person[id]['yron']=a
 
     
     elif opr_data.player.person[id]['latk']==1:
@@ -281,8 +293,10 @@ def pldmg(id):
             opr_data.oprmove[id]['oprldef'] = oprldef
         elif opr_data.oprmove[id]['ldef']==0:
             oprldef=0
-            opr_data.oprmove[id]['hp']-=random.randint(10,15)
+            a=random.randint(10,15)
+            opr_data.oprmove[id]['hp']-=a
             opr_data.oprmove[id]['oprldef']=oprldef
+            opr_data.player.person[id]['yron']=a
 
 
 
@@ -290,15 +304,15 @@ def abc(id):
     if opr_data.player.person[id]['plhdef']==1:
         opr_data.text4='Вы заблокировали удар в голову!'
     elif opr_data.player.person[id]['plhdef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по голове!'
+        opr_data.text4 = 'Опричник нанес вам удар по голове, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона;'
     elif opr_data.player.person[id]['plldef']==1:
-        opr_data.text4='Вы спаслись от удара по ногам!'
+        opr_data.text4='Вы спаслись от удара по ногам;'
     elif opr_data.player.person[id]['plldef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по ногам!'
+        opr_data.text4 = 'Опричник нанес вам удар по ногам, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона;'
     elif opr_data.player.person[id]['pltdef']==1:
         opr_data.text4='Вы ушли от удара по телу!'
     elif opr_data.player.person[id]['pltdef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по телу!'
+        opr_data.text4 = 'Опричник нанес вам удар по телу, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона;'
         
 
 
@@ -308,21 +322,21 @@ def abcd(id):
     if opr_data.oprmove[id]['oprtdef']==1:
         opr_data.text3='Опричник успешно отразил удар по телу'
     elif opr_data.oprmove[id]['oprtdef']==0:
-        opr_data.text3='Вы нанесли опричнику удар по телу!'
+        opr_data.text3='Вы нанесли опричнику удар по телу, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
     elif opr_data.oprmove[id]['oprhdef']==1:
         opr_data.text3='Опричник уклонился от удара, который шел ровно ему в голову!'
     elif opr_data.oprmove[id]['oprhdef']==0:
-        opr_data.text3 = 'Вы нанесли опричнику удар по голове!'
+        opr_data.text3 = 'Вы нанесли опричнику удар по голове, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
     elif opr_data.oprmove[id]['oprldef']==1:
         opr_data.text3='Опричник ушел от удара по ногам'
     elif opr_data.oprmove[id]['oprldef']==0:
-        opr_data.text3 = 'Вы нанесли опричнику удар по ногам!'
+        opr_data.text3 = 'Вы нанесли опричнику удар по ногам, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
     if opr_data.oprmove[id]['chlen']==1:
         opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар по члену! опричник повержен!'
     if opr_data.player.person[id]['miss']==1:
         opr_data.text3='Вы промахнулись!'
     if opr_data.player.person[id]['krit']==1:
-        opr_data.text3='Вы нанесли опричнику критический удар!(32 урона)'
+        opr_data.text3='Вы нанесли опричнику критический удар!(32 урона);'
 
 
 
@@ -334,7 +348,7 @@ def endturn(id):
     abcd(id)
     reboot(id)
     bot.send_message(id,'Результаты хода:'+"\n"+
-                     opr_data.text3+'; '+opr_data.text4)
+                     opr_data.text3+'"\n"'+opr_data.text4)
     bot.send_message(id, 'Ваше ХП: '+str(opr_data.player.person[id]['hp'])+"\n"+'ХП Опричника: '+str(opr_data.oprmove[id]['hp']))
     play(id)
 
