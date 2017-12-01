@@ -156,7 +156,8 @@ def createuser():
            'ldef':0,
            'hp':100,
            'dmg':25,
-           'endgame':0
+           'endgame':0,
+           'name':''
             }
 
 
@@ -348,14 +349,16 @@ def removeban(id):
 
 
 
-def timers(id):
+def timers(id, fname):
     if id not in opr_data.ban:
         opr_data.ban.append(id)
+     
         print(opr_data.ban)
         removethread=threading.Timer(900.0, removeban,[id])
         removethread.start()
         opr_data.oprmove[id]=createopr()
         opr_data.player.person[id] = createuser()
+        opr_data.player.person[id]['name']=fname
         opr_data.players.append(id)
         return 'Подсказки по бою: атакуя в ноги, вы наносите меньше урона, но имеете шанс нанести опричнику фатальный урон. Атакуя в голову, у вас есть шанс нанести критический урон, но есть и шанс промаха'
     else:
@@ -372,7 +375,8 @@ def timers(id):
 
 @bot.message_handler(content_types=['text'])
 def send_message(message):
-    bot.send_message(message.from_user.id, timers(message.from_user.id))
+    bot.send_message(message.from_user.id, timers(message.from_user.id, message.from_user.first_name))
+   
 
 
 
@@ -389,14 +393,15 @@ def play(id):
     else:
         if opr_data.player.person[id]['hp']<=0:
             bot.send_message(id, '*Опричник победил вас.*'+"\n"+
-                             '-Даже с больным коленом брошу тебя в темницу...'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
+                             '-А ты силён,'+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
+                             
             print('Поражение '+str(id))
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z'] = 0
             opr_data.player.person[id]['endgame']=1
         else:
             bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
-                             '-А ты силён... попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
+                             '-А ты силён,'+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
             print('Победа ' + str(id))
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z']=0
