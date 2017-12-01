@@ -430,6 +430,10 @@ def play(id):
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z'] = 0
             opr_data.player.person[id]['endgame']=1
+            if id in vip:
+                opr_data.player.person[id]['endgame']=0
+                opr_data.player.person[id]['hp']=100
+                opr_data.oprmove[id]['hp']=100
         else:
             bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
                              '-А ты силён, '+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 15 минут после начала предыдущего*')
