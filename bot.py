@@ -271,7 +271,7 @@ def pldmg(id):
     
     elif opr_data.player.person[id]['latk']==1:
         chlen=random.randint(1, 100)
-        if chlen<6:
+        if chlen==1:
             opr_data.oprmove[id]['hp']=0
             opr_data.oprmove[id]['chlen']=1
         if opr_data.oprmove[id]['ldef']==1:
