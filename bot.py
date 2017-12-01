@@ -327,7 +327,7 @@ def abc(id):
     elif opr_data.player.person[id]['pltdef']==0:
         opr_data.text4 = 'Опричник нанес вам удар по телу, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
     if opr_data.oprmove[id]['krit']==1:
-        opr_data.text4='**Опричник разозлился** и испытал на вас свой коронный удар в голову, нанеся 45 урона!'
+        opr_data.text4='<b>Опричник разозлился</b> и испытал на вас свой коронный удар в голову, нанеся 45 урона!'
     if opr_data.oprmove[id]['miss']==1:
         opr_data.text4='Опричник промахнулся!'
         
