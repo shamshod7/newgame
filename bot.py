@@ -393,7 +393,7 @@ def timers(id, fname):
         opr_data.players.append(id)
         return 'Подсказки по бою: атакуя в ноги, вы наносите меньше урона, но имеете шанс нанести опричнику фатальный урон. Атакуя в голову, у вас есть шанс нанести критический урон, но есть и шанс промаха. Напишите что-нибудь еще раз, чтобы вступить в драку'
     else:
-        if id in opr_data.ban:
+        if id in opr_data.players:
           if opr_data.player.person[id]['endgame']==1:
             return 'опричник отдыхает, приходите через 15 минут после начала предыдущего боя'
           thr=threading.Thread(target=play, args=[id])
