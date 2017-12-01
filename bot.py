@@ -377,14 +377,13 @@ def endturn(id):
 def removeban(id):
     if id in opr_data.ban:
       opr_data.ban.remove(id)
-      opr.data.player.person[id]['endgame']=0
+  
 
 
 
 def timers(id, fname):
     if id not in opr_data.ban:
-        opr_data.ban.append(id)
-     
+        opr_data.ban.append(id) 
         print(opr_data.ban)
         removethread=threading.Timer(900.0, removeban,[id])
         removethread.start()
