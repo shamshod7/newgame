@@ -144,6 +144,7 @@ def inline(call):
 
 def createuser():
     return {'x':0,
+            'chlen':0,
             'yron':0,
             'y':0,
             'z':0,
@@ -172,7 +173,6 @@ def createopr():
             'krit':0,
             'miss':0,
             'yron':0,
-         'chlen':0,
          'hatk':0,
          'latk':0,
          'tdef':0,
