@@ -439,7 +439,9 @@ def play(id):
             opr_data.player.person[id]['z']=0
             opr_data.player.person[id]['endgame']=1
             if id in vip:
-                removeban(id)
+                opr_data.player.person[id]['endgame']=0
+                opr_data.player.person[id]['hp']=100
+                opr_data.oprmove[id]['hp']=100
                 
 
 
