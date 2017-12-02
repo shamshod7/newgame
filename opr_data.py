@@ -7,7 +7,7 @@ class Player(object):
         self.person={}
 player=Player()
     
-
+all=[]
 
 text4=''
 text3=''
