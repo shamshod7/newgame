@@ -399,7 +399,7 @@ def timers(id, fname):
         opr_data.player.person[id] = createuser()
         opr_data.player.person[id]['name']=fname
         opr_data.players.append(id)
-        return 'Подсказки по бою: Подсказок не будет, изучайте слабости опричника сами! Напишите что-нибудь еще раз, чтобы вступить в драку'
+        return 'Подсказки по бою: Подсказок не будет, изучайте слабости опричника сами! Напишите /fight еще раз, чтобы вступить в драку'
     else:
         if id in opr_data.players:
           if opr_data.player.person[id]['endgame']==1:
@@ -412,7 +412,7 @@ def timers(id, fname):
 
         
 
-@bot.message_handler(content_types=['text'])
+@bot.message_handler(commands=['fight'])
 def send_message(message):
     bot.send_message(message.from_user.id, timers(message.from_user.id, message.from_user.first_name))
    
