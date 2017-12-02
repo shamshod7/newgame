@@ -399,7 +399,7 @@ def timers(id, fname):
         opr_data.player.person[id] = createuser()
         opr_data.player.person[id]['name']=fname
         opr_data.players.append(id)
-        return 'Подсказки по бою: атакуя в ноги, вы наносите меньше урона, но имеете шанс нанести опричнику фатальный урон. Атакуя в голову, у вас есть шанс нанести критический урон, но есть и шанс промаха. Напишите что-нибудь еще раз, чтобы вступить в драку'
+        return 'Подсказки по бою: Подсказок не будет, изучайте слабости опричника сами! Напишите что-нибудь еще раз, чтобы вступить в драку'
     else:
         if id in opr_data.players:
           if opr_data.player.person[id]['endgame']==1:
