@@ -35,6 +35,7 @@ def reboot(id):
     opr_data.player.person[id]['ldef']=0
     opr_data.player.person[id]['krit']=0
     opr_data.player.person[id]['miss']=0
+    opr_data.player.person[id]['chlen']=0
     opr_data.oprmove[id]['krit']=0
     opr_data.oprmove[id]['miss']=0
     opr_data.oprmove[id]['chlen']=0
