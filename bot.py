@@ -13,7 +13,7 @@ token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
 vip=[208094271, 314238081, 84959870]
-
+eventlist=[]
 def reboot(id):
     opr_data.oprmove[id]['tatk']=0
     opr_data.oprmove[id]['hatk']=0
@@ -39,6 +39,12 @@ def reboot(id):
     opr_data.oprmove[id]['krit']=0
     opr_data.oprmove[id]['miss']=0
     opr_data.oprmove[id]['chlen']=0
+    
+@bot.message_handler(commands=['event'])
+def event(message):
+    if message.from_user.id not in eventlist:
+        bot.send_message(message.from_user.id, 'У вас только одна попытка, чтобы помочь победить мега-опричника. Для подтверждения отправьте команду еще раз')
+        opr_data.player.person[id]['bonusgame']=createuser2()
     
     
 @bot.message_handler(commands=['secret'])
@@ -169,6 +175,30 @@ def createuser():
             }
 
 
+def createuser2():
+    return {'x':0,
+            'chlen':0,
+            'yron':0,
+            'y':0,
+            'z':0,
+            'krit':0,
+            'miss':0,
+           'pltdef':2,
+           'plhdef':2,
+           'plldef':2,
+           'tatk':0,
+           'hatk':0,
+           'latk':0,
+           'tdef':0,
+           'hdef':0,
+           'ldef':0,
+           'hp':1,
+           'dmg':25,
+           'endgame':0,
+           'name':''
+            }
+
+
 
 def createopr():
     return {'tatk':0,
@@ -182,6 +212,23 @@ def createopr():
          'hdef':0,
          'ldef':0,
          'hp':100,
+         'oprtdef':2,
+         'oprhdef':2,
+         'oprldef':2}
+
+
+def createopr2():
+    return {'tatk':0,
+            'chlen':0,
+            'krit':0,
+            'miss':0,
+            'yron':0,
+         'hatk':0,
+         'latk':0,
+         'tdef':0,
+         'hdef':0,
+         'ldef':0,
+         'hp':5000,
          'oprtdef':2,
          'oprhdef':2,
          'oprldef':2}
