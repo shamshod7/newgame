@@ -40,12 +40,64 @@ def reboot(id):
     opr_data.oprmove[id]['miss']=0
     opr_data.oprmove[id]['chlen']=0
     
-@bot.message_handler(commands=['event'])
-def event(message):
-    if message.from_user.id not in eventlist:
-        bot.send_message(message.from_user.id, 'У вас только одна попытка, чтобы помочь победить мега-опричника. Для подтверждения отправьте команду еще раз')
-        opr_data.player.person[id]['bonusgame']=createuser2()
-    
+#@bot.message_handler(commands=['event'])
+#def event(message):
+#    if message.from_user.id not in eventlist:
+#      if opr_data.player.person[id]['bonusgame']['start']==0:
+#        bot.send_message(message.from_user.id, 'У вас только одна попытка, чтобы помочь победить мега-опричника. Для подтверждения отправьте команду еще раз')
+#        opr_data.player.person[id]['bonusgame']=createuser2()
+#        opr_data.player.person[id]['bonusgame']['start']=1
+#      else:
+#        b=threading.Thread(target=bonus, args=[message.from_user.id])
+#        b.start()
+        
+ 
+def bonus(id):
+    if opr_data.player.person[id]['bonusgame']['hp']>0 and opr_data.bonusopr>0:
+        bot.send_message(id, 'Новый раунд!')
+        Keyboard=types.InlineKeyboardMarkup()
+        Keyboard.add(types.InlineKeyboardButton(text="Голова", callback_data='attack'))
+        Keyboard.add(types.InlineKeyboardButton(text="Тело", callback_data='attack'))
+        Keyboard.add(types.InlineKeyboardButton(text="Ноги", callback_data='attack'))
+        msg=bot.send_message(id, '*Выберите место для атаки*',reply_markup=Keyboard)
+        opr_data.player.person[id]['x']=1
+    else:
+        if opr_data.player.person[id]['hp']<opr_data.bonusopr:
+            bot.send_message(id, '*Опричник победил вас.*'+"\n"+
+                             '-соси, '+opr_data.player.person[id]['name']+'!')
+                             
+            print('Поражение '+str(id))
+            opr_data.oprmove[id]['chlen']=0
+            opr_data.player.person[id]['z'] = 0
+            opr_data.player.person[id]['endgame']=1
+            if id in vip:
+                opr_data.player.person[id]['endgame']=0
+                opr_data.player.person[id]['hp']=100
+                opr_data.oprmove[id]['hp']=100
+        elif opr_data.player.person[id]['hp']>opr_data.bonusopr:
+            bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
+                             '-А ты силён, '+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
+            print('Победа ' + str(id))
+            opr_data.oprmove[id]['chlen']=0
+            opr_data.player.person[id]['z']=0
+
+                
+        
+        else:
+            bot.send_message(id, 'Ничья! Схватка была равной, полегли оба.')
+
+
+
+
+
+      
+@bot.message_handler(commands=['stat'])
+def statm(message):
+    if message.from_user.id==314238081:
+        for id in eventlist:
+           bot.send_message(message.from_user.id, str(id))
+  
+
     
 @bot.message_handler(commands=['secret'])
 def m(message):
@@ -91,6 +143,14 @@ def inline(call):
             msg = bot.send_message(call.from_user.id, '*Выберите место для защиты*', reply_markup=Keyboard)
             opr_data.player.person[call.from_user.id]['x'] = 0
             opr_data.player.person[call.from_user.id]['y'] = 1
+            
+            
+    elif call.data=='attack':
+        opr_data.bonusopr-=100
+        opr_data.player.person[call.from_user.id]['bonusopr']['hp']=0
+
+            
+       
 
 
 
@@ -195,7 +255,8 @@ def createuser2():
            'hp':1,
            'dmg':25,
            'endgame':0,
-           'name':''
+           'name':'',
+           'start':0
             }
 
 
