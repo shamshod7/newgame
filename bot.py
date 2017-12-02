@@ -501,8 +501,8 @@ def removeban(id):
 @bot.message_handler(commands=['info'])
 def info(message):
     if message.from_user.id in vip:
-        bot.send_message(message.from_user.id, len(opr_data.all))
-        for id in opr_data.all:
+        bot.send_message(message.from_user.id, len(opr_data.alls))
+        for id in opr_data.alls:
             bot.send_message(message.from_user.id, str(id))
         
 
@@ -513,8 +513,8 @@ def info(message):
 
 
 def timers(id, fname):
-    if id not in opr_data.all:
-        opr_data.all.append[id]
+    if id not in opr_data.alls:
+        opr_data.alls.append(id)
     if id not in opr_data.ban:
         opr_data.ban.append(id) 
         print(opr_data.ban)
