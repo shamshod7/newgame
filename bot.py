@@ -456,17 +456,46 @@ def abc(id):
 
 def abcd(id):
     if opr_data.oprmove[id]['oprtdef']==1:
-        opr_data.text3='Опричник успешно отразил удар по телу;'
+        x=random.randint(1,2)
+        if x==1:
+           opr_data.text3='Опричник успешно отразил удар по телу;'
+        elif x==2:
+           opr_data.text3='Опричник хладнокровно парировал удар по телу;'
     elif opr_data.oprmove[id]['oprtdef']==0:
-        opr_data.text3='Вы нанесли опричнику удар по телу, и убавили его ХП на '+str(opr_data.player.person[id]['yron'])+';'
+        x=random.randint(1,2)
+        if x==1:
+           opr_data.text3='Вы нанесли опричнику удар по телу, и убавили его ХП на '+str(opr_data.player.person[id]['yron'])+';'
+        elif x==2:
+           opr_data.text3='Вы хорошо просчитали движения опричника, и нанесли ему сокрушительный удар по телу, который нёс в себе '+
+           str(opr_data.player.person[id]['yron'])+' урона;'
+        
     elif opr_data.oprmove[id]['oprhdef']==1:
-        opr_data.text3='Опричник уклонился от удара, который шел ровно ему в голову;'
+        x=random.randint(1,3)
+        if x==1:
+            opr_data.text3='Опричник уклонился от удара, который шел ровно ему в голову;'
+        elif x==2:
+            opr_data.text3='Опричник мастерски отразил удар по голове;'
+        elif x==3:
+            opr_data.text3='Опричник пригнулся, тем самым не дав вам поразить его в голову;'
+          
     elif opr_data.oprmove[id]['oprhdef']==0:
-        opr_data.text3 = 'Вы поразили опричника в голову, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
+        x=random.randint(1,2)
+        if x==1:
+            opr_data.text3 = 'Вы поразили опричника в голову, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
+        elif x==2:
+            opr_data.extt3= 'Вы изловчились и ударили опричника прямо по шлему, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
     elif opr_data.oprmove[id]['oprldef']==1:
-        opr_data.text3='Опричник ушел от удара по ногам;'
+        x=random.randint(1,2)
+        if x==1:
+            opr_data.text3='Опричник ушел от удара по ногам;'
+        elif x==2:
+            opr_data.text3='Опричник не дал вам ударить себя по ногам;'
     elif opr_data.oprmove[id]['oprldef']==0:
-        opr_data.text3 = 'Вы ударили опричника по ногам, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
+        x=random.randint(1,2)
+        if x==1:
+            opr_data.text3 = 'Вы ударили опричника по ногам, нанеся '+str(opr_data.player.person[id]['yron'])+' урона;'
+        elif x==2:
+            opr_data.text3= 'Опричник замешкался, и вы нанесли ему удар по ногам, отняв '+str(opr_data.player.person[id]['yron'])+' ХП;'
     if opr_data.player.person[id]['chlen']==1:
         opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар между ног! опричник повержен;'
     if opr_data.player.person[id]['miss']==1:
