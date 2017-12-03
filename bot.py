@@ -572,7 +572,7 @@ def timers(id, fname):
         opr_data.player.person[id] = createuser()
         opr_data.player.person[id]['name']=fname
         opr_data.players.append(id)
-        return 'Подсказки по бою: Подсказок не будет, изучайте слабости опричника сами! Напишите /fight еще раз, чтобы вступить в драку'
+        return 'Ищешь справедливости? жми /fight еще раз!'
     else:
         if id in opr_data.players:
           if opr_data.player.person[id]['endgame']==1:
