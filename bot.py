@@ -466,8 +466,7 @@ def abcd(id):
         if x==1:
            opr_data.text3='Вы нанесли опричнику удар по телу, и убавили его ХП на '+str(opr_data.player.person[id]['yron'])+';'
         elif x==2:
-           opr_data.text3='Вы хорошо просчитали движения опричника, и нанесли ему сокрушительный удар по телу, который нёс в себе '+
-           str(opr_data.player.person[id]['yron'])+' урона;'
+           opr_data.text3='Вы хорошо просчитали движения опричника, и нанесли ему сокрушительный удар по телу, который нёс в себе '+str(opr_data.player.person[id]['yron'])+' урона;'
         
     elif opr_data.oprmove[id]['oprhdef']==1:
         x=random.randint(1,3)
