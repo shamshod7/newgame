@@ -445,7 +445,7 @@ def abc(id):
             opr_data.text4='Вы засмотрелись на проходивший рядом караван и получили '+str(opr_data.oprmove[id]['yron'])+' урона в голову!'
     elif opr_data.player.person[id]['plldef']==1:
         x=random.randint(1,2)
-        if x==1        
+        if x==1:   
             opr_data.text4='Вы спаслись от удара по ногам!'
         elif x==2:
             opr_data.text4='Вовремя поставленный блок спас вас от удара по ногам!'
