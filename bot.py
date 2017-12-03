@@ -263,6 +263,7 @@ def createuser2():
 
 def createopr():
     return {'tatk':0,
+            'fight':0,
             'chlen':0,
             'krit':0,
             'miss':0,
@@ -575,13 +576,17 @@ def timers(id, fname):
         return 'Ищешь справедливости? жми /fight еще раз!'
     else:
         if id in opr_data.players:
+         if opr_data.player.person[id]['fight']==0:
           if opr_data.player.person[id]['endgame']==1:
-            return 'опричник отдыхает, приходите через 2 минут после начала предыдущего боя'
+            return 'опричник отдыхает, приходите через 2 минуты после начала предыдущего боя'
           thr=threading.Thread(target=play, args=[id])
           thr.start()
         #play(id)
         #opr_data.player.person[id]['z']=1
+          opr_data.player.person[id]['fight']=1
           return 'Бой начинается!'
+         else:
+              return 'Вы уже в бою!'
 
         
 
@@ -615,6 +620,7 @@ def play(id):
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z'] = 0
             opr_data.player.person[id]['endgame']=1
+            opr_data.player.person[id]['fight']=0
             if id in vip:
                 opr_data.player.person[id]['endgame']=0
                 opr_data.player.person[id]['hp']=100
@@ -630,14 +636,17 @@ def play(id):
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z']=0
             opr_data.player.person[id]['endgame']=1
+            opr_data.player.person[id]['fight']=0
             if id in vip:
                 opr_data.player.person[id]['endgame']=0
                 opr_data.player.person[id]['hp']=100
                 opr_data.oprmove[id]['hp']=100
+                opr_data.player.person[id]['fight']=0
                 
         
         else:
             bot.send_message(id, 'Ничья! Схватка была равной, полегли оба.')
+            opr_data.player.person[id]['fight']=0
 
 
 
