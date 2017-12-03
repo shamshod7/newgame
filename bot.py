@@ -432,17 +432,37 @@ def pldmg(id):
 
 def abc(id):
     if opr_data.player.person[id]['plhdef']==1:
-        opr_data.text4='Вы заблокировали удар в голову!'
+        x=random.randint(1,2)
+        if x==1:
+            opr_data.text4='Вы заблокировали удар в голову!'
+        elif x==2:
+            opr_data.text4='Удар, который шел вам в голову, не достиг цели!'
     elif opr_data.player.person[id]['plhdef']==0:
-        opr_data.text4 = 'Опричник поразил вас ударом в голову, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
+        x=random.randint(1,2)
+        if x==1:            
+            opr_data.text4 = 'Опричник поразил вас ударом в голову, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
+        elif x==2:
+            opr_data.text4='Вы засмотрелись на проходивший рядом караван и получили '+str(opr_data.oprmove[id]['yron'])+' урона в голову!'
     elif opr_data.player.person[id]['plldef']==1:
-        opr_data.text4='Вы спаслись от удара по ногам!'
+        x=random.randint(1,2)
+        if x==1        
+            opr_data.text4='Вы спаслись от удара по ногам!'
+        elif x==2:
+            opr_data.text4='Вовремя поставленный блок спас вас от удара по ногам!'
     elif opr_data.player.person[id]['plldef']==0:
-        opr_data.text4 = 'Опричник ударил вас по ногам, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
+        x=random.randint(1,2)
+        if x==1:   
+            opr_data.text4 = 'Опричник ударил вас по ногам, нанеся '+str(opr_data.oprmove[id]['yron'])+' урона!'
+        elif x==2:
+            opr_data.text4='Вам в ноги прилетел удар, отнявший '+str(opr_data.oprmove[id]['yron'])+' ХП!'
     elif opr_data.player.person[id]['pltdef']==1:
-        opr_data.text4='Вы ушли от удара по телу!'
+        x=random.randint(1,2)
+        if x==1:
+            opr_data.text4='Вы ушли от удара по телу!'
+        elif x==2:
+            opr_data.text4='Вы парировали удар по телу!'
     elif opr_data.player.person[id]['pltdef']==0:
-        opr_data.text4 = 'Опричник нанес вам удар по телу, уменьшив ваше хп на '+str(opr_data.oprmove[id]['yron'])+'!'
+        opr_data.text4 = 'Опричник нанес вам удар по телу, уменьшив ваше ХП на '+str(opr_data.oprmove[id]['yron'])+'!'
     if opr_data.oprmove[id]['krit']==1:
         opr_data.text4='Опричник разозлился и испытал на вас свой коронный удар в голову, нанеся 45 урона!'
     if opr_data.oprmove[id]['miss']==1:
