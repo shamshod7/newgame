@@ -213,6 +213,7 @@ def inline(call):
 
 def createuser():
     return {'x':0,
+            'fight':0,
             'chlen':0,
             'yron':0,
             'y':0,
