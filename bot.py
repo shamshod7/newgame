@@ -516,7 +516,7 @@ def abcd(id):
         elif x==2:
             opr_data.text3= 'Опричник замешкался, и вы нанесли ему удар по ногам, отняв '+str(opr_data.player.person[id]['yron'])+' ХП;'
     if opr_data.player.person[id]['chlen']==1:
-        opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар между ног! опричник повержен;'
+        opr_data.text3 = 'Вы нанесли опричнику КРИТИЧЕСКИЙ удар между ног! Опричник повержен;'
     if opr_data.player.person[id]['miss']==1:
         opr_data.text3='Вы промахнулись!'
     if opr_data.player.person[id]['krit']==1:
@@ -581,7 +581,7 @@ def timers(id, fname):
           thr.start()
         #play(id)
         #opr_data.player.person[id]['z']=1
-          return 'Ну что ж, посмотрим, кто кого...'
+          return 'Бой начинается!'
 
         
 
@@ -604,8 +604,12 @@ def play(id):
         msg=bot.send_message(id, '*Выберите место для атаки*',reply_markup=Keyboard)
     else:
         if opr_data.player.person[id]['hp']<opr_data.oprmove[id]['hp']:
-            bot.send_message(id, '*Опричник победил вас.*'+"\n"+
+            x=random.randint(1,2)
+            if x==1:
+                bot.send_message(id, 'Опричник победил вас.'+"\n"+
                              '-Даже с больным коленом брошу тебя в темницу, '+opr_data.player.person[id]['name']+'!'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
+            elif x==2:
+                bot.send_message(id, 'Опричник победил вас.'+"\n"+'-Здесь нет справедливости, '+opr_data.player.person[id]['name']+'!'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
                              
             print('Поражение '+str(id))
             opr_data.oprmove[id]['chlen']=0
@@ -616,8 +620,12 @@ def play(id):
                 opr_data.player.person[id]['hp']=100
                 opr_data.oprmove[id]['hp']=100
         elif opr_data.player.person[id]['hp']>opr_data.oprmove[id]['hp']:
-            bot.send_message(id, '*Вы победили Опричника и отстояли свою честь!*'+"\n"+
-                             '-А ты силён, '+opr_data.player.person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
+            x=random.randint(1,2)
+            if x==1:
+                bot.send_message(id, 'Вы победили Опричника и отстояли свою честь!'+"\n"+
+                             '-А ты силён, '+person[id]['name']+'! Попадешь в темницу в другой раз'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
+            elif x==2:
+                bot.send_message(id, 'Вы победили Опричника и отстояли свою честь!'+"\n"+'-В этот раз тебе повезло, '+person[id]['name']+'!'+"\n"+'*Следующий бой через 2 минут после начала предыдущего*')
             print('Победа ' + str(id))
             opr_data.oprmove[id]['chlen']=0
             opr_data.player.person[id]['z']=0
