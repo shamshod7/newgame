@@ -448,7 +448,7 @@ def abc(id):
         if x==1:   
             opr_data.text4='Вы спаслись от удара по ногам!'
         elif x==2:
-            opr_data.text4='Вовремя поставленный блок спас вас от удара по ногам!'
+            opr_data.text4='Вовремя выставленный блок спас вас от удара по ногам!'
     elif opr_data.player.person[id]['plldef']==0:
         x=random.randint(1,2)
         if x==1:   
