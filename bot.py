@@ -40,6 +40,12 @@ def reboot(id):
     opr_data.oprmove[id]['miss']=0
     opr_data.oprmove[id]['chlen']=0
     
+    
+    
+    
+@bot.message_handler(commands=['start'])
+def startmessage(message):
+    bot.send_message(message.from_user.id, 'Вас приветствует опричник, и раз вы здесь, значит вы хотите проверить свои боевые навыки. Жми /fight для боя!')
 #@bot.message_handler(commands=['event'])
 #def event(message):
 #    if message.from_user.id not in eventlist:
