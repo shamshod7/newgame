@@ -45,10 +45,11 @@ def reboot(id):
 #    if message.from_user.id not in eventlist:
 #      if opr_data.player.person[id]['bonusgame']['start']==0:
 #        bot.send_message(message.from_user.id, 'У вас только одна попытка, чтобы помочь победить мега-опричника. Для подтверждения отправьте команду еще раз')
-#        opr_data.player.person[id]['bonusgame']=createuser2()
+#        opr_data.player.person[id]['bonusgame']=createuser()
 #        opr_data.player.person[id]['bonusgame']['start']=1
 #      else:
-#        b=threading.Thread(target=bonus, args=[message.from_user.id])
+         
+#        b=threading.Thread(target=play, args=[message.from_user.id])
 #        b.start()
         
  
@@ -64,7 +65,7 @@ def bonus(id):
     else:
         if opr_data.player.person[id]['hp']<opr_data.bonusopr:
             bot.send_message(id, '*Опричник победил вас.*'+"\n"+
-                             '-соси, '+opr_data.player.person[id]['name']+'!')
+                             '-В следующий раз повезет, '+opr_data.player.person[id]['name']+'!')
                              
             print('Поражение '+str(id))
             opr_data.oprmove[id]['chlen']=0
@@ -101,7 +102,7 @@ def statm(message):
     
 @bot.message_handler(commands=['secret'])
 def m(message):
-    bot.send_message(message.from_user.id, 'СОСИ ХУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУЙ')
+    bot.send_message(message.from_user.id, 'секретное сообщение')
 
 def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
     return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
@@ -253,7 +254,7 @@ def createuser2():
            'tdef':0,
            'hdef':0,
            'ldef':0,
-           'hp':1,
+           'hp':100,
            'dmg':25,
            'endgame':0,
            'name':'',
