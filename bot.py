@@ -29,7 +29,7 @@ def joinm(message):
 
 @bot.message_handler(commands=['cancel'])
 def cancelmessage(message):
-  if message.chat.id in info.lobby.game:
+  if message.from_user.id in info.lobby.game:
     if info.lobby.game[message.chat.id]['playing']==0:
       cancel(message.chat.id)
     else:
