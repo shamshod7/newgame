@@ -14,10 +14,8 @@ bot = telebot.TeleBot(token)
 
 
 
-@bot.message_handler(commands=['fight'])
-def fightbegin(message):
-  
 
+  
 
 @bot.message_handler(commands=['join'])
 def joinm(message):
