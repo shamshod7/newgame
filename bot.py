@@ -41,7 +41,8 @@ def helpmessage(message):
 @bot.message_handler(commands=['begin'])
 def beginmessage(message):
   if message.chat.id not in info.lobby.game:
-    info.lobby.game=createlobby(message.chat.id, message.from_user.id)
+    info.lobby.game[message.chat.id]=createlobby(message.chat.id, message.from_user.id)
+    print(info.lobby.game)
     bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
     info.lobby.game[message.chat.id]['naming']=1
     lobbycancel=threading.Timer(300.0, target=cancel, args=[message.chat.id])
