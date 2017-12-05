@@ -56,7 +56,7 @@ def namemessage(message):
       if info.lobby.game[message.chat.id]['naming']==1:
         if len(message.text)<31:
           info.lobby.game[message.chat.id]['name']=message.from_user.id
-          bot.send_message(message.chat.id, 'Вы назвали лобби! ('+message.text+').')
+          bot.send_message(message.chat.id, 'Вы назвали лобби! ('+message.text+').'+"\n"+'Ожидайте второго игрока.')
           info.lobby.game[message.chat.id]['naming']=0                          
         else:
           bot.send_message(message.chat.id, 'Длина названия не должна превышать 30 символов!')
