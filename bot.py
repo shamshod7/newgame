@@ -112,7 +112,7 @@ def createlobby(chatid, creatorid):
   
 def createuser(id):
   return{
-    'selfid':0
+    'selfid':id
   }
 
 
