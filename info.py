@@ -1,6 +1,6 @@
-class Lobby(object):
+class lobby(object):
     def __init__(self):
-        self.chat={}
+        self.game={}
         
         
 lobby = Lobby()
