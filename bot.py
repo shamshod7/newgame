@@ -67,7 +67,7 @@ def cancel(id):
     info.lobby.game[id].clear()
     for key in info.lobby.game:
       if key==id:
-    info.lobby.game.del(key)
+        info.lobby.game.del(key)
   
   
 
