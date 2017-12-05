@@ -49,7 +49,7 @@ def beginmessage(message):
   
   
 @bot.message_handler(content_types=['text'])
-def namemessage():
+def namemessage(message):
   if message.chat.id in info.lobby.game:
     if info.lobby.game[message.chat.id]['creatorid']==message.from_user.id:
       if info.lobby.game[message.chat.id]['naming']==1:
