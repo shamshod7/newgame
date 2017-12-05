@@ -68,10 +68,15 @@ def beginmessage(message):
 @bot.message_handler(content_types=['text'])
 def namemessage(message):
   if message.from_user.id in info.lobby.game:
+    print('1')
     if info.lobby.game[message.from_user.id]['creatorid']['selfid']==message.from_user.id:
+      print('2')
       if info.lobby.game[message.from_user.id]['naming']==1:
+        print('3')
         if len(message.text)<31:
+         print('4')
          if message.text!='None':
+          print('5')
           info.lobby.game[message.from_user.id]['name']=message.from_user.id
           bot.send_message(message.chat.id, 'Вы назвали лобби! ('+message.text+').'+"\n"+'Ожидайте второго игрока (/join для присоединения).')
           info.lobby.game[message.from_user.id]['naming']=0  
