@@ -66,6 +66,7 @@ def cancel(id):
   if info.lobby.game[id]['playing']==0:
     info.lobby.game[id].clear()
     del info.lobby.game[id]
+    bot.send_message(id, 'Лобби удалено!')
   
   
 
