@@ -147,7 +147,7 @@ def createuser(id):
   
 def battle(id):
     for id in info.lobby.game[id]['players']:
-      Keyboard=types.InlineKeyboardMarkup(resize_keyboard: True)
+      Keyboard=types.InlineKeyboardMarkup(resize_keyboard=True)
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
       Keyboard.add(types.InlineKeyboardButton(text="Информация обо мне", callback_data='info'))
