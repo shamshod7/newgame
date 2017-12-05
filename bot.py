@@ -79,7 +79,7 @@ def namemessage(message):
          print('4')
          if message.text!='None':
           print('5')
-          info.lobby.game[message.from_user.id]['name']=message.from_user.id
+          info.lobby.game[message.from_user.id]['name']=message.text
           bot.send_message(message.chat.id, 'Вы назвали лобби! ('+message.text+').'+"\n"+'Ожидайте второго игрока (/join для присоединения).')
           info.lobby.game[message.from_user.id]['naming']=0  
          else:
