@@ -67,7 +67,7 @@ def beginmessage(message):
   
 @bot.message_handler(content_types=['text'])
 def namemessage(message):
-  if message.chat.id in info.lobby.game:
+  if message.from_user.id in info.lobby.game:
     if info.lobby.game[message.from_user.id]['creatorid']['selfid']==message.from_user.id:
       if info.lobby.game[message.from_user.id]['naming']==1:
         if len(message.text)<31:
