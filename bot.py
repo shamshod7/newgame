@@ -12,6 +12,13 @@ bot = telebot.TeleBot(token)
 
 
 
+@bot.callback_query_handler(func=lambda call:True)
+def inline(call):
+  if call.data=='do':
+    pass
+
+
+
 
 
 @bot.message_handler(commands=['fight'])
