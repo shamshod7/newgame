@@ -60,8 +60,7 @@ def namemessage():
           bot.send_message(message.chat.id, 'Длина названия не должна превышать 30 символов!')
           
   
-  
- def cancel(id):
+def cancel(id):
   if info.lobby.game[id]['playing']==0:
     info.lobby.game.remove[id]
   
