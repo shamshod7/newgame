@@ -106,9 +106,8 @@ def createlobby(chatid, creatorid):
     'creatorid':createuser(creatorid),
     'naming':0,
     'playing':0,
-    'players':{creatorid:createuser(creatorid)
+    'players':{creatorid:createuser(creatorid)}
   }
-  
   
   
   
