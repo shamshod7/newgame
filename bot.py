@@ -39,6 +39,7 @@ def helpmessage(message):
 def beginmessage(message):
   if message.chat.id not in currentchat:
     currentchat.append(message.chat.id)
+    info.lobby.game=createchat(id)
   
   
   
