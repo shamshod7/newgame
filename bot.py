@@ -12,12 +12,22 @@ bot = telebot.TeleBot(token)
 
 
 
+
+
+@bot.message_handler(commands=['fight'])
+def fightbegin(message):
+  
+
+
 @bot.message_handler(commands=['join'])
 def joinm(message):
-  if message.chat.id in info.lobby.game:
-    if info.lobby.game[message.chat.id]
-
-
+  for key in info.lobby.game:
+    if info.lobby.game[key]['creatorid']['selfid']!=message.from_user.id:
+      if info.lobby.game[key]['chatid']==message.chat.id:
+       if info.lobby.game[key]['name']!='None':
+        info.lobby.game[key]['player2id']=message.from_user.id
+        bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+info.lobby.game[key]['name']+')! Для начала игры её создатель должен нажать /fight')
+           
 
 @bot.message_handler(commands=['cancel'])
 def cancelmessage(message):
@@ -48,7 +58,7 @@ def helpmessage(message):
 
 @bot.message_handler(commands=['begin'])
 def beginmessage(message):
-  if message.chat.id not in info.lobby.game:
+  if message.from_user.id not in info.lobby.game:
     info.lobby.game[message.from_user.id]=createlobby(message.chat.id, message.from_user.id)
     print(info.lobby.game)
     bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
@@ -60,12 +70,15 @@ def beginmessage(message):
 @bot.message_handler(content_types=['text'])
 def namemessage(message):
   if message.chat.id in info.lobby.game:
-    if info.lobby.game[message.from_user.id]['creatorid']==message.from_user.id:
+    if info.lobby.game[message.from_user.id]['creatorid']['selfid']==message.from_user.id:
       if info.lobby.game[message.from_user.id]['naming']==1:
         if len(message.text)<31:
+         if message.text!='None':
           info.lobby.game[message.from_user.id]['name']=message.from_user.id
           bot.send_message(message.chat.id, 'Вы назвали лобби! ('+message.text+').'+"\n"+'Ожидайте второго игрока (/join для присоединения).')
-          info.lobby.game[message.from_user.id]['naming']=0                          
+          info.lobby.game[message.from_user.id]['naming']=0  
+         else:
+          bot.send_message(message.chat.id, 'Недопустимое имя!')
         else:
           bot.send_message(message.chat.id, 'Длина названия не должна превышать 30 символов!')
           
@@ -83,17 +96,22 @@ def cancel(id):
   
 def createlobby(chatid, creatorid):
   return {
-    'name':'',
+    'name':'None',
     'chatid':chatid,
-    'creatorid':creatorid,
+    'creatorid':createuser(creatorid),
     'naming':0,
-    'playing':0
+    'playing':0,
+    'player2id':0,
   }
   
   
   
   
-  
+def createuser(id):
+  return{
+    'selfid':0
+  }
+
 
 
 if __name__ == '__main__':
