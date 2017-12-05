@@ -11,6 +11,14 @@ token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
 
+
+@bot.message_handler(commands=['join'])
+def joinm(message):
+  if message.chat.id in info.lobby.game:
+    if info.lobby.game[message.chat.id]
+
+
+
 @bot.message_handler(commands=['cancel'])
 def cancelmessage(message):
   if message.chat.id in info.lobby.game:
@@ -41,23 +49,23 @@ def helpmessage(message):
 @bot.message_handler(commands=['begin'])
 def beginmessage(message):
   if message.chat.id not in info.lobby.game:
-    info.lobby.game[message.chat.id]=createlobby(message.chat.id, message.from_user.id)
+    info.lobby.game[message.from_user.id]=createlobby(message.chat.id, message.from_user.id)
     print(info.lobby.game)
     bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
-    info.lobby.game[message.chat.id]['naming']=1
-    lobbycancel=threading.Timer(300.0, cancel, args=[message.chat.id])
+    info.lobby.game[message.from_user.id]['naming']=1
+    lobbycancel=threading.Timer(300.0, cancel, args=[message.from_user.id])
     
   
   
 @bot.message_handler(content_types=['text'])
 def namemessage(message):
   if message.chat.id in info.lobby.game:
-    if info.lobby.game[message.chat.id]['creatorid']==message.from_user.id:
-      if info.lobby.game[message.chat.id]['naming']==1:
+    if info.lobby.game[message.from_user.id]['creatorid']==message.from_user.id:
+      if info.lobby.game[message.from_user.id]['naming']==1:
         if len(message.text)<31:
-          info.lobby.game[message.chat.id]['name']=message.from_user.id
+          info.lobby.game[message.from_user.id]['name']=message.from_user.id
           bot.send_message(message.chat.id, 'Вы назвали лобби! ('+message.text+').'+"\n"+'Ожидайте второго игрока (/join для присоединения).')
-          info.lobby.game[message.chat.id]['naming']=0                          
+          info.lobby.game[message.from_user.id]['naming']=0                          
         else:
           bot.send_message(message.chat.id, 'Длина названия не должна превышать 30 символов!')
           
