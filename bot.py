@@ -147,11 +147,11 @@ def createuser(id):
   
 def battle(id):
     for id in info.lobby.game[id]['players']:
-      Keyboard=types.InlineKeyboardMarkup()
+      Keyboard=types.InlineKeyboardMarkup(resize_keyboard: True)
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
       Keyboard.add(types.InlineKeyboardButton(text="Информация обо мне", callback_data='info'))
-      msg=bot.send_message(id, 'Главное меню',reply_markup=Keyboard, resize_keyboard: True)
+      msg=bot.send_message(id, 'Главное меню',reply_markup=Keyboard)
 
 
 if __name__ == '__main__':
