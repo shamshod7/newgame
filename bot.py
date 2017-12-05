@@ -10,7 +10,7 @@ token = os.environ['TELEGRAM_TOKEN']
 
 bot = telebot.TeleBot(token)
 
-
+currentchat=[]
 
 @bot.message_handler(commands=['start'])
 def startmessage(message):
@@ -35,7 +35,21 @@ def helpmessage(message):
 
 
 
-
+@bot.message_handler(commands=['begin'])
+def beginmessage(message):
+  if message.chat.id not in currentchat:
+    currentchat.append(message.chat.id)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if __name__ == '__main__':
