@@ -74,7 +74,7 @@ def createlobby(chatid, creatorid):
   return {
     'name':'',
     'aidi':chatid,
-    'creatorid':playerid,
+    'creatorid':creatorid,
     'naming':0,
     'playing':0
   }
