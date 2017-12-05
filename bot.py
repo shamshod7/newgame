@@ -14,7 +14,16 @@ bot = telebot.TeleBot(token)
 
 
 
-
+@bot.message_handler(commands=['fight'])
+def fightstart(message):
+  if message.from_user.id in info.lobby.game:
+    if message.chat.id==info.lobby.game[message.from_user.id]['chatid']:
+      if info.lobby.game[message.from_user.id]['battle']==0:
+        if info.lobby.game[message.from_user.id]['len']%2==0:
+          bot.send_message(message.chat.id, 'Битва начинается! Приготовьте свою ману...')
+          
+          
+                     
   
 
 @bot.message_handler(commands=['join'])
@@ -25,6 +34,7 @@ def joinm(message):
        if info.lobby.game[key]['name']!='None':
          if message.from_user.id not in info.lobby.game[key]['players']:
           info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id)
+          info.lobby.game[key]['len']+=1
           bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[key]['name'])+')! Для начала игры её создатель должен нажать /fight')
 
            
@@ -106,7 +116,9 @@ def createlobby(chatid, creatorid):
     'creatorid':createuser(creatorid),
     'naming':0,
     'playing':0,
-    'players':{creatorid:createuser(creatorid)}
+    'players':{creatorid:createuser(creatorid)},
+    'battle':0,
+    'len':1
   }
   
   
@@ -117,6 +129,14 @@ def createuser(id):
             }  
   
 
+  
+  def battle(id):
+    for id in info.lobby.game[id]['players']:
+      Keyboard=types.InlineKeyboardMarkup()
+      Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
+      Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
+      Keyboard.add(types.InlineKeyboardButton(text="Информация обо мне", callback_data='info'))
+        msg=bot.send_message(id, 'Главное меню',reply_markup=Keyboard)
 
 
 if __name__ == '__main__':
