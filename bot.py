@@ -64,7 +64,7 @@ def namemessage(message):
   
 def cancel(id):
   if info.lobby.game[id]['playing']==0:
-    info.lobby.game.remove[id]
+    info.lobby.game.clear[id]
   
   
 
