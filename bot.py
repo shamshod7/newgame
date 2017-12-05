@@ -145,7 +145,7 @@ def createuser(id):
   
 
   
-  def battle(id):
+def battle(id):
     for id in info.lobby.game[id]['players']:
       Keyboard=types.InlineKeyboardMarkup()
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
