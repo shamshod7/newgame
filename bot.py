@@ -23,7 +23,7 @@ def joinm(message):
     if info.lobby.game[key]['creatorid']['selfid']!=message.from_user.id:
       if info.lobby.game[key]['chatid']==message.chat.id:
        if info.lobby.game[key]['name']!='None':
-         if message.from_user.id not in info.lobby.game.players:
+         if message.from_user.id not in info.lobby.game[key]['players']:
           info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id)
           bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[key]['name'])+')! Для начала игры её создатель должен нажать /fight')
 
