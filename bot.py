@@ -27,7 +27,16 @@ def fightstart(message):
     if message.chat.id==info.lobby.game[message.from_user.id]['chatid']:
       if info.lobby.game[message.from_user.id]['battle']==0:
         if info.lobby.game[message.from_user.id]['len']%2==0:
-          bot.send_message(message.chat.id, 'Битва начинается! Приготовьте свою ману...')
+          if info.lobby.game[message.from_user.id]['battle']==0:
+            bot.send_message(message.chat.id, 'Битва начинается! Приготовьте свою ману...')
+            info.lobby.game[message.from_user.id]['battle']=1
+            btl=threading.Thread(target=battle, args=[message.from_user.id])
+            btl.start()
+          else:
+            bot.send_message(message.chat.id, 'Игра ('+info.lobby.game[message.from_user.id]['name']+') уже была запущена!'
+        else:
+          bot.send_message(message.chat.id, 'Можно играть только при четном количестве игроков!')
+
           
           
                      
@@ -39,10 +48,10 @@ def joinm(message):
     if info.lobby.game[key]['creatorid']['selfid']!=message.from_user.id:
       if info.lobby.game[key]['chatid']==message.chat.id:
        if info.lobby.game[key]['name']!='None':
-         if message.from_user.id not in info.lobby.game[key]['players']:
-          info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id)
-          info.lobby.game[key]['len']+=1
-          bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[key]['name'])+')! Для начала игры её создатель должен нажать /fight')
+         if message.from_user.id not in info.lobby.game[key]['players']:                             
+           info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id)
+           info.lobby.game[key]['len']+=1
+           bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[key]['name'])+')! Для начала игры её создатель должен нажать /fight')
 
            
 
@@ -64,8 +73,7 @@ def startmessage(message):
 
 @bot.message_handler(commands=['help'])
 def helpmessage(message):
-  bot.send_message(message.from_user.id, 'Чтобы сыграть в игру, добавьте меня в чат и напишите /begin для начала набора игроков.'+"\n"+
-                   
+  bot.send_message(message.from_user.id, 'Чтобы сыграть в игру, добавьте меня в чат и напишите /begin для начала набора игроков. В одном чате можно запустить несколько игр, но один игрок может присутствовать только в одной из них'+"\n"+      
                    'В этой игре вы играете за одного из магов, который обороняет свою крепость, или нападает на чужую! '+
                    'Чтобы атаковать врага, вы призываете специальный алтарь, на котором каждый новый ход появляется одно из ваших выбранных '+
                    'существ (для каждого существа свой алтарь), которое вступает в бой с существами врагов, и разделавшись с ними, идет в атаку на крепость.'+
@@ -132,7 +140,7 @@ def createlobby(chatid, creatorid):
   
 def createuser(id):
   return{'selfid':id
-                 
+                          
             }  
   
 
