@@ -33,7 +33,7 @@ def joinm(message):
 def cancelmessage(message):
   if message.from_user.id in info.lobby.game:
     if info.lobby.game[message.from_user.id]['playing']==0:
-      cancel(message.from_user.id)
+      cancel(message.from_user.id, message.chat.id)
     else:
       bot.send_message(message.chat.id, 'Игра уже была запущена!')
 
@@ -88,11 +88,11 @@ def namemessage(message):
           bot.send_message(message.chat.id, 'Длина названия не должна превышать 30 символов!')
           
   
-def cancel(id):
+def cancel(id, chatid):
   if info.lobby.game[id]['playing']==0:
     info.lobby.game[id].clear()
     del info.lobby.game[id]
-    bot.send_message(id, 'Лобби удалено!')
+    bot.send_message(chatid, 'Лобби удалено!')
   
   
 
