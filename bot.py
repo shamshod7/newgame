@@ -73,7 +73,7 @@ def cancel(id):
 def createlobby(chatid, creatorid):
   return {
     'name':'',
-    'aidi':chatid,
+    'chatid':chatid,
     'creatorid':creatorid,
     'naming':0,
     'playing':0
