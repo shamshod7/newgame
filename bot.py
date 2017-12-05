@@ -33,7 +33,7 @@ def fightstart(message):
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
           else:
-            bot.send_message(message.chat.id, 'Игра ('+info.lobby.game[message.from_user.id]['name']+') уже была запущена!'
+            bot.send_message(message.chat.id, 'Игра ('+info.lobby.game[message.from_user.id]['name']+') уже была запущена!')
         else:
           bot.send_message(message.chat.id, 'Можно играть только при четном количестве игроков!')
 
