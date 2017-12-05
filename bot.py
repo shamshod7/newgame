@@ -63,7 +63,7 @@ def beginmessage(message):
     print(info.lobby.game)
     bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
     info.lobby.game[message.from_user.id]['naming']=1
-    lobbycancel=threading.Timer(300.0, cancel, args=[message.from_user.id])
+    lobbycancel=threading.Timer(300.0, cancel, args=[message.from_user.id, message.chat.id])
     
   
   
