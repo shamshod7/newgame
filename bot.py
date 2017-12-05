@@ -65,9 +65,7 @@ def namemessage(message):
 def cancel(id):
   if info.lobby.game[id]['playing']==0:
     info.lobby.game[id].clear()
-    for key in info.lobby.game:
-      if key==id:
-        info.lobby.game.del(key)
+    info.lobby.game[id].del()
   
   
 
