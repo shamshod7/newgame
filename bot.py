@@ -31,7 +31,7 @@ def inline(call):
           Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
           Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
           Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
-          msg=medit('Главное меню:'+"\n"+'Мана: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax'], call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+          msg=medit('Главное меню:'+"\n"+'Мана: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax'], call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage']), reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
           
           
