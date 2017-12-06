@@ -23,8 +23,8 @@ def inline(call):
           meditkeyboard('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'])
 
 
-def meditkeyboard(message_text,chat_id, message_id,reply_markup=Keyboard,parse_mode='Markdown'):
-    return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
+def meditkeyboard(Keyboard=types.InlineKeyboardMarkup, message_text,chat_id, message_id,reply_markup=Keyboard,parse_mode='Markdown', ):
+    return bot.edit_message_text(Keyboard=Keyboard, chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
                                  parse_mode=parse_mode)
   
   
