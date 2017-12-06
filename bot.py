@@ -264,9 +264,11 @@ def battle(creatorid):
       if id in info.lobby.game[creatorid]['team1']:
         mobs(id)
         info.lobby.game[creatorid]['team1'][id]['mana']=info.lobby.game[creatorid]['team1'][id]['manamax']
+        print(str(info.lobby.game[creatorid]['team1'][id]['manamax']))
       elif id in info.lobby.game[creatorid]['team2']:
         mobs(id)
         info.lobby.game[creatorid]['team2'][id]['mana']=info.lobby.game[creatorid]['team2'][id]['manamax']
+        print(str(info.lobby.game[creatorid]['team2'][id]['manamax']))
       mana=emojize(':droplet:', use_aliases=True)
       Keyboard=types.InlineKeyboardMarkup()
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
