@@ -92,7 +92,7 @@ def joinm(message):
     if info.lobby.game[key]['creatorid']['selfid']!=message.from_user.id:
       if info.lobby.game[key]['chatid']==message.chat.id:
        if info.lobby.game[key]['name']!='None':
-         if message.from_user.id not in info.lobby.game[key]['players']
+         if message.from_user.id not in info.lobby.game[key]['players']:
            already=0
            for id in info.lobby.game:                    
              if message.from_user.id in info.lobby.game[id]['players']:
