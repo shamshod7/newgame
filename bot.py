@@ -33,6 +33,16 @@ def inline(call):
           Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
           msg=medit('Главное меню', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
+          
+          
+  elif call.data=='altar':
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+          Keyboard=types.InlineKeyboardMarkup()
+          Keyboard.add(types.InlineKeyboardButton(text="Скелет-мечник", callback_data='s_me4nik'))
+          Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
+          msg=medit('Выберите существо', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+          info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
 
   
   
