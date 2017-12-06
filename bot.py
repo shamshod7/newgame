@@ -15,11 +15,14 @@ bot = telebot.TeleBot(token)
 @bot.callback_query_handler(func=lambda call:True)
 def inline(call):
   if call.data=='do':
-    pass
+    for id in info.lobby.game[id]['players']:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        msgedit()
 
 
 
-
+def msgedit():
+  pass
 
 @bot.message_handler(commands=['fight'])
 def fightstart(message):
@@ -139,19 +142,22 @@ def createlobby(chatid, creatorid):
   
   
 def createuser(id):
-  return{'selfid':id
+  return{'selfid':id,
+         'lastmessage':0
                           
             }  
   
 
   
-def battle(id):
-    for id in info.lobby.game[id]['players']:
+def battle(creatorid):
+    for id in info.lobby.game[creatorid]['players']:
       Keyboard=types.InlineKeyboardMarkup()
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
       Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
       msg=bot.send_message(id, 'Главное меню',reply_markup=Keyboard)
+      info.lobby.game[creatorid]['players'][id]['lastmessage']=msg.message.id
+      
 
 
 if __name__ == '__main__':
