@@ -28,7 +28,7 @@ def meditkeyboard(Keyboard=types.InlineKeyboardMarkup, message_text,chat_id, mes
                                  parse_mode=parse_mode)
   
   
-def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
+def medit(Keyboard=Keyboard, message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
     return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
                                  parse_mode=parse_mode)
 
