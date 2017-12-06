@@ -58,17 +58,17 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if call.from_user.id in info.lobby.game[id]['team1']:
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="mob1", callback_data=info.lobby.game[id]['team1']['mobsinturn'][0]))
-            Keyboard.add(types.InlineKeyboardButton(text="mob2", callback_data=info.lobby.game[id]['team1']['mobsinturn'][1]))
-            Keyboard.add(types.InlineKeyboardButton(text="mob3", callback_data=info.lobby.game[id]['team1']['mobsinturn'][2]))
+            Keyboard.add(types.InlineKeyboardButton(text="mob1", callback_data=info.lobby.game[id]['team1'][call.from_user.id]['mobsinturn'][0]))
+            Keyboard.add(types.InlineKeyboardButton(text="mob2", callback_data=info.lobby.game[id]['team1'][call.from_user.id]['mobsinturn'][1]))
+            Keyboard.add(types.InlineKeyboardButton(text="mob3", callback_data=info.lobby.game[id]['team1'][call.from_user.id]['mobsinturn'][2]))
             Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
             msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
           elif call.from_user.id in info.lobby.game[id]['team2']:
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="mob1", callback_data=info.lobby.game[id]['team2']['mobsinturn'][0]))
-            Keyboard.add(types.InlineKeyboardButton(text="mob2", callback_data=info.lobby.game[id]['team2']['mobsinturn'][1]))
-            Keyboard.add(types.InlineKeyboardButton(text="mob3", callback_data=info.lobby.game[id]['team2']['mobsinturn'][2]))
+            Keyboard.add(types.InlineKeyboardButton(text="mob1", callback_data=info.lobby.game[id]['team2'][call.from_user.id]['mobsinturn'][0]))
+            Keyboard.add(types.InlineKeyboardButton(text="mob2", callback_data=info.lobby.game[id]['team2'][call.from_user.id]['mobsinturn'][1]))
+            Keyboard.add(types.InlineKeyboardButton(text="mob3", callback_data=info.lobby.game[id]['team2'][call.from_user.id]['mobsinturn'][2]))
             Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
             msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
