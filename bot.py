@@ -58,9 +58,21 @@ def fightstart(message):
         if info.lobby.game[message.from_user.id]['len']%2==0:
           if info.lobby.game[message.from_user.id]['battle']==0:
             bot.send_message(message.chat.id, 'Битва начинается! Приготовьте свою ману...')
+            for id in info.lobby.game[message.from_user.id]['players']:
+              if len(info.lobby.game[message.from_user.id]['team1'])==len(info.lobby.game[message.from_user.id]['team2']):
+                a=random.randint(1,2)
+                if a==1:
+                  info.lobby.game[message.from_user.id]['team1'][id]=createuser(id)
+                else:
+                  info.lobby.game[message.from_user.id]['team2'][id]=createuser(id)
+              elif len(info.lobby.game[message.from_user.id]['team1'])>len(info.lobby.game[message.from_user.id]['team2']):
+                info.lobby.game[message.from_user.id]['team2'][id]=createuser(id)
+              else:
+                info.lobby.game[message.from_user.id]['team1'][id]=createuser(id)
             info.lobby.game[message.from_user.id]['battle']=1
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
+            print(info.lobby.game)
           else:
             bot.send_message(message.chat.id, 'Игра ('+info.lobby.game[message.from_user.id]['name']+') уже была запущена!')
         else:
@@ -162,7 +174,10 @@ def createlobby(chatid, creatorid):
     'playing':0,
     'players':{creatorid:createuser(creatorid)},
     'battle':0,
-    'len':1
+    'len':1,
+    'team1':{},
+    'team2':{}
+
   }
   
   
