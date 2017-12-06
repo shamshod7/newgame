@@ -209,7 +209,7 @@ def battle(creatorid):
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
       Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
-      msg=bot.send_message(id, 'Главное меню:'+"\n"+'Мана: '+str(info.lobby.game[creatorid]['players'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][id]['manamax'],reply_markup=Keyboard)
+      msg=bot.send_message(id, 'Главное меню:'+"\n"+'Мана: '+str(info.lobby.game[creatorid]['players'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][id]['manamax']),reply_markup=Keyboard)
       info.lobby.game[creatorid]['players'][id]['lastmessage']=msg.message_id
       
 
