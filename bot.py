@@ -45,13 +45,17 @@ def inline(call):
   elif call.data=='menu':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
-          mana=emojize(':droplet:', use_aliases=True)
-          Keyboard=types.InlineKeyboardMarkup()
-          Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
-          Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
-          Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
-          msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
-          info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
+            mana=emojize(':droplet:', use_aliases=True)
+            Keyboard=types.InlineKeyboardMarkup()
+            Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
+            Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
+            Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
+            if call.from_user.id in info.lobby.game[id]['team1']:                
+              msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['team1'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['team1'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+              info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
+            elif call.from_user.id in info.lobby.game[id]['team2']:                
+              msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['team2'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['team2'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+              info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
           
           
   elif call.data=='altar':
