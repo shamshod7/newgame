@@ -273,9 +273,13 @@ def battle(creatorid):
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
       Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
-      msg=bot.send_message(id, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['players'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][id]['manamax']),reply_markup=Keyboard)
-      info.lobby.game[creatorid]['players'][id]['lastmessage']=msg.message_id
-      
+      for id in info.lobby.game[creatorid]['players']:
+        if id in info.lobby.game[creatorid]['team1']:
+          msg=bot.send_message(id, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['team1'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['team1'][id]['manamax']),reply_markup=Keyboard)
+          info.lobby.game[creatorid]['team1'][id]['lastmessage']=msg.message_id
+        elif id in info.lobby.game[creatorid]['team2']:
+          msg=bot.send_message(id, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['team2'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['team2'][id]['manamax']),reply_markup=Keyboard)
+          info.lobby.game[creatorid]['team2'][id]['lastmessage']=msg.message_id
 
 
 if __name__ == '__main__':
