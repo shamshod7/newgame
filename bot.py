@@ -38,10 +38,11 @@ def inline(call):
           Keyboard=types.InlineKeyboardMarkup()
           Keyboard.add(types.InlineKeyboardButton(text="Открыть портал", callback_data='altar'))
           Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
-          msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           if call.from_user.id in info.lobby.game[id]['team1']:
+            msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['team1'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['team1'][call.from_user.id]['lastmessage']=msg.message_id
           elif call.from_user.id in info.lobby.game[id]['team2']:
+            msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['team2'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['team2'][call.from_user.id]['lastmessage']=msg.message_id
           
           
