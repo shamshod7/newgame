@@ -65,13 +65,13 @@ def fightstart(message):
               if len(info.lobby.game[message.from_user.id]['team1'])==len(info.lobby.game[message.from_user.id]['team2']):
                 a=random.randint(1,2)
                 if a==1:
-                  info.lobby.game[message.from_user.id]['team1'][id]=createuser(id)
+                  info.lobby.game[message.from_user.id]['team1'][id]=createuser(id, 1)
                 else:
-                  info.lobby.game[message.from_user.id]['team2'][id]=createuser(id)
+                  info.lobby.game[message.from_user.id]['team2'][id]=createuser(id, 1)
               elif len(info.lobby.game[message.from_user.id]['team1'])>len(info.lobby.game[message.from_user.id]['team2']):
-                info.lobby.game[message.from_user.id]['team2'][id]=createuser(id)
+                info.lobby.game[message.from_user.id]['team2'][id]=createuser(id, 1)
               else:
-                info.lobby.game[message.from_user.id]['team1'][id]=createuser(id)
+                info.lobby.game[message.from_user.id]['team1'][id]=createuser(id, 1)
             info.lobby.game[message.from_user.id]['battle']=1
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
