@@ -18,7 +18,7 @@ def mobs(callid):
       if callid in info.lobby.game[id]['players']:
           if callid in info.lobby.game[id]['team1']:
             while len(info.lobby.game[id]['team1'][callid]['mobsinturn'])<3:
-              x=random.randint(1,len(info.lobby.game[id]['team1']['allmobs']))
+              x=random.randint(1,len(info.lobby.game[id]['team1'][callid]['allmobs']))
               if info.lobby.game[id]['team1'][callid]['allmobs'][x-1] not in info.lobby.game[id]['team1'][callid]['mobsinturn']:
                 info.lobby.game[id]['team1'][callid]['mobsinturn'].append(info.lobby.game[id]['team1'][callid]['allmobs'][x-1])
           elif callid in info.lobby.game[id]['team2']:
