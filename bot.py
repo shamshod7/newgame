@@ -17,8 +17,7 @@ def inline(call):
   if call.data=='do':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
-        medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players']['lastmessage'])
-
+        medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'])
 
 
 def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
