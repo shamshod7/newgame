@@ -7,6 +7,7 @@ import random
 import threading
 import info
 from telebot import types
+from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
@@ -46,7 +47,22 @@ def inline(call):
 
      
   elif call.data=='s_me4nik':
-    pass
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if call.from_user.id in info.lobby.game[id]['team1']:
+          if info.lobby.game[id]['team1'][call.from_user.id]['mana']>=info.s_me4nik.cost:
+            info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik']+=1
+            info.lobby.game[id]['team1'][call.from_user.id]['mana']-=info.s_me4nik.cost
+          else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+        elif call.from_user.id in info.lobby.game[id]['team2']:
+          if info.lobby.game[id]['team2'][call.from_user.id]['mana']>=info.s_me4nik.cost:
+            info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik']+=1
+            info.lobby.game[id]['team2'][call.from_user.id]['mana']-=info.s_me4nik.cost
+          else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+         
+            
     
   
 def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
@@ -197,9 +213,10 @@ def createlobby(chatid, creatorid):
 def createuser(id, x):
   return{'selfid':id,
          'lastmessage':0,
-         'tvari':[],
+         'tvari':{'s_me4nik':0                 
+         },
          'mana':0,
-          'manamax':0,
+          'manamax':100,
          'inlobby':x,
          'cash':''
             }  
@@ -208,6 +225,10 @@ def createuser(id, x):
   
 def battle(creatorid):
     for id in info.lobby.game[creatorid]['players']:
+      if id in info.lobby.game[creatorid]['team1']:
+        info.lobby.game[creatorid]['team1'][id]['mana']=info.lobby.game[creatorid]['team1'][id]['manamax']
+      elif id in info.lobby.game[creatorid]['team2']:
+        info.lobby.game[creatorid]['team2'][id]['mana']=info.lobby.game[creatorid]['team2'][id]['manamax']
       Keyboard=types.InlineKeyboardMarkup()
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
