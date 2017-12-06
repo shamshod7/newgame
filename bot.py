@@ -2,6 +2,7 @@
 import redis
 import os
 import telebot
+import emoji
 import math
 import random
 import threading
