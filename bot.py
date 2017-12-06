@@ -253,7 +253,7 @@ def createuser(id, x):
          'manamax':100,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'tvar1', 'tvar2']
+         'allmobs':['s_me4nik', 'tvar1', 'tvar2'],
          'mobsinturn':[]
             }  
   
