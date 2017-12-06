@@ -46,6 +46,7 @@ def inline(call):
 
      
   elif call.data=='s_me4nik':
+    pass
     
   
 def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
