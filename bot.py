@@ -250,7 +250,7 @@ def createuser(id, x):
          'lastmessage':0,
          'tvari':{'s_me4nik':0                 
          },
-         'mana':0,
+         'mana':100,
          'manamax':100,
          'inlobby':x,
          'cash':'',
@@ -264,11 +264,9 @@ def battle(creatorid):
     for id in info.lobby.game[creatorid]['players']:
       if id in info.lobby.game[creatorid]['team1']:
         mobs(id)
-        info.lobby.game[creatorid]['team1'][id]['mana']=info.lobby.game[creatorid]['team1'][id]['manamax']
         print(str(info.lobby.game[creatorid]['team1'][id]['mana']))
       elif id in info.lobby.game[creatorid]['team2']:
         mobs(id)
-        info.lobby.game[creatorid]['team2'][id]['mana']=info.lobby.game[creatorid]['team2'][id]['manamax']
         print(str(info.lobby.game[creatorid]['team2'][id]['mana']))
       mana=emojize(':droplet:', use_aliases=True)
       Keyboard=types.InlineKeyboardMarkup()
