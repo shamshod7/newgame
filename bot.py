@@ -18,7 +18,7 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
           Keyboard=types.InlineKeyboardMarkup()
-          Keyboard.add(types.InlineKeyboardButton(text="Создать алтарь", callback_data='altar'))
+          Keyboard.add(types.InlineKeyboardButton(text="Открыть портал", callback_data='altar'))
           Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
           msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
@@ -31,7 +31,7 @@ def inline(call):
           Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
           Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
           Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
-          msg=medit('Главное меню', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+          msg=medit('Главное меню:'+"\n"+'Мана: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax'], call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
           
           
@@ -44,7 +44,9 @@ def inline(call):
           msg=medit('Выберите существо', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
 
-  
+     
+  elif call.data=='s_me4nik':
+    
   
 def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
     return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
@@ -89,10 +91,17 @@ def joinm(message):
     if info.lobby.game[key]['creatorid']['selfid']!=message.from_user.id:
       if info.lobby.game[key]['chatid']==message.chat.id:
        if info.lobby.game[key]['name']!='None':
-         if message.from_user.id not in info.lobby.game[key]['players']:                             
-           info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id)
-           info.lobby.game[key]['len']+=1
-           bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[key]['name'])+')! Для начала игры её создатель должен нажать /fight')
+         if message.from_user.id not in info.lobby.game[key]['players']
+           already=0
+           for id in info.lobby.game:                    
+             if message.from_user.id in info.lobby.game[id]['players']:
+               already=1
+           if already==0:
+             info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id, 1)
+             info.lobby.game[key]['len']+=1
+             bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[key]['name'])+')! Для начала игры её создатель должен нажать /fight')
+           else:
+             bot.send_message(message.chat.id, 'Вы уже в другом лобби! ('+info.lobby.game[key]['name']+')!')
 
            
 
@@ -116,8 +125,8 @@ def startmessage(message):
 def helpmessage(message):
   bot.send_message(message.from_user.id, 'Чтобы сыграть в игру, добавьте меня в чат и напишите /begin для начала набора игроков. В одном чате можно запустить несколько игр, но один игрок может присутствовать только в одной из них'+"\n"+      
                    'В этой игре вы играете за одного из магов, который обороняет свою крепость, или нападает на чужую! '+
-                   'Чтобы атаковать врага, вы призываете специальный алтарь, на котором каждый новый ход появляется одно из ваших выбранных '+
-                   'существ (для каждого существа свой алтарь), которое вступает в бой с существами врагов, и разделавшись с ними, идет в атаку на крепость.'+
+                   'Чтобы атаковать врага, вы чертите на земле специальные символы, открывая портал, из которого каждый новый ход появляется одно из ваших выбранных '+
+                   'существ (для открытия портала требуется мана), которое вступает в бой с существами врагов, и разделавшись с ними, идет в атаку на крепость.'+
                    ' Все существа полностью самостоятельны, вам лишь нужно грамотно выбрать алтари для их появления.'+'Можно играть команда на команду!'+"\n"+'Цель игры: уничтожить крепость соперника')
 
 
@@ -169,10 +178,10 @@ def createlobby(chatid, creatorid):
   return {
     'name':'None',
     'chatid':chatid,
-    'creatorid':createuser(creatorid),
+    'creatorid':createuser(creatorid, 1),
     'naming':0,
     'playing':0,
-    'players':{creatorid:createuser(creatorid)},
+    'players':{creatorid:createuser(creatorid, 1)},
     'battle':0,
     'len':1,
     'team1':{},
@@ -182,10 +191,13 @@ def createlobby(chatid, creatorid):
   
   
   
-def createuser(id):
+def createuser(id, x):
   return{'selfid':id,
-         'lastmessage':0
-                          
+         'lastmessage':0,
+         'tvari':[],
+         'mana':0,
+          'manamax':0,
+         'inlobby':x
             }  
   
 
@@ -196,7 +208,7 @@ def battle(creatorid):
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
       Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
-      msg=bot.send_message(id, 'Главное меню',reply_markup=Keyboard)
+      msg=bot.send_message(id, 'Главное меню:'+"\n"+'Мана: '+str(info.lobby.game[creatorid]['players'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][id]['manamax'],reply_markup=Keyboard)
       info.lobby.game[creatorid]['players'][id]['lastmessage']=msg.message_id
       
 
