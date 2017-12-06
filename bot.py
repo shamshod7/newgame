@@ -21,6 +21,8 @@ def inline(call):
           Keyboard.add(types.InlineKeyboardButton(text="Создать алтарь", callback_data='altar'))
           Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
           msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+          info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
+          
           
   elif call.data=='menu':
     for id in info.lobby.game:
@@ -30,7 +32,7 @@ def inline(call):
           Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
           Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
           msg=medit('Главное меню', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
-          info.lobby.game[creatorid]['players'][id]['lastmessage']=msg.message_id 
+          info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
 
   
   
