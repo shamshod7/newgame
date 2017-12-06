@@ -97,10 +97,11 @@ def joinm(message):
            for id in info.lobby.game:                    
              if message.from_user.id in info.lobby.game[id]['players']:
                already=1
+               info.lobby.game[id]['players'][message.from_user.id]['cash']=info.lobby.game[id]['name']
            if already==0:
              info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id, 1)
              info.lobby.game[key]['len']+=1
-             bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[key]['name'])+')! Для начала игры её создатель должен нажать /fight')
+             bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[id]['players'][message.from_user.id]['cash'])+')! Для начала игры её создатель должен нажать /fight')
            else:
              bot.send_message(message.chat.id, 'Вы уже в другом лобби! ('+info.lobby.game[key]['name']+')!')
 
@@ -186,7 +187,8 @@ def createlobby(chatid, creatorid):
     'battle':0,
     'len':1,
     'team1':{},
-    'team2':{}
+    'team2':{},
+    
 
   }
   
@@ -198,7 +200,8 @@ def createuser(id, x):
          'tvari':[],
          'mana':0,
           'manamax':0,
-         'inlobby':x
+         'inlobby':x,
+         'cash':''
             }  
   
 
