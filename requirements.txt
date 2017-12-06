@@ -1,4 +1,4 @@
 redis
-emojize
+emoji
 pyTelegramBotAPI
 
