@@ -39,7 +39,11 @@ def inline(call):
           Keyboard.add(types.InlineKeyboardButton(text="Открыть портал", callback_data='altar'))
           Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
           msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
-          info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
+          if call.from_user.id in info.lobby.game[id]['team1']:
+            info.lobby.game[id]['team1'][call.from_user.id]['lastmessage']=msg.message_id
+          elif call.from_user.id in info.lobby.game[id]['team2']:
+            info.lobby.game[id]['team2'][call.from_user.id]['lastmessage']=msg.message_id
+          
           
           
   elif call.data=='menu':
@@ -51,10 +55,10 @@ def inline(call):
             Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
             Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
             if call.from_user.id in info.lobby.game[id]['team1']:                
-              msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['team1'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['team1'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+              msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['team1'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['team1'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['team1'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
               info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             elif call.from_user.id in info.lobby.game[id]['team2']:                
-              msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['team2'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['team2'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+              msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['team2'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['team2'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['team2'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
               info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
           
           
@@ -67,7 +71,7 @@ def inline(call):
             Keyboard.add(types.InlineKeyboardButton(text="mob2", callback_data=info.lobby.game[id]['team1'][call.from_user.id]['mobsinturn'][1]))
             Keyboard.add(types.InlineKeyboardButton(text="mob3", callback_data=info.lobby.game[id]['team1'][call.from_user.id]['mobsinturn'][2]))
             Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
-            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['team1'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
           elif call.from_user.id in info.lobby.game[id]['team2']:
             Keyboard=types.InlineKeyboardMarkup()
@@ -75,7 +79,7 @@ def inline(call):
             Keyboard.add(types.InlineKeyboardButton(text="mob2", callback_data=info.lobby.game[id]['team2'][call.from_user.id]['mobsinturn'][1]))
             Keyboard.add(types.InlineKeyboardButton(text="mob3", callback_data=info.lobby.game[id]['team2'][call.from_user.id]['mobsinturn'][2]))
             Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
-            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['team2'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
 
      
