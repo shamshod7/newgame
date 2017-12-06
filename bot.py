@@ -20,15 +20,11 @@ def inline(call):
           Keyboard=types.InlineKeyboardMarkup()
           Keyboard.add(types.InlineKeyboardButton(text="Создать алтарь", callback_data='altar'))
           Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
-          meditkeyboard('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'])
+          medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
 
-
-def meditkeyboard(Keyboard=types.InlineKeyboardMarkup, message_text,chat_id, message_id,reply_markup=Keyboard,parse_mode='Markdown', ):
-    return bot.edit_message_text(Keyboard=Keyboard, chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
-                                 parse_mode=parse_mode)
   
   
-def medit(Keyboard=Keyboard, message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
+def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
     return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
                                  parse_mode=parse_mode)
 
