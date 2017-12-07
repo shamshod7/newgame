@@ -91,13 +91,16 @@ def inline(call):
           if info.lobby.game[id]['team1'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik']+=1
             info.lobby.game[id]['team1'][call.from_user.id]['mana']-=info.s_me4nik.cost
-            info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, )
+            info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, (len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )
+            print(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1])
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
         elif call.from_user.id in info.lobby.game[id]['team2']:
           if info.lobby.game[id]['team2'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik']+=1
             info.lobby.game[id]['team2'][call.from_user.id]['mana']-=info.s_me4nik.cost
+            info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, (len(info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )
+            print(info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'])+1])
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
             
