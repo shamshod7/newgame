@@ -14,8 +14,11 @@ bot = telebot.TeleBot(token)
 def nametoclass(name):  #делает перевод названия сущ-ва в ссылку на класс
     if name=='s_me4nik':
         x=s_me4nik
-
-    
+    elif name=='phoenix':
+        x=phoenix
+    elif name=='electromagnit':
+        x=electromagnit
+         
     return x
 
 
