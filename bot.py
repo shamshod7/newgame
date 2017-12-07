@@ -22,7 +22,14 @@ def nametoclass(name):  #делает перевод названия сущ-в�
     return x
 
 
-
+def codetoname(name):
+    if name=='s_me4nik':
+        x='Скелет-мечник'
+    elif name=='phoenix':
+        x='Феникадзе'
+    elif name=='electromagnit':
+        x='Электромагнитень'
+    return x
 
 
 
@@ -36,14 +43,14 @@ def mobs(callid):    #выбирает 3х рандомных мобов для 
               if info.lobby.game[id]['players'][callid]['allmobs'][x-1] not in info.lobby.game[id]['players'][callid]['mobsinturn']:
                 info.lobby.game[id]['players'][callid]['mobsinturn'].append(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
                 if len(info.lobby.game[id]['players'][callid]['mobsinturn'])==1:
-                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                  info.lobby.game[id]['players'][callid]['name1mob']=info.y.name
+                  y=codetoname(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[id]['players'][callid]['name1mob']=y
                 elif len(info.lobby.game[id]['players'][callid]['mobsinturn'])==2:
-                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                  info.lobby.game[id]['players'][callid]['name2mob']=info.y.name
+                  y=codetoname(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[id]['players'][callid]['name2mob']=y
                 elif len(info.lobby.game[id]['players'][callid]['mobsinturn'])==3:
-                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                  info.lobby.game[id]['players'][callid]['name3mob']=info.y.name
+                  y=codetoname(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[id]['players'][callid]['name3mob']=y
                         
 
 
