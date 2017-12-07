@@ -11,21 +11,29 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
+def nametoclass(name):  #делает перевод названия сущ-ва в ссылку на класс
+    if name=='s_me4nik':
+        x=s_me4nik
 
+    
+    return x
 
-def mobs(callid):
+def mobs(callid):    #выбирает 3х рандомных мобов для возможности спавна
     for id in info.lobby.game:
       if callid in info.lobby.game[id]['players']:
-          if callid in info.lobby.game[id]['team1']:
-            while len(info.lobby.game[id]['team1'][callid]['mobsinturn'])<3:
-              x=random.randint(1,len(info.lobby.game[id]['team1'][callid]['allmobs']))
-              if info.lobby.game[id]['team1'][callid]['allmobs'][x-1] not in info.lobby.game[id]['team1'][callid]['mobsinturn']:
-                info.lobby.game[id]['team1'][callid]['mobsinturn'].append(info.lobby.game[id]['team1'][callid]['allmobs'][x-1])
-          elif callid in info.lobby.game[id]['team2']:
-             while len(info.lobby.game[id]['team2'][callid]['mobsinturn'])<3:
-               x=random.randint(1,len(info.lobby.game[id]['team2'][callid]['allmobs']))
-               if info.lobby.game[id]['team2'][callid]['allmobs'][x-1] not in info.lobby.game[id]['team2'][callid]['mobsinturn']:
-                 info.lobby.game[id]['team2'][callid]['mobsinturn'].append(info.lobby.game[id]['team2'][callid]['allmobs'][x-1])
+            while len(info.lobby.game[id]['players'][callid]['mobsinturn'])<3:
+              x=random.randint(1,len(info.lobby.game[id]['players'][callid]['allmobs']))
+              if info.lobby.game[id]['players'][callid]['allmobs'][x-1] not in info.lobby.game[id]['players'][callid]['mobsinturn']:
+                info.lobby.game[id]['players'][callid]['mobsinturn'].append(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                if len(info.lobby.game[id]['players'][callid]['mobsinturn'])==1:
+                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[id]['players'][callid]['name1mob']=info.y.name
+                elif len(info.lobby.game[id]['players'][callid]['mobsinturn'])==2:
+                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[id]['players'][callid]['name2mob']=info.y.name
+                elif len(info.lobby.game[id]['players'][callid]['mobsinturn'])==3:
+                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[id]['players'][callid]['name3mob']=info.y.name
                         
 
 
@@ -38,12 +46,9 @@ def inline(call):
           Keyboard=types.InlineKeyboardMarkup()
           Keyboard.add(types.InlineKeyboardButton(text="Открыть портал", callback_data='altar'))
           Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
-          if call.from_user.id in info.lobby.game[id]['team1']:
-            msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['team1'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
-            info.lobby.game[id]['team1'][call.from_user.id]['lastmessage']=msg.message_id
-          elif call.from_user.id in info.lobby.game[id]['team2']:
-            msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['team2'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
-            info.lobby.game[id]['team2'][call.from_user.id]['lastmessage']=msg.message_id
+          msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+          info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
+
           
           
           
@@ -54,55 +59,36 @@ def inline(call):
             Keyboard=types.InlineKeyboardMarkup()
             Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
             Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
-            Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
-            if call.from_user.id in info.lobby.game[id]['team1']:                
-              msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['team1'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['team1'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['team1'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
-              info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
-            elif call.from_user.id in info.lobby.game[id]['team2']:                
-              msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['team2'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['team2'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['team2'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
-              info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
+            Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))            
+            msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
+           
           
           
   elif call.data=='altar':
     for id in info.lobby.game:
-      if call.from_user.id in info.lobby.game[id]['players']:
-          if call.from_user.id in info.lobby.game[id]['team1']:
+      if call.from_user.id in info.lobby.game[id]['players']:          
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="mob1", callback_data=info.lobby.game[id]['team1'][call.from_user.id]['mobsinturn'][0]))
-            Keyboard.add(types.InlineKeyboardButton(text="mob2", callback_data=info.lobby.game[id]['team1'][call.from_user.id]['mobsinturn'][1]))
-            Keyboard.add(types.InlineKeyboardButton(text="mob3", callback_data=info.lobby.game[id]['team1'][call.from_user.id]['mobsinturn'][2]))
+            Keyboard.add(types.InlineKeyboardButton(text=info.lobby.game[id]['players'][call.from_user.id]['name1mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]))
+            Keyboard.add(types.InlineKeyboardButton(text=info.lobby.game[id]['players'][call.from_user.id]['name2mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]))
+            Keyboard.add(types.InlineKeyboardButton(text=info.lobby.game[id]['players'][call.from_user.id]['name3mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]))
             Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
-            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['team1'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
-          elif call.from_user.id in info.lobby.game[id]['team2']:
-            Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="mob1", callback_data=info.lobby.game[id]['team2'][call.from_user.id]['mobsinturn'][0]))
-            Keyboard.add(types.InlineKeyboardButton(text="mob2", callback_data=info.lobby.game[id]['team2'][call.from_user.id]['mobsinturn'][1]))
-            Keyboard.add(types.InlineKeyboardButton(text="mob3", callback_data=info.lobby.game[id]['team2'][call.from_user.id]['mobsinturn'][2]))
-            Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
-            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['team2'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
-            info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
-
+         
      
   elif call.data=='s_me4nik':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
-        if call.from_user.id in info.lobby.game[id]['team1']:
-          if info.lobby.game[id]['team1'][call.from_user.id]['mana']>=info.s_me4nik.cost:
-            info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik']+=1
-            info.lobby.game[id]['team1'][call.from_user.id]['mana']-=info.s_me4nik.cost
-            info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, (len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )
-            print(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1])
+          if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik']+=1
+            info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )
+            print(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1])
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!')
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
-        elif call.from_user.id in info.lobby.game[id]['team2']:
-          if info.lobby.game[id]['team2'][call.from_user.id]['mana']>=info.s_me4nik.cost:
-            info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik']+=1
-            info.lobby.game[id]['team2'][call.from_user.id]['mana']-=info.s_me4nik.cost
-            info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, (len(info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )
-            print(info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team2'][call.from_user.id]['tvari']['s_me4nik'])+1])
-          else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+       
             
        
   elif call.data=='tvar1':      
@@ -269,7 +255,10 @@ def createuser(id, x):
          'inlobby':x,
          'cash':'',
          'allmobs':['s_me4nik', 'tvar1', 'tvar2'],
-         'mobsinturn':[]
+         'mobsinturn':[],
+         'name1mob':'',
+         'name2mob':'',
+         'name3mob:''
             }  
   
 def mobnumber(creatorid):
@@ -287,7 +276,7 @@ def mobnumber(creatorid):
     
 def createmob(name, x):
     return{x:{'hp':info.name.hp,
-        'mana':info.name.mana
+        'mana':info.name.mana,
         'damage':info.name.damage,
         'cost':info.name.cost,
         'type':info.name.type,
