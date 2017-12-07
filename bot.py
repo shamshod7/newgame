@@ -99,7 +99,7 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob('s_me4nik', (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )
             print(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1])
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!')
           else:
@@ -111,7 +111,7 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.phoenix.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1]=createmob(phoenix, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1 ) )
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1]=createmob('phoenix', (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1 ) )
             print(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1])
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Фениксадзе)!')
           else:
@@ -122,7 +122,7 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.electromagnit.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1]=createmob(electromagnit, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1 ) )
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1]=createmob('electromagnit', (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1 ) )
             print(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1])
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Электромагнитень)!')
           else:
@@ -307,19 +307,48 @@ def createuser(id, x):
 
     
 def createmob(name, x):
-    return{x:{'hp':info.name.hp,
-        'mana':info.name.mana,
-        'damage':info.name.damage,
-        'cost':info.name.cost,
-        'type':info.name.type,
-        'fromelectrodmg':info.name.fromelectrodmg,
-        'frombiodmg':info.name.frombiodmg,          
-        'fromghostdmg':info.name.fromghostdmg,
-        'fromdeaddmg':info.name.fromdeaddmg,
-        'fromfiredmg':info.name.fromfiredmg,     
+    if name='s_me4nik':
+      return{x:{'hp':info.s_me4nik.hp,
+        'mana':info.s_me4nik.mana,
+        'damage':info.s_me4nik.damage,
+        'cost':info.s_me4nik.cost,
+        'type':info.s_me4nik.type,
+        'fromelectrodmg':info.s_me4nik.fromelectrodmg,
+        'frombiodmg':info.s_me4nik.frombiodmg,          
+        'fromghostdmg':info.s_me4nik.fromghostdmg,
+        'fromdeaddmg':info.s_me4nik.fromdeaddmg,
+        'fromfiredmg':info.s_me4nik.fromfiredmg,     
         'x':x            
         }
-    }
+       }
+    elif name='phoenix':
+        return{x:{'hp':info.phoenix.hp,
+        'mana':info.phoenix.mana,
+        'damage':info.phoenix.damage,
+        'cost':info.phoenix.cost,
+        'type':info.phoenix.type,
+        'fromelectrodmg':info.phoenix.fromelectrodmg,
+        'frombiodmg':info.phoenix.frombiodmg,          
+        'fromghostdmg':info.phoenix.fromghostdmg,
+        'fromdeaddmg':info.phoenix.fromdeaddmg,
+        'fromfiredmg':info.phoenix.fromfiredmg,     
+        'x':x            
+        }
+       }
+    elif name='electromagnit':
+         return{x:{'hp':info.electromagnit.hp,
+        'mana':info.electromagnit.mana,
+        'damage':info.electromagnit.damage,
+        'cost':info.electromagnit.cost,
+        'type':info.electromagnit.type,
+        'fromelectrodmg':info.electromagnit.fromelectrodmg,
+        'frombiodmg':info.electromagnit.frombiodmg,          
+        'fromghostdmg':info.electromagnit.fromghostdmg,
+        'fromdeaddmg':info.electromagnit.fromdeaddmg,
+        'fromfiredmg':info.electromagnit.fromfiredmg,     
+        'x':x            
+        }
+       }
     
     
     
