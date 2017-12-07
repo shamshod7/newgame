@@ -284,7 +284,15 @@ def mobnumber(creatorid):
     
     
 def createmob(name):
-    return{
+    return{'hp':info.name.hp,
+        'mana':info.name.mana
+        'damage':info.name.damage,
+        'cost':info.name.cost,
+        'type':info.name.type,
+        'fromelectrodmg':info.name.fromelectrodmg,
+        'frombiodmg':info.name.frombiodmg,          
+        'fromghostdmg':info.name.fromghostdmg,
+        'fromdeaddmg':info.name.fromdeaddmg
         
     }
     
