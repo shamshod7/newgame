@@ -91,6 +91,7 @@ def inline(call):
           if info.lobby.game[id]['team1'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik']+=1
             info.lobby.game[id]['team1'][call.from_user.id]['mana']-=info.s_me4nik.cost
+            info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, )
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
         elif call.from_user.id in info.lobby.game[id]['team2']:
@@ -257,7 +258,7 @@ def createlobby(chatid, creatorid):
 def createuser(id, x):
   return{'selfid':id,
          'lastmessage':0,
-         'tvari':{'s_me4nik':0                 
+         'tvari':{'s_me4nik':{}              
          },
          'mana':0,
          'mobnumber':0,
@@ -279,12 +280,10 @@ def mobnumber(creatorid):
         elif id in info.lobby.game[creatorid]['team2']:
             for key in info.lobby.game[creatorid]['team2']['tvari']:
                 x+=info.lobby.game[creatorid]['team2']['tvari'][key]
-            return x
-
+            return x    
     
-    
-def createmob(name):
-    return{'hp':info.name.hp,
+def createmob(name, x):
+    return{x:{'hp':info.name.hp,
         'mana':info.name.mana
         'damage':info.name.damage,
         'cost':info.name.cost,
@@ -292,8 +291,10 @@ def createmob(name):
         'fromelectrodmg':info.name.fromelectrodmg,
         'frombiodmg':info.name.frombiodmg,          
         'fromghostdmg':info.name.fromghostdmg,
-        'fromdeaddmg':info.name.fromdeaddmg
-        
+        'fromdeaddmg':info.name.fromdeaddmg,
+        'x':x
+             
+        }
     }
     
     
