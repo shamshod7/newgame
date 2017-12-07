@@ -245,6 +245,7 @@ def createlobby(chatid, creatorid):
   
   
 def createuser(id, x):
+  
   return{'selfid':id,
          'lastmessage':0,
          'tvari':{'s_me4nik':{}              
@@ -258,7 +259,7 @@ def createuser(id, x):
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
-         'name3mob:''
+         'name3mob':''
             }  
   
 def mobnumber(creatorid):
