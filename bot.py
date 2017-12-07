@@ -307,7 +307,7 @@ def createuser(id, x):
 
     
 def createmob(name, x):
-    if name='s_me4nik':
+    if name=='s_me4nik':
       return{x:{'hp':info.s_me4nik.hp,
         'mana':info.s_me4nik.mana,
         'damage':info.s_me4nik.damage,
@@ -321,7 +321,7 @@ def createmob(name, x):
         'x':x            
         }
        }
-    elif name='phoenix':
+    elif name=='phoenix':
         return{x:{'hp':info.phoenix.hp,
         'mana':info.phoenix.mana,
         'damage':info.phoenix.damage,
@@ -335,7 +335,7 @@ def createmob(name, x):
         'x':x            
         }
        }
-    elif name='electromagnit':
+    elif name=='electromagnit':
          return{x:{'hp':info.electromagnit.hp,
         'mana':info.electromagnit.mana,
         'damage':info.electromagnit.damage,
