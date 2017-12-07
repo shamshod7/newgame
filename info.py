@@ -5,6 +5,7 @@ class Lobby(object):
         
 class S_me4nik(object):
     def __init__(self):
+        self.name='Скелет-мечник'
         self.hp=120
         self.mana=0
         self.damage=50
