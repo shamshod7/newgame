@@ -18,6 +18,13 @@ def nametoclass(name):  #делает перевод названия сущ-в�
     
     return x
 
+
+
+
+
+
+
+
 def mobs(callid):    #выбирает 3х рандомных мобов для возможности спавна
     for id in info.lobby.game:
       if callid in info.lobby.game[id]['players']:
@@ -81,11 +88,33 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik']+=1
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['team1'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(s_me4nik, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )
             print(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1])
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!')
+          else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            
+            
+  elif call.data=='phoenix':
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+          if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
+            info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.phoenix.cost
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1]=createmob(phoenix, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1 ) )
+            print(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1])
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Фениксадзе)!')
+          else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            
+  elif call.data=='electromagnit':
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+          if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
+            info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.electromagnit.cost
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1]=createmob(electromagnit, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1 ) )
+            print(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1])
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Электромагнитень)!')
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
        
@@ -248,32 +277,24 @@ def createuser(id, x):
   
   return{'selfid':id,
          'lastmessage':0,
-         'tvari':{'s_me4nik':{}              
+         'tvari':{'s_me4nik':{},
+                  'phoenix':{},
+                  'electromagnit':{}
          },
          'mana':0,
          'mobnumber':0,
          'manamax':100,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'tvar1', 'tvar2'],
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix'],
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
          'name3mob':''
             }  
   
-def mobnumber(creatorid):
-    x=0
-    for id in info.lobby.game[creatorid]['players']:
-        if id in info.lobby.game[creatorid]['team1']:
-            for key in info.lobby.game[creatorid]['team1']['tvari']:
-                x+=info.lobby.game[creatorid]['team1']['tvari'][key]
-            return x
-           
-        elif id in info.lobby.game[creatorid]['team2']:
-            for key in info.lobby.game[creatorid]['team2']['tvari']:
-                x+=info.lobby.game[creatorid]['team2']['tvari'][key]
-            return x    
+    
+
     
 def createmob(name, x):
     return{x:{'hp':info.name.hp,
@@ -285,8 +306,8 @@ def createmob(name, x):
         'frombiodmg':info.name.frombiodmg,          
         'fromghostdmg':info.name.fromghostdmg,
         'fromdeaddmg':info.name.fromdeaddmg,
-        'x':x
-             
+        'fromfiredmg':info.name.fromfiredmg,     
+        'x':x            
         }
     }
     
@@ -294,26 +315,18 @@ def createmob(name, x):
     
 def battle(creatorid):
     for id in info.lobby.game[creatorid]['players']:
-      if id in info.lobby.game[creatorid]['team1']:
-        mobs(id)
-        info.lobby.game[creatorid]['team1'][id]['mana']=info.lobby.game[creatorid]['team1'][id]['manamax']
-        print(str(info.lobby.game[creatorid]['team1'][id]['mana']))
-      elif id in info.lobby.game[creatorid]['team2']:
-        mobs(id)
-        info.lobby.game[creatorid]['team2'][id]['mana']=info.lobby.game[creatorid]['team2'][id]['manamax']
-        print(str(info.lobby.game[creatorid]['team2'][id]['mana']))
+      mobs(id)
+      info.lobby.game[creatorid]['players'][id]['mana']=info.lobby.game[creatorid]['players'][id]['manamax']
+      print(str(info.lobby.game[creatorid]['players'][id]['mana']))      
       mana=emojize(':droplet:', use_aliases=True)
       Keyboard=types.InlineKeyboardMarkup()
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
       Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))
       for id in info.lobby.game[creatorid]['players']:
-        if id in info.lobby.game[creatorid]['team1']:
-          msg=bot.send_message(id, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['team1'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['team1'][id]['manamax']),reply_markup=Keyboard)
-          info.lobby.game[creatorid]['team1'][id]['lastmessage']=msg.message_id
-        elif id in info.lobby.game[creatorid]['team2']:
-          msg=bot.send_message(id, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['team2'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['team2'][id]['manamax']),reply_markup=Keyboard)
-          info.lobby.game[creatorid]['team2'][id]['lastmessage']=msg.message_id
+          msg=bot.send_message(id, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['players'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][id]['manamax']),reply_markup=Keyboard)
+          info.lobby.game[creatorid]['players'][id]['lastmessage']=msg.message_id
+       
 
 
 if __name__ == '__main__':
