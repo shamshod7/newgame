@@ -260,6 +260,7 @@ def createuser(id, x):
          'tvari':{'s_me4nik':0                 
          },
          'mana':0,
+         'mobnumber':0,
          'manamax':100,
          'inlobby':x,
          'cash':'',
@@ -267,8 +268,26 @@ def createuser(id, x):
          'mobsinturn':[]
             }  
   
+def mobnumber(creatorid):
+    x=0
+    for id in info.lobby.game[creatorid]['players']:
+        if id in info.lobby.game[creatorid]['team1']:
+            for key in info.lobby.game[creatorid]['team1']['tvari']:
+                x+=info.lobby.game[creatorid]['team1']['tvari'][key]
+            return x
+           
+        elif id in info.lobby.game[creatorid]['team2']:
+            for key in info.lobby.game[creatorid]['team2']['tvari']:
+                x+=info.lobby.game[creatorid]['team2']['tvari'][key]
+            return x
 
-  
+    
+    
+def createmob():
+    return{}
+    
+    
+    
 def battle(creatorid):
     for id in info.lobby.game[creatorid]['players']:
       if id in info.lobby.game[creatorid]['team1']:
