@@ -283,8 +283,10 @@ def mobnumber(creatorid):
 
     
     
-def createmob():
-    return{}
+def createmob(name):
+    return{
+        
+    }
     
     
     
