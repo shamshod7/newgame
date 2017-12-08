@@ -13,11 +13,11 @@ bot = telebot.TeleBot(token)
 
 def nametoclass(name):  #делает перевод названия сущ-ва в ссылку на класс
     if name=='s_me4nik':
-        x=s_me4nik
+        x=info.s_me4nik
     elif name=='phoenix':
-        x=phoenix
+        x=info.phoenix
     elif name=='electromagnit':
-        x=electromagnit
+        x=info.electromagnit
          
     return x
 
@@ -43,14 +43,14 @@ def mobs(callid):    #выбирает 3х рандомных мобов для 
               if info.lobby.game[id]['players'][callid]['allmobs'][x-1] not in info.lobby.game[id]['players'][callid]['mobsinturn']:
                 info.lobby.game[id]['players'][callid]['mobsinturn'].append(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
                 if len(info.lobby.game[id]['players'][callid]['mobsinturn'])==1:
-                  y=codetoname(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                  info.lobby.game[id]['players'][callid]['name1mob']=y
+                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[id]['players'][callid]['name1mob']=y.name
                 elif len(info.lobby.game[id]['players'][callid]['mobsinturn'])==2:
-                  y=codetoname(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                  info.lobby.game[id]['players'][callid]['name2mob']=y
+                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[id]['players'][callid]['name2mob']=y.name
                 elif len(info.lobby.game[id]['players'][callid]['mobsinturn'])==3:
-                  y=codetoname(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                  info.lobby.game[id]['players'][callid]['name3mob']=y
+                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[id]['players'][callid]['name3mob']=y.name
                         
 
 
@@ -304,48 +304,21 @@ def createuser(id, x):
 
     
 def createmob(name, x):
-    if name=='s_me4nik':
-      return{x:{'hp':info.s_me4nik.hp,
-        'mana':info.s_me4nik.mana,
-        'damage':info.s_me4nik.damage,
-        'cost':info.s_me4nik.cost,
-        'type':info.s_me4nik.type,
-        'fromelectrodmg':info.s_me4nik.fromelectrodmg,
-        'frombiodmg':info.s_me4nik.frombiodmg,          
-        'fromghostdmg':info.s_me4nik.fromghostdmg,
-        'fromdeaddmg':info.s_me4nik.fromdeaddmg,
-        'fromfiredmg':info.s_me4nik.fromfiredmg,     
+      return{x:{'hp':name.hp,
+        'mana':name.mana,
+        'damage':name.damage,
+        'cost':name.cost,
+        'type':name.type,
+        'fromelectrodmg':name.fromelectrodmg,
+        'frombiodmg':name.frombiodmg,          
+        'fromghostdmg':name.fromghostdmg,
+        'fromdeaddmg':name.fromdeaddmg,
+        'fromfiredmg':name.fromfiredmg,     
         'x':x            
         }
        }
-    elif name=='phoenix':
-        return{x:{'hp':info.phoenix.hp,
-        'mana':info.phoenix.mana,
-        'damage':info.phoenix.damage,
-        'cost':info.phoenix.cost,
-        'type':info.phoenix.type,
-        'fromelectrodmg':info.phoenix.fromelectrodmg,
-        'frombiodmg':info.phoenix.frombiodmg,          
-        'fromghostdmg':info.phoenix.fromghostdmg,
-        'fromdeaddmg':info.phoenix.fromdeaddmg,
-        'fromfiredmg':info.phoenix.fromfiredmg,     
-        'x':x            
-        }
-       }
-    elif name=='electromagnit':
-         return{x:{'hp':info.electromagnit.hp,
-        'mana':info.electromagnit.mana,
-        'damage':info.electromagnit.damage,
-        'cost':info.electromagnit.cost,
-        'type':info.electromagnit.type,
-        'fromelectrodmg':info.electromagnit.fromelectrodmg,
-        'frombiodmg':info.electromagnit.frombiodmg,          
-        'fromghostdmg':info.electromagnit.fromghostdmg,
-        'fromdeaddmg':info.electromagnit.fromdeaddmg,
-        'fromfiredmg':info.electromagnit.fromfiredmg,     
-        'x':x            
-        }
-       }
+    
+       
     
     
     
