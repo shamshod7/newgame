@@ -99,7 +99,7 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob('s_me4nik', (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )           
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(info.s_me4nik, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )           
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!')
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
@@ -110,7 +110,7 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.phoenix.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1]=createmob('phoenix', (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1 ) )
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1]=createmob(info.phoenix, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1 ) )
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Фениксадзе)!')
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
@@ -120,7 +120,7 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.electromagnit.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1]=createmob('electromagnit', (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1 ) )          
+            info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1]=createmob(info.electromagnit, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1 ) )          
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Электромагнитень)!')
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
