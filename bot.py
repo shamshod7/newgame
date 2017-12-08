@@ -12,11 +12,34 @@ token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
 
-
-
-
-def endturn():
+def mobturn(mob):
     pass
+    
+
+
+def endturn(creatorid):
+  for id in info.lobby.game[creatorid]['team1']:
+    for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
+        if name in info.lobby.game[creatorid]['players'][id]['portals']:
+          number=0
+          while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
+            info.lobby.game[creatorid]['t1mobs'][name]=createmob(name, len(info.lobby.game[id]['t1mobs'][name]+1))
+            number+=1                                                          
+  for id in info.lobby.game[creatorid]['team2']:
+    for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
+        if name in info.lobby.game[creatorid]['players'][id]['portals']:
+          number=0
+          while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
+            info.lobby.game[id]['t2mobs'][name]=createmob(name, len(info.lobby.game[id]['t1mobs'][name]+1))
+            number+=1
+            
+  for mob in info.lobby.game[creatorid]['t1mobs']:
+    
+    
+            
+            
+            
+            
 
 
 def nametoclass(name):  #делает перевод названия сущ-ва в ссылку на класс
@@ -267,7 +290,8 @@ def createlobby(chatid, creatorid):
     'len':1,
     'team1':{},
     'team2':{},
-    
+    't1mobs':[],
+    't2mobs':[]
 
   }
   
@@ -311,7 +335,9 @@ def createmob(name, x):
         'fromghostdmg':name.fromghostdmg,
         'fromdeaddmg':name.fromdeaddmg,
         'fromfiredmg':name.fromfiredmg,     
-        'x':x            
+        'x':x,
+        'target':''
+                
         }
        }
     
