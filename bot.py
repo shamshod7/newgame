@@ -295,7 +295,7 @@ def createuser(id, x):
             }  
   
 def createportal(name, x):  
-    return {'name':name
+    return {'name':name,
           'count':x
            }
 
