@@ -16,7 +16,7 @@ bot = telebot.TeleBot(token)
 
 
 def endturn():
-    for 
+    pass
 
 
 def nametoclass(name):  #делает перевод названия сущ-ва в ссылку на класс
