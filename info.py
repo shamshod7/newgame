@@ -9,7 +9,7 @@ class S_me4nik(object):
         self.hp=120
         self.mana=0
         self.damage=50
-        self.cost=100
+        self.cost=25
         self.type='dead'
         self.fromelectrodmg=0.8
         self.frombiodmg=0.8
