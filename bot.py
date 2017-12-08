@@ -11,6 +11,14 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
+
+
+
+
+def endturn():
+    for 
+
+
 def nametoclass(name):  #делает перевод названия сущ-ва в ссылку на класс
     if name=='s_me4nik':
         x=info.s_me4nik
@@ -20,18 +28,6 @@ def nametoclass(name):  #делает перевод названия сущ-в�
         x=info.electromagnit
          
     return x
-
-
-def codetoname(name):
-    if name=='s_me4nik':
-        x='Скелет-мечник'
-    elif name=='phoenix':
-        x='Феникадзе'
-    elif name=='electromagnit':
-        x='Электромагнитень'
-    return x
-
-
 
 
 
@@ -99,8 +95,11 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1]=createmob(info.s_me4nik, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['s_me4nik'])+1 ) )           
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!')
+            if 's_me4nik' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', 1)  
+            else:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count']+1)  
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count'])+' таких порталов!')
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
             
@@ -110,8 +109,8 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.phoenix.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1]=createmob(info.phoenix, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['phoenix'])+1 ) )
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Фениксадзе)!')
+            info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal()    
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Феникадзе)!')
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
             
@@ -120,18 +119,12 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.electromagnit.cost
-            info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'][len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1]=createmob(info.electromagnit, (len(info.lobby.game[id]['players'][call.from_user.id]['tvari']['electromagnit'])+1 ) )          
+            info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal()              
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Электромагнитень)!')
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
        
-            
-       
-  elif call.data=='tvar1':      
-    bot.send_message(call.from_user.id, 'tvar1')
-    
-  elif call.data=='tvar2':      
-    bot.send_message(call.from_user.id, 'tvar2')
+                 
             
     
   
@@ -288,6 +281,7 @@ def createuser(id, x):
                   'phoenix':{},
                   'electromagnit':{}
          },
+         'portals':{},
          'mana':0,
          'mobnumber':0,
          'manamax':100,
@@ -300,7 +294,10 @@ def createuser(id, x):
          'name3mob':''
             }  
   
-    
+def createportal(name, x):  
+    return {'name':name
+          'count':x
+           }
 
     
 def createmob(name, x):
