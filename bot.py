@@ -144,7 +144,7 @@ def endturn(creatorid):
         info.lobby.game[creatorid]['t2mobs'][mob][number]['smert']=1
         
   bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+info.lobby.game[creatorid]['resultst2']) 
-  battle(info.lobby.game[creatorid]['creatorid'])
+  battle(info.lobby.game[creatorid]['creatorid']['selfid'])
                                                                               
                                                                               
     
