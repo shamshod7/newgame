@@ -24,7 +24,19 @@ def mobdmg(mob, creatorid, team, team2):
     return t  
 
 
-
+def typetotext(name):
+    if name=='dead':
+        text='Мертвец'
+    elif name=='electro':
+        text='Электро'
+    elif name=='fire':
+        text='Огненный'
+    elif name=='bio':
+        text='Биологический'
+    elif name=='ghost':
+        text='Призрачный'
+    return text
+        
 
 
 
@@ -45,9 +57,9 @@ def mobturn(mob, creatorid, team, team2):
               dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
               t['hp']-=dmg
               if team=='t1mobs':
-                info.lobby.game[creatorid]['resultst1']+=mob+' нанёс '+str(dmg)+' урона по '+t['name']+skilltext+';'
+                info.lobby.game[creatorid]['resultst1']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
               elif team=='t2mobs':
-                info.lobby.game[creatorid]['resultst2']+=mob+' нанёс '+str(dmg)+' урона по '+t['name']+skilltext+';'
+                info.lobby.game[creatorid]['resultst2']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
 
                     
     elif mob=='electromagnit':
@@ -55,8 +67,14 @@ def mobturn(mob, creatorid, team, team2):
           if info.lobby.game[creatorid][team][mob][number]['target']=='None':
             t=mobdmg(mob, creatorid, team, team2)
             t['underattack']=1
-            if t['skill']!='returndmg': 
-                t['hp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+            if t['skill']!='returndmg':
+                skilltext=''                
+                dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+                t['hp']-=dmg
+                if team=='t1mobs':
+                  info.lobby.game[creatorid]['resultst1']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
+                elif team=='t2mobs':
+                  info.lobby.game[creatorid]['resultst2']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
 
                 
     elif mob=='phoenix':
@@ -65,7 +83,14 @@ def mobturn(mob, creatorid, team, team2):
             t=mobdmg(mob, creatorid, team, team2)
             t['underattack']=1
             if t['skill']!='returndmg': 
-                t['hp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']    
+                skilltext=''                
+                dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']                                                              
+                t['hp']-=dmg
+                if team=='t1mobs':
+                  info.lobby.game[creatorid]['resultst1']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
+                elif team=='t2mobs':
+                  info.lobby.game[creatorid]['resultst2']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"                                                              
+                                                                              
 
    
 
@@ -107,6 +132,11 @@ def endturn(creatorid):
     for number in info.lobby.game[creatorid]['t2mobs'][mob]:
       if info.lobby.game[creatorid]['t2mobs'][mob][number]['hp']<1:
         info.lobby.game[creatorid]['t2mobs'][mob][number]['smert']=1
+        
+  bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+info.lobby.game[creatorid]['resultst2']) 
+  battle(info.lobby.game[creatorid]['creatorid'])
+                                                                              
+                                                                              
     
     
     
@@ -172,6 +202,11 @@ def inline(call):
             Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))            
             msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
+            
+  elif call.data=='end':
+    for id in info.data.game:
+        if call.from_user.id in info.data.game[id]['players']:
+          endturn(info.lobby.game[id]['creatorid'])
            
           
           
