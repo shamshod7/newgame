@@ -16,6 +16,7 @@ class S_me4nik(object):
         self.fromghostdmg=1.1
         self.fromdeaddmg=1.0
         self.fromfiredmg=1.1
+        self.skill=None
         
         
 class Pyos(object):
@@ -31,6 +32,7 @@ class Pyos(object):
         self.fromghostdmg=0.8
         self.fromdeaddmg=1.1
         self.fromfiredmg=1.5
+        self.skill=None
         
 class Phoenix(object):
     def __init__(self):
@@ -45,6 +47,7 @@ class Phoenix(object):
         self.fromghostdmg=1.5
         self.fromdeaddmg=1.2
         self.fromfiredmg=1.0
+        self.skill=None
         
         
 class Electromagnit(object):
@@ -60,6 +63,7 @@ class Electromagnit(object):
         self.fromghostdmg=0.8
         self.fromdeaddmg=1.5
         self.fromfiredmg=0.5
+        self.skill=None
         
         
 class Manoed(object):
@@ -75,6 +79,7 @@ class Manoed(object):
         self.fromghostdmg=1.0
         self.fromdeaddmg=0.75
         self.fromfiredmg=0.9
+        self.skill=None
         
         
 electromagnit=Electromagnit()
