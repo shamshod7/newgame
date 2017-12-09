@@ -12,8 +12,14 @@ token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
 
-def mobturn(mob):
-    pass
+def mobturn(mob, creatorid, team, team2):
+    if mob=='s_me4nik':
+        for number in info.lobby.game[creatorid][team][mob]:
+          if info.lobby.game[creatorid][team][mob][number]['target']=='None':
+            for number2 in info.lobby.game[creatorid][team1][mob]:
+              for types in info.lobby.game[creatorid][team1][mob][number2]['type']:
+                if 
+            
     
 
 
@@ -34,6 +40,7 @@ def endturn(creatorid):
             number+=1
             
   for mob in info.lobby.game[creatorid]['t1mobs']:
+    
     
     
             
@@ -336,7 +343,7 @@ def createmob(name, x):
         'fromdeaddmg':name.fromdeaddmg,
         'fromfiredmg':name.fromfiredmg,     
         'x':x,
-        'target':''
+        'target':'None'
                 
         }
        }
