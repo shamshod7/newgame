@@ -454,7 +454,7 @@ def createuser(id, x):
 def createportal(name, x):  
     return {name:{'name':name,
           'count':x
-           }
+           }}
 
     
 def createmob(nameclass, x, namemob):
