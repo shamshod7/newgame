@@ -399,8 +399,8 @@ def createlobby(chatid, creatorid):
     'len':1,
     'team1':{},
     'team2':{},
-    't1mobs':[],
-    't2mobs':[],
+    't1mobs':{},
+    't2mobs':{},
     'resultst1':'Результаты монстров из команды 1:'+"\n",
     'resultst2':'Результаты монстров из команды 2:'+"\n"
       
