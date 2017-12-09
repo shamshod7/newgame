@@ -11,12 +11,8 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
-
-def mobturn(mob, creatorid, team, team2):
-    if mob=='s_me4nik':
-        for number in info.lobby.game[creatorid][team][mob]:
-          if info.lobby.game[creatorid][team][mob][number]['target']=='None':
-            for mob2 in info.lobby.game[creatorid][team2]:
+def mobdmg(mob, creatorid, team, team2):
+    for mob2 in info.lobby.game[creatorid][team2]:
               for number2 in info.lobby.game[creatorid][team2][mob2]:
                 for types in info.lobby.game[creatorid][team2][mob2][number2]['type']:
                   info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
@@ -25,28 +21,52 @@ def mobturn(mob, creatorid, team, team2):
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
-            t['underattack']=1
-            if t['skill']!='returndmg':
+    return t  
+
+
+
+
+
+
+def mobturn(mob, creatorid, team, team2):
+    if mob=='s_me4nik':
+        for number in info.lobby.game[creatorid][team][mob]:
+         if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+           if info.lobby.game[creatorid][team][mob][number]['target']=='None':
+             t=mobdmg(mob, creatorid, team, team2)
+             t['underattack']=1
+             if t['skill']!='returndmg':
               z=random.randint(1,100)
               if z<=15:
                   t['fromdeaddmg']+=0.6
-              t['hp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+                  skilltext='применив скилл "Проклятье мертвецов"'
+              else:
+                  skilltext=''
+              dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+              t['hp']-=dmg
+              if team=='t1mobs':
+                info.lobby.game[creatorid]['resultst1']+=mob+' нанёс '+str(dmg)+' урона по '+t['name']+skilltext+';'
+              elif team=='t2mobs':
+                info.lobby.game[creatorid]['resultst2']+=mob+' нанёс '+str(dmg)+' урона по '+t['name']+skilltext+';'
+
                     
     elif mob=='electromagnit':
         for number in info.lobby.game[creatorid][team][mob]:
           if info.lobby.game[creatorid][team][mob][number]['target']=='None':
-            for mob2 in info.lobby.game[creatorid][team2]:
-              for number2 in info.lobby.game[creatorid][team2][mob2]:
-                for types in info.lobby.game[creatorid][team2][mob2][number2]['type']:
-                  info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
-                  if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
-                      if info.lobby.game[creatorid][team2][mob2][number2]['hp']>0:
-                        info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
-                        info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
-                        t=info.lobby.game[creatorid][team2][mob2][number2]   
+            t=mobdmg(mob, creatorid, team, team2)
             t['underattack']=1
             if t['skill']!='returndmg': 
                 t['hp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+
+                
+    elif mob=='phoenix':
+        for number in info.lobby.game[creatorid][team][mob]:
+          if info.lobby.game[creatorid][team][mob][number]['target']=='None':
+            t=mobdmg(mob, creatorid, team, team2)
+            t['underattack']=1
+            if t['skill']!='returndmg': 
+                t['hp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']    
+
    
 
                 
@@ -74,6 +94,19 @@ def endturn(creatorid):
             number+=1
             
   for mob in info.lobby.game[creatorid]['t1mobs']:
+    mobturn(mob, creatorid, 't1mobs', 't2mobs')
+  for mob in info.lobby.game[creatorid]['t2mobs']:
+    mobturn(mob, creatorid, 't2mobs', 't1mobs')
+    
+  for mob in info.lobby.game[creatorid]['t1mobs']:
+    for number in info.lobby.game[creatorid]['t1mobs'][mob]:
+      if info.lobby.game[creatorid]['t1mobs'][mob][number]['hp']<1:
+        info.lobby.game[creatorid]['t1mobs'][mob][number]['smert']=1
+        
+  for mob in info.lobby.game[creatorid]['t2mobs']:
+    for number in info.lobby.game[creatorid]['t2mobs'][mob]:
+      if info.lobby.game[creatorid]['t2mobs'][mob][number]['hp']<1:
+        info.lobby.game[creatorid]['t2mobs'][mob][number]['smert']=1
     
     
     
@@ -332,7 +365,10 @@ def createlobby(chatid, creatorid):
     'team1':{},
     'team2':{},
     't1mobs':[],
-    't2mobs':[]
+    't2mobs':[],
+    'resultst1':'Результаты монстров из команды 1:'+"\n",
+    'resultst2':'Результаты монстров из команды 2:'+"\n"
+      
 
   }
   
@@ -381,7 +417,8 @@ def createmob(name, x):
         'koef':0,
         'maxkoef':0,
         'underattack':0,
-        'skill':name.skill
+        'skill':name.skill,
+        'smert':0
                 
         }
        }
