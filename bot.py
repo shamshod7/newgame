@@ -457,7 +457,7 @@ def createmob(name, x):
                 
         }
        }
-    
+    }
        
     
     
