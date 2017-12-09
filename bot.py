@@ -119,7 +119,7 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if name in info.lobby.game[creatorid]['t1mobs']:
-            info.lobby.game[creatorid]['t1mobs']=createmob(name, len(info.lobby.game[id]['t1mobs'][name])+1)
+            info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), len(info.lobby.game[id]['t1mobs'][name])+1, name)
             number+=1
            else:
             info.lobby.game[creatorid]['t1mobs']=createmob(name, 1)
@@ -130,7 +130,7 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
               if name in info.lobby.game[creatorid]['t2mobs']:
-                info.lobby.game[creatorid]['t2mobs']=createmob(name, len(info.lobby.game[id]['t1mobs'][name])+1)
+                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), len(info.lobby.game[id]['t1mobs'][name])+1, name)
                 number+=1
               else:
                 info.lobby.game[creatorid]['t2mobs']=createmob(name, 1)
@@ -453,23 +453,23 @@ def createportal(name, x):
            }
 
     
-def createmob(name, x):
-      return{nametoclass(name):{x:{'hp':name.hp,
-        'mana':name.mana,
-        'damage':name.damage,
-        'cost':name.cost,
-        'type':name.type,
-        'fromelectrodmg':name.fromelectrodmg,
-        'frombiodmg':name.frombiodmg,          
-        'fromghostdmg':name.fromghostdmg,
-        'fromdeaddmg':name.fromdeaddmg,
-        'fromfiredmg':name.fromfiredmg,     
+def createmob(nameclass, x, namemob):
+      return{namemob:{x:{'hp':nameclass.hp,
+        'mana':nameclass.mana,
+        'damage':nameclass.damage,
+        'cost':nameclass.cost,
+        'type':nameclass.type,
+        'fromelectrodmg':nameclass.fromelectrodmg,
+        'frombiodmg':nameclass.frombiodmg,          
+        'fromghostdmg':nameclass.fromghostdmg,
+        'fromdeaddmg':nameclass.fromdeaddmg,
+        'fromfiredmg':nameclass.fromfiredmg,     
         'x':x,
         'target':None,
         'koef':0,
         'maxkoef':0,
         'underattack':0,
-        'skill':name.skill,
+        'skill':nameclass.skill,
         'smert':0
                 
         }
