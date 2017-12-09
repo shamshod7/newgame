@@ -51,7 +51,7 @@ def mobturn(mob, creatorid, team, team2):
          print('11')
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            print('12')
-           if info.lobby.game[creatorid][team][mob][number]['target']=='None':
+           if info.lobby.game[creatorid][team][mob][number]['target']==None:
              print('13')
              t=mobdmg(mob, creatorid, team, team2)
              t['underattack']=1
