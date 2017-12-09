@@ -137,10 +137,8 @@ def endturn(creatorid):
                 number+=1
             
   for mob in info.lobby.game[creatorid]['t1mobs']:
-    print(mob)
     mobturn(mob, creatorid, 't1mobs', 't2mobs')
   for mob in info.lobby.game[creatorid]['t2mobs']:
-    print(mob)
     mobturn(mob, creatorid, 't2mobs', 't1mobs')
     
   for mob in info.lobby.game[creatorid]['t1mobs']:
