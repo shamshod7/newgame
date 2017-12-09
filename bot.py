@@ -14,7 +14,6 @@ bot = telebot.TeleBot(token)
 def mobdmg(mob, creatorid, team, team2):
     for mob2 in info.lobby.game[creatorid][team2]:
               for number2 in info.lobby.game[creatorid][team2][mob2]:
-                for types in info.lobby.game[creatorid][team2][mob2][number2]['type']:
                   info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
                   if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
                       if info.lobby.game[creatorid][team2][mob2][number2]['hp']>0:
