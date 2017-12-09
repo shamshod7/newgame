@@ -11,7 +11,7 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
-def mobdmg(mob, creatorid, team, team2):
+def mobdmg(mob, creatorid, team, team2, number):
     for mob2 in info.lobby.game[creatorid][team2]:
               print('1')
               for number2 in info.lobby.game[creatorid][team2][mob2]:
@@ -53,7 +53,7 @@ def mobturn(mob, creatorid, team, team2):
            print('12')
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
              print('13')
-             t=mobdmg(mob, creatorid, team, team2)
+             t=mobdmg(mob, creatorid, team, team2, number)
              t['underattack']=1
              if t['skill']!='returndmg':
               z=random.randint(1,100)
