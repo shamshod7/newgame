@@ -16,9 +16,21 @@ def mobturn(mob, creatorid, team, team2):
     if mob=='s_me4nik':
         for number in info.lobby.game[creatorid][team][mob]:
           if info.lobby.game[creatorid][team][mob][number]['target']=='None':
-            for number2 in info.lobby.game[creatorid][team1][mob]:
-              for types in info.lobby.game[creatorid][team1][mob][number2]['type']:
-                if 
+            for mob2 in info.lobby.game[creatorid][team2]:
+              for number2 in info.lobby.game[creatorid][team2][mob2]:
+                for types in info.lobby.game[creatorid][team2][mob2][number2]['type']:
+                  info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
+                  if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
+                      if info.lobby.game[creatorid][team2][mob2][number2]['hp']>0:
+                        info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
+                        info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
+                        t=info.lobby.game[creatorid][team2][mob2][number2]
+            t['underattack']=1
+            if t['skill']==None:
+              t['hp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+            
+                    
+                    
             
     
 
@@ -343,7 +355,11 @@ def createmob(name, x):
         'fromdeaddmg':name.fromdeaddmg,
         'fromfiredmg':name.fromfiredmg,     
         'x':x,
-        'target':'None'
+        'target':None,
+        'koef':0,
+        'maxkoef':0,
+        'underattack':0,
+        'skill':name.skill
                 
         }
        }
