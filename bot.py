@@ -152,8 +152,6 @@ def endturn(creatorid):
         info.lobby.game[creatorid]['t2mobs'][mob][number]['smert']=1
         
   bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+info.lobby.game[creatorid]['resultst2']) 
-  print(info.lobby.game[creatorid]['t1mobs'])
-  print(info.lobby.game[creatorid]['t2mobs'])
   battle(info.lobby.game[creatorid]['creatorid']['selfid'])
                                                                               
                                                                               
@@ -481,8 +479,7 @@ def createmob(nameclass, x, namemob):
 def battle(creatorid):
     for key in info.lobby.game[creatorid]['players']:
       mobs(key)
-      info.lobby.game[creatorid]['players'][key]['mana']=info.lobby.game[creatorid]['players'][key]['manamax']
-      print(str(info.lobby.game[creatorid]['players'][key]['mana']))      
+      info.lobby.game[creatorid]['players'][key]['mana']=info.lobby.game[creatorid]['players'][key]['manamax']      
       mana=emojize(':droplet:', use_aliases=True)
       Keyboard=types.InlineKeyboardMarkup()
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
