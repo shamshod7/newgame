@@ -65,10 +65,10 @@ def mobturn(mob, creatorid, team, team2):
               dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
               t['hp']-=dmg
               if team=='t1mobs':
-                info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+t['x']+skilltext+';'+"\n"
+                info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+str(t['x'])+skilltext+';'+"\n"
                 print(info.lobby.game[creatorid]['resultst1'])
               elif team=='t2mobs':
-                info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по ('+t['name']+typetotext(t['type'])+')'+t['x']+skilltext+';'+"\n"
+                info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по ('+t['name']+typetotext(t['type'])+')'+str(t['x'])+skilltext+';'+"\n"
                 print(info.lobby.game[creatorid]['resultst2'])
 
                     
