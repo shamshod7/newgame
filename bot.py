@@ -26,8 +26,30 @@ def mobturn(mob, creatorid, team, team2):
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
             t['underattack']=1
-            if t['skill']==None:
+            if t['skill']!='returndmg':
+              z=random.randint(1,100)
+              if z<=15:
+                  t['fromdeaddmg']+=0.6
               t['hp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+                    
+    elif mob=='electromagnit':
+        for number in info.lobby.game[creatorid][team][mob]:
+          if info.lobby.game[creatorid][team][mob][number]['target']=='None':
+            for mob2 in info.lobby.game[creatorid][team2]:
+              for number2 in info.lobby.game[creatorid][team2][mob2]:
+                for types in info.lobby.game[creatorid][team2][mob2][number2]['type']:
+                  info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
+                  if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
+                      if info.lobby.game[creatorid][team2][mob2][number2]['hp']>0:
+                        info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
+                        info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
+                        t=info.lobby.game[creatorid][team2][mob2][number2]   
+            t['underattack']=1
+            if t['skill']!='returndmg': 
+                t['hp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+   
+
+                
             
                     
                     
