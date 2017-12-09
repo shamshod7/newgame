@@ -135,7 +135,7 @@ def endturn(creatorid):
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
               if name in info.lobby.game[creatorid]['t2mobs']:
                 print('name in t2mobs')
-                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), (len(info.lobby.game[creatorid]['t1mobs'][name])+1), name)
+                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), (len(info.lobby.game[creatorid]['t2mobs'][name])+1), name)
                 number+=1
                 print('lent2 '+str(len(info.lobby.game[creatorid]['t2mobs'][name])))
               else:
