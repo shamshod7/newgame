@@ -108,8 +108,12 @@ def endturn(creatorid):
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
+           if name in info.lobby.game[creatorid]['t1mobs']:
             info.lobby.game[creatorid]['t1mobs']=createmob(name, len(info.lobby.game[id]['t1mobs'][name]+1))
-            number+=1                                                          
+            number+=1
+           else:
+            info.lobby.game[creatorid]['t1mobs']=createmob(name, 1)
+            number+=1
   for id in info.lobby.game[creatorid]['team2']:
     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
