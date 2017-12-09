@@ -119,7 +119,7 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if name in info.lobby.game[creatorid]['t1mobs']:
-            info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), len(info.lobby.game[id]['t1mobs'][name])+1, name)
+            info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), len(info.lobby.game[creatorid]['t1mobs'][name])+1, name)
             number+=1
            else:
             info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), 1, name)
@@ -130,7 +130,7 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
               if name in info.lobby.game[creatorid]['t2mobs']:
-                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), len(info.lobby.game[id]['t1mobs'][name])+1, name)
+                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), len(info.lobby.game[creatorid]['t1mobs'][name])+1, name)
                 number+=1
               else:
                 info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), 1, name)
