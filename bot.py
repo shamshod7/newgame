@@ -455,6 +455,7 @@ def createportal(name, x):
     
 def createmob(nameclass, x, namemob):
       return{namemob:{x:{'hp':nameclass.hp,
+        'name':nameclass.name,
         'mana':nameclass.mana,
         'damage':nameclass.damage,
         'cost':nameclass.cost,
