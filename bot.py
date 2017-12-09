@@ -204,8 +204,8 @@ def inline(call):
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             
   elif call.data=='end':
-    for id in info.data.game:
-        if call.from_user.id in info.data.game[id]['players']:
+    for id in info.lobby.game:
+        if call.from_user.id in info.lobby.game[id]['players']:
           endturn(info.lobby.game[id]['creatorid'])
            
           
