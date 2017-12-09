@@ -119,10 +119,12 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if name in info.lobby.game[creatorid]['t1mobs']:
+            print('name in t1mobs')
             info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), (len(info.lobby.game[creatorid]['t1mobs'][name])+1), name)
             print('lent1 '+str(len(info.lobby.game[creatorid]['t1mobs'][name])))
             number+=1
            else:
+            print('name not in t1')
             info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), 1, name)
             number+=1
             print('lent1 '+str(len(info.lobby.game[creatorid]['t1mobs'][name])))
@@ -132,10 +134,12 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
               if name in info.lobby.game[creatorid]['t2mobs']:
+                print('name in t2mobs')
                 info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), (len(info.lobby.game[creatorid]['t1mobs'][name])+1), name)
                 number+=1
                 print('lent2 '+str(len(info.lobby.game[creatorid]['t2mobs'][name])))
               else:
+                print('name not in t2mobs')
                 info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), 1, name)
                 number+=1
                 print('lent2 '+str(len(info.lobby.game[creatorid]['t2mobs'][name])))
@@ -250,9 +254,9 @@ def inline(call):
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
             if 's_me4nik' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
-              info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', 1)  
+              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('s_me4nik', 1)  
             else:
-              info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count']+1)  
+              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('s_me4nik', info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count']+1)  
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count'])+' таких порталов!')
           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
@@ -448,7 +452,7 @@ def createuser(id, x):
             }  
   
 def createportal(name, x):  
-    return {'name':name,
+    return {name:{'name':name,
           'count':x
            }
 
