@@ -109,18 +109,22 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if name in info.lobby.game[creatorid]['t1mobs']:
-            info.lobby.game[creatorid]['t1mobs']=createmob(name, len(info.lobby.game[id]['t1mobs'][name]+1))
+            info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), len(info.lobby.game[id]['t1mobs'][name]+1))
             number+=1
            else:
-            info.lobby.game[creatorid]['t1mobs']=createmob(name, 1)
+            info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), 1)
             number+=1
   for id in info.lobby.game[creatorid]['team2']:
     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
-            info.lobby.game[id]['t2mobs'][name]=createmob(name, len(info.lobby.game[id]['t1mobs'][name]+1))
-            number+=1
+              if name in info.lobby.game[creatorid]['t2mobs']:
+                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), len(info.lobby.game[id]['t1mobs'][name]+1))
+                number+=1
+              else:
+                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), 1)
+                number+=1
             
   for mob in info.lobby.game[creatorid]['t1mobs']:
     mobturn(mob, creatorid, 't1mobs', 't2mobs')
