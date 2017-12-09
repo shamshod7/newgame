@@ -58,8 +58,10 @@ def mobturn(mob, creatorid, team, team2):
               t['hp']-=dmg
               if team=='t1mobs':
                 info.lobby.game[creatorid]['resultst1']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
+                print(info.lobby.game[creatorid]['resultst1'])
               elif team=='t2mobs':
                 info.lobby.game[creatorid]['resultst2']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
+                print(info.lobby.game[creatorid]['resultst2'])
 
                     
     elif mob=='electromagnit':
