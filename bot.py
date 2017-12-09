@@ -474,7 +474,7 @@ def battle(creatorid):
     for key in info.lobby.game[creatorid]['players']:
       mobs(key)
       info.lobby.game[creatorid]['players'][key]['mana']=info.lobby.game[creatorid]['players'][key]['manamax']
-      print(str(info.lobby.game[creatorid]['players']key]['mana']))      
+      print(str(info.lobby.game[creatorid]['players'][key]['mana']))      
       mana=emojize(':droplet:', use_aliases=True)
       Keyboard=types.InlineKeyboardMarkup()
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
