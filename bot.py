@@ -471,17 +471,17 @@ def createmob(name, x):
     
     
 def battle(creatorid):
-    for id in info.lobby.game[creatorid]['players']:
-      mobs(id)
-      info.lobby.game[creatorid]['players'][id]['mana']=info.lobby.game[creatorid]['players'][id]['manamax']
-      print(str(info.lobby.game[creatorid]['players'][id]['mana']))      
+    for key in info.lobby.game[creatorid]['players']:
+      mobs(key)
+      info.lobby.game[creatorid]['players'][key]['mana']=info.lobby.game[creatorid]['players'][key]['manamax']
+      print(str(info.lobby.game[creatorid]['players']key]['mana']))      
       mana=emojize(':droplet:', use_aliases=True)
       Keyboard=types.InlineKeyboardMarkup()
       Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
       Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))      
-      msg=bot.send_message(id, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['players'][id]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][id]['manamax']),reply_markup=Keyboard)
-      info.lobby.game[creatorid]['players'][id]['lastmessage']=msg.message_id
+      msg=bot.send_message(key, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['players'][key]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][key]['manamax']),reply_markup=Keyboard)
+      info.lobby.game[creatorid]['players'][key]['lastmessage']=msg.message_id
        
 
 
