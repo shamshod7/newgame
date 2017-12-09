@@ -108,7 +108,7 @@ def endturn(creatorid):
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
-            info.lobby.game[creatorid]['t1mobs'][name]=createmob(name, len(info.lobby.game[id]['t1mobs'][name]+1))
+            info.lobby.game[creatorid]['t1mobs']=createmob(name, len(info.lobby.game[id]['t1mobs'][name]+1))
             number+=1                                                          
   for id in info.lobby.game[creatorid]['team2']:
     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
@@ -437,7 +437,7 @@ def createportal(name, x):
 
     
 def createmob(name, x):
-      return{x:{'hp':name.hp,
+      return{name:{x:{'hp':name.hp,
         'mana':name.mana,
         'damage':name.damage,
         'cost':name.cost,
