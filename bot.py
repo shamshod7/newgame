@@ -181,9 +181,9 @@ def endturn(creatorid):
     for number4 in info.lobby.game[creatorid]['t1mobs'][mobs4]:
         if info.lobby.game[creatorid]['t1mobs'][mobs4][number4]['hp']>0:
           livemobs1+=1
- for mobs5 in info.lobby.game[creatorid]['t1mobs']:
-      for number5 in info.lobby.game[creatorid]['t1mobs'][mobs5]:
-        if info.lobby.game[creatorid]['t1mobs'][mobs5][number5]['hp']>0:
+ for mobs5 in info.lobby.game[creatorid]['t2mobs']:
+      for number5 in info.lobby.game[creatorid]['t2mobs'][mobs5]:
+        if info.lobby.game[creatorid]['t2mobs'][mobs5][number5]['hp']>0:
           livemobs2+=1
  bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды 1: '+str(livemobs1)+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды 2: '+str(livemobs2)+"\n"+"\n") 
  info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды 1:'+"\n"
