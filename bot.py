@@ -352,6 +352,15 @@ def fightstart(message):
               else:
                 info.lobby.game[message.from_user.id]['team1'][id]=createuser(id, 1)
             info.lobby.game[message.from_user.id]['battle']=1
+            for id1 in info.lobby.game[message.from_user.id]['players']:
+                if info.lobby.game[message.from_user.id]['players'][id1] in info.lobby.game[message.from_user.id]['team1']:
+                    info.lobby.game[message.from_user.id]['teammates1']+=info.lobby.game[message.from_user.id]['players'][id1]['fname']+', '
+                elif info.lobby.game[message.from_user.id]['players'][id1] in info.lobby.game[message.from_user.id]['team2']:
+                    info.lobby.game[message.from_user.id]['teammates2']+=info.lobby.game[message.from_user.id]['players'][id1]['fname']+', '
+            lenofteam1=len(info.lobby.game[creatorid]['teammates1'])
+            info.lobby.game[creatorid]['teammates1']=info.lobby.game[creatorid]['teammates1'][:(lenofteam1-2)]
+            lenofteam2=len(info.lobby.game[creatorid]['teammates2'])
+            info.lobby.game[creatorid]['teammates2']=info.lobby.game[creatorid]['teammates2'][:(lenofteam2-2)]
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
             print(info.lobby.game)
@@ -380,7 +389,7 @@ def joinm(message):
                already=1
                info.lobby.game[id]['players'][message.from_user.id]['cash']=info.lobby.game[id]['name']
            if already==0:
-             info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id, 1)
+             info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id, 1, message.from_user.first_name)
              info.lobby.game[key]['len']+=1
              bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[id]['players'][message.from_user.id]['cash'])+')! Для начала игры её создатель должен нажать /fight')
            else:
@@ -417,7 +426,7 @@ def helpmessage(message):
 @bot.message_handler(commands=['begin'])
 def beginmessage(message):
   if message.from_user.id not in info.lobby.game:
-    info.lobby.game[message.from_user.id]=createlobby(message.chat.id, message.from_user.id)
+    info.lobby.game[message.from_user.id]=createlobby(message.chat.id, message.from_user.id, message.from_user.first_name)
     print(info.lobby.game)
     bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
     info.lobby.game[message.from_user.id]['naming']=1
@@ -452,14 +461,14 @@ def cancel(id, chatid):
   
   
   
-def createlobby(chatid, creatorid):
+def createlobby(chatid, creatorid, fname):
   return {
     'name':'None',
     'chatid':chatid,
-    'creatorid':createuser(creatorid, 1),
+    'creatorid':createuser(creatorid, 1, fname),
     'naming':0,
     'playing':0,
-    'players':{creatorid:createuser(creatorid, 1)},
+    'players':{creatorid:createuser(creatorid, 1, fname)},
     'battle':0,
     'len':1,
     'team1':{},
@@ -471,14 +480,16 @@ def createlobby(chatid, creatorid):
     'readys':0,
     'launchtimer':0,
     'timer':None,
-    'hod':1
+    'hod':1,
+    'teammates1':'',
+    'teammates2':''
       
 
   }
   
   
   
-def createuser(id, x):
+def createuser(id, x, fname):
   
   return{'selfid':id,
          'lastmessage':0,
@@ -497,7 +508,8 @@ def createuser(id, x):
          'name1mob':'',
          'name2mob':'',
          'name3mob':'',
-         'ready':0
+         'ready':0,
+         'fname':fname
             }  
   
 def createportal(name, x):  
