@@ -169,18 +169,18 @@ def endturn(creatorid):
       if info.lobby.game[creatorid]['t1mobs'][mobs2][xyz]['hp']<1:
         info.lobby.game[creatorid]['t1mobs'][mobs2][xyz]['smert']=1
         
-  for mobs3 in info.lobby.game[creatorid]['t2mobs']:
+ for mobs3 in info.lobby.game[creatorid]['t2mobs']:
     for xyz3 in info.lobby.game[creatorid]['t2mobs'][mobs3]:
       if info.lobby.game[creatorid]['t2mobs'][mobs3][xyz3]['hp']<1:
         info.lobby.game[creatorid]['t2mobs'][mobs3][xyz3]['smert']=1
         
-  bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+info.lobby.game[creatorid]['resultst2']) 
-  info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды 1:'+"\n"
-  info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды 2:'+"\n"
+ bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+info.lobby.game[creatorid]['resultst2']) 
+ info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды 1:'+"\n"
+ info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды 2:'+"\n"
   for endid in info.lobby.game[creatorid]['players']:
     info.lobby.game[creatorid]['players'][endid]['ready']=0
     info.lobby.game[creatorid]['readys']=0
-  battle(info.lobby.game[creatorid]['creatorid']['selfid'])
+ battle(info.lobby.game[creatorid]['creatorid']['selfid'])
                                                                               
                                                                               
     
