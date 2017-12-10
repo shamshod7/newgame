@@ -156,6 +156,8 @@ def endturn(creatorid):
         info.lobby.game[creatorid]['t2mobs'][mobs3][xyz3]['smert']=1
         
   bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+info.lobby.game[creatorid]['resultst2']) 
+  info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды 1:'+"\n"
+  info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды 2:'+"\n"
   battle(info.lobby.game[creatorid]['creatorid']['selfid'])
                                                                               
                                                                               
