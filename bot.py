@@ -638,7 +638,7 @@ def battle(creatorid):
       Keyboard.add(types.InlineKeyboardButton(text=end+"Окончить ход", callback_data='end'))     
       msg=bot.send_message(key, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['players'][key]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][key]['manamax']),reply_markup=Keyboard)
       info.lobby.game[creatorid]['players'][key]['lastmessage']=msg.message_id
-      info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
+      info.lobby.game[creatorid]['players'][key]['currentmessage']=msg.message_id
        
 
 
