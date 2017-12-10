@@ -124,7 +124,7 @@ def testturn(creatorid, id):
 def endturn(creatorid):
  for ids in info.lobby.game[creatorid]['players']:
   if info.lobby.game[creatorid]['players'][ids]['ready']!=1:
-    msg=medit('Время вышло!', ids, info.lobby.game[id]['players'][ids]['lastmessage'])
+    msg=medit('Время вышло!', ids, info.lobby.game[creatorid]['players'][ids]['lastmessage'])
  for id in info.lobby.game[creatorid]['team1']:
      for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
