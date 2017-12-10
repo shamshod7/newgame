@@ -482,7 +482,7 @@ def createmob(nameclass, x, namemob):
         }
     
 def createmob1(nameclass, x, namemob):
-      return{name:{x:{
+      return{namemob:{x:{
         'hp':nameclass.hp,
         'name':nameclass.name,
         'mana':nameclass.mana,
