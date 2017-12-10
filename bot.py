@@ -190,7 +190,10 @@ def endturn(creatorid):
     info.lobby.game[creatorid]['readys']=0
  for mob10 in info.lobby.game[creatorid]['t1mobs']:
     for number10 in info.lobby.game[creatorid]['t1mobs'][mob10]:
-      info.lobby.game[creatorid][mob10][number10]['target']=None
+      info.lobby.game[creatorid]['t1mobs'][mob10][number10]['target']=None
+ for mob11 in info.lobby.game[creatorid]['t2mobs']:
+    for number11 in info.lobby.game[creatorid]['t2mobs'][mob11]:
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['target']=None
  battle(info.lobby.game[creatorid]['creatorid']['selfid'])
                                                                               
                                                                               
