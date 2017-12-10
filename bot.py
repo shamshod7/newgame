@@ -263,13 +263,13 @@ def endturn(creatorid):
      for nmbs in info.lobby.game[creatorid]['t2mobs'][mbs]:
        mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        info.lobby.game[creatorid]['throne1hp']-=mobdmage
-   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmage)+' урона по трону команды 1! Теперь у него'+str(info.lobby.game[creatorid]['thronet1'])+' хп!'    
+   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmage)+' урона по трону команды 1! Теперь у него'+str(info.lobby.game[creatorid]['throne1hp'])+' хп!'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
        mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
        info.lobby.game[creatorid]['throne2hp']-=mobdmage       
-    info.lobby.game[creatorid]['thronedamage']='Мобы из команды 1 нанесли '+str(mobdmage)+' урона по трону команды 2! Теперь у него '+str(info.lobby.game[creatorid]['thronet2'])+' хп!'
+    info.lobby.game[creatorid]['thronedamage']='Мобы из команды 1 нанесли '+str(mobdmage)+' урона по трону команды 2! Теперь у него '+str(info.lobby.game[creatorid]['throne2hp'])+' хп!'
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Урона по тронам нанесено не было!'
  bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'])
