@@ -12,6 +12,7 @@ token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
 def mobdmg(mob, creatorid, team, team2, number):
+    t=None
     for mob2 in info.lobby.game[creatorid][team2]:
               for number2 in info.lobby.game[creatorid][team2][mob2]:
                 if info.lobby.game[creatorid][team2][mob2][number2]['smert']!=1:
@@ -22,7 +23,8 @@ def mobdmg(mob, creatorid, team, team2, number):
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
                         print(t)
-                        
+    if t==None:
+        t='None'
     return t  
 
 
@@ -48,11 +50,12 @@ def mobturn(mob, creatorid, team, team2):
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
-              z=random.randint(1,100)
-              if z<=15:
+              if t!='None':
+                z=random.randint(1,100)
+                if z<=15:
                   t['fromdeaddmg']+=0.6
                   skilltext=', применив скилл "Проклятье мертвецов"'
-              else:
+                else:
                   skilltext=''
               dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
               t['hp']-=dmg
