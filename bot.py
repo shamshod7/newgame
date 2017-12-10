@@ -375,10 +375,10 @@ def inline(call):
           if 's_me4nik' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
            if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
-            if 's_me4nik' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
-              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('s_me4nik', 1)  
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count'])==0:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', 1)  
             else:
-              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('s_me4nik', info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count']+1)  
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count']+1)  
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count'])+' таких порталов!')
            else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
@@ -392,10 +392,10 @@ def inline(call):
           if 'phoenix' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
            if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.phoenix.cost
-            if 'phoenix' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
-              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('phoenix', 1)  
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count'])==0:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal('phoenix', 1)  
             else:
-              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('phoenix', info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count']+1)  
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal('phoenix', info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count']+1)  
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Феникадзе)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count'])+' таких порталов!')
            else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
@@ -408,10 +408,10 @@ def inline(call):
           if 'electromagnit' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
            if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.electromagnit.cost
-            if 'electromagnit' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
-              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('electromagnit', 1)  
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count'])==0:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal('electromagnit', 1)  
             else:
-              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('electromagnit', info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count']+1)  
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal('electromagnit', info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count']+1)  
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Электромагнитень)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count'])+' таких порталов!')
            else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
@@ -589,7 +589,10 @@ def createuser(id, x, fname):
                   'phoenix':{},
                   'electromagnit':{}
          },
-         'portals':{},
+         'portals':{'s_me4nik':{},
+                  'phoenix':{},
+                  'electromagnit':{}
+                   },
          'mana':0,
          'mobnumber':0,
          'manamax':250,
@@ -606,9 +609,9 @@ def createuser(id, x, fname):
             }  
   
 def createportal(name, x):  
-    return {name:{'name':name,
+    return {'name':name,
           'count':x
-           }}
+           }
 
     
 def createmob(nameclass, x, namemob):
