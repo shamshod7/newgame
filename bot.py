@@ -250,6 +250,7 @@ def endturn(creatorid):
  info.lobby.game[creatorid]['hod']+=1
  livemob1=0
  livemob2=0
+ mobdmageall=0
  for mobtothrone1 in info.lobby.game[creatorid]['t1mobs']:
     for numberthrone1 in info.lobby.game[creatorid]['t1mobs'][mobtothrone1]:
       if info.lobby.game[creatorid]['t1mobs'][mobtothrone1][numberthrone1]['smert']!=1:
@@ -261,15 +262,17 @@ def endturn(creatorid):
  if livemob1==0 and livemob2>0:
    for mbs in info.lobby.game[creatorid]['t2mobs']:
      for nmbs in info.lobby.game[creatorid]['t2mobs'][mbs]:
+       mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        info.lobby.game[creatorid]['throne1hp']-=mobdmage
-   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmage)+' урона по трону команды 1! Теперь у него'+str(info.lobby.game[creatorid]['throne1hp'])+' хп!'    
+   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmageall)+' урона по трону команды 1! Теперь у него'+str(info.lobby.game[creatorid]['throne1hp'])+' хп!'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
+       mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
        mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
        info.lobby.game[creatorid]['throne2hp']-=mobdmage       
-    info.lobby.game[creatorid]['thronedamage']='Мобы из команды 1 нанесли '+str(mobdmage)+' урона по трону команды 2! Теперь у него '+str(info.lobby.game[creatorid]['throne2hp'])+' хп!'
+    info.lobby.game[creatorid]['thronedamage']='Мобы из команды 1 нанесли '+str(mobdmageall)+' урона по трону команды 2! Теперь у него '+str(info.lobby.game[creatorid]['throne2hp'])+' хп!'
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Урона по тронам нанесено не было!'
  bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'])
