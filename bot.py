@@ -273,8 +273,16 @@ def endturn(creatorid):
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Урона по тронам нанесено не было!'
  bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'])
- info.lobby.game[creatorid]['thronedamage']=''       
- battle(info.lobby.game[creatorid]['creatorid']['selfid'])
+ info.lobby.game[creatorid]['thronedamage']=''  
+ if info.lobby.game[creatorid]['throne2hp']<1 or info.lobby.game[creatorid]['throne1hp']<1:
+   if info.lobby.game[creatorid]['throne2hp']<info.lobby.game[creatorid]['throne1hp']:
+    bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды 1!')
+    info.lobby.game.del(info.lobby.game[creatorid])
+   elif info.lobby.game[creatorid]['throne2hp']>info.lobby.game[creatorid]['throne1hp']:
+    bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды 2!')
+    info.lobby.game.del(info.lobby.game[creatorid])
+ else:
+   battle(info.lobby.game[creatorid]['creatorid']['selfid'])
                                                                               
                                                                               
     
