@@ -181,15 +181,15 @@ def endturn(creatorid):
   if info.lobby.game[creatorid]['players'][ids]['ready']!=1:
     msg=medit('Время вышло!', ids, info.lobby.game[creatorid]['players'][ids]['lastmessage'])
  for id in info.lobby.game[creatorid]['team1']:
-    print('1')
+     print('1')
      for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
-       print('2')
+        print('2')
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
-         print('3')
+          print('3')
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if name in info.lobby.game[creatorid]['t1mobs']:
-             print('4')
+              print('4')
               s4islo=0
               for count in info.lobby.game[creatorid]['t1mobs'][name]:
                 s4islo+=1
