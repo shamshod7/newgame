@@ -375,7 +375,7 @@ def inline(call):
           if 's_me4nik' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
            if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
-            if info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count'])==0:
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count']==0:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count']+1)  
@@ -392,7 +392,7 @@ def inline(call):
           if 'phoenix' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
            if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.phoenix.cost
-            if info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count'])==0:
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count']==0:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal('phoenix', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal('phoenix', info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count']+1)  
@@ -408,7 +408,7 @@ def inline(call):
           if 'electromagnit' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
            if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.electromagnit.cost
-            if info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count'])==0:
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count']==0:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal('electromagnit', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal('electromagnit', info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count']+1)  
