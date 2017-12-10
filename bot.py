@@ -104,14 +104,29 @@ def mobturn(mob, creatorid, team, team2):
                 
             
                     
-                    
+def testturn(creatorid, id):
+  info.lobby.game[creatorid]['readys']+=1
+  info.lobby.game[creatorid]['players'][id]['ready']=1
+  if info.lobby.game[creatorid]['readys']!=len(info.lobby.game[creatorid]['players']):
+    msg=medit('Ожидание других игроков...', id, info.lobby.game[creatorid]['players'][id]['lastmessage'])
+  else:
+    msg=medit('Ожидание других игроков...', id, info.lobby.game[creatorid]['players'][id]['lastmessage'])
+    
+    endturn(creatorid)
+    
+              
+    
+ 
             
     
 
 
 def endturn(creatorid):
-  for id in info.lobby.game[creatorid]['team1']:
-    for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
+ for ids in info.lobby.game[creatorid]['players']:
+  if info.lobby.game[creatorid]['players'][ids]['ready']!=1:
+    msg=medit('Время вышло!', ids, info.lobby.game[id]['players'][ids]['lastmessage'])
+ for id in info.lobby.game[creatorid]['team1']:
+     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
@@ -162,6 +177,9 @@ def endturn(creatorid):
   bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+info.lobby.game[creatorid]['resultst2']) 
   info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды 1:'+"\n"
   info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды 2:'+"\n"
+  for endid in info.lobby.game[creatorid]['players']:
+    info.lobby.game[creatorid]['players'][endid]['ready']=0
+    info.lobby.game[creatorid]['readys']=0
   battle(info.lobby.game[creatorid]['creatorid']['selfid'])
                                                                               
                                                                               
@@ -232,9 +250,11 @@ def inline(call):
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             
   elif call.data=='end':
-    for id in info.lobby.game:
-        if call.from_user.id in info.lobby.game[id]['players']:
-          endturn(info.lobby.game[id]['creatorid']['selfid'])
+    for creatorid in info.lobby.game:
+      if call.from_user.id in info.lobby.game[creatorid]['players']:  
+        testturn(info.lobby.game[creatorid]['creatorid']['selfid'], call.from_user.id)
+
+
            
           
           
@@ -425,7 +445,9 @@ def createlobby(chatid, creatorid):
     't1mobs':{},
     't2mobs':{},
     'resultst1':'Результаты монстров из команды 1:'+"\n",
-    'resultst2':'Результаты монстров из команды 2:'+"\n"
+    'resultst2':'Результаты монстров из команды 2:'+"\n",
+    'readys':0,
+    'launchtimer':0
       
 
   }
@@ -450,7 +472,8 @@ def createuser(id, x):
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
-         'name3mob':''
+         'name3mob':'',
+         'ready':0
             }  
   
 def createportal(name, x):  
@@ -513,6 +536,13 @@ def createmob1(nameclass, x, namemob):
     
     
 def battle(creatorid):
+    if info.lobby.game[creatorid]['launchtimer']==0:
+      t=threading.Timer(120.0, target=endturn, args=[creatorid])
+      t.start()
+      info.lobby.game[creatorid]['launchtimer']=1
+    else:
+      t.cancel()
+      t.start()
     for key in info.lobby.game[creatorid]['players']:
       mobs(key)
       info.lobby.game[creatorid]['players'][key]['mana']=info.lobby.game[creatorid]['players'][key]['manamax']      
