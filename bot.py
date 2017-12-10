@@ -262,6 +262,7 @@ def endturn(creatorid):
  if livemob1==0 and livemob2>0:
    for mbs in info.lobby.game[creatorid]['t2mobs']:
      for nmbs in info.lobby.game[creatorid]['t2mobs'][mbs]:
+      if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']!=1:
        mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        info.lobby.game[creatorid]['throne1hp']-=mobdmage
@@ -269,6 +270,7 @@ def endturn(creatorid):
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
+      if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']!=1:
        mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
        mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
        info.lobby.game[creatorid]['throne2hp']-=mobdmage       
