@@ -483,8 +483,8 @@ def createmob(nameclass, x, namemob):
         'smert':0
                 
         }
-       }
-    }
+       
+    
        
     
     
