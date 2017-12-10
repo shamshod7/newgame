@@ -125,7 +125,7 @@ def endturn(creatorid):
               number+=1
            else:
             print('name not in t1')
-            info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), 1, name)
+            info.lobby.game[creatorid]['t1mobs'][name][1]=createmob(nametoclass(name), 1, name)
             number+=1
   for id in info.lobby.game[creatorid]['team2']:
     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
@@ -138,11 +138,11 @@ def endturn(creatorid):
                 for count in info.lobby.game[creatorid]['t1mobs'][name]:
                   s4islo+=1
                 print('name in t2mobs')
-                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), (s4islo+1), name)
+                info.lobby.game[creatorid]['t2mobs'][name][s4islo+1]=createmob(nametoclass(name), (s4islo+1), name)
                 number+=1
               else:
                 print('name not in t2mobs')
-                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), 1, name)
+                info.lobby.game[creatorid]['t2mobs'][name][1]=createmob(nametoclass(name), 1, name)
                 number+=1
             
   for mob in info.lobby.game[creatorid]['t1mobs']:
@@ -151,9 +151,9 @@ def endturn(creatorid):
     mobturn(mob, creatorid, 't2mobs', 't1mobs')
     
   for mob in info.lobby.game[creatorid]['t1mobs']:
-    for numbers in info.lobby.game[creatorid]['t1mobs'][mob]:
-      if info.lobby.game[creatorid]['t1mobs'][mob][numbers]['hp']<1:
-        info.lobby.game[creatorid]['t1mobs'][mob][numbers]['smert']=1
+    for xyz in info.lobby.game[creatorid]['t1mobs'][mob]:
+      if info.lobby.game[creatorid]['t1mobs'][mob][xyz]['hp']<1:
+        info.lobby.game[creatorid]['t1mobs'][mob][xyz]['smert']=1
         
   for mob in info.lobby.game[creatorid]['t2mobs']:
     for numbers in info.lobby.game[creatorid]['t2mobs'][mob]:
