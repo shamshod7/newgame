@@ -32,7 +32,16 @@ def mobdmg(mob, creatorid, team, team2, number):
               for number2 in info.lobby.game[creatorid][team2][mob2]:
                 if info.lobby.game[creatorid][team2][mob2][number2]['smert']!=1:
                  if info.lobby.game[creatorid][team2][mob2][number2]['hp']>0:
-                  info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
+                  if info.lobby.game[creatorid][team][mob][number]['type']=='dead':
+                    info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
+                  elif info.lobby.game[creatorid][team][mob][number]['type']=='bio':
+                    info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['frombiodmg']
+                  elif info.lobby.game[creatorid][team][mob][number]['type']=='electro':
+                    info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromelectrodmg']
+                  elif info.lobby.game[creatorid][team][mob][number]['type']=='ghost':
+                    info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromghostdmg']
+                  elif info.lobby.game[creatorid][team][mob][number]['type']=='fire':
+                    info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromfiredmg']
                   if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
@@ -87,32 +96,58 @@ def mobturn(mob, creatorid, team, team2):
                     
     elif mob=='electromagnit':
         for number in info.lobby.game[creatorid][team][mob]:
-          if info.lobby.game[creatorid][team][mob][number]['target']=='None':
-            t=mobdmg(mob, creatorid, team, team2)
-            t['underattack']=1
-            if t['skill']!='returndmg':
-                skilltext=''                
-                dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+         if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+           if info.lobby.game[creatorid][team][mob][number]['target']==None:
+              t=mobdmg(mob, creatorid, team, team2, number)
+              if t!='None':
+                z=random.randint(1,100)
+                if z<=40:
+                  if t['mana']>0:
+                    h=100
+                    t['mana']-=h
+                    a=0-t['mana']
+                    if a>0:
+                        t['mana']+=a
+                        h-=a    
+                    info.lobby.game[creatorid][team][mob][number]['hp']+=h
+                    skilltext=', и применил скилл "Проникновение", восстановив '+str(h)+' хп!'
+                else:
+                  skilltext=''
+                dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
                 t['hp']-=dmg
                 if team=='t1mobs':
-                  info.lobby.game[creatorid]['resultst1']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
+                 if t['hp']<1:
+                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; враг погибает!'+"\n"  
+                 else:
+                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; '+'у него остается '+str(t['hp'])+' хп!'+"\n"
                 elif team=='t2mobs':
-                  info.lobby.game[creatorid]['resultst2']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
+                 if t['hp']<1:
+                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по ('+t['name']+typetotext(t['type'])+')'+skilltext+'; враг погибает!'+"\n"
+                 else:
+                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по ('+t['name']+typetotext(t['type'])+')'+skilltext+'; '+'у него остается '+str(t['hp'])+' хп!'+"\n"
+
 
                 
     elif mob=='phoenix':
         for number in info.lobby.game[creatorid][team][mob]:
-          if info.lobby.game[creatorid][team][mob][number]['target']=='None':
-            t=mobdmg(mob, creatorid, team, team2)
-            t['underattack']=1
-            if t['skill']!='returndmg': 
-                skilltext=''                
-                dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']                                                              
+         if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+           if info.lobby.game[creatorid][team][mob][number]['target']==None:
+              t=mobdmg(mob, creatorid, team, team2, number)
+              if t!='None':
+                skilltext=''
+                dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
                 t['hp']-=dmg
+                info.lobby.game[creatorid][team][mob][number]['smert']=1
                 if team=='t1mobs':
-                  info.lobby.game[creatorid]['resultst1']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"
+                 if t['hp']<1:
+                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' самоубился об врага '+t['name']+'('+typetotext(t['type'])+')'+', нанеся '+str(dmg)+' урона ; враг погибает!'+"\n"  
+                 else:
+                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' самоубился об врага '+t['name']+'('+typetotext(t['type'])+')'+', нанеся '+str(dmg)+' урона ;'+'у него остается '+str(t['hp'])+' хп!'+"\n"
                 elif team=='t2mobs':
-                  info.lobby.game[creatorid]['resultst2']+=mob+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+typetotext(t['type'])+skilltext+';'+"\n"                                                              
+                 if t['hp']<1:
+                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' самоубился об врага '+t['name']+'('+typetotext(t['type'])+')'+', нанеся '+str(dmg)+' урона ; враг погибает!'+"\n" 
+                 else:
+                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' самоубился об врага '+t['name']+'('+typetotext(t['type'])+')'+', нанеся '+str(dmg)+' урона ;'+'у него остается '+str(t['hp'])+' хп!'+"\n"                                                           
                                                                               
 
    
@@ -350,27 +385,35 @@ def inline(call):
             
             
   elif call.data=='phoenix':
-    for id in info.lobby.game:
+     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
-          if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
+          if 'phoenix' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
+           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.phoenix.cost
-            info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal()    
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Феникадзе)!')
-          else:
+            if 'phoenix' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('phoenix', 1)  
+            else:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('phoenix', info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count']+1)  
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Феникадзе)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count'])+' таких порталов!')
+           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
             
   elif call.data=='electromagnit':
-    for id in info.lobby.game:
+     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
-          if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
+          if 'electromagnit' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
+           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.electromagnit.cost
-            info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal()              
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Электромагнитень)!')
-          else:
+            if 'electromagnit' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('electromagnit', 1)  
+            else:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('electromagnit', info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count']+1)  
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Электромагнитень)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count'])+' таких порталов!')
+           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
        
                  
