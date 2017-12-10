@@ -11,6 +11,21 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
+def classtoemoji(class):
+    if class=='dead':
+        emoj=emojize(':skull:', use_aliases=True)
+    elif class=='electro':
+        emoj=emojize(':zap:', use_aliases=True)
+    elif class=='bio':
+        emoj=emojize(':evergreen_tree:', use_aliases=True)
+    elif class=='ghost':
+        emoj=emojize(':ghost:', use_aliases=True)
+    elif class=='fire':
+        emoj=emojize(':fire:', use_aliases=True)
+    return emoj
+
+
+
 def mobdmg(mob, creatorid, team, team2, number):
     t=None
     for mob2 in info.lobby.game[creatorid][team2]:
@@ -247,10 +262,12 @@ def mobs(callid):    #выбирает 3х рандомных мобов для 
 def inline(call):
   if call.data=='do':
     for id in info.lobby.game:
-      if call.from_user.id in info.lobby.game[id]['players']:         
+      if call.from_user.id in info.lobby.game[id]['players']: 
+          portal=emojize(':crystal_ball:', use_aliases=True)
+          back=emojize(':back:', use_aliases=True) 
           Keyboard=types.InlineKeyboardMarkup()
-          Keyboard.add(types.InlineKeyboardButton(text="Открыть портал", callback_data='altar'))
-          Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
+          Keyboard.add(types.InlineKeyboardButton(text=portal+"Открыть портал", callback_data='altar'))
+          Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
           msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
 
@@ -282,12 +299,16 @@ def inline(call):
           
   elif call.data=='altar':
     for id in info.lobby.game:
-      if call.from_user.id in info.lobby.game[id]['players']:          
+      if call.from_user.id in info.lobby.game[id]['players']: 
+            emoj0=classtoemoji(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]['type'])
+            emoj1=classtoemoji(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]['type'])
+            emoj2=classtoemoji(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]['type'])
+            back=emojize(':back:', use_aliases=True) 
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text=info.lobby.game[id]['players'][call.from_user.id]['name1mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]))
-            Keyboard.add(types.InlineKeyboardButton(text=info.lobby.game[id]['players'][call.from_user.id]['name2mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]))
-            Keyboard.add(types.InlineKeyboardButton(text=info.lobby.game[id]['players'][call.from_user.id]['name3mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]))
-            Keyboard.add(types.InlineKeyboardButton(text="Главное меню", callback_data='menu'))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj0+info.lobby.game[id]['players'][call.from_user.id]['name1mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]))
+            Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
             msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
          
