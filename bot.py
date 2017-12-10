@@ -266,6 +266,7 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
           portal=emojize(':crystal_ball:', use_aliases=True)
           back=emojize(':back:', use_aliases=True) 
           Keyboard=types.InlineKeyboardMarkup()
@@ -282,6 +283,7 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
             mana=emojize(':droplet:', use_aliases=True)
             go=emojize(':video_game:', use_aliases=True)
             end=emojize(':white_check_mark:', use_aliases=True)
@@ -298,9 +300,10 @@ def inline(call):
    for id in info.lobby.game:
     if call.from_user.id in info.lobby.game[id]['players']:
      if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
-      for creatorid in info.lobby.game:
-       if call.from_user.id in info.lobby.game[creatorid]['players']:  
-         testturn(info.lobby.game[creatorid]['creatorid']['selfid'], call.from_user.id)
+      if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+       for creatorid in info.lobby.game:
+        if call.from_user.id in info.lobby.game[creatorid]['players']:  
+          testturn(info.lobby.game[creatorid]['creatorid']['selfid'], call.from_user.id)
 
 
            
@@ -310,6 +313,7 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']: 
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
             nc0=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0])
             nc1=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1])
             nc2=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2])
@@ -332,6 +336,7 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
             if 's_me4nik' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
@@ -347,6 +352,7 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.phoenix.cost
             info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal()    
@@ -358,6 +364,7 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.electromagnit.cost
             info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal()              
