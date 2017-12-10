@@ -537,7 +537,7 @@ def createmob1(nameclass, x, namemob):
     
 def battle(creatorid):
     if info.lobby.game[creatorid]['launchtimer']==0:
-      t=threading.Timer(120.0, target=endturn, args=[creatorid])
+      t=threading.Timer(120.0, endturn, args=[creatorid])
       t.start()
       info.lobby.game[creatorid]['launchtimer']=1
     else:
