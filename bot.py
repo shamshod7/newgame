@@ -188,30 +188,22 @@ def endturn(creatorid):
           print('3')
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
-           if name in info.lobby.game[creatorid]['t1mobs']:
-              print('4')
-              s4islo=0
-              for count in info.lobby.game[creatorid]['t1mobs'][name]:
-                s4islo+=1
-              info.lobby.game[creatorid]['t1mobs'][name][s4islo+1]=createmob(nametoclass(name), (s4islo+1), name)
+           if len(info.lobby.game[creatorid]['t1mobs'][name])==0:
+              info.lobby.game[creatorid]['t1mobs'][name]=createmob1(nametoclass(name), 1, name)
               number+=1
            else:
-              print('5')
-              info.lobby.game[creatorid]['t1mobs']=createmob1(nametoclass(name), 1, name)
+              info.lobby.game[creatorid]['t1mobs'][name].update([createmob(nametoclass(name),(len(info.lobby.game[creatorid]['t1mobs'][name])+1)]), name)
               number+=1
  for id in info.lobby.game[creatorid]['team2']:
     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
-              if name in info.lobby.game[creatorid]['t2mobs']:               
-                s4islo=0
-                for count in info.lobby.game[creatorid]['t2mobs'][name]:
-                  s4islo+=1
-                info.lobby.game[creatorid]['t2mobs'][name][s4islo+1]=createmob(nametoclass(name), (s4islo+1), name)
+              if len(info.lobby.game[creatorid]['t2mobs'][name])==0:               
+                info.lobby.game[creatorid]['t2mobs'][name]=createmob1(nametoclass(name), 1, name)
                 number+=1
               else:
-                info.lobby.game[creatorid]['t2mobs']=createmob1(nametoclass(name), 1, name)
+                info.lobby.game[creatorid]['t2mobs'][name].update([createmob(nametoclass(name),(len(info.lobby.game[creatorid]['t2mobs'][name])+1), name)])
                 number+=1
             
  for mob in info.lobby.game[creatorid]['t1mobs']:
@@ -568,8 +560,12 @@ def createlobby(chatid, creatorid, fname):
     'len':1,
     'team1':{},
     'team2':{},
-    't1mobs':{},
-    't2mobs':{},
+    't1mobs':{'s_me4nik':{},
+                  'phoenix':{},
+                  'electromagnit':{}},
+    't2mobs':{'s_me4nik':{},
+                  'phoenix':{},
+                  'electromagnit':{}},
     'resultst1':'Результаты монстров из команды 1'+"\n",
     'resultst2':'Результаты монстров из команды 2'+"\n",
     'readys':0,
@@ -641,7 +637,7 @@ def createmob(nameclass, x, namemob):
         }
     
 def createmob1(nameclass, x, namemob):
-      return{namemob:{x:{
+      return{x:{
         'hp':nameclass.hp,
         'name':nameclass.name,
         'mana':nameclass.mana,
@@ -663,7 +659,7 @@ def createmob1(nameclass, x, namemob):
                 
         }
           }
-            }
+            
        
     
        
