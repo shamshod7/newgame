@@ -447,7 +447,8 @@ def createlobby(chatid, creatorid):
     'resultst1':'Результаты монстров из команды 1:'+"\n",
     'resultst2':'Результаты монстров из команды 2:'+"\n",
     'readys':0,
-    'launchtimer':0
+    'launchtimer':0,
+    'timer':None
       
 
   }
@@ -540,9 +541,13 @@ def battle(creatorid):
       t=threading.Timer(120.0, endturn, args=[creatorid])
       t.start()
       info.lobby.game[creatorid]['launchtimer']=1
+      info.lobby.game[creatorid]['timer']=t
     else:
-      t.cancel()
+      info.lobby.game[creatorid]['timer'].cancel()
+      t=threading.Timer(120.0, endturn, args=[creatorid])
       t.start()
+      info.lobby.game[creatorid]['launchtimer']=1
+      info.lobby.game[creatorid]['timer']=t
     for key in info.lobby.game[creatorid]['players']:
       mobs(key)
       info.lobby.game[creatorid]['players'][key]['mana']=info.lobby.game[creatorid]['players'][key]['manamax']      
