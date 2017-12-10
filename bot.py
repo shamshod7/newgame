@@ -115,7 +115,7 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if name in info.lobby.game[creatorid]['t1mobs']:
-              print('namet1: '+info.lobby.game[creatorid]['t1mobs'][name])
+              print(info.lobby.game[creatorid]['t1mobs'][name])
               s4islo=0
               for count in info.lobby.game[creatorid]['t1mobs'][name]:
                 s4islo+=1
