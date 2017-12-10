@@ -353,9 +353,9 @@ def fightstart(message):
                 info.lobby.game[message.from_user.id]['team1'][id]=createuser(id, 1, info.lobby.game[message.from_user.id]['players'][id]['fname'])
             info.lobby.game[message.from_user.id]['battle']=1
             for id1 in info.lobby.game[message.from_user.id]['players']:
-                if info.lobby.game[message.from_user.id]['players'][id1] in info.lobby.game[message.from_user.id]['team1']:
+                if info.lobby.game[message.from_user.id]['players'][id1]['selfid'] in info.lobby.game[message.from_user.id]['team1']:
                     info.lobby.game[message.from_user.id]['teammates1']+=info.lobby.game[message.from_user.id]['players'][id1]['fname']+', '
-                elif info.lobby.game[message.from_user.id]['players'][id1] in info.lobby.game[message.from_user.id]['team2']:
+                elif info.lobby.game[message.from_user.id]['players'][id1]['selfid'] in info.lobby.game[message.from_user.id]['team2']:
                     info.lobby.game[message.from_user.id]['teammates2']+=info.lobby.game[message.from_user.id]['players'][id1]['fname']+', '
             lenofteam1=len(info.lobby.game[creatorid]['teammates1'])
             info.lobby.game[creatorid]['teammates1']=info.lobby.game[creatorid]['teammates1'][:(lenofteam1-2)]
