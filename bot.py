@@ -300,9 +300,9 @@ def inline(call):
   elif call.data=='altar':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']: 
-            emoj0=classtoemoji(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]['type'])
-            emoj1=classtoemoji(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]['type'])
-            emoj2=classtoemoji(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]['type'])
+            emoj0=classtoemoji(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0])
+            emoj1=classtoemoji(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1])
+            emoj2=classtoemoji(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2])
             back=emojize(':back:', use_aliases=True) 
             Keyboard=types.InlineKeyboardMarkup()
             Keyboard.add(types.InlineKeyboardButton(text=emoj0+info.lobby.game[id]['players'][call.from_user.id]['name1mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]))
