@@ -125,8 +125,10 @@ def testturn(creatorid, id):
   info.lobby.game[creatorid]['players'][id]['ready']=1
   if info.lobby.game[creatorid]['readys']!=len(info.lobby.game[creatorid]['players']):
     msg=medit('Ожидание других игроков...', id, info.lobby.game[creatorid]['players'][id]['lastmessage'])
+    info.lobby.game[creatorid]['players'][id]['currentmessage']=msg.message_id
   else:
     msg=medit('Ожидание других игроков...', id, info.lobby.game[creatorid]['players'][id]['lastmessage'])
+    info.lobby.game[creatorid]['players'][id]['currentmessage']=msg.message_id
     
     endturn(creatorid)
     
@@ -263,13 +265,14 @@ def inline(call):
   if call.data=='do':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
-        if message_id==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
           portal=emojize(':crystal_ball:', use_aliases=True)
           back=emojize(':back:', use_aliases=True) 
           Keyboard=types.InlineKeyboardMarkup()
           Keyboard.add(types.InlineKeyboardButton(text=portal+"Открыть портал", callback_data='altar'))
           Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
           msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+          info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
 
           
@@ -278,7 +281,7 @@ def inline(call):
   elif call.data=='menu':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
-        if message_id==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
             mana=emojize(':droplet:', use_aliases=True)
             go=emojize(':video_game:', use_aliases=True)
             end=emojize(':white_check_mark:', use_aliases=True)
@@ -289,11 +292,12 @@ def inline(call):
             Keyboard.add(types.InlineKeyboardButton(text=end+"Окончить ход", callback_data='end'))
             msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
+            info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
             
   elif call.data=='end':
    for id in info.lobby.game:
     if call.from_user.id in info.lobby.game[id]['players']:
-     if message_id==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+     if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
       for creatorid in info.lobby.game:
        if call.from_user.id in info.lobby.game[creatorid]['players']:  
          testturn(info.lobby.game[creatorid]['creatorid']['selfid'], call.from_user.id)
@@ -305,7 +309,7 @@ def inline(call):
   elif call.data=='altar':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']: 
-        if message_id==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
             nc0=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0])
             nc1=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1])
             nc2=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2])
@@ -321,12 +325,13 @@ def inline(call):
             Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
             msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
+            info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
          
      
   elif call.data=='s_me4nik':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
-        if message_id==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
             if 's_me4nik' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
@@ -341,7 +346,7 @@ def inline(call):
   elif call.data=='phoenix':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
-        if message_id==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.phoenix.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.phoenix.cost
             info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal()    
@@ -352,7 +357,7 @@ def inline(call):
   elif call.data=='electromagnit':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
-        if message_id==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.electromagnit.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.electromagnit.cost
             info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal()              
@@ -545,7 +550,8 @@ def createuser(id, x, fname):
          'name2mob':'',
          'name3mob':'',
          'ready':0,
-         'fname':fname
+         'fname':fname,
+         'currentmessage':''
             }  
   
 def createportal(name, x):  
