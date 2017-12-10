@@ -115,8 +115,12 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if name in info.lobby.game[creatorid]['t1mobs']:
+              print('namet1: '+info.lobby.game[creatorid]['t1mobs'][name])
+              s4islo=0
+              for count in info.lobby.game[creatorid]['t1mobs'][name]:
+                s4islo+=1
               print('name in t1mobs')
-              info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), (info.lobby.game[creatorid]['t1mobs'][name][count]['x']+1), name)
+              info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), (s4islo+1), name)
               print('lent1 '+str(len(info.lobby.game[creatorid]['t1mobs'][name])))
               number+=1
            else:
@@ -130,8 +134,12 @@ def endturn(creatorid):
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
               if name in info.lobby.game[creatorid]['t2mobs']:
+                print('namet2: '+info.lobby.game[creatorid]['t1mobs'][name])
+                s4islo=0
+                for count in info.lobby.game[creatorid]['t1mobs'][name]:
+                  s4islo+=1
                 print('name in t2mobs')
-                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), ((info.lobby.game[creatorid]['t2mobs'][name][count]['x'])+1), name)
+                info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), (s4islo+1), name)
                 number+=1
                 print('lent2 '+str(len(info.lobby.game[creatorid]['t2mobs'][name])))
               else:
