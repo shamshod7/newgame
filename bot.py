@@ -127,7 +127,6 @@ def endturn(creatorid):
             print('name not in t1')
             info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), 1, name)
             number+=1
-            print('lent1 '+str(len(info.lobby.game[creatorid]['t1mobs'][name])))
   for id in info.lobby.game[creatorid]['team2']:
     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
@@ -141,12 +140,10 @@ def endturn(creatorid):
                 print('name in t2mobs')
                 info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), (s4islo+1), name)
                 number+=1
-                print('lent2 '+str(len(info.lobby.game[creatorid]['t2mobs'][name])))
               else:
                 print('name not in t2mobs')
                 info.lobby.game[creatorid]['t2mobs']=createmob(nametoclass(name), 1, name)
                 number+=1
-                print('lent2 '+str(len(info.lobby.game[creatorid]['t2mobs'][name])))
             
   for mob in info.lobby.game[creatorid]['t1mobs']:
     mobturn(mob, creatorid, 't1mobs', 't2mobs')
