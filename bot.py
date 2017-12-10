@@ -189,12 +189,9 @@ def endturn(creatorid):
               s4islo=0
               for count in info.lobby.game[creatorid]['t1mobs'][name]:
                 s4islo+=1
-              print('name in t1mobs')
               info.lobby.game[creatorid]['t1mobs'][name][s4islo+1]=createmob(nametoclass(name), (s4islo+1), name)
-              print(str(len(info.lobby.game[creatorid]['t1mobs'][name])))
               number+=1
            else:
-            print('name not in t1')
             info.lobby.game[creatorid]['t1mobs']=createmob1(nametoclass(name), 1, name)
             number+=1
  for id in info.lobby.game[creatorid]['team2']:
