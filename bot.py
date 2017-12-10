@@ -133,7 +133,7 @@ def endturn(creatorid):
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
               if name in info.lobby.game[creatorid]['t2mobs']:               
                 s4islo=0
-                for count in info.lobby.game[creatorid]['t1mobs'][name]:
+                for count in info.lobby.game[creatorid]['t2mobs'][name]:
                   s4islo+=1
                 print('name in t2mobs')
                 info.lobby.game[creatorid]['t2mobs'][name][s4islo+1]=createmob(nametoclass(name), (s4islo+1), name)
