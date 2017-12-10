@@ -42,13 +42,9 @@ def typetotext(name):
 
 def mobturn(mob, creatorid, team, team2):
     if mob=='s_me4nik':
-        print('10')
         for number in info.lobby.game[creatorid][team][mob]:
-         print('11')
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
-           print('12')
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
-             print('13')
              t=mobdmg(mob, creatorid, team, team2, number)
              t['underattack']=1
              if t['skill']!='returndmg':
