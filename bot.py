@@ -357,10 +357,10 @@ def fightstart(message):
                     info.lobby.game[message.from_user.id]['teammates1']+=info.lobby.game[message.from_user.id]['players'][id1]['fname']+', '
                 elif info.lobby.game[message.from_user.id]['players'][id1]['selfid'] in info.lobby.game[message.from_user.id]['team2']:
                     info.lobby.game[message.from_user.id]['teammates2']+=info.lobby.game[message.from_user.id]['players'][id1]['fname']+', '
-            lenofteam1=len(info.lobby.game[creatorid]['teammates1'])
-            info.lobby.game[creatorid]['teammates1']=info.lobby.game[creatorid]['teammates1'][:(lenofteam1-2)]
-            lenofteam2=len(info.lobby.game[creatorid]['teammates2'])
-            info.lobby.game[creatorid]['teammates2']=info.lobby.game[creatorid]['teammates2'][:(lenofteam2-2)]
+            lenofteam1=len(info.lobby.game[message.from_user.id]['teammates1'])
+            info.lobby.game[message.from_user.id]['teammates1']=info.lobby.game[message.from_user.id]['teammates1'][:(lenofteam1-2)]
+            lenofteam2=len(info.lobby.game[message.from_user.id]['teammates2'])
+            info.lobby.game[message.from_user.id]['teammates2']=info.lobby.game[message.from_user.id]['teammates2'][:(lenofteam2-2)]
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
             print(info.lobby.game)
