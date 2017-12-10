@@ -181,19 +181,24 @@ def endturn(creatorid):
   if info.lobby.game[creatorid]['players'][ids]['ready']!=1:
     msg=medit('Время вышло!', ids, info.lobby.game[creatorid]['players'][ids]['lastmessage'])
  for id in info.lobby.game[creatorid]['team1']:
+    print('1')
      for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
+       print('2')
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
+         print('3')
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if name in info.lobby.game[creatorid]['t1mobs']:
+             print('4')
               s4islo=0
               for count in info.lobby.game[creatorid]['t1mobs'][name]:
                 s4islo+=1
               info.lobby.game[creatorid]['t1mobs'][name][s4islo+1]=createmob(nametoclass(name), (s4islo+1), name)
               number+=1
            else:
-            info.lobby.game[creatorid]['t1mobs']=createmob1(nametoclass(name), 1, name)
-            number+=1
+              print('5')
+              info.lobby.game[creatorid]['t1mobs']=createmob1(nametoclass(name), 1, name)
+              number+=1
  for id in info.lobby.game[creatorid]['team2']:
     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
@@ -203,11 +208,9 @@ def endturn(creatorid):
                 s4islo=0
                 for count in info.lobby.game[creatorid]['t2mobs'][name]:
                   s4islo+=1
-                print('name in t2mobs')
                 info.lobby.game[creatorid]['t2mobs'][name][s4islo+1]=createmob(nametoclass(name), (s4islo+1), name)
                 number+=1
               else:
-                print('name not in t2mobs')
                 info.lobby.game[creatorid]['t2mobs']=createmob1(nametoclass(name), 1, name)
                 number+=1
             
