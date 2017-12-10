@@ -151,14 +151,14 @@ def endturn(creatorid):
     mobturn(mob, creatorid, 't2mobs', 't1mobs')
     
   for mob in info.lobby.game[creatorid]['t1mobs']:
-    for number in info.lobby.game[creatorid]['t1mobs'][mob]:
-      if info.lobby.game[creatorid]['t1mobs'][mob][number]['hp']<1:
-        info.lobby.game[creatorid]['t1mobs'][mob][number]['smert']=1
+    for numbers in info.lobby.game[creatorid]['t1mobs'][mob]:
+      if info.lobby.game[creatorid]['t1mobs'][mob][numbers]['hp']<1:
+        info.lobby.game[creatorid]['t1mobs'][mob][numbers]['smert']=1
         
   for mob in info.lobby.game[creatorid]['t2mobs']:
-    for number in info.lobby.game[creatorid]['t2mobs'][mob]:
-      if info.lobby.game[creatorid]['t2mobs'][mob][number]['hp']<1:
-        info.lobby.game[creatorid]['t2mobs'][mob][number]['smert']=1
+    for numbers in info.lobby.game[creatorid]['t2mobs'][mob]:
+      if info.lobby.game[creatorid]['t2mobs'][mob][numbers]['hp']<1:
+        info.lobby.game[creatorid]['t2mobs'][mob][numbers]['smert']=1
         
   bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+info.lobby.game[creatorid]['resultst2']) 
   battle(info.lobby.game[creatorid]['creatorid']['selfid'])
