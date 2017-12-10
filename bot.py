@@ -589,9 +589,9 @@ def createuser(id, x, fname):
                   'phoenix':{},
                   'electromagnit':{}
          },
-         'portals':{'s_me4nik':{},
-                  'phoenix':{},
-                  'electromagnit':{}
+         'portals':{'s_me4nik':{'count':0},
+                  'phoenix':{'count':0},
+                  'electromagnit':{'count':0}
                    },
          'mana':0,
          'mobnumber':0,
