@@ -8,7 +8,7 @@ class S_me4nik(object):
         self.name='Скелет-мечник'
         self.hp=120
         self.mana=0
-        self.damage=150
+        self.damage=80
         self.cost=50
         self.type='dead'
         self.fromelectrodmg=0.7
