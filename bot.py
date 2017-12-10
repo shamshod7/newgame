@@ -337,14 +337,15 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
-          if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
+          if 's_me4nik' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
+           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.s_me4nik.cost:
             info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.s_me4nik.cost
             if 's_me4nik' not in info.lobby.game[id]['players'][call.from_user.id]['portals']:
               info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('s_me4nik', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']=createportal('s_me4nik', info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count']+1)  
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count'])+' таких порталов!')
-          else:
+           else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
             
             
