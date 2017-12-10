@@ -192,7 +192,8 @@ def endturn(creatorid):
               info.lobby.game[creatorid]['t1mobs'][name]=createmob1(nametoclass(name), 1, name)
               number+=1
            else:
-              info.lobby.game[creatorid]['t1mobs'][name].update(createmob(nametoclass(name),(len(info.lobby.game[creatorid]['t1mobs'][name])+1), name))
+              diction=createmob1(nametoclass(name),(len(info.lobby.game[creatorid]['t1mobs'][name])+1), name)
+              info.lobby.game[creatorid]['t1mobs'][name].update(diction)
               number+=1
  for id in info.lobby.game[creatorid]['team2']:
     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
@@ -203,7 +204,8 @@ def endturn(creatorid):
                 info.lobby.game[creatorid]['t2mobs'][name]=createmob1(nametoclass(name), 1, name)
                 number+=1
               else:
-                info.lobby.game[creatorid]['t2mobs'][name].update(createmob(nametoclass(name),(len(info.lobby.game[creatorid]['t2mobs'][name])+1), name))
+                diction2=createmob1(nametoclass(name),(len(info.lobby.game[creatorid]['t2mobs'][name])+1), name)
+                info.lobby.game[creatorid]['t2mobs'][name].update(diction2)
                 number+=1
             
  for mob in info.lobby.game[creatorid]['t1mobs']:
