@@ -266,7 +266,7 @@ def endturn(creatorid):
        mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        info.lobby.game[creatorid]['throne1hp']-=mobdmage
-   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmageall)+' урона по трону команды 1! Теперь у него'+str(info.lobby.game[creatorid]['throne1hp'])+' хп!'    
+   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmageall)+' урона по трону команды 1! Теперь у него '+str(info.lobby.game[creatorid]['throne1hp'])+' хп!'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
