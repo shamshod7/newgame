@@ -592,7 +592,7 @@ def createuser(id, x, fname):
          'portals':{},
          'mana':0,
          'mobnumber':0,
-         'manamax':100,
+         'manamax':250,
          'inlobby':x,
          'cash':'',
          'allmobs':['s_me4nik', 'electromagnit', 'phoenix'],
