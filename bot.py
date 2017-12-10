@@ -12,8 +12,10 @@ token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
 def mobdmg(mob, creatorid, team, team2, number):
+  if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
     for mob2 in info.lobby.game[creatorid][team2]:
               for number2 in info.lobby.game[creatorid][team2][mob2]:
+                if info.lobby.game[creatorid][team2][mob2][number2]['smert']!=1:
                   info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
                   if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
                       if info.lobby.game[creatorid][team2][mob2][number2]['hp']>0:
