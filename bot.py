@@ -11,16 +11,16 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
-def classtoemoji(class):
-    if class=='dead':
+def classtoemoji(classs):
+    if classs=='dead':
         emoj=emojize(':skull:', use_aliases=True)
-    elif class=='electro':
+    elif classs=='electro':
         emoj=emojize(':zap:', use_aliases=True)
-    elif class=='bio':
+    elif classs=='bio':
         emoj=emojize(':evergreen_tree:', use_aliases=True)
-    elif class=='ghost':
+    elif classs=='ghost':
         emoj=emojize(':ghost:', use_aliases=True)
-    elif class=='fire':
+    elif classs=='fire':
         emoj=emojize(':fire:', use_aliases=True)
     return emoj
 
