@@ -110,7 +110,7 @@ def mobturn(mob, creatorid, team, team2):
                         t['mana']+=a
                         h-=a    
                     info.lobby.game[creatorid][team][mob][number]['hp']+=h
-                    skilltext=', и применил скилл "Проникновение", восстановив '+str(h)+' хп!'
+                    skilltext=', и применил скилл "Проникновение", восстановив '+str(h)+' хп'
                 else:
                   skilltext=''
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
@@ -119,12 +119,12 @@ def mobturn(mob, creatorid, team, team2):
                  if t['hp']<1:
                   info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; враг погибает!'+"\n"  
                  else:
-                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; '+'у него остается '+str(t['hp'])+' хп!'+"\n"
+                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; '+'у врага остается '+str(t['hp'])+' хп!'+"\n"
                 elif team=='t2mobs':
                  if t['hp']<1:
                   info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по ('+t['name']+typetotext(t['type'])+')'+skilltext+'; враг погибает!'+"\n"
                  else:
-                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по ('+t['name']+typetotext(t['type'])+')'+skilltext+'; '+'у него остается '+str(t['hp'])+' хп!'+"\n"
+                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по ('+t['name']+typetotext(t['type'])+')'+skilltext+'; '+'у врага остается '+str(t['hp'])+' хп!'+"\n"
 
 
                 
