@@ -303,7 +303,7 @@ def inline(call):
             nc0=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0])
             nc1=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1])
             nc2=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2])
-            manacost=emoji(':droplet:', use_aliases=True)
+            manacost=emojize(':droplet:', use_aliases=True)
             emoj0=classtoemoji(nc0.type)
             emoj1=classtoemoji(nc1.type)
             emoj2=classtoemoji(nc2.type)
