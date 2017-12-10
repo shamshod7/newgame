@@ -125,7 +125,7 @@ def endturn(creatorid):
               number+=1
            else:
             print('name not in t1')
-            info.lobby.game[creatorid]['t1mobs'][name][1]=createmob(nametoclass(name), 1, name)
+            info.lobby.game[creatorid]['t1mobs']=createmob1(nametoclass(name), 1, name)
             number+=1
   for id in info.lobby.game[creatorid]['team2']:
     for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
@@ -142,7 +142,7 @@ def endturn(creatorid):
                 number+=1
               else:
                 print('name not in t2mobs')
-                info.lobby.game[creatorid]['t2mobs'][name][1]=createmob(nametoclass(name), 1, name)
+                info.lobby.game[creatorid]['t2mobs']=createmob1(nametoclass(name), 1, name)
                 number+=1
             
   for mob in info.lobby.game[creatorid]['t1mobs']:
@@ -480,6 +480,31 @@ def createmob(nameclass, x, namemob):
         'smert':0
                 
         }
+    
+ def createmob1(nameclass, x, namemob):
+      return{name:{x:{
+        'hp':nameclass.hp,
+        'name':nameclass.name,
+        'mana':nameclass.mana,
+        'damage':nameclass.damage,
+        'cost':nameclass.cost,
+        'type':nameclass.type,
+        'fromelectrodmg':nameclass.fromelectrodmg,
+        'frombiodmg':nameclass.frombiodmg,          
+        'fromghostdmg':nameclass.fromghostdmg,
+        'fromdeaddmg':nameclass.fromdeaddmg,
+        'fromfiredmg':nameclass.fromfiredmg,     
+        'x':x,
+        'target':None,
+        'koef':0,
+        'maxkoef':0,
+        'underattack':0,
+        'skill':nameclass.skill,
+        'smert':0
+                
+        }
+          }
+            }
        
     
        
