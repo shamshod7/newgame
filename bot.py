@@ -13,14 +13,10 @@ bot = telebot.TeleBot(token)
 
 def mobdmg(mob, creatorid, team, team2, number):
     for mob2 in info.lobby.game[creatorid][team2]:
-              print('1')
               for number2 in info.lobby.game[creatorid][team2][mob2]:
-                  print('2')
                   info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
                   if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
-                      print('3')
                       if info.lobby.game[creatorid][team2][mob2][number2]['hp']>0:
-                        print('4')
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
@@ -120,9 +116,9 @@ def endturn(creatorid):
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if name in info.lobby.game[creatorid]['t1mobs']:
             print('name in t1mobs')
-            info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), (len(info.lobby.game[creatorid]['t1mobs'][name])+2), name)
-            print('lent1 '+str(len(info.lobby.game[creatorid]['t1mobs'][name])))
-            number+=1
+              info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), (info.lobby.game[creatorid]['t1mobs'][name][count]['x']+1), name)
+              print('lent1 '+str(len(info.lobby.game[creatorid]['t1mobs'][name])))
+              number+=1
            else:
             print('name not in t1')
             info.lobby.game[creatorid]['t1mobs']=createmob(nametoclass(name), 1, name)
