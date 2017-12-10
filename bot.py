@@ -111,6 +111,8 @@ def mobturn(mob, creatorid, team, team2):
                         h-=a    
                     info.lobby.game[creatorid][team][mob][number]['hp']+=h
                     skilltext=', и применил скилл "Проникновение", восстановив '+str(h)+' хп'
+                  else:
+                    skilltext=''
                 else:
                   skilltext=''
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
