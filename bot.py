@@ -46,7 +46,7 @@ def mobturn(mob, creatorid, team, team2):
         for number in info.lobby.game[creatorid][team][mob]:
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
-             t=mobdmg(mob, creatorid, team, team2, number)
+              t=mobdmg(mob, creatorid, team, team2, number)
               z=random.randint(1,100)
               if z<=15:
                   t['fromdeaddmg']+=0.6
