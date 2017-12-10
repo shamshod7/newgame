@@ -22,7 +22,6 @@ def mobdmg(mob, creatorid, team, team2, number):
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
-                        print(t)
     if t==None:
         t='None'
     return t  
@@ -262,10 +261,13 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
             mana=emojize(':droplet:', use_aliases=True)
+            go=emojize(':video_game:', use_aliases=True)
+            end=emojize(':white_check_mark:', use_aliases=True)
+            info=emojize(':question:', use_aliases=True)
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
-            Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
-            Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))            
+            Keyboard.add(types.InlineKeyboardButton(text=go+"Действия", callback_data='do'))
+            Keyboard.add(types.InlineKeyboardButton(text=info+"Инфо обо мне", callback_data='info'))  
+            Keyboard.add(types.InlineKeyboardButton(text=end+"Окончить ход", callback_data='end'))
             msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             
@@ -587,10 +589,13 @@ def battle(creatorid):
       mobs(key)
       info.lobby.game[creatorid]['players'][key]['mana']=info.lobby.game[creatorid]['players'][key]['manamax']      
       mana=emojize(':droplet:', use_aliases=True)
-      Keyboard=types.InlineKeyboardMarkup()
-      Keyboard.add(types.InlineKeyboardButton(text="Действия", callback_data='do'))
-      Keyboard.add(types.InlineKeyboardButton(text="Окончить ход", callback_data='end'))
-      Keyboard.add(types.InlineKeyboardButton(text="Инфо обо мне", callback_data='info'))      
+      go=emojize(':video_game:', use_aliases=True)
+      end=emojize(':white_check_mark:', use_aliases=True)
+      info=emojize(':question:', use_aliases=True)
+      Keyboard=types.InlineKeyboardMarkup()       
+      Keyboard.add(types.InlineKeyboardButton(text=go+"Действия", callback_data='do'))
+      Keyboard.add(types.InlineKeyboardButton(text=info+"Инфо обо мне", callback_data='info'))
+      Keyboard.add(types.InlineKeyboardButton(text=end+"Окончить ход", callback_data='end'))     
       msg=bot.send_message(key, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['players'][key]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][key]['manamax']),reply_markup=Keyboard)
       info.lobby.game[creatorid]['players'][key]['lastmessage']=msg.message_id
        
