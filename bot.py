@@ -12,7 +12,6 @@ token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
 def mobdmg(mob, creatorid, team, team2, number):
-  if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
     for mob2 in info.lobby.game[creatorid][team2]:
               for number2 in info.lobby.game[creatorid][team2][mob2]:
                 if info.lobby.game[creatorid][team2][mob2][number2]['smert']!=1:
@@ -335,6 +334,7 @@ def fightstart(message):
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
             print(info.lobby.game)
+            info.lobby.game[message.from_user.id]['playing']=1
           else:
             bot.send_message(message.chat.id, 'Игра ('+info.lobby.game[message.from_user.id]['name']+') уже была запущена!')
         else:
@@ -352,6 +352,7 @@ def joinm(message):
       if info.lobby.game[key]['chatid']==message.chat.id:
        if info.lobby.game[key]['name']!='None':
          if message.from_user.id not in info.lobby.game[key]['players']:
+          if info.lobby.game[key]['playing']==0:
            already=0
            for id in info.lobby.game:                    
              if message.from_user.id in info.lobby.game[id]['players']:
@@ -362,7 +363,7 @@ def joinm(message):
              info.lobby.game[key]['len']+=1
              bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[id]['players'][message.from_user.id]['cash'])+')! Для начала игры её создатель должен нажать /fight')
            else:
-             bot.send_message(message.chat.id, 'Вы уже в другом лобби! ('+info.lobby.game[key]['name']+')!')
+             bot.send_message(message.chat.id, 'Вы уже в другом лобби!')
 
            
 
