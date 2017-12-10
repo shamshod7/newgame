@@ -139,7 +139,6 @@ def mobturn(mob, creatorid, team, team2):
                 skilltext=''
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
                 t['hp']-=dmg
-                info.lobby.game[creatorid][team][mob][number]['smert']=1
                 if team=='t1mobs':
                  if t['hp']<1:
                   info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' самоубился об врага '+t['name']+'('+typetotext(t['type'])+')'+', нанеся '+str(dmg)+' урона ; враг погибает!'+"\n"  
@@ -233,7 +232,8 @@ def endturn(creatorid):
       for number5 in info.lobby.game[creatorid]['t2mobs'][mobs5]:
         if info.lobby.game[creatorid]['t2mobs'][mobs5][number5]['hp']>0:
           livemobs2+=1
- bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+'Команда 1: '+info.lobby.game[creatorid]['teammates1']+"\n"+'Команда 2: '+info.lobby.game[creatorid]['teammates2']+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды 1: '+str(livemobs1)+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды 2: '+str(livemobs2)+"\n"+"\n") 
+ te=emojize(':busts_in_silhouette:', use_aliases=True)
+ bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда 1: '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда 2: '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды 1: '+str(livemobs1)+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды 2: '+str(livemobs2)+"\n"+"\n") 
  info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды 1:'+"\n"
  info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды 2:'+"\n"
  for endid in info.lobby.game[creatorid]['players']:
@@ -248,6 +248,32 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['target']=None
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['maxkoef']=0
  info.lobby.game[creatorid]['hod']+=1
+ livemob1=0
+ livemob2=0
+ for mobtothrone1 in info.lobby.game[creatorid]['t1mobs']:
+    for numberthrone1 in info.lobby.game[creatorid]['t1mobs'][mobtothrone1]:
+      if info.lobby.game[creatorid]['t1mobs'][mobtothrone1][numberthrone1]['smert']!=1:
+        livemob1+=1
+ for mobtothrone2 in info.lobby.game[creatorid]['t2mobs']:
+    for numberthrone2 in info.lobby.game[creatorid]['t2mobs'][mobtothrone2]:
+      if info.lobby.game[creatorid]['t2mobs'][mobtothrone2][numberthrone2]['smert']!=1:
+        livemob2+=1
+ if livemob1==0 and livemob2>0:
+   for mbs in info.lobby.game[creatorid]['t2mobs']:
+     for nmbs in info.lobby.game[creatorid]['t2mobs'][mbs]:
+       mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
+       info.lobby.game[creatorid]['throne1hp']-=mobdmage
+   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmage)+' урона по трону команды 1! Теперь у него'+str(info.lobby.game[creatorid]['thronet1'])+' хп!'    
+ elif livemob2==0 and livemob1>0:
+    for mbs2 in info.lobby.game[creatorid]['t1mobs']:
+     for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
+       mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
+       info.lobby.game[creatorid]['throne2hp']-=mobdmage       
+    info.lobby.game[creatorid]['thronedamage']='Мобы из команды 1 нанесли '+str(mobdmage)+' урона по трону команды 2! Теперь у него '+str(info.lobby.game[creatorid]['thronet2'])+' хп!'
+ elif livemob2==0 and livemob1==0:
+    info.lobby.game[creatorid]['thronedamage']='Урона по тронам нанесено не было!'
+ bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'])
+ info.lobby.game[creatorid]['thronedamage']=''       
  battle(info.lobby.game[creatorid]['creatorid']['selfid'])
                                                                               
                                                                               
@@ -575,7 +601,10 @@ def createlobby(chatid, creatorid, fname):
     'timer':None,
     'hod':1,
     'teammates1':'',
-    'teammates2':''
+    'teammates2':'',
+    'throne1hp':2000,
+    'throne2hp':2000,
+    'thronedamage':''
       
 
   }
