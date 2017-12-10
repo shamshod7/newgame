@@ -20,6 +20,7 @@ def mobdmg(mob, creatorid, team, team2, number):
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
+                        print(t)
                         
     return t  
 
@@ -46,8 +47,6 @@ def mobturn(mob, creatorid, team, team2):
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
              t=mobdmg(mob, creatorid, team, team2, number)
-             t['underattack']=1
-             if t['skill']!='returndmg':
               z=random.randint(1,100)
               if z<=15:
                   t['fromdeaddmg']+=0.6
@@ -144,15 +143,15 @@ def endturn(creatorid):
   for mob in info.lobby.game[creatorid]['t2mobs']:
     mobturn(mob, creatorid, 't2mobs', 't1mobs')
     
-  for mob in info.lobby.game[creatorid]['t1mobs']:
+  for mobs2 in info.lobby.game[creatorid]['t1mobs']:
     for xyz in info.lobby.game[creatorid]['t1mobs'][mob]:
-      if info.lobby.game[creatorid]['t1mobs'][mob][xyz]['hp']<1:
-        info.lobby.game[creatorid]['t1mobs'][mob][xyz]['smert']=1
+      if info.lobby.game[creatorid]['t1mobs'][mobs2][xyz]['hp']<1:
+        info.lobby.game[creatorid]['t1mobs'][mobs2][xyz]['smert']=1
         
-  for mob in info.lobby.game[creatorid]['t2mobs']:
-    for numbers in info.lobby.game[creatorid]['t2mobs'][mob]:
-      if info.lobby.game[creatorid]['t2mobs'][mob][numbers]['hp']<1:
-        info.lobby.game[creatorid]['t2mobs'][mob][numbers]['smert']=1
+  for mobs3 in info.lobby.game[creatorid]['t2mobs']:
+    for xyz3 in info.lobby.game[creatorid]['t2mobs'][mobs3]:
+      if info.lobby.game[creatorid]['t2mobs'][mobs3][xyz3]['hp']<1:
+        info.lobby.game[creatorid]['t2mobs'][mobs3][xyz3]['smert']=1
         
   bot.send_message(info.lobby.game[creatorid]['chatid'],info.lobby.game[creatorid]['resultst1']+"\n"+info.lobby.game[creatorid]['resultst2']) 
   battle(info.lobby.game[creatorid]['creatorid']['selfid'])
