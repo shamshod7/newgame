@@ -139,7 +139,7 @@ def skills(mob, creatorid, team, team2):
               if t!='None':
                 z=random.randint(1,100)
                 if z<=30:
-                    t['damage']-=35  
+                    t['damage']-=45  
                     skilltext='"Разряд"'
                 else:
                     skilltext=''
@@ -546,9 +546,17 @@ def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdow
     return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
                                  parse_mode=parse_mode)
 
-@bot.message_handler(commands=['full'])
+@bot.message_handler(commands=['electro'])
 def fullhelp(message):
-    bot.send_message(message.from_user.id, '')
+    emojelectro=emojize(':zap:', use_aliases=True)
+    emojbio=emojize(':evergreen_tree:', use_aliases=True)
+    emojfire=emojize(':fire:', use_aliases=True)
+    emojghost=emojize(':ghost:', use_aliases=True)
+    bot.send_message(message.from_user.id, emojelectro+'Электро:'+"\n"+'Оболочка этих монстров состоит из плоти, а внутренности отсутствуют. Вместо них внутри монстра присутствует электричество, заполняющее всё тело и контролирующее его. У существ этого типа есть свой запас маны, за счёт которого они и удерживают электричество в теле.'+"\n"+
+                    'Наносимый урон:'+"\n"+'По '+emojbio+'био: 130%'+"\n"+'По '+emojfire+'огненным: 50%'+"\n"+'По '+emojghost+'призрачным: 150%'+"\n"+'По '+emojundead+'мертвецам: 100%'+"\n"+"\n"+
+                     'Получаемый урон:'+"\n"+'От '+emojbio+'био: 100%'+"\n"+'От '+emojfire+'огненных: 50%'+"\n"+'От '+emojghost+'призрачных: 80%'+"\n"+'От '+emojundead+'мертвецов: 150%'+"\n"+"\n"+
+                     'Скиллы:'+"\n"+'"Разряд" - имеет 30% шанс отнять у существа, которое атакует, 45 урона (урон может уйти в минус!)'
+                    )
     
                      
 
@@ -649,7 +657,8 @@ def helpmessage(message):
                    'В этой игре вы играете за одного из магов, который обороняет свою крепость, или нападает на чужую! '+
                    'Чтобы атаковать врага, вы чертите на земле специальные символы, открывая портал, из которого каждый новый ход появляется одно из ваших выбранных '+
                    'существ (для открытия портала требуется мана), которое вступает в бой с существами врагов, и разделавшись с ними, идет в атаку на крепость.'+
-                   ' Все существа полностью самостоятельны, вам лишь нужно грамотно выбрать порталы для их появления.'+'Можно играть команда на команду!'+"\n"+'Цель игры: уничтожить крепость соперника')
+                   ' Все существа полностью самостоятельны, вам лишь нужно грамотно выбрать порталы для их появления.'+'Можно играть команда на команду!'+"\n"+'Цель игры: уничтожить крепость соперника.'+"/n"+'Всего в игре есть 5 классов существ:'+"\n"+'электро, биологические, огненные, призрачные и мертвецы.'+"\n"+
+                    'Чтобы узнать про каждый: /electro, /bio, /fire, /ghost, /undead.')
  except:
         bot.send_message(message.chat.id, 'Для начала надо начать разговор с @MagicWarsBot !')
 
