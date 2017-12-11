@@ -303,10 +303,10 @@ def endturn(creatorid):
     for number11 in info.lobby.game[creatorid]['t2mobs'][mob11]:
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['target']=None
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['maxkoef']=0
-      info.lobby.game[creatorid]['t1mobs'][mob11][number11]['mob']=None
-      info.lobby.game[creatorid]['t1mobs'][mob11][number11]['team']=None
-      info.lobby.game[creatorid]['t1mobs'][mob11][number11]['number']=None
-      info.lobby.game[creatorid]['t1mobs'][mob11][number11]['t']=None
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['mob']=None
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['team']=None
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['number']=None
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['t']=None
  info.lobby.game[creatorid]['hod']+=1
  livemob1=0
  livemob2=0
