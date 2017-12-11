@@ -70,9 +70,13 @@ def mobdmg(mob, creatorid, team, team2, number):
                   elif info.lobby.game[creatorid][team][mob][number]['type']=='fire':
                     info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromfiredmg']
                   if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
+                    if t['potentialdie']!=1:
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
+                        if t['hp']-(info.lobby.game[creatorid][team][mob][number]['dmg']*info.lobby.game[creatorid][team][mob][number]['maxkoef'])<1:
+                            t['potentialdie']=1
+                            
 
     if t==None:
         t='None'
@@ -307,6 +311,7 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['team']=None
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['number']=None
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['t']=None
+      info.lobby.game[creatorid]['t1mobs'][mob10][number10]['potentialdie']=0
  for mob11 in info.lobby.game[creatorid]['t2mobs']:
     for number11 in info.lobby.game[creatorid]['t2mobs'][mob11]:
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['target']=None
@@ -315,6 +320,7 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['team']=None
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['number']=None
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['t']=None
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['potentialdie']=0
  info.lobby.game[creatorid]['hod']+=1
  livemob1=0
  livemob2=0
@@ -826,7 +832,8 @@ def createmob(nameclass, x, namemob):
          'mob':'',
         'number':0,
         'team':'',
-        't':''
+        't':'',
+        'potentialdie':0
                 
         }
     
@@ -854,7 +861,8 @@ def createmob1(nameclass, x, namemob):
         'mob':'',
         'number':0,
         'team':'',
-        't':''
+        't':'',
+        'potentialdie':0
                 
         }
           }
