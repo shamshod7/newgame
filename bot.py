@@ -101,6 +101,11 @@ def mobturn(creatorid, team, mob, number, t):
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
      t['hp']-=dmg
      end(creatorid, team, mob, number, t, dmg)
+   
+   elif mob=='manoed':
+     dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
+     t['hp']-=dmg
+     end(creatorid, team, mob, number, t, dmg)
 
     
     
