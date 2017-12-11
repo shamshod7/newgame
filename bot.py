@@ -294,6 +294,8 @@ def endturn(creatorid):
  bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!') 
  info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды "Штурм":'+"\n"
  info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды "Оборона":'+"\n"
+ info.lobby.game[creatorid]['manaplust1']=0
+ info.lobby.game[creatorid]['manaplust2']=0
  for endid in info.lobby.game[creatorid]['players']:
     info.lobby.game[creatorid]['players'][endid]['ready']=0
     info.lobby.game[creatorid]['readys']=0
