@@ -74,7 +74,7 @@ def mobdmg(mob, creatorid, team, team2, number):
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
-                        if t['hp']-(info.lobby.game[creatorid][team][mob][number]['dmg']*info.lobby.game[creatorid][team][mob][number]['maxkoef'])<1:
+                        if t['hp']-(info.lobby.game[creatorid][team][mob][number]['damage']*info.lobby.game[creatorid][team][mob][number]['maxkoef'])<1:
                             t['potentialdie']=1
                             
 
