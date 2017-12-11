@@ -9,7 +9,7 @@ class S_me4nik(object):
         self.hp=100
         self.mana=0
         self.damage=65
-        self.cost=100
+        self.cost=75
         self.type='dead'
         self.fromelectrodmg=0.7
         self.frombiodmg=1.5
@@ -37,10 +37,10 @@ class Pyos(object):
 class Phoenix(object):
     def __init__(self):
         self.name='Феникадзе'
-        self.hp=1
+        self.hp=25
         self.mana=0
         self.damage=330
-        self.cost=200
+        self.cost=160
         self.type='fire'
         self.fromelectrodmg=0.5
         self.frombiodmg=0.7
@@ -53,10 +53,10 @@ class Phoenix(object):
 class Electromagnit(object):
     def __init__(self):
         self.name='Электромагнитень'
-        self.hp=190
+        self.hp=260
         self.mana=100
-        self.damage=105
-        self.cost=175
+        self.damage=70
+        self.cost=190
         self.type='electro'
         self.fromelectrodmg=1.0
         self.frombiodmg=1.1
@@ -69,9 +69,9 @@ class Electromagnit(object):
 class Manoed(object):
     def __init__(self):
         self.name='Маноед'
-        self.hp=85
+        self.hp=120
         self.mana=0
-        self.damage=70
+        self.damage=55
         self.cost=165
         self.type='ghost'
         self.fromelectrodmg=1.5
