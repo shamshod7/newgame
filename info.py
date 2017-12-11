@@ -81,7 +81,7 @@ class Manoed(object):
         self.fromfiredmg=0.9
         self.skill=None
         
-        
+manoed=Manoed()        
 electromagnit=Electromagnit()
 phoenix=Phoenix()        
 pyos=Pyos()       
