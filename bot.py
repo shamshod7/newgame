@@ -81,17 +81,25 @@ def mobturn(mob, creatorid, team, team2):
                 else:
                   skilltext=''
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+                typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
+                typemob2=classtoemoji(t['type'])
+                emoj1= emojize(typemob1, use_aliases=True)
+                emoj2= emojize(typemob2, use_aliases=True)
+                emojattack=emojize(':arrow_right:', use_aliases=True)
+                emojdie=emojize(':angel:', use_aliases=True)
+                emojdmg=emojize(':broken_heart:', use_aliases=True)
+                emojhp=emojize(':green_heart:', use_aliases=True)
                 t['hp']-=dmg
                 if team=='t1mobs':
                  if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; Враг погибает!'+"\n"  
+                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"  
                  else:
-                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; '+'У него остается '+str(t['hp'])+' хп!'+"\n"
+                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
                 elif team=='t2mobs':
                  if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по ('+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; Враг погибает!'+"\n"
+                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n" 
                  else:
-                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по ('+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; '+'У него остается '+str(t['hp'])+' хп!'+"\n"
+                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
 
                     
     elif mob=='electromagnit':
@@ -116,17 +124,25 @@ def mobturn(mob, creatorid, team, team2):
                 else:
                   skilltext=''
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
+                typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
+                typemob2=classtoemoji(t['type'])
+                emoj1= emojize(typemob1, use_aliases=True)
+                emoj2= emojize(typemob2, use_aliases=True)
+                emojattack=emojize(':arrow_right:', use_aliases=True)
+                emojdie=emojize(':angel:', use_aliases=True)
+                emojdmg=emojize(':broken_heart:', use_aliases=True)
+                emojhp=emojize(':green_heart:', use_aliases=True)
                 t['hp']-=dmg
                 if team=='t1mobs':
                  if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; враг погибает!'+"\n"  
+                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"
                  else:
-                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; '+'у врага остается '+str(t['hp'])+' хп!'+"\n"
+                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
                 elif team=='t2mobs':
                  if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; враг погибает!'+"\n"
+                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"
                  else:
-                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' нанёс '+str(dmg)+' урона по '+t['name']+'('+typetotext(t['type'])+')'+skilltext+'; '+'у врага остается '+str(t['hp'])+' хп!'+"\n"
+                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
 
 
                 
@@ -137,18 +153,26 @@ def mobturn(mob, creatorid, team, team2):
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None':
                 skilltext=''
+                typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
+                typemob2=classtoemoji(t['type'])
+                emoj1= emojize(typemob1, use_aliases=True)
+                emoj2= emojize(typemob2, use_aliases=True)
+                emojattack=emojize(':arrow_right:', use_aliases=True)
+                emojdie=emojize(':angel:', use_aliases=True)
+                emojdmg=emojize(':broken_heart:', use_aliases=True)
+                emojhp=emojize(':green_heart:', use_aliases=True)
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
                 t['hp']-=dmg
                 if team=='t1mobs':
                  if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' самоубился об врага '+t['name']+'('+typetotext(t['type'])+')'+', нанеся '+str(dmg)+' урона ; враг погибает!'+"\n"  
+                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"
                  else:
-                  info.lobby.game[creatorid]['resultst1']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' самоубился об врага '+t['name']+'('+typetotext(t['type'])+')'+', нанеся '+str(dmg)+' урона ;'+'у него остается '+str(t['hp'])+' хп!'+"\n"
+                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
                 elif team=='t2mobs':
                  if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' самоубился об врага '+t['name']+'('+typetotext(t['type'])+')'+', нанеся '+str(dmg)+' урона ; враг погибает!'+"\n" 
+                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"
                  else:
-                  info.lobby.game[creatorid]['resultst2']+=info.lobby.game[creatorid][team][mob][number]['name']+'('+typetotext(info.lobby.game[creatorid][team][mob][number]['type'])+')'+' самоубился об врага '+t['name']+'('+typetotext(t['type'])+')'+', нанеся '+str(dmg)+' урона ;'+'у него остается '+str(t['hp'])+' хп!'+"\n"                                                           
+                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"                                                        
                                                                               
 
    
