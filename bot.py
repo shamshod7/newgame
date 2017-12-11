@@ -783,7 +783,7 @@ def createuser(id, x, fname):
          'ready':0,
          'fname':fname,
          'currentmessage':'',
-         'manaregen':25
+         'manaregen':40
             }  
   
 def createportal(name, x):  
