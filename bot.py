@@ -129,26 +129,7 @@ def mobturn(mob, creatorid, team, team2):
                 else:
                   skilltext=''
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
-                typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
-                typemob2=classtoemoji(t['type'])
-                emoj1= emojize(typemob1, use_aliases=True)
-                emoj2= emojize(typemob2, use_aliases=True)
-                emojattack=emojize(':arrow_right:', use_aliases=True)
-                emojdie=emojize(':x:', use_aliases=True)
-                emojdmg=emojize(':broken_heart:', use_aliases=True)
-                emojhp=emojize(':green_heart:', use_aliases=True)
-                t['hp']-=dmg
-                if team=='t1mobs':
-                 if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"
-                 else:
-                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
-                elif team=='t2mobs':
-                 if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"
-                 else:
-                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
-
+                end(creatorid, team, mob, number, t, dmg)
 
                 
     elif mob=='phoenix':
@@ -158,27 +139,8 @@ def mobturn(mob, creatorid, team, team2):
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None':
                 skilltext=''
-                typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
-                typemob2=classtoemoji(t['type'])
-                emoj1= emojize(typemob1, use_aliases=True)
-                emoj2= emojize(typemob2, use_aliases=True)
-                emojattack=emojize(':arrow_right:', use_aliases=True)
-                emojdie=emojize(':x:', use_aliases=True)
-                emojdmg=emojize(':broken_heart:', use_aliases=True)
-                emojhp=emojize(':green_heart:', use_aliases=True)
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
-                t['hp']-=dmg
-                if team=='t1mobs':
-                 if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"
-                 else:
-                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
-                elif team=='t2mobs':
-                 if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"
-                 else:
-                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"                                                        
-                                                                              
+                end(creatorid, team, mob, number, t, dmg)                       
 
    
 
@@ -527,6 +489,10 @@ def fightstart(message):
             info.lobby.game[message.from_user.id]['teammates1']=info.lobby.game[message.from_user.id]['teammates1'][:(lenofteam1-2)]
             lenofteam2=len(info.lobby.game[message.from_user.id]['teammates2'])
             info.lobby.game[message.from_user.id]['teammates2']=info.lobby.game[message.from_user.id]['teammates2'][:(lenofteam2-2)]
+            for ids2 in info.lobby.game[message.from_user.id]['teammates2']:
+                bot.send_message(ids2, 'Вы в обороне! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates2'])
+            for ids1 in info.lobby.game[message.from_user.id]['teammates1']:
+                bot.send_message(ids1, 'Вы штурмуете крепость! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates1'])
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
             print(info.lobby.game)
@@ -666,8 +632,8 @@ def createlobby(chatid, creatorid, fname):
     't2mobs':{'s_me4nik':{},
                   'phoenix':{},
                   'electromagnit':{}},
-    'resultst1':'Результаты монстров из команды 1'+"\n",
-    'resultst2':'Результаты монстров из команды 2'+"\n",
+    'resultst1':'Результаты монстров из команды "Штурм"'+"\n",
+    'resultst2':'Результаты монстров из команды "Оборона"'+"\n",
     'readys':0,
     'launchtimer':0,
     'timer':None,
