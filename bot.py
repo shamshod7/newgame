@@ -36,12 +36,18 @@ def end(creatorid, team, mob, number, t, dmg):
                 emojhp=emojize(':green_heart:', use_aliases=True)
                 if team=='t1mobs':
                  if t['hp']<1:
+                  for id in info.lobby.game[creatorid]['team1']:
+                    info.lobby.game[creatorid]['players'][id]['mana']+=3
+                    info.lobby.game[creatorid]['manaplust1']+=3
                   info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"  
                  else:
                   info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
                 elif team=='t2mobs':
                  if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n" 
+                   for id in info.lobby.game[creatorid]['team2']:
+                    info.lobby.game[creatorid]['players'][id]['mana']+=3
+                    info.lobby.game[creatorid]['manaplust2']+=3
+                   info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n" 
                  else:
                   info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
 
@@ -67,6 +73,7 @@ def mobdmg(mob, creatorid, team, team2, number):
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
+
     if t==None:
         t='None'
     return t  
@@ -89,7 +96,7 @@ def typetotext(name):
 def mobturn(creatorid, team, mob, number, t):
    if mob=='s_me4nik':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
-     t['hp']-=dmg
+     t['hp']-=dmg                    
      end(creatorid, team, mob, number, t, dmg)
         
    elif mob=='phoenix':
@@ -106,9 +113,7 @@ def mobturn(creatorid, team, mob, number, t):
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
      t['hp']-=dmg
      end(creatorid, team, mob, number, t, dmg)
-
-    
-    
+        
     
     
 def skills(mob, creatorid, team, team2):
@@ -284,8 +289,9 @@ def endturn(creatorid):
       for number5 in info.lobby.game[creatorid]['t2mobs'][mobs5]:
         if info.lobby.game[creatorid]['t2mobs'][mobs5][number5]['hp']>0:
           livemobs2+=1
+ droplet=emojize(':droplet:', use_aliases=True)
  te=emojize(':busts_in_silhouette:', use_aliases=True)
- bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+"\n") 
+ bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1'])+' маны за убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2'])+' маны за убитых существ!'+"\n"+"\n") 
  info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды "Штурм":'+"\n"
  info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды "Оборона":'+"\n"
  for endid in info.lobby.game[creatorid]['players']:
@@ -749,7 +755,9 @@ def createlobby(chatid, creatorid, fname):
     'teammates2':'',
     'throne1hp':2000,
     'throne2hp':2000,
-    'thronedamage':''
+    'thronedamage':'',
+    'manaplust1':0,
+    'manaplust2':0
       
 
            }
