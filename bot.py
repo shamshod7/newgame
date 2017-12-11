@@ -639,9 +639,9 @@ def createuser(id, x, fname):
                   'phoenix':{'count':0},
                   'electromagnit':{'count':0}
                    },
-         'mana':0,
+         'mana':150,
          'mobnumber':0,
-         'manamax':250,
+         'manamax':500,
          'inlobby':x,
          'cash':'',
          'allmobs':['s_me4nik', 'electromagnit', 'phoenix'],
@@ -652,6 +652,7 @@ def createuser(id, x, fname):
          'ready':0,
          'fname':fname,
          'currentmessage':''
+         'manaregen':25
             }  
   
 def createportal(name, x):  
@@ -727,7 +728,7 @@ def battle(creatorid):
       info.lobby.game[creatorid]['timer']=t
     for key in info.lobby.game[creatorid]['players']:
       mobs(key)
-      info.lobby.game[creatorid]['players'][key]['mana']=info.lobby.game[creatorid]['players'][key]['manamax']      
+      info.lobby.game[creatorid]['players'][key]['mana']+=info.lobby.game[creatorid]['players'][key]['manaregen']      
       mana=emojize(':droplet:', use_aliases=True)
       go=emojize(':video_game:', use_aliases=True)
       end=emojize(':white_check_mark:', use_aliases=True)
