@@ -25,7 +25,7 @@ def classtoemoji(classs):
     return emoj
 
 
-def end(creatorid, team, mob, number, t, dmg)
+def end(creatorid, team, mob, number, t, dmg):
                 typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
                 typemob2=classtoemoji(t['type'])
                 emoj1= emojize(typemob1, use_aliases=True)
