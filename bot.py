@@ -716,10 +716,14 @@ def createlobby(chatid, creatorid, fname):
     'team2':{},
     't1mobs':{'s_me4nik':{},
                   'phoenix':{},
-                  'electromagnit':{}},
+                  'electromagnit':{},
+                  'manoed':{}
+             },
     't2mobs':{'s_me4nik':{},
                   'phoenix':{},
-                  'electromagnit':{}},
+                  'electromagnit':{},
+                  'manoed':{}
+             },
     'resultst1':'Результаты монстров из команды "Штурм"'+"\n",
     'resultst2':'Результаты монстров из команды "Оборона"'+"\n",
     'readys':0,
