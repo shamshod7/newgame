@@ -225,8 +225,8 @@ def endturn(creatorid):
           livemobs2+=1
  te=emojize(':busts_in_silhouette:', use_aliases=True)
  bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда 1: '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда 2: '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды 1: '+str(livemobs1)+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды 2: '+str(livemobs2)+"\n"+"\n") 
- info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды 1:'+"\n"
- info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды 2:'+"\n"
+ info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды "Штурм":'+"\n"
+ info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды "Оборона":'+"\n"
  for endid in info.lobby.game[creatorid]['players']:
     info.lobby.game[creatorid]['players'][endid]['ready']=0
     info.lobby.game[creatorid]['readys']=0
