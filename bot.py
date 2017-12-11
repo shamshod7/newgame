@@ -651,7 +651,7 @@ def createuser(id, x, fname):
          'name3mob':'',
          'ready':0,
          'fname':fname,
-         'currentmessage':''
+         'currentmessage':'',
          'manaregen':25
             }  
   
