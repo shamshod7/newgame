@@ -257,27 +257,31 @@ def endturn(creatorid):
        mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        info.lobby.game[creatorid]['throne1hp']-=mobdmage
-   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmageall)+' урона по трону команды 1! Теперь у него '+str(info.lobby.game[creatorid]['throne1hp'])+' хп!'    
+       info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
+       info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']=0
+   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmageall)+' урона по крепости команды "Штурм"! Теперь у неё '+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы погибли.'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
       if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']!=1:
        mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
        mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
-       info.lobby.game[creatorid]['throne2hp']-=mobdmage       
-    info.lobby.game[creatorid]['thronedamage']='Мобы из команды 1 нанесли '+str(mobdmageall)+' урона по трону команды 2! Теперь у него '+str(info.lobby.game[creatorid]['throne2hp'])+' хп!'
+       info.lobby.game[creatorid]['throne2hp']-=mobdmage 
+       info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
+       info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']=0
+    info.lobby.game[creatorid]['thronedamage']='Мобы из команды 1 нанесли '+str(mobdmageall)+' урона по крепости команды "Оборона"! Теперь у неё '+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы погибли.'
  elif livemob2==0 and livemob1==0:
-    info.lobby.game[creatorid]['thronedamage']='Урона по тронам нанесено не было!'
+    info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
  elif livemob2>0 and livemob1>0:
-    info.lobby.game[creatorid]['thronedamage']='Урона по тронам нанесено не было!'
+    info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
  bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'])
  info.lobby.game[creatorid]['thronedamage']=''  
  if info.lobby.game[creatorid]['throne2hp']<1 or info.lobby.game[creatorid]['throne1hp']<1:
    if info.lobby.game[creatorid]['throne2hp']<info.lobby.game[creatorid]['throne1hp']:
-    bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды 1!')
+    bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды "Штурм"!')
     del info.lobby.game[creatorid]
    elif info.lobby.game[creatorid]['throne2hp']>info.lobby.game[creatorid]['throne1hp']:
-    bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды 2!')
+    bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды "Оборона"!')
     del info.lobby.game[creatorid]
  else:
    battle(info.lobby.game[creatorid]['creatorid']['selfid'])
