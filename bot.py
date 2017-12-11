@@ -258,7 +258,7 @@ def endturn(creatorid):
         if info.lobby.game[creatorid]['t2mobs'][mobs5][number5]['hp']>0:
           livemobs2+=1
  te=emojize(':busts_in_silhouette:', use_aliases=True)
- bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда 1: '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда 2: '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды 1: '+str(livemobs1)+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды 2: '+str(livemobs2)+"\n"+"\n") 
+ bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+"\n") 
  info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды "Штурм":'+"\n"
  info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды "Оборона":'+"\n"
  for endid in info.lobby.game[creatorid]['players']:
