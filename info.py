@@ -6,10 +6,10 @@ class Lobby(object):
 class S_me4nik(object):
     def __init__(self):
         self.name='Скелет-мечник'
-        self.hp=120
+        self.hp=100
         self.mana=0
-        self.damage=80
-        self.cost=150
+        self.damage=65
+        self.cost=100
         self.type='dead'
         self.fromelectrodmg=0.7
         self.frombiodmg=1.5
