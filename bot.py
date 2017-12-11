@@ -25,6 +25,28 @@ def classtoemoji(classs):
     return emoj
 
 
+def end(creatorid, team, mob, number, t, dmg)
+                typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
+                typemob2=classtoemoji(t['type'])
+                emoj1= emojize(typemob1, use_aliases=True)
+                emoj2= emojize(typemob2, use_aliases=True)
+                emojattack=emojize(':arrow_right:', use_aliases=True)
+                emojdie=emojize(':x:', use_aliases=True)
+                emojdmg=emojize(':broken_heart:', use_aliases=True)
+                emojhp=emojize(':green_heart:', use_aliases=True)
+                t['hp']-=dmg
+                if team=='t1mobs':
+                 if t['hp']<1:
+                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"  
+                 else:
+                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
+                elif team=='t2mobs':
+                 if t['hp']<1:
+                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n" 
+                 else:
+                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
+
+
 
 def mobdmg(mob, creatorid, team, team2, number):
     t=None
@@ -81,25 +103,8 @@ def mobturn(mob, creatorid, team, team2):
                 else:
                   skilltext=''
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
-                typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
-                typemob2=classtoemoji(t['type'])
-                emoj1= emojize(typemob1, use_aliases=True)
-                emoj2= emojize(typemob2, use_aliases=True)
-                emojattack=emojize(':arrow_right:', use_aliases=True)
-                emojdie=emojize(':angel:', use_aliases=True)
-                emojdmg=emojize(':broken_heart:', use_aliases=True)
-                emojhp=emojize(':green_heart:', use_aliases=True)
-                t['hp']-=dmg
-                if team=='t1mobs':
-                 if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"  
-                 else:
-                  info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
-                elif team=='t2mobs':
-                 if t['hp']<1:
-                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n" 
-                 else:
-                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
+                end(creatorid, team, mob, number, t, dmg)
+
 
                     
     elif mob=='electromagnit':
@@ -129,7 +134,7 @@ def mobturn(mob, creatorid, team, team2):
                 emoj1= emojize(typemob1, use_aliases=True)
                 emoj2= emojize(typemob2, use_aliases=True)
                 emojattack=emojize(':arrow_right:', use_aliases=True)
-                emojdie=emojize(':angel:', use_aliases=True)
+                emojdie=emojize(':x:', use_aliases=True)
                 emojdmg=emojize(':broken_heart:', use_aliases=True)
                 emojhp=emojize(':green_heart:', use_aliases=True)
                 t['hp']-=dmg
@@ -158,7 +163,7 @@ def mobturn(mob, creatorid, team, team2):
                 emoj1= emojize(typemob1, use_aliases=True)
                 emoj2= emojize(typemob2, use_aliases=True)
                 emojattack=emojize(':arrow_right:', use_aliases=True)
-                emojdie=emojize(':angel:', use_aliases=True)
+                emojdie=emojize(':x:', use_aliases=True)
                 emojdmg=emojize(':broken_heart:', use_aliases=True)
                 emojhp=emojize(':green_heart:', use_aliases=True)
                 dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
