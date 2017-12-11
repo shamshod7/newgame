@@ -462,6 +462,13 @@ def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdow
     return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
                                  parse_mode=parse_mode)
 
+@bot.message_handler(commands=['full'])
+def fullhelp(message):
+    bot.send_message(message.from_user.id, '')
+    
+                     
+
+
 @bot.message_handler(commands=['fight'])
 def fightstart(message):
   if message.from_user.id in info.lobby.game:
