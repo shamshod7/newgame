@@ -136,14 +136,14 @@ def skills(mob, creatorid, team, team2):
                 if z<=30:
                     t['damage']-=35  
                     skilltext=', и применил скилл "Разряд"'
-                  else:
-                    skilltext=''
                 else:
-                  skilltext=''
+                    skilltext=''
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
                 info.lobby.game[creatorid][team][mob][number]['number']=number
                 info.lobby.game[creatorid][team][mob][number]['team']=team
                 info.lobby.game[creatorid][team][mob][number]['t']=t  
+              else:
+                  skilltext=''
 
                 
     elif mob=='phoenix':
