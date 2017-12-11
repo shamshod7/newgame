@@ -70,7 +70,7 @@ def mobdmg(mob, creatorid, team, team2, number):
                   elif info.lobby.game[creatorid][team][mob][number]['type']=='fire':
                     info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromfiredmg']
                   if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
-                    if t['potentialdie']!=1:
+                    if info.lobby.game[creatorid][team2][mob2][number2]['potentialdie']!=1:
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
