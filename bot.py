@@ -116,7 +116,7 @@ def skills(mob, creatorid, team, team2):
                 z=random.randint(1,100)
                 if z<=15:
                   t['fromdeaddmg']+=0.6
-                  skilltext=', применив скилл "Проклятье мертвецов"'
+                  skilltext='"Проклятье мертвецов"'
                 else:
                   skilltext=''
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
@@ -135,7 +135,7 @@ def skills(mob, creatorid, team, team2):
                 z=random.randint(1,100)
                 if z<=30:
                     t['damage']-=35  
-                    skilltext=', и применил скилл "Разряд"'
+                    skilltext='"Разряд"'
                 else:
                     skilltext=''
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
@@ -153,6 +153,31 @@ def skills(mob, creatorid, team, team2):
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None':
                 skilltext=''
+                info.lobby.game[creatorid][team][mob][number]['mob']=mob
+                info.lobby.game[creatorid][team][mob][number]['number']=number
+                info.lobby.game[creatorid][team][mob][number]['team']=team
+                info.lobby.game[creatorid][team][mob][number]['t']=t  
+                
+    elif mob=='manoed':
+        for number in info.lobby.game[creatorid][team][mob]:
+         if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+           if info.lobby.game[creatorid][team][mob][number]['target']==None:
+              t=mobdmg(mob, creatorid, team, team2, number)
+              if t!='None':
+                z=random.randint(1,100)
+                if z<35:
+                    skilltext='Проникновение'
+                    if t['mana']>0:
+                      a=70
+                      t['mana']-=a                
+                      b=0+t['mana']
+                      if b<0:
+                        t['mana']-=b
+                        a+=b
+                        t['hp']-=a
+                      else:
+                        t['hp']-=a
+                                                  
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
                 info.lobby.game[creatorid][team][mob][number]['number']=number
                 info.lobby.game[creatorid][team][mob][number]['team']=team
@@ -187,11 +212,8 @@ def endturn(creatorid):
   if info.lobby.game[creatorid]['players'][ids]['ready']!=1:
     msg=medit('Время вышло!', ids, info.lobby.game[creatorid]['players'][ids]['lastmessage'])
  for id in info.lobby.game[creatorid]['team1']:
-     print('1')
      for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
-        print('2')
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
-          print('3')
           number=0
           while number<info.lobby.game[creatorid]['players'][id]['portals'][name]['count']:   
            if len(info.lobby.game[creatorid]['t1mobs'][name])==0:
@@ -490,6 +512,24 @@ def inline(call):
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Электромагнитень)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count'])+' таких порталов!')
            else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            
+  elif call.data=='manoed': 
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+          if 'manoed' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
+           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.manoed.cost:
+            info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.manoed.cost
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']['count']==0:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']=createportal('manoed', 1)  
+            else:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']=createportal('manoed', info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']['count']+1)  
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Маноед)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']['count'])+' таких порталов!')
+           else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+                
+   
        
                  
             
@@ -701,18 +741,20 @@ def createuser(id, x, fname):
          'lastmessage':0,
          'tvari':{'s_me4nik':{},
                   'phoenix':{},
-                  'electromagnit':{}
+                  'electromagnit':{},
+                  'manoed':{}
          },
          'portals':{'s_me4nik':{'count':0},
                   'phoenix':{'count':0},
-                  'electromagnit':{'count':0}
+                  'electromagnit':{'count':0},
+                  'manoed':{'count':0}
                    },
          'mana':150,
          'mobnumber':0,
          'manamax':500,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'electromagnit', 'phoenix'],
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed'],
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
