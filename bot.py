@@ -489,9 +489,9 @@ def fightstart(message):
             info.lobby.game[message.from_user.id]['teammates1']=info.lobby.game[message.from_user.id]['teammates1'][:(lenofteam1-2)]
             lenofteam2=len(info.lobby.game[message.from_user.id]['teammates2'])
             info.lobby.game[message.from_user.id]['teammates2']=info.lobby.game[message.from_user.id]['teammates2'][:(lenofteam2-2)]
-            for ids2 in info.lobby.game[message.from_user.id]['teammates2']:
+            for ids2 in info.lobby.game[message.from_user.id]['team2']:
                 bot.send_message(ids2, 'Вы в обороне! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates2'])
-            for ids1 in info.lobby.game[message.from_user.id]['teammates1']:
+            for ids1 in info.lobby.game[message.from_user.id]['team1']:
                 bot.send_message(ids1, 'Вы штурмуете крепость! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates1'])
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
