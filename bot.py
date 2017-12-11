@@ -367,6 +367,8 @@ def nametoclass(name):  #делает перевод названия сущ-в�
         x=info.phoenix
     elif name=='electromagnit':
         x=info.electromagnit
+    elif name=='manoed':
+        x=info.manoed
          
     return x
 
