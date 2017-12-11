@@ -516,9 +516,9 @@ def joinm(message):
            for id in info.lobby.game:                    
              if message.from_user.id in info.lobby.game[id]['players']:
                pass
-             else:
-               info.lobby.game[id]['players'][message.from_user.id]['cash']=info.lobby.game[id]['name']
+             else:             
                info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id, 1, message.from_user.first_name)
+               info.lobby.game[key]['players'][message.from_user.id]['cash']=info.lobby.game[id]['name']
                info.lobby.game[key]['len']+=1
                bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[id]['players'][message.from_user.id]['cash'])+')! Для начала игры её создатель должен нажать /fight')
          else:
