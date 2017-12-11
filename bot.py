@@ -513,17 +513,18 @@ def joinm(message):
        if info.lobby.game[key]['name']!='None':
          if message.from_user.id not in info.lobby.game[key]['players']:
           if info.lobby.game[key]['playing']==0:
-           already=0
            for id in info.lobby.game:                    
              if message.from_user.id in info.lobby.game[id]['players']:
-               already=1
+               pass
+             else:
                info.lobby.game[id]['players'][message.from_user.id]['cash']=info.lobby.game[id]['name']
-           if already==0:
-             info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id, 1, message.from_user.first_name)
-             info.lobby.game[key]['len']+=1
-             bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[id]['players'][message.from_user.id]['cash'])+')! Для начала игры её создатель должен нажать /fight')
-           else:
-             bot.send_message(message.chat.id, 'Вы уже в другом лобби!')
+               info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id, 1, message.from_user.first_name)
+               info.lobby.game[key]['len']+=1
+               bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[id]['players'][message.from_user.id]['cash'])+')! Для начала игры её создатель должен нажать /fight')
+         else:
+            for lobbyid in info.lobby.game:
+                if message.from_user.id in info.lobby.game[lobbyid]['players']:
+                   bot.send_message(message.chat.id, 'Вы уже в лобби('+info.lobby.game[lobbyid]['name']+')!')
 
            
 
