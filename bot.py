@@ -545,11 +545,14 @@ def startmessage(message):
 
 @bot.message_handler(commands=['help'])
 def helpmessage(message):
+ try:
   bot.send_message(message.from_user.id, 'Чтобы сыграть в игру, добавьте меня в чат и напишите /begin для начала набора игроков. В одном чате можно запустить несколько игр, но один игрок может присутствовать только в одной из них'+"\n"+      
                    'В этой игре вы играете за одного из магов, который обороняет свою крепость, или нападает на чужую! '+
                    'Чтобы атаковать врага, вы чертите на земле специальные символы, открывая портал, из которого каждый новый ход появляется одно из ваших выбранных '+
                    'существ (для открытия портала требуется мана), которое вступает в бой с существами врагов, и разделавшись с ними, идет в атаку на крепость.'+
-                   ' Все существа полностью самостоятельны, вам лишь нужно грамотно выбрать алтари для их появления.'+'Можно играть команда на команду!'+"\n"+'Цель игры: уничтожить крепость соперника')
+                   ' Все существа полностью самостоятельны, вам лишь нужно грамотно выбрать порталы для их появления.'+'Можно играть команда на команду!'+"\n"+'Цель игры: уничтожить крепость соперника')
+ except:
+        bot.send_message(message.chat.id, 'Для начала надо начать разговор с @MagicWarsBot !')
 
 
 
@@ -557,12 +560,21 @@ def helpmessage(message):
 def beginmessage(message):
   if message.from_user.id not in info.lobby.game:
    if message.chat.id<0:
-    info.lobby.game[message.from_user.id]=createlobby(message.chat.id, message.from_user.id, message.from_user.first_name)
-    print(info.lobby.game)
-    bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
-    info.lobby.game[message.from_user.id]['naming']=1
-    lobbycancel=threading.Timer(300.0, cancel, args=[message.from_user.id, message.chat.id])
-    lobbycancel.start()
+    userapply=0
+    try:
+      bot.send_message(message.from_user.id, 'Вы создали лобби!')
+      userapply=1
+    except:
+      bot.send_message(message.chat.id, 'Для начала надо начать разговор с @MagicWarsBot !')
+    if userapply==1:
+      createdlobby=createlobby(message.chat.id, message.from_user.id, message.from_user.first_name)
+      info.lobby.game.update(createdlobby)
+      print(info.lobby.game)
+      bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
+      info.lobby.game[message.from_user.id]['naming']=1
+      lobbycancel=threading.Timer(300.0, cancel, args=[message.from_user.id, message.chat.id])
+      lobbycancel.start()
+        
    else:
     bot.send_message(message.from_user.id, 'Играть можно только в группах!')
     
@@ -575,9 +587,10 @@ def namemessage(message):
       if info.lobby.game[message.from_user.id]['naming']==1:
         if len(message.text)<31:
          if message.text!='None':
-          info.lobby.game[message.from_user.id]['name']=message.text
-          bot.send_message(message.chat.id, 'Вы назвали лобби! ('+message.text+').'+"\n"+'Ожидайте второго игрока (/join для присоединения).')
-          info.lobby.game[message.from_user.id]['naming']=0  
+          if message.chat.id==info.lobby.game[message.from_user.id]['chatid']:
+            info.lobby.game[message.from_user.id]['name']=message.text
+            bot.send_message(message.chat.id, 'Вы назвали лобби! ('+message.text+').'+"\n"+'Ожидайте игроков (/join для присоединения).')
+            info.lobby.game[message.from_user.id]['naming']=0  
          else:
           bot.send_message(message.chat.id, 'Недопустимое имя!')
         else:
@@ -596,7 +609,7 @@ def cancel(id, chatid):
   
   
 def createlobby(chatid, creatorid, fname):
-  return {
+  return{creatorid: {
     'name':'None',
     'chatid':chatid,
     'creatorid':createuser(creatorid, 1, fname),
@@ -626,8 +639,8 @@ def createlobby(chatid, creatorid, fname):
     'thronedamage':''
       
 
-  }
-  
+           }
+        }
   
   
 def createuser(id, x, fname):
