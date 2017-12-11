@@ -556,12 +556,15 @@ def helpmessage(message):
 @bot.message_handler(commands=['begin'])
 def beginmessage(message):
   if message.from_user.id not in info.lobby.game:
+   if message.chat.id<0:
     info.lobby.game[message.from_user.id]=createlobby(message.chat.id, message.from_user.id, message.from_user.first_name)
     print(info.lobby.game)
     bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
     info.lobby.game[message.from_user.id]['naming']=1
     lobbycancel=threading.Timer(300.0, cancel, args=[message.from_user.id, message.chat.id])
     lobbycancel.start()
+   else:
+    bot.send_message(message.from_user.id, 'Играть можно только в группах!')
     
   
   
