@@ -749,7 +749,11 @@ def createmob(nameclass, x, namemob):
         'underattack':0,
         'skill':nameclass.skill,
         'smert':0,
-        'cachedmg':0
+        'cachedmg':0,
+         'mob':'',
+        'number':0,
+        'team':'',
+        't':''
                 
         }
     
