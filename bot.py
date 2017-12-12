@@ -953,7 +953,7 @@ def createmob(nameclass, x, namemob):
         'number':0,
         'team':'',
         't':'',
-        'potentialhp'::nameclass.hp,
+        'potentialhp':nameclass.hp,
         'skilltext':'None'       
         }
     
