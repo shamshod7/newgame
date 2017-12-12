@@ -525,9 +525,8 @@ def inline(call):
     if call.from_user.id in info.lobby.game[id]['players']:
      if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
       if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
-       for creatorid in info.lobby.game:
-        if call.from_user.id in info.lobby.game[creatorid]['players']:  
-          testturn(info.lobby.game[creatorid]['creatorid']['selfid'], call.from_user.id)
+        if call.from_user.id in info.lobby.game[id]['players']:  
+          testturn(info.lobby.game[id]['creatorid']['selfid'], call.from_user.id)
 
 
            
