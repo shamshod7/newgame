@@ -25,7 +25,7 @@ class Pyos(object):
         self.hp=400
         self.mana=0
         self.damage=0
-        self.cost=200
+        self.cost=100
         self.type='bio'
         self.fromelectrodmg=1.3
         self.frombiodmg=1.0
