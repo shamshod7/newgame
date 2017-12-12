@@ -243,7 +243,7 @@ def skills(mob, creatorid, team, team2):
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None':
                 x=random.randint(1,100)
-                if x<=20:
+                if x<=25:
                   typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
                   emoj1= emojize(typemob1, use_aliases=True)
                   emojattack=emojize(':arrow_right:', use_aliases=True)
@@ -252,10 +252,10 @@ def skills(mob, creatorid, team, team2):
                   emojhp=emojize(':green_heart:', use_aliases=True)
                   if team=='t1mobs':
                     info.lobby.game[creatorid]['throne2hp']-=100
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'50.0'+emojhp+str(info.lobby.game[creatorid]['thronet2hp'])
+                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'50.0'+emojhp+str(info.lobby.game[creatorid]['throne2hp'])
                   elif team=='t2mobs':
                     info.lobby.game[creatorid]['throne1hp']-=100
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'50.0'+emojhp+str(info.lobby.game[creatorid]['thronet1hp'])
+                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'50.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])
                 else:
                     info.lobby.game[creatorid][team][mob][number]['skilltext']='None'
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
