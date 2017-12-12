@@ -144,6 +144,7 @@ def skills(mob, creatorid, team, team2):
                   skilltext='"Проклятье мертвецов"'
                 else:
                   skilltext=''
+                  t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
                 info.lobby.game[creatorid][team][mob][number]['number']=number
                 info.lobby.game[creatorid][team][mob][number]['team']=team
