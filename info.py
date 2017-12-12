@@ -6,10 +6,10 @@ class Lobby(object):
 class S_me4nik(object):
     def __init__(self):
         self.name='Скелет-мечник'
-        self.hp=100
+        self.hp=65
         self.mana=0
-        self.damage=65
-        self.cost=75
+        self.damage=55
+        self.cost=90
         self.type='dead'
         self.fromelectrodmg=0.7
         self.frombiodmg=1.5
@@ -39,8 +39,8 @@ class Phoenix(object):
         self.name='Феникадзе'
         self.hp=25
         self.mana=0
-        self.damage=330
-        self.cost=160
+        self.damage=350
+        self.cost=130
         self.type='fire'
         self.fromelectrodmg=0.5
         self.frombiodmg=0.7
@@ -53,10 +53,10 @@ class Phoenix(object):
 class Electromagnit(object):
     def __init__(self):
         self.name='Электромагнитень'
-        self.hp=260
-        self.mana=100
+        self.hp=180
+        self.mana=80
         self.damage=70
-        self.cost=190
+        self.cost=145
         self.type='electro'
         self.fromelectrodmg=1.0
         self.frombiodmg=1.1
@@ -69,10 +69,10 @@ class Electromagnit(object):
 class Manoed(object):
     def __init__(self):
         self.name='Маноед'
-        self.hp=120
+        self.hp=135
         self.mana=0
-        self.damage=55
-        self.cost=165
+        self.damage=40
+        self.cost=125
         self.type='ghost'
         self.fromelectrodmg=1.5
         self.frombiodmg=0.75
