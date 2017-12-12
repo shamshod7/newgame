@@ -252,10 +252,10 @@ def skills(mob, creatorid, team, team2):
                   emojhp=emojize(':green_heart:', use_aliases=True)
                   if team=='t1mobs':
                     info.lobby.game[creatorid]['throne2hp']-=100
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'50.0'+emojhp+str(info.lobby.game[creatorid]['throne2hp'])
+                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne2hp'])
                   elif team=='t2mobs':
                     info.lobby.game[creatorid]['throne1hp']-=100
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'50.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])
+                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])
                 else:
                     info.lobby.game[creatorid][team][mob][number]['skilltext']='None'
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
