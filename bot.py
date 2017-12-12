@@ -243,7 +243,7 @@ def skills(mob, creatorid, team, team2):
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None':
                 x=random.randint(1,100)
-                if x<=10:
+                if x<=20:
                   typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
                   emoj1= emojize(typemob1, use_aliases=True)
                   emojattack=emojize(':arrow_right:', use_aliases=True)
