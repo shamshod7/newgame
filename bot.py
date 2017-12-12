@@ -74,7 +74,8 @@ def mobdmg(mob, creatorid, team, team2, number):
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
-                        t['potentialhp']-=(info.lobby.game[creatorid][team][mob][number]['damage']*info.lobby.game[creatorid][team][mob][number]['maxkoef'])                 
+                        ptdmg=info.lobby.game[creatorid][team][mob][number]['damage']*info.lobby.game[creatorid][team][mob][number]['maxkoef']
+                        
                         
                         print(t['potentialhp'])
                             
@@ -139,6 +140,7 @@ def skills(mob, creatorid, team, team2):
                 z=random.randint(1,100)
                 if z<=15:
                   t['fromdeaddmg']+=0.6
+                  t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
                   skilltext='"Проклятье мертвецов"'
                 else:
                   skilltext=''
@@ -165,8 +167,8 @@ def skills(mob, creatorid, team, team2):
                 info.lobby.game[creatorid][team][mob][number]['number']=number
                 info.lobby.game[creatorid][team][mob][number]['team']=team
                 info.lobby.game[creatorid][team][mob][number]['t']=t  
-              else:
-                  skilltext=''
+          
+                  
 
                 
     elif mob=='phoenix':
