@@ -194,8 +194,10 @@ def skills(mob, creatorid, team, team2):
                         t['mana']-=b
                         a+=b
                         t['hp']-=a
+                        t['potentialhp']-=a
                       else:
                         t['hp']-=a
+                        t['potentialhp']-=a
                                                   
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
                 info.lobby.game[creatorid][team][mob][number]['number']=number
