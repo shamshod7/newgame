@@ -101,22 +101,26 @@ def typetotext(name):
 def mobturn(creatorid, team, mob, number, t):
    if mob=='s_me4nik':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+     round(dmg, 2)
      t['hp']-=dmg                    
      end(creatorid, team, mob, number, t, dmg)
         
    elif mob=='phoenix':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
+     round(dmg, 2)
      t['hp']-=dmg
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='electromagnit':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
+     round(dmg, 2)
      t['hp']-=dmg
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='manoed':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
-     t['hp']-=dmg
+     round (dmg, 2)
+     t['hp']-=dmg        
      end(creatorid, team, mob, number, t, dmg)
         
     
