@@ -250,10 +250,10 @@ def skills(mob, creatorid, team, team2):
                   emojdie=emojize(':x:', use_aliases=True)
                   emojdmg=emojize(':broken_heart:', use_aliases=True)
                   emojhp=emojize(':green_heart:', use_aliases=True)
-                  if team='t1mobs':
+                  if team=='t1mobs':
                     info.lobby.game[creatorid]['thronet2hp']-=50
                     info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'50.0'+emojhp+str(info.lobby.game[creatorid]['thronet2hp'])
-                  elif team='t2mobs':
+                  elif team=='t2mobs':
                     info.lobby.game[creatorid]['thronet1hp']-=50
                     info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'50.0'+emojhp+str(info.lobby.game[creatorid]['thronet1hp'])
                 else:
