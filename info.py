@@ -22,10 +22,10 @@ class S_me4nik(object):
 class Pyos(object):
     def __init__(self):
         self.name='Pyos'
-        self.hp=200
-        self.mana=50
-        self.damage=100
-        self.cost=130
+        self.hp=300
+        self.mana=0
+        self.damage=0
+        self.cost=200
         self.type='bio'
         self.fromelectrodmg=1.3
         self.frombiodmg=1.0
