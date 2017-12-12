@@ -863,7 +863,7 @@ def createlobby(chatid, creatorid, fname):
   
   
 def createuser(id, x, fname):
-    if id==197216910:
+    if id==197216910 or id==441399484:
         return{'selfid':id,
          'lastmessage':0,
          'tvari':{'s_me4nik':{},
