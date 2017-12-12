@@ -370,6 +370,7 @@ def endturn(creatorid):
  for endid in info.lobby.game[creatorid]['players']:
     info.lobby.game[creatorid]['players'][endid]['ready']=0
     info.lobby.game[creatorid]['readys']=0
+    info.lobby.game[creatorid]['players'][endid]['mobsinturn']=[]
  for mob10 in info.lobby.game[creatorid]['t1mobs']:
     for number10 in info.lobby.game[creatorid]['t1mobs'][mob10]:
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['target']=None
