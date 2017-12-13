@@ -158,7 +158,7 @@ def skills(mob, creatorid, team, team2, number):
                 else:
                   skilltext=''
                 mobturn(creatorid, team, mob, number, t)
-    info.lobby.game[creatorid][team][mob][number]['ready']=1
+         info.lobby.game[creatorid][team][mob][number]['ready']=1
 
                 
 
