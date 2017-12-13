@@ -308,7 +308,7 @@ def endturn(creatorid):
    if info.lobby.game[creatorid]['t1hod']==0:
             e+=1
             print('1')
-            if e>1:
+            if e>2:
               info.lobby.game[creatorid]['t1hod']=1
    elif info.lobby.game[creatorid]['t1hod']==1:
             j+=1
