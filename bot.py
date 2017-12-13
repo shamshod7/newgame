@@ -173,9 +173,7 @@ def skills(mob, creatorid, team, team2, number):
                 z=random.randint(1,100)
                 if z<=30:
                     t['damage']-=45  
-                    t['target']['potentialhp']+=45
                     skilltext='"Разряд"'
-                    t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
                 else:
                     skilltext=''
                 mobturn(creatorid, team, mob, number, t)
@@ -211,8 +209,6 @@ def skills(mob, creatorid, team, team2, number):
                         t['mana']-=b
                         a+=b
                         t['hp']-=a
-                        t['potentialhp']-=a
-                        t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
                       else:
                         t['hp']-=a
                 mobturn(creatorid, team, mob, number, t)
