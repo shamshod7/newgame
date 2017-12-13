@@ -305,26 +305,26 @@ def endturn(creatorid):
  j=0
  while readymobs<allmobs: 
    readymobs=0
+   if info.lobby.game[creatorid]['t1hod']==0:
+            e+=1
+   elif info.lobby.game[creatorid]['t1hod']==1:
+            j+=1
    for mob1 in info.lobby.game[creatorid]['t1mobs']:
         for number111 in info.lobby.game[creatorid]['t1mobs'][mob1]:
            if info.lobby.game[creatorid]['t1hod']==1:
              skills(mob1, creatorid, 't1mobs', 't2mobs', number111)
              info.lobby.game[creatorid]['t1hod']=0
-             e=0
-           else:
-            e+=1
-            if e>2:
-              info.lobby.game[creatorid]['t1hod']=1
+             e=0       
+        if e>3:
+            info.lobby.game[creatorid]['t1hod']=1
    for mob2 in info.lobby.game[creatorid]['t2mobs']:
        for number222 in info.lobby.game[creatorid]['t2mobs'][mob2]:
          if info.lobby.game[creatorid]['t1hod']==0:
            skills(mob2, creatorid, 't2mobs', 't1mobs', number222)
            info.lobby.game[creatorid]['t1hod']=1
            j=0
-         else:
-            j+=1
-            if j>2:
-              info.lobby.game[creatorid]['t1hod']=0  
+       if j>3:
+            info.lobby.game[creatorid]['t1hod']=0  
    for readymob1 in info.lobby.game[creatorid]['t1mobs']:
      for readynumber1 in info.lobby.game[creatorid]['t1mobs'][readymob1]:
        if info.lobby.game[creatorid]['t1mobs'][readymob1][readynumber1]['ready']==1:
