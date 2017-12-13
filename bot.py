@@ -188,8 +188,10 @@ def skills(mob, creatorid, team, team2):
                     t['damage']-=45  
                     t['target']['potentialhp']+=45
                     skilltext='"Разряд"'
+                    t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
                 else:
                     skilltext=''
+                    t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
                 info.lobby.game[creatorid][team][mob][number]['number']=number
                 info.lobby.game[creatorid][team][mob][number]['team']=team
@@ -209,6 +211,7 @@ def skills(mob, creatorid, team, team2):
                 info.lobby.game[creatorid][team][mob][number]['number']=number
                 info.lobby.game[creatorid][team][mob][number]['team']=team
                 info.lobby.game[creatorid][team][mob][number]['t']=t  
+                t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
                 
     elif mob=='manoed':
         for number in info.lobby.game[creatorid][team][mob]:
@@ -228,9 +231,13 @@ def skills(mob, creatorid, team, team2):
                         a+=b
                         t['hp']-=a
                         t['potentialhp']-=a
+                        t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
                       else:
                         t['hp']-=a
                         t['potentialhp']-=a
+                        t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
+                else:
+                    t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
                                                   
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
                 info.lobby.game[creatorid][team][mob][number]['number']=number
