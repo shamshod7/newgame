@@ -301,7 +301,8 @@ def endturn(creatorid):
     for xyz2xx in info.lobby.game[creatorid]['t2mobs'][mobs2xx]:
       allmobs+=1 
  readymobs=0
- print(str(allmobs))
+ e=0
+ j=0
  while readymobs<allmobs: 
    readymobs=0
    for mob1 in info.lobby.game[creatorid]['t1mobs']:
