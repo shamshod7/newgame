@@ -116,35 +116,35 @@ def typetotext(name):
 def mobturn(creatorid, team, mob, number, t):
    if mob=='s_me4nik':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
-     round(dmg, 2)
+     dmg=round(dmg, 2)
      t['hp']-=dmg    
      t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
         
    elif mob=='phoenix':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
-     round(dmg, 2)
+     dmg=round(dmg, 2)
      t['hp']-=dmg
      t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='electromagnit':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
-     round(dmg, 2)
+     dmg=round(dmg, 2)
      t['hp']-=dmg
      t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='manoed':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
-     round (dmg, 2)
+     dmg=round (dmg, 2)
      t['hp']-=dmg    
      t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='pyos':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['frombiodmg']
-     round (dmg, 2)
+     dmg=round (dmg, 2)
      t['hp']-=dmg    
      t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
@@ -186,6 +186,7 @@ def skills(mob, creatorid, team, team2):
                 z=random.randint(1,100)
                 if z<=30:
                     t['damage']-=45  
+                    t['target']['potentialhp']+=45
                     skilltext='"Разряд"'
                 else:
                     skilltext=''
