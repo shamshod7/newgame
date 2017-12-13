@@ -349,14 +349,6 @@ def endturn(creatorid):
       if info.lobby.game[creatorid]['t2mobs'][mobs3][xyz3]['hp']<1:
         info.lobby.game[creatorid]['t2mobs'][mobs3][xyz3]['smert']=1
         
- for mob in info.lobby.game[creatorid]['t2mobs']:
-    for number in info.lobby.game[creatorid]['t2mobs'][mob]:
-        if info.lobby.game[creatorid]['t2mobs'][mob][number]['smert']==1:
-            del info.lobby.game[creatorid]['t2mobs'][mob][number]
- for mob in info.lobby.game[creatorid]['t1mobs']:
-    for number in info.lobby.game[creatorid]['t1mobs'][mob]:
-        if info.lobby.game[creatorid]['t1mobs'][mob][number]['smert']==1:
-            del info.lobby.game[creatorid]['t1mobs'][mob][number]
         
  livemobs1=0
  livemobs2=0
