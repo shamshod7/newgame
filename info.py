@@ -56,7 +56,7 @@ class Electromagnit(object):
         self.hp=180
         self.mana=80
         self.damage=70
-        self.cost=45
+        self.cost=40
         self.type='electro'
         self.fromelectrodmg=1.0
         self.frombiodmg=1.1
@@ -71,8 +71,8 @@ class Manoed(object):
         self.name='Маноед'
         self.hp=135
         self.mana=0
-        self.damage=40
-        self.cost=35
+        self.damage=45
+        self.cost=30
         self.type='ghost'
         self.fromelectrodmg=1.5
         self.frombiodmg=0.75
