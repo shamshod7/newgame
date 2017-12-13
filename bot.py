@@ -231,10 +231,10 @@ def skills(mob, creatorid, team, team2, number):
                   emojhp=emojize(':green_heart:', use_aliases=True)
                   if team=='t1mobs':
                     info.lobby.game[creatorid]['throne2hp']-=100
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne2hp'])
+                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne2hp'])+"\n"
                   elif team=='t2mobs':
                     info.lobby.game[creatorid]['throne1hp']-=100
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])
+                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])+"\n"
                 mobturn(creatorid, team, mob, number, t)  
          info.lobby.game[creatorid][team][mob][number]['ready']=1
 
@@ -421,7 +421,7 @@ def endturn(creatorid):
        info.lobby.game[creatorid]['throne1hp']-=mobdmage
        info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
        info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']=0
-   info.lobby.game[creatorid]['thronedamage']='Мобы из команды 2 нанесли '+str(mobdmageall)+' урона по крепости команды "Штурм"! Теперь у неё '+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы погибли.'    
+   info.lobby.game[creatorid]['thronedamage']='Мобы из команды "Оборона" нанесли '+str(mobdmageall)+' урона по крепости команды "Штурм"! Теперь у неё '+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы погибли.'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
@@ -431,7 +431,7 @@ def endturn(creatorid):
        info.lobby.game[creatorid]['throne2hp']-=mobdmage 
        info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
        info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']=0
-    info.lobby.game[creatorid]['thronedamage']='Мобы из команды 1 нанесли '+str(mobdmageall)+' урона по крепости команды "Оборона"! Теперь у неё '+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы погибли.'
+    info.lobby.game[creatorid]['thronedamage']='Мобы из команды "Штурм" нанесли '+str(mobdmageall)+' урона по крепости команды "Оборона"! Теперь у неё '+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы погибли.'
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
  elif livemob2>0 and livemob1>0:
