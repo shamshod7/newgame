@@ -325,6 +325,7 @@ def endturn(creatorid):
      for readynumber2 in info.lobby.game[creatorid]['t2mobs'][readymob2]:
        if info.lobby.game[creatorid]['t2mobs'][readymob2][readynumber2]['ready']==1:
          readymobs+=1
+         print(str(readymobs))
 
 
  for mobs2 in info.lobby.game[creatorid]['t1mobs']:
