@@ -9,7 +9,7 @@ class S_me4nik(object):
         self.hp=65
         self.mana=0
         self.damage=55
-        self.cost=90
+        self.cost=20
         self.type='dead'
         self.fromelectrodmg=0.7
         self.frombiodmg=1.5
@@ -25,7 +25,7 @@ class Pyos(object):
         self.hp=400
         self.mana=0
         self.damage=0
-        self.cost=100
+        self.cost=25
         self.type='bio'
         self.fromelectrodmg=1.3
         self.frombiodmg=1.0
@@ -40,7 +40,7 @@ class Phoenix(object):
         self.hp=25
         self.mana=0
         self.damage=350
-        self.cost=130
+        self.cost=40
         self.type='fire'
         self.fromelectrodmg=0.5
         self.frombiodmg=0.7
@@ -56,7 +56,7 @@ class Electromagnit(object):
         self.hp=180
         self.mana=80
         self.damage=70
-        self.cost=145
+        self.cost=45
         self.type='electro'
         self.fromelectrodmg=1.0
         self.frombiodmg=1.1
@@ -72,7 +72,7 @@ class Manoed(object):
         self.hp=135
         self.mana=0
         self.damage=40
-        self.cost=125
+        self.cost=35
         self.type='ghost'
         self.fromelectrodmg=1.5
         self.frombiodmg=0.75
