@@ -161,7 +161,7 @@ def skills(mob, creatorid, team, team2):
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
-              if t!='None':
+              if t!='None' and t!=None:
                 z=random.randint(1,100)
                 if z<=15:
                   t['fromdeaddmg']+=0.6
@@ -182,7 +182,7 @@ def skills(mob, creatorid, team, team2):
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
-              if t!='None':
+              if t!='None' and t!=None:
                 z=random.randint(1,100)
                 if z<=30:
                     t['damage']-=45  
@@ -205,7 +205,7 @@ def skills(mob, creatorid, team, team2):
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
-              if t!='None':
+              if t!='None' and t!=None:
                 skilltext=''
                 info.lobby.game[creatorid][team][mob][number]['mob']=mob
                 info.lobby.game[creatorid][team][mob][number]['number']=number
@@ -218,7 +218,7 @@ def skills(mob, creatorid, team, team2):
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
-              if t!='None':
+              if t!='None' and t!=None:
                 z=random.randint(1,100)
                 if z<35:
                     skilltext='Проникновение'
@@ -249,7 +249,7 @@ def skills(mob, creatorid, team, team2):
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
-              if t!='None':
+              if t!='None' and t!=None:
                 x=random.randint(1,100)
                 if x<=25:
                   typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
