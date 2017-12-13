@@ -395,6 +395,8 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['t']=None
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['potentialhp']=info.lobby.game[creatorid]['t1mobs'][mob10][number10]['hp']
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['skilltext']='None'
+      info.lobby.game[creatorid]['t1mobs'][mob10][number10]['ready']=0
+        
  for mob11 in info.lobby.game[creatorid]['t2mobs']:
     for number11 in info.lobby.game[creatorid]['t2mobs'][mob11]:
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['target']=None
@@ -405,6 +407,7 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['t']=None
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['potentialhp']=info.lobby.game[creatorid]['t2mobs'][mob11][number11]['hp']
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['skilltext']='None'
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['ready']=0
  info.lobby.game[creatorid]['hod']+=1
  livemob1=0
  livemob2=0
