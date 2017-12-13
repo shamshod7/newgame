@@ -84,16 +84,11 @@ def mobdmg(mob, creatorid, team, team2, number):
                   elif info.lobby.game[creatorid][team][mob][number]['type']=='fire':
                     info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromfiredmg']
                   if info.lobby.game[creatorid][team][mob][number]['koef']>info.lobby.game[creatorid][team][mob][number]['maxkoef']:
-                    if info.lobby.game[creatorid][team2][mob2][number2]['potentialhp']>0:
+                    if info.lobby.game[creatorid][team2][mob2][number2]['hp']>0:
                         info.lobby.game[creatorid][team][mob][number]['maxkoef']=info.lobby.game[creatorid][team][mob][number]['koef']
                         info.lobby.game[creatorid][team][mob][number]['target']=info.lobby.game[creatorid][team2][mob2][number2]
                         t=info.lobby.game[creatorid][team2][mob2][number2]
-                        ptdmg=info.lobby.game[creatorid][team][mob][number]['damage']*info.lobby.game[creatorid][team][mob][number]['maxkoef']
-                        
-                        
-                        print(t['potentialhp'])
-                            
-
+                                                                           
     if t==None:
         t='None'
     return t  
@@ -118,35 +113,30 @@ def mobturn(creatorid, team, mob, number, t):
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
      dmg=round(dmg, 2)
      t['hp']-=dmg    
-     t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
         
    elif mob=='phoenix':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
      dmg=round(dmg, 2)
      t['hp']-=dmg
-     t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='electromagnit':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
      dmg=round(dmg, 2)
      t['hp']-=dmg
-     t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='manoed':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
      dmg=round (dmg, 2)
      t['hp']-=dmg    
-     t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='pyos':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['frombiodmg']
      dmg=round (dmg, 2)
      t['hp']-=dmg    
-     t['potentialhp']=t['hp']
      end(creatorid, team, mob, number, t, dmg)
     
     
@@ -155,30 +145,27 @@ def mobturn(creatorid, team, mob, number, t):
         
     
     
-def skills(mob, creatorid, team, team2):
+def skills(mob, creatorid, team, team2, number):
     if mob=='s_me4nik':
-        for number in info.lobby.game[creatorid][team][mob]:
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
                 z=random.randint(1,100)
-                if z<=15:
+                if z<=25:
                   t['fromdeaddmg']+=0.6
-                  t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
                   skilltext='"Проклятье мертвецов"'
                 else:
                   skilltext=''
-                  t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
-                info.lobby.game[creatorid][team][mob][number]['mob']=mob
-                info.lobby.game[creatorid][team][mob][number]['number']=number
-                info.lobby.game[creatorid][team][mob][number]['team']=team
-                info.lobby.game[creatorid][team][mob][number]['t']=t
+                mobturn(creatorid, team, mob, number, t)
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
+              else:
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
+
 
 
                     
     elif mob=='electromagnit':
-        for number in info.lobby.game[creatorid][team][mob]:
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
@@ -191,30 +178,27 @@ def skills(mob, creatorid, team, team2):
                     t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
                 else:
                     skilltext=''
-                    t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
-                info.lobby.game[creatorid][team][mob][number]['mob']=mob
-                info.lobby.game[creatorid][team][mob][number]['number']=number
-                info.lobby.game[creatorid][team][mob][number]['team']=team
-                info.lobby.game[creatorid][team][mob][number]['t']=t  
+                mobturn(creatorid, team, mob, number, t)
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
+              else:
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
           
                   
 
                 
     elif mob=='phoenix':
-        for number in info.lobby.game[creatorid][team][mob]:
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
                 skilltext=''
-                info.lobby.game[creatorid][team][mob][number]['mob']=mob
-                info.lobby.game[creatorid][team][mob][number]['number']=number
-                info.lobby.game[creatorid][team][mob][number]['team']=team
-                info.lobby.game[creatorid][team][mob][number]['t']=t  
-                t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
+                mobturn(creatorid, team, mob, number, t)
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
+              else:
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
+
                 
     elif mob=='manoed':
-        for number in info.lobby.game[creatorid][team][mob]:
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
@@ -234,24 +218,20 @@ def skills(mob, creatorid, team, team2):
                         t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
                       else:
                         t['hp']-=a
-                        t['potentialhp']-=a
-                        t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
-                else:
-                    t['potentialhp']-=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
-                                                  
-                info.lobby.game[creatorid][team][mob][number]['mob']=mob
-                info.lobby.game[creatorid][team][mob][number]['number']=number
-                info.lobby.game[creatorid][team][mob][number]['team']=team
-                info.lobby.game[creatorid][team][mob][number]['t']=t 
+                mobturn(creatorid, team, mob, number, t)
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
+              else:
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
+
+
                 
     elif mob=='pyos':
-        for number in info.lobby.game[creatorid][team][mob]:
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
                 x=random.randint(1,100)
-                if x<=25:
+                if x<=40:
                   typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
                   emoj1= emojize(typemob1, use_aliases=True)
                   emojattack=emojize(':arrow_right:', use_aliases=True)
@@ -264,12 +244,11 @@ def skills(mob, creatorid, team, team2):
                   elif team=='t2mobs':
                     info.lobby.game[creatorid]['throne1hp']-=100
                     info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])
-                else:
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']='None'
-                info.lobby.game[creatorid][team][mob][number]['mob']=mob
-                info.lobby.game[creatorid][team][mob][number]['number']=number
-                info.lobby.game[creatorid][team][mob][number]['team']=team
-                info.lobby.game[creatorid][team][mob][number]['t']=t             
+                mobturn(creatorid, team, mob, number, t)  
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
+              else:
+                info.lobby.game[creatorid][team][mob][number]['ready']=1
+       
         
 
    
@@ -324,28 +303,33 @@ def endturn(creatorid):
                 diction2=createmob1(nametoclass(name),(len(info.lobby.game[creatorid]['t2mobs'][name])+1), name)
                 info.lobby.game[creatorid]['t2mobs'][name].update(diction2)
                 number+=1
-            
- for mob1 in info.lobby.game[creatorid]['t1mobs']:
-    skills(mob1, creatorid, 't1mobs', 't2mobs')
- for mob2 in info.lobby.game[creatorid]['t2mobs']:
-    skills(mob2, creatorid, 't2mobs', 't1mobs')
-    
- for mobtrn1 in info.lobby.game[creatorid]['t1mobs']:
-    for mobtrnnumber1 in info.lobby.game[creatorid]['t1mobs'][mobtrn1]:
-      team=info.lobby.game[creatorid]['t1mobs'][mobtrn1][mobtrnnumber1]['team']
-      mob=info.lobby.game[creatorid]['t1mobs'][mobtrn1][mobtrnnumber1]['mob']
-      number=info.lobby.game[creatorid]['t1mobs'][mobtrn1][mobtrnnumber1]['number']
-      t=info.lobby.game[creatorid]['t1mobs'][mobtrn1][mobtrnnumber1]['t']
-      mobturn(creatorid, team, mob, number, t)
- for mobtrn2 in info.lobby.game[creatorid]['t2mobs']:
-    for mobtrnnumber2 in info.lobby.game[creatorid]['t2mobs'][mobtrn2]:
-      team=info.lobby.game[creatorid]['t2mobs'][mobtrn2][mobtrnnumber2]['team']
-      mob=info.lobby.game[creatorid]['t2mobs'][mobtrn2][mobtrnnumber2]['mob']
-      number=info.lobby.game[creatorid]['t2mobs'][mobtrn2][mobtrnnumber2]['number']
-      t=info.lobby.game[creatorid]['t2mobs'][mobtrn2][mobtrnnumber2]['t']
-      mobturn(creatorid, team, mob, number, t)
-
-  
+ allmobs=0
+ for mobs2x in info.lobby.game[creatorid]['t1mobs']:
+    for xyz2x in info.lobby.game[creatorid]['t1mobs'][mobs2x]:
+      allmobs+=1
+ for mobs2xx in info.lobby.game[creatorid]['t2mobs']:
+    for xyz2xx in info.lobby.game[creatorid]['t2mobs'][mobs2xx]:
+      allmobs+=1 
+ while readymobs<allmobs: 
+   readymobs=0
+   for mob1 in info.lobby.game[creatorid]['t1mobs']:
+        for number111 in info.lobby.game[creatorid]['t1mobs'][mob1]:
+           if info.lobby.game[creatorid]['t1hod']==1:
+             skills(mob1, creatorid, 't1mobs', 't2mobs', number111)
+             info.lobby.game[creatorid]['t1hod']=0
+   for mob2 in info.lobby.game[creatorid]['t2mobs']:
+       for number222 in info.lobby.game[creatorid]['t2mobs'][mob2]:
+         if info.lobby.game[creatorid]['t1hod']==0:
+           skills(mob2, creatorid, 't2mobs', 't1mobs', number222)
+           info.lobby.game[creatorid]['t1hod']=1
+   for readymob in info.lobby.game[creatorid]['t1mobs']:
+     for readynumber in info.lobby.game[creatorid]['t1mobs'][readymob]:
+       if info.lobby.game[creatorid]['t1mobs'][readymob][readynumber]['ready']==1:
+         readymobs+=1
+   for readymob in info.lobby.game[creatorid]['t2mobs']:
+     for readynumber in info.lobby.game[creatorid]['t2mobs'][readymob]:
+       if info.lobby.game[creatorid]['t2mobs'][readymob][readynumber]['ready']==1:
+         readymobs+=1
 
 
  for mobs2 in info.lobby.game[creatorid]['t1mobs']:
@@ -379,6 +363,12 @@ def endturn(creatorid):
     info.lobby.game[creatorid]['players'][endid]['ready']=0
     info.lobby.game[creatorid]['readys']=0
     info.lobby.game[creatorid]['players'][endid]['mobsinturn']=[]
+    info.lobby.game[creatorid]['players'][endid]['portals']={'s_me4nik':{'count':0},
+                  'phoenix':{'count':0},
+                  'electromagnit':{'count':0},
+                  'manoed':{'count':0},
+                  'pyos':{'count':0}}                 
+    info.lobby.game[creatorid]['players'][endid]
  for mob10 in info.lobby.game[creatorid]['t1mobs']:
     for number10 in info.lobby.game[creatorid]['t1mobs'][mob10]:
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['target']=None
@@ -892,7 +882,8 @@ def createlobby(chatid, creatorid, fname):
     'throne2hp':2000,
     'thronedamage':'',
     'manaplust1':0,
-    'manaplust2':0
+    'manaplust2':0,
+    't1hod':0
       
 
            }
@@ -987,11 +978,6 @@ def createmob(nameclass, x, namemob):
         'skill':nameclass.skill,
         'smert':0,
         'cachedmg':0,
-         'mob':'',
-        'number':0,
-        'team':'',
-        't':'',
-        'potentialhp':nameclass.hp,
         'skilltext':'None'       
         }
     
@@ -1016,12 +1002,8 @@ def createmob1(nameclass, x, namemob):
         'skill':nameclass.skill,
         'smert':0,
         'cachedmg':0,
-        'mob':'',
-        'number':0,
-        'team':'',
-        't':'',
-        'potentialhp':nameclass.hp,
-        'skilltext':'None'
+        'skilltext':'None',
+        'ready':0
                 
         }
           }
