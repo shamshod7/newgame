@@ -308,12 +308,12 @@ def endturn(creatorid):
    if info.lobby.game[creatorid]['t1hod']==0:
             e+=1
             print('1')
-            if e>5:
+            if e>2:
               info.lobby.game[creatorid]['t1hod']=1
    elif info.lobby.game[creatorid]['t1hod']==1:
             j+=1
             print('2')
-            if j>5:
+            if j>2:
                info.lobby.game[creatorid]['t1hod']=0 
    for mob1 in info.lobby.game[creatorid]['t1mobs']:
         for number111 in info.lobby.game[creatorid]['t1mobs'][mob1]:
