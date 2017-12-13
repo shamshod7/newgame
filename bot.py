@@ -158,9 +158,9 @@ def skills(mob, creatorid, team, team2, number):
                 else:
                   skilltext=''
                 mobturn(creatorid, team, mob, number, t)
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
-              else:
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
+    info.lobby.game[creatorid][team][mob][number]['ready']=1
+
+                
 
 
 
@@ -179,9 +179,8 @@ def skills(mob, creatorid, team, team2, number):
                 else:
                     skilltext=''
                 mobturn(creatorid, team, mob, number, t)
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
-              else:
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
+         info.lobby.game[creatorid][team][mob][number]['ready']=1
+
           
                   
 
@@ -193,9 +192,7 @@ def skills(mob, creatorid, team, team2, number):
               if t!='None' and t!=None:
                 skilltext=''
                 mobturn(creatorid, team, mob, number, t)
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
-              else:
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
+         info.lobby.game[creatorid][team][mob][number]['ready']=1
 
                 
     elif mob=='manoed':
@@ -219,9 +216,7 @@ def skills(mob, creatorid, team, team2, number):
                       else:
                         t['hp']-=a
                 mobturn(creatorid, team, mob, number, t)
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
-              else:
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
+         info.lobby.game[creatorid][team][mob][number]['ready']=1
 
 
                 
@@ -245,9 +240,8 @@ def skills(mob, creatorid, team, team2, number):
                     info.lobby.game[creatorid]['throne1hp']-=100
                     info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])
                 mobturn(creatorid, team, mob, number, t)  
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
-              else:
-                info.lobby.game[creatorid][team][mob][number]['ready']=1
+         info.lobby.game[creatorid][team][mob][number]['ready']=1
+
        
         
 
@@ -323,13 +317,13 @@ def endturn(creatorid):
          if info.lobby.game[creatorid]['t1hod']==0:
            skills(mob2, creatorid, 't2mobs', 't1mobs', number222)
            info.lobby.game[creatorid]['t1hod']=1
-   for readymob in info.lobby.game[creatorid]['t1mobs']:
-     for readynumber in info.lobby.game[creatorid]['t1mobs'][readymob]:
-       if info.lobby.game[creatorid]['t1mobs'][readymob][readynumber]['ready']==1:
+   for readymob1 in info.lobby.game[creatorid]['t1mobs']:
+     for readynumber1 in info.lobby.game[creatorid]['t1mobs'][readymob1]:
+       if info.lobby.game[creatorid]['t1mobs'][readymob1][readynumber1]['ready']==1:
          readymobs+=1
-   for readymob in info.lobby.game[creatorid]['t2mobs']:
-     for readynumber in info.lobby.game[creatorid]['t2mobs'][readymob]:
-       if info.lobby.game[creatorid]['t2mobs'][readymob][readynumber]['ready']==1:
+   for readymob2 in info.lobby.game[creatorid]['t2mobs']:
+     for readynumber2 in info.lobby.game[creatorid]['t2mobs'][readymob2]:
+       if info.lobby.game[creatorid]['t2mobs'][readymob2][readynumber2]['ready']==1:
          readymobs+=1
 
 
