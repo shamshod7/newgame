@@ -412,32 +412,48 @@ def endturn(creatorid):
     for numberthrone2 in info.lobby.game[creatorid]['t2mobs'][mobtothrone2]:
       if info.lobby.game[creatorid]['t2mobs'][mobtothrone2][numberthrone2]['smert']!=1:
         livemob2+=1
+        
  if livemob1==0 and livemob2>0:
    for mbs in info.lobby.game[creatorid]['t2mobs']:
      for nmbs in info.lobby.game[creatorid]['t2mobs'][mbs]:
+      typemob1=classtoemoji(info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['type'])
+      throne=emojize(':european_castle:', use_aliases=True)
+      emoj1=emojize(typemob1, use_aliases=True)
+      emojattack=emojize(':arrow_right:', use_aliases=True)
+      emojdmg=emojize(':broken_heart:', use_aliases=True)
+      emojhp=emojize(':green_heart:', use_aliases=True)
       if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']!=1:
        mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
+       info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne1hp'])
        info.lobby.game[creatorid]['throne1hp']-=mobdmage
        info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
        info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']=0
-   info.lobby.game[creatorid]['thronedamage']='Мобы из команды "Оборона" нанесли '+str(mobdmageall)+' урона по крепости команды "Штурм"! Теперь у неё '+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы погибли.'    
+   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Оборона" нанесли '+str(mobdmageall)+' урона по крепости команды "Штурм"! Теперь у неё '+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы погибли.'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
+      typemob1=classtoemoji(info.lobby.game[creatorid]['t2mobs'][mbs2][nmbs2]['type'])
+      throne=emojize(':european_castle:', use_aliases=True)
+      emoj1=emojize(typemob1, use_aliases=True)
+      emojattack=emojize(':arrow_right:', use_aliases=True)
+      emojdmg=emojize(':broken_heart:', use_aliases=True)
+      emojhp=emojize(':green_heart:', use_aliases=True)
       if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']!=1:
        mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
        mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
+       info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs][nmbs]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne2hp'])
        info.lobby.game[creatorid]['throne2hp']-=mobdmage 
        info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
        info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']=0
-    info.lobby.game[creatorid]['thronedamage']='Мобы из команды "Штурм" нанесли '+str(mobdmageall)+' урона по крепости команды "Оборона"! Теперь у неё '+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы погибли.'
+    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Штурм" нанесли '+str(mobdmageall)+' урона по крепости команды "Оборона"! Теперь у неё '+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы погибли.'
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
  elif livemob2>0 and livemob1>0:
     info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
  bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'])
- info.lobby.game[creatorid]['thronedamage']=''  
+ info.lobby.game[creatorid]['thronedamage']=''
+ info.lobby.game[creatorid]['thronedamagemobs']=''
  if info.lobby.game[creatorid]['throne2hp']<1 or info.lobby.game[creatorid]['throne1hp']<1:
    if info.lobby.game[creatorid]['throne2hp']<info.lobby.game[creatorid]['throne1hp']:
     bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды "Штурм"!')
@@ -923,7 +939,8 @@ def createlobby(chatid, creatorid, fname):
     'thronedamage':'',
     'manaplust1':0,
     'manaplust2':0,
-    't1hod':0
+    't1hod':0,
+    'thronedamagemobs':''
       
 
            }
