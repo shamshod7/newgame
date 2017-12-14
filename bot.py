@@ -199,7 +199,7 @@ def skills(mob, creatorid, team, team2, number):
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
                 z=random.randint(1,100)
-                if z<35:
+                if z<45:
                     skilltext='Проникновение'
                     if t['mana']>0:
                       a=70
@@ -697,6 +697,35 @@ def fire(message):
                      'Получаемый урон:'+"\n"+'От '+emojghost+'призрачных: 150%'+"\n"+'От '+emojundead+'мертвецов: 120%'+"\n"+'От '+emojelectro+'электро: 50%'+"\n"+'От '+emojbio+'био: 70%'+"\n"+"\n"+
                      'Скиллы:'+"\n"+'Пока что ни у одного существа типа "огненные" скиллов нет.'
                     )
+    
+@bot.message_handler(commands=['ghost'])
+def ghost(message):   
+    emojelectro=emojize(':zap:', use_aliases=True)
+    emojbio=emojize(':evergreen_tree:', use_aliases=True)
+    emojfire=emojize(':fire:', use_aliases=True)
+    emojghost=emojize(':ghost:', use_aliases=True)
+    emojundead=emojize(':skull:', use_aliases=True)
+    bot.send_message(message.from_user.id, emojghost+'Призрачные:'+"\n"+'Монстры, имеющие полу-материальное тело, что позволяет им получать меньше повреждений от физического мира, но от электро-монстров урона они получают очень много'+"\n"+
+                     'Наносимый урон:'+"\n"+'По '+emojundead+'мертвецам: 110%'+"\n"+'По '+emojelectro+'электро: 80%'+"\n"+'По '+emojbio+'био: 80%'+"\n"+'По '+emojfire+'огненным: 150%'+"\n"+"\n"+    
+                     'Получаемый урон:'+"\n"+'От '+emojundead+'мертвецов: 75%'+"\n"+'От '+emojelectro+'электро: 150%'+"\n"+'От '+emojbio+'био: 75%'+"\n"+'От '+emojfire+'огненных: 90%'+"\n"+"\n"+ 
+                     'Скиллы:'+"\n"+'"Проникновение" (присутствует у: Маноед) - с шансом 45% отнимает у цели до 70 маны (у цели остается не меньше, чем 0), и наносит урон, соответствующий выжженной мане'
+                    )
+    
+    
+@bot.message_handler(commands=['undead'])
+def undead(message):
+    emojelectro=emojize(':zap:', use_aliases=True)
+    emojbio=emojize(':evergreen_tree:', use_aliases=True)
+    emojfire=emojize(':fire:', use_aliases=True)
+    emojghost=emojize(':ghost:', use_aliases=True)
+    emojundead=emojize(':skull:', use_aliases=True)
+    bot.send_message(message.from_user.id, emojundead+'Мертвецы:'+"\n"+'Существа, которые уже мертвы, и поэтому самый действенный способ убить их - физическое уничтожение частей тела.'+"\n"+
+                     'Наносимый урон:'+"\n"+'По '+emojelectro+'электро: 150%'+"\n"+'По '+emojbio+'био: 110%'+"\n"+'По '+emojfire+'огненным: 120%'+"\n"+'По '+emojghost+'призракам: 75%'+"\n"+"\n"+  
+                     'Получаемый урон:'+"\n"+'От '+emojelectro+'электро: 70%'+"\n"+'От '+emojbio+'био: 150%'+"\n"+'От '+emojfire+'огненных: 100%'+"\n"+'От '+emojundead+'призраков: 90%'+"\n"+"\n"+ 
+                     'Скиллы:'+"\n"+'"Проклятье мертвецов" (присутствует у: Скелет-мечник) - имеет 15% шанс при атаке цели повысить получаемый ей урон от мертвецов на 60% (складывается от нескольких применений скилла по одной цели).'
+                    )
+    
+ 
     
     
                      
