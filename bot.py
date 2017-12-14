@@ -248,7 +248,7 @@ def skills(mob, creatorid, team, team2, number):
                     
 
                    
-               mobturn(creatorid, team, mob, number, t)  
+                 mobturn(creatorid, team, mob, number, t)  
          info.lobby.game[creatorid][team][mob][number]['ready']=1
         
     elif mob=='tiranozavr':
@@ -271,7 +271,7 @@ def skills(mob, creatorid, team, team2, number):
                       if info.lobby.game[creatorid][team2][c][b]['ready']==1:
                         info.lobby.game[creatorid][team2][c][b]['stun']=2
                       info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Оглушающий рык"'
-               mobturn(creatorid, team, mob, number, t)   
+                 mobturn(creatorid, team, mob, number, t)   
         info.lobby.game[creatorid][team][mob][number]['ready']=1    
                     
                     
