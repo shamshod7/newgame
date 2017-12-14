@@ -258,7 +258,7 @@ def skills(mob, creatorid, team, team2, number):
                if t!=None and t!='None':
                  x=random.randint(1,100)
                  if x<=40:
-                    d=info.lobby.game[creatorid][team2].keys()
+                    d=list(info.lobby.game[creatorid][team2].keys())
                     c=random.choice(d)
                     g=info.lobby.game[creatorid][team2][c].keys()
                     b=random.choice(g)
