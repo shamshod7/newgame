@@ -44,35 +44,25 @@ def end(creatorid, team, mob, number, t, dmg):
                   for id in info.lobby.game[creatorid]['team2']:
                     info.lobby.game[creatorid]['players'][id]['mana']+=3
                     info.lobby.game[creatorid]['manaplust1']+=3
-                  if info.lobby.game[creatorid][team][mob][number]['skilltext']!='None':
-                    skillt=info.lobby.game[creatorid][team][mob][number]['skilltext']
-                    info.lobby.game[creatorid]['resultst1']+=skillt
-                  else:
                     info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"  
                  else:
-                   if info.lobby.game[creatorid][team][mob][number]['skilltext']!='None':
-                     skillt=info.lobby.game[creatorid][team][mob][number]['skilltext']
-                     info.lobby.game[creatorid]['resultst1']+=skillt
-                   else:  
                     info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
+                 if info.lobby.game[creatorid][team][mob][number]['skilltext']!='None':
+                    info.lobby.game[creatorid]['skills1']+=info.lobby.game[creatorid][team][mob][number]['skilltext']+"\n"
                 else:
                     info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojstun+"\n"
+                 
               elif team=='t2mobs':
                if info.lobby.game[creatorid][team][mob][number]['stun']<1:
                  if t['hp']<1:
                    for id in info.lobby.game[creatorid]['team1']:
                     info.lobby.game[creatorid]['players'][id]['mana']+=3
                     info.lobby.game[creatorid]['manaplust2']+=3
-                   if info.lobby.game[creatorid][team][mob][number]['skilltext']!='None':
-                     skillt=info.lobby.game[creatorid][team][mob][number]['skilltext']
-                   else:
-                     info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n" 
-                        
+                    info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"                 
                  else:
-                  if info.lobby.game[creatorid][team][mob][number]['skilltext']!='None':
-                     skillt=info.lobby.game[creatorid][team][mob][number]['skilltext']
-                  else:
                     info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
+                 if info.lobby.game[creatorid][team][mob][number]['skilltext']!='None':
+                    info.lobby.game[creatorid]['skills2']+=info.lobby.game[creatorid][team][mob][number]['skilltext']+"\n"
                else:
                   info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojstun+"\n"
                 
@@ -159,17 +149,28 @@ def mobturn(creatorid, team, mob, number, t):
     
     
 def skills(mob, creatorid, team, team2, number):
+    typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
+    emoj1=emojize(typemob1, use_aliases=True)
+    emojattack=emojize(':arrow_right:', use_aliases=True)
+    emojdie=emojize(':x:', use_aliases=True)
+    emojdmg=emojize(':broken_heart:', use_aliases=True)
+    emojhp=emojize(':green_heart:', use_aliases=True)
+    emojstun=emojize(':cyclone:', use_aliases=True)
+    emojskill=emojize(':sparkles:', use_aliases=True)
     if mob=='s_me4nik':
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
+                typemob2=classtoemoji(t['type'])
+                emoj2= emojize(typemob2, use_aliases=True)
                 z=random.randint(1,100)
                 if z<=25:
                   t['fromdeaddmg']+=0.6
-                  skilltext='"Проклятье мертвецов"'
+                  info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проклятье мертвецов"'
                 else:
-                  skilltext=''
+                  info.lobby.game[creatorid][team][mob][number]['skilltext']='None'
                 mobturn(creatorid, team, mob, number, t)
          info.lobby.game[creatorid][team][mob][number]['ready']=1
 
@@ -180,13 +181,14 @@ def skills(mob, creatorid, team, team2, number):
                     
     elif mob=='electromagnit':
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
                 z=random.randint(1,100)
-                if z<=30:
+                if z<=35:
                     t['damage']-=45  
-                    skilltext='"Разряд"'
+                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Разряд"'
                 else:
                     skilltext=''
                 mobturn(creatorid, team, mob, number, t)
@@ -198,22 +200,23 @@ def skills(mob, creatorid, team, team2, number):
                 
     elif mob=='phoenix':
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
-                skilltext=''
                 mobturn(creatorid, team, mob, number, t)
          info.lobby.game[creatorid][team][mob][number]['ready']=1
 
                 
     elif mob=='manoed':
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
                 z=random.randint(1,100)
                 if z<45:
-                    skilltext='Проникновение'
+                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проникновение"'
                     if t['mana']>0:
                       a=70
                       t['mana']-=a                
@@ -231,28 +234,22 @@ def skills(mob, creatorid, team, team2, number):
                 
     elif mob=='pyos':
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
                t=mobdmg(mob, creatorid, team, team2, number)
                if t!=None and t!='None':
                  x=random.randint(1,100)
-                 if x<=50:
-                  typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
-                  emoj1= emojize(typemob1, use_aliases=True)
-                  emojattack=emojize(':arrow_right:', use_aliases=True)
-                  emojdie=emojize(':x:', use_aliases=True)
-                  emojdmg=emojize(':broken_heart:', use_aliases=True)
-                  emojhp=emojize(':green_heart:', use_aliases=True)
-                  if team=='t1mobs':
-                    info.lobby.game[creatorid]['throne2hp']-=100
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne2hp'])+"\n"
-                  elif team=='t2mobs':
-                    info.lobby.game[creatorid]['throne1hp']-=100
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])+"\n"
+                 if x<=35:
+                    pass
+                    
+
+                   
                mobturn(creatorid, team, mob, number, t)  
          info.lobby.game[creatorid][team][mob][number]['ready']=1
         
     elif mob=='tiranozavr':
         if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
                t=mobdmg(mob, creatorid, team, team2, number)
                if t!=None and t!='None':
@@ -267,6 +264,7 @@ def skills(mob, creatorid, team, team2, number):
                       info.lobby.game[creatorid][team2][c][b]['stun']=1
                       if info.lobby.game[creatorid][team2][c][b]['ready']==1:
                         info.lobby.game[creatorid][team2][c][b]['stun']=2
+                      info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Оглушающий рык"'
                mobturn(creatorid, team, mob, number, t)   
         info.lobby.game[creatorid][team][mob][number]['ready']=1    
                     
@@ -398,7 +396,7 @@ def endturn(creatorid):
           livemobs2+=1
  droplet=emojize(':droplet:', use_aliases=True)
  te=emojize(':busts_in_silhouette:', use_aliases=True)
- bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!') 
+ bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Примененные скиллы:'+info.lobby.game[creatorid]['skills1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+'Примененные скиллы:'+info.lobby.game[creatorid]['skills2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!') 
  info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды "Штурм":'+"\n"
  info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды "Оборона":'+"\n"
  info.lobby.game[creatorid]['manaplust1']=0
@@ -436,8 +434,10 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['t']=None
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['skilltext']='None'
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['ready']=0
-      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['stun']-=1
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['stun']-=1    
  info.lobby.game[creatorid]['hod']+=1
+ info.lobby.game[creatorid]['skills1']=''
+ info.lobby.game[creatorid]['skills2']=''
  livemob1=0
  livemob2=0
  mobdmageall=0
@@ -1003,7 +1003,9 @@ def createlobby(chatid, creatorid, fname):
     'manaplust1':0,
     'manaplust2':0,
     't1hod':0,
-    'thronedamagemobs':''
+    'thronedamagemobs':'',
+    'skills1':'',
+    'skills2':''
       
 
            }
