@@ -411,7 +411,8 @@ def endturn(creatorid):
                   'phoenix':{'count':0},
                   'electromagnit':{'count':0},
                   'manoed':{'count':0},
-                  'pyos':{'count':0}}                 
+                  'pyos':{'count':0},
+                  'tiranozavr':{'count':0}}                 
     info.lobby.game[creatorid]['players'][endid]
  for mob10 in info.lobby.game[creatorid]['t1mobs']:
     for number10 in info.lobby.game[creatorid]['t1mobs'][mob10]:
