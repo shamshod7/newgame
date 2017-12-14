@@ -1045,7 +1045,8 @@ def createuser(id, x, fname):
          'tvari':{'s_me4nik':{},
                   'phoenix':{},
                   'electromagnit':{},
-                  'manoed':{}
+                  'manoed':{},
+                  'tiranozavr':{}
          },
          'portals':{'s_me4nik':{'count':0},
                   'phoenix':{'count':0},
