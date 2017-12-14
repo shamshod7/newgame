@@ -219,7 +219,7 @@ def skills(mob, creatorid, team, team2, number):
     elif mob=='pyos':
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
-              t=mobdmg(mob, creatorid, team, team2, number)
+                t=mobdmg(mob, creatorid, team, team2, number)
                 x=random.randint(1,100)
                 if x<=50:
                   typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
