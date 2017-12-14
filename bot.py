@@ -497,7 +497,8 @@ def endturn(creatorid):
     del info.lobby.game[creatorid]
    elif info.lobby.game[creatorid]['throne2hp']>info.lobby.game[creatorid]['throne1hp']:
     bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды "Оборона"!')
-    del info.lobby.game[creatorid]
+    timer=threading.Timer(4.0, delete, args=[creatorid])
+    timer.start()
  else:
    battle(info.lobby.game[creatorid]['creatorid']['selfid'])
                                                                               
@@ -506,7 +507,8 @@ def endturn(creatorid):
     
     
             
-            
+def delete(id):
+    del info.lobby.game[id]
             
             
 
