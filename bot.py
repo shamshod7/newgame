@@ -220,7 +220,6 @@ def skills(mob, creatorid, team, team2, number):
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
-              if t!='None' and t!=None:
                 x=random.randint(1,100)
                 if x<=50:
                   typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
