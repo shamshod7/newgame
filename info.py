@@ -81,6 +81,24 @@ class Manoed(object):
         self.fromfiredmg=0.9
         self.skill=None
         
+        
+class Tiranozavr(object):  
+    def __init__(self):
+        self.name='Тиранозавр'
+        self.hp=260
+        self.mana=30
+        self.damage=120
+        self.cost=55
+        self.type='bio'
+        self.fromelectrodmg=1.3
+        self.frombiodmg=1.0
+        self.fromghostdmg=0.8
+        self.fromdeaddmg=1.1
+        self.fromfiredmg=1.5
+        self.skill=None
+        
+        
+tiranozavr=Tiranozavr()        
 manoed=Manoed()        
 electromagnit=Electromagnit()
 phoenix=Phoenix()        
