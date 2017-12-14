@@ -11,6 +11,9 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
+ban=['pyos']
+
+
 def classtoemoji(classs):
     if classs=='dead':
         emoj=emojize(':skull:', use_aliases=True)
@@ -219,9 +222,10 @@ def skills(mob, creatorid, team, team2, number):
     elif mob=='pyos':
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
-                t=mobdmg(mob, creatorid, team, team2, number)
-                x=random.randint(1,100)
-                if x<=50:
+               t=mobdmg(mob, creatorid, team, team2, number)
+               if t!=None and t!='None':
+                 x=random.randint(1,100)
+                 if x<=50:
                   typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
                   emoj1= emojize(typemob1, use_aliases=True)
                   emojattack=emojize(':arrow_right:', use_aliases=True)
@@ -493,6 +497,7 @@ def mobs(callid):    #выбирает 3х рандомных мобов для 
             while len(info.lobby.game[id]['players'][callid]['mobsinturn'])<3:
               x=random.randint(1,len(info.lobby.game[id]['players'][callid]['allmobs']))
               if info.lobby.game[id]['players'][callid]['allmobs'][x-1] not in info.lobby.game[id]['players'][callid]['mobsinturn']:
+               if info.lobby.game[id]['players'][callid]['allmobs'][x-1] not in ban:
                 info.lobby.game[id]['players'][callid]['mobsinturn'].append(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
                 if len(info.lobby.game[id]['players'][callid]['mobsinturn'])==1:
                   y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
