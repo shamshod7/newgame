@@ -73,8 +73,9 @@ def end(creatorid, team, mob, number, t, dmg):
 def mobdmg(mob, creatorid, team, team2, number):
     t=None
     for mob2 in info.lobby.game[creatorid][team2]:
-              for number2 in info.lobby.game[creatorid][team2][mob2]:
-                if info.lobby.game[creatorid][team2][mob2][number2]['smert']!=1:
+            for number2 in info.lobby.game[creatorid][team2][mob2]:
+              if info.lobby.game[creatorid][team2][mob2][number2]['smert']!=1:
+                if info.lobby.game[creatorid][team2][mob2][number2]['stun']<1:
                  if info.lobby.game[creatorid][team2][mob2][number2]['hp']>0:
                   if info.lobby.game[creatorid][team][mob][number]['type']=='dead':
                     info.lobby.game[creatorid][team][mob][number]['koef']=info.lobby.game[creatorid][team2][mob2][number2]['fromdeaddmg']
@@ -136,12 +137,12 @@ def mobturn(creatorid, team, mob, number, t):
      t['hp']-=dmg    
      end(creatorid, team, mob, number, t, dmg)
    
-   elif mob=='pyos':
+   elif mob=='pyos' or mob=='tiranozavr':
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['frombiodmg']
      dmg=round (dmg, 2)
      t['hp']-=dmg    
      end(creatorid, team, mob, number, t, dmg)
-    
+ 
     
     
    
@@ -240,6 +241,24 @@ def skills(mob, creatorid, team, team2, number):
                     info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])+"\n"
                mobturn(creatorid, team, mob, number, t)  
          info.lobby.game[creatorid][team][mob][number]['ready']=1
+        
+    elif mob=='tiranozavr':
+        if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+           if info.lobby.game[creatorid][team][mob][number]['target']==None:
+               t=mobdmg(mob, creatorid, team, team2, number)
+               if t!=None and t!='None':
+                 x=random.randint(1,100)
+                 if x<=40:
+                    d=info.lobby.game[creatorid][team2].keys()
+                    c=random.choice(d)
+                    g=info.lobby.game[creatorid][team2][c].keys()
+                    b=random.choice(g)
+                    info.lobby.game[creatorid][team2][c][b]['stun']=1
+                    if info.lobby.game[creatorid][team2][c][b]['ready']==1:
+                        info.lobby.game[creatorid][team2][c][b]['stun']=2
+                    
+                    
+     
 
        
         
@@ -390,6 +409,7 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['t']=None
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['skilltext']='None'
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['ready']=0
+      info.lobby.game[creatorid]['t1mobs'][mob10][number10]['stun']-=1
         
  for mob11 in info.lobby.game[creatorid]['t2mobs']:
     for number11 in info.lobby.game[creatorid]['t2mobs'][mob11]:
@@ -401,6 +421,7 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['t']=None
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['skilltext']='None'
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['ready']=0
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['stun']-=1
  info.lobby.game[creatorid]['hod']+=1
  livemob1=0
  livemob2=0
@@ -426,7 +447,7 @@ def endturn(creatorid):
       if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']!=1:
        mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
        mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
-       info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne1hp'])+"\n"
+       info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne1hp']-mobdmage)+"\n"
        info.lobby.game[creatorid]['throne1hp']-=mobdmage
        info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
        info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']=0
@@ -443,7 +464,7 @@ def endturn(creatorid):
       if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']!=1:
        mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
        mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
-       info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne2hp'])+"\n"
+       info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne2hp']-mobdmage)+"\n"
        info.lobby.game[creatorid]['throne2hp']-=mobdmage 
        info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
        info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']=0
