@@ -258,13 +258,15 @@ def skills(mob, creatorid, team, team2, number):
                if t!=None and t!='None':
                  x=random.randint(1,100)
                  if x<=40:
+                  if len(info.lobby.game[creatorid][team2])>0:
                     d=list(info.lobby.game[creatorid][team2].keys())
                     c=random.choice(d)
-                    g=info.lobby.game[creatorid][team2][c].keys()
+                    g=list(info.lobby.game[creatorid][team2][c].keys())
                     b=random.choice(g)
+                    if d!=
                     info.lobby.game[creatorid][team2][c][b]['stun']=1
                     if info.lobby.game[creatorid][team2][c][b]['ready']==1:
-                        info.lobby.game[creatorid][team2][c][b]['stun']=2
+                      info.lobby.game[creatorid][team2][c][b]['stun']=2
                mobturn(creatorid, team, mob, number, t)   
         info.lobby.game[creatorid][team][mob][number]['ready']=1    
                     
