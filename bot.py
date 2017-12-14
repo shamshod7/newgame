@@ -1093,7 +1093,8 @@ def createmob(nameclass, x, namemob):
         'skill':nameclass.skill,
         'smert':0,
         'cachedmg':0,
-        'skilltext':'None'       
+        'skilltext':'None',
+        'stun':0
         }
     
 def createmob1(nameclass, x, namemob):
@@ -1118,7 +1119,8 @@ def createmob1(nameclass, x, namemob):
         'smert':0,
         'cachedmg':0,
         'skilltext':'None',
-        'ready':0
+        'ready':0,
+        'stun':0
                 
         }
           }
