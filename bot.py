@@ -29,15 +29,17 @@ def classtoemoji(classs):
 
 
 def end(creatorid, team, mob, number, t, dmg):
-                typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
-                typemob2=classtoemoji(t['type'])
-                emoj1= emojize(typemob1, use_aliases=True)
-                emoj2= emojize(typemob2, use_aliases=True)
-                emojattack=emojize(':arrow_right:', use_aliases=True)
-                emojdie=emojize(':x:', use_aliases=True)
-                emojdmg=emojize(':broken_heart:', use_aliases=True)
-                emojhp=emojize(':green_heart:', use_aliases=True)
-                if team=='t1mobs':
+              typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
+              typemob2=classtoemoji(t['type'])
+              emoj1= emojize(typemob1, use_aliases=True)
+              emoj2= emojize(typemob2, use_aliases=True)
+              emojattack=emojize(':arrow_right:', use_aliases=True)
+              emojdie=emojize(':x:', use_aliases=True)
+              emojdmg=emojize(':broken_heart:', use_aliases=True)
+              emojhp=emojize(':green_heart:', use_aliases=True)
+              emojstun=emojize(':cyclone:', use_aliases=True)
+              if team=='t1mobs':
+                if info.lobby.game[creatorid][team][mob][number]['stun']<1:
                  if t['hp']<1:
                   for id in info.lobby.game[creatorid]['team2']:
                     info.lobby.game[creatorid]['players'][id]['mana']+=3
@@ -53,7 +55,10 @@ def end(creatorid, team, mob, number, t, dmg):
                      info.lobby.game[creatorid]['resultst1']+=skillt
                    else:  
                     info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
-                elif team=='t2mobs':
+                else:
+                    info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojstun+"\n"
+              elif team=='t2mobs':
+               if info.lobby.game[creatorid][team][mob][number]['stun']<1:
                  if t['hp']<1:
                    for id in info.lobby.game[creatorid]['team1']:
                     info.lobby.game[creatorid]['players'][id]['mana']+=3
@@ -62,11 +67,15 @@ def end(creatorid, team, mob, number, t, dmg):
                      skillt=info.lobby.game[creatorid][team][mob][number]['skilltext']
                    else:
                      info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n" 
+                        
                  else:
                   if info.lobby.game[creatorid][team][mob][number]['skilltext']!='None':
                      skillt=info.lobby.game[creatorid][team][mob][number]['skilltext']
                   else:
                     info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
+               else:
+                  info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojstun+"\n"
+                
 
 
 
@@ -256,6 +265,8 @@ def skills(mob, creatorid, team, team2, number):
                     info.lobby.game[creatorid][team2][c][b]['stun']=1
                     if info.lobby.game[creatorid][team2][c][b]['ready']==1:
                         info.lobby.game[creatorid][team2][c][b]['stun']=2
+               mobturn(creatorid, team, mob, number, t)   
+        info.lobby.game[creatorid][team][mob][number]['ready']=1    
                     
                     
      
@@ -507,6 +518,8 @@ def nametoclass(name):  #делает перевод названия сущ-в�
         x=info.manoed
     elif name=='pyos':
         x=info.pyos
+    elif name=='tiranozavr':
+        x=info.tiranozavr
          
     return x
 
@@ -685,6 +698,23 @@ def inline(call):
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Pyos)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['pyos']['count'])+' таких порталов!')
            else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            
+  elif call.data=='tiranozavr':
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+          if 'tiranozavr' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
+           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.tiranozavr.cost:
+            info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.tiranozavr.cost
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']['count']==0:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']=createportal('pyos', 1)  
+            else:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']=createportal('tiranozavr', info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']['count']+1)  
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Тиранозавр)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']['count'])+' таких порталов!')
+           else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+   
                 
    
        
@@ -941,13 +971,15 @@ def createlobby(chatid, creatorid, fname):
                   'phoenix':{},
                   'electromagnit':{},
                   'manoed':{},
-                  'pyos':{}
+                  'pyos':{},
+                  'tiranozavr':{}
              },
     't2mobs':{'s_me4nik':{},
                   'phoenix':{},
                   'electromagnit':{},
                   'manoed':{},
-                  'pyos':{}
+                  'pyos':{},
+                  'tiranozavr':{}
              },
     'resultst1':'Результаты монстров из команды "Штурм"'+"\n",
     'resultst2':'Результаты монстров из команды "Оборона"'+"\n",
@@ -978,13 +1010,15 @@ def createuser(id, x, fname):
                   'phoenix':{},
                   'electromagnit':{},
                   'manoed':{},
-                  'pyos':{}
+                  'pyos':{},
+                  'tiranozavr':{}
          },
          'portals':{'s_me4nik':{'count':0},
                   'phoenix':{'count':0},
                   'electromagnit':{'count':0},
                   'manoed':{'count':0},
-                  'pyos':{'count':0}
+                  'pyos':{'count':0},
+                  'tiranozavr':{'count':0}
 
                    },
          'mana':150,
@@ -992,7 +1026,7 @@ def createuser(id, x, fname):
          'manamax':500,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'pyos'],
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'pyos', 'tiranozavr'],
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
@@ -1013,14 +1047,15 @@ def createuser(id, x, fname):
          'portals':{'s_me4nik':{'count':0},
                   'phoenix':{'count':0},
                   'electromagnit':{'count':0},
-                  'manoed':{'count':0}
+                  'manoed':{'count':0},
+                  'tiranozavr':{'count':0}
                    },
          'mana':150,
          'mobnumber':0,
          'manamax':500,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed'],
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr'],
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
