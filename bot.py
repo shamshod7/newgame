@@ -185,6 +185,8 @@ def skills(mob, creatorid, team, team2, number):
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
+                typemob2=classtoemoji(t['type'])
+                emoj2= emojize(typemob2, use_aliases=True)
                 z=random.randint(1,100)
                 if z<=35:
                     t['damage']-=45  
@@ -214,6 +216,8 @@ def skills(mob, creatorid, team, team2, number):
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
+                typemob2=classtoemoji(t['type'])
+                emoj2= emojize(typemob2, use_aliases=True)
                 z=random.randint(1,100)
                 if z<45:
                     info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проникновение"'
@@ -253,6 +257,8 @@ def skills(mob, creatorid, team, team2, number):
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
                t=mobdmg(mob, creatorid, team, team2, number)
                if t!=None and t!='None':
+                 typemob2=classtoemoji(t['type'])
+                 emoj2= emojize(typemob2, use_aliases=True)
                  x=random.randint(1,100)
                  if x<=40:
                   if len(info.lobby.game[creatorid][team2])>0:
