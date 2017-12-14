@@ -433,7 +433,7 @@ def endturn(creatorid):
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
-      typemob1=classtoemoji(info.lobby.game[creatorid]['t2mobs'][mbs2][nmbs2]['type'])
+      typemob1=classtoemoji(info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['type'])
       throne=emojize(':european_castle:', use_aliases=True)
       emoj1=emojize(typemob1, use_aliases=True)
       emojattack=emojize(':arrow_right:', use_aliases=True)
