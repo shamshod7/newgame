@@ -338,6 +338,7 @@ def endturn(creatorid):
  readymobs=0
  e=0
  j=0
+ info.lobby.game[creatorid]['t1hod']=random.randint(0,1)
  while readymobs<allmobs: 
    readymobs=0
    if info.lobby.game[creatorid]['t1hod']==0:
