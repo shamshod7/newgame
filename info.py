@@ -2,7 +2,7 @@ class Lobby(object):
     def __init__(self):
         self.game={}
         
-        
+     
 class S_me4nik(object):
     def __init__(self):
         self.name='Скелет-мечник'
@@ -13,9 +13,9 @@ class S_me4nik(object):
         self.type='dead'
         self.fromelectrodmg=0.7
         self.frombiodmg=1.5
-        self.fromghostdmg=1.1
+        self.fromghostdmg=0.9
         self.fromdeaddmg=1.0
-        self.fromfiredmg=1.1
+        self.fromfiredmg=1.0
         self.skill=None
         
         
