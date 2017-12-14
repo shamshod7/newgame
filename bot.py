@@ -238,7 +238,7 @@ def skills(mob, creatorid, team, team2, number):
                   elif team=='t2mobs':
                     info.lobby.game[creatorid]['throne1hp']-=100
                     info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+'Pyos'+emojattack+'Крепость'+emojdmg+'100.0'+emojhp+str(info.lobby.game[creatorid]['throne1hp'])+"\n"
-                mobturn(creatorid, team, mob, number, t)  
+               mobturn(creatorid, team, mob, number, t)  
          info.lobby.game[creatorid][team][mob][number]['ready']=1
 
        
