@@ -226,9 +226,9 @@ def skills(mob, creatorid, team, team2, number):
                 typemob2=classtoemoji(t['type'])
                 emoj2= emojize(typemob2, use_aliases=True)
                 z=random.randint(1,100)
-                if z<45:
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проникновение"'
+                if z<45:                   
                     if t['mana']>0:
+                      info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проникновение"'
                       a=70
                       t['mana']-=a                
                       b=0+t['mana']
@@ -264,7 +264,7 @@ def skills(mob, creatorid, team, team2, number):
                t=mobdmg(mob, creatorid, team, team2, number)
                x=random.randint(1,100)
                if x<=100:    
-                      randomstun(creatorid, team2, info.lobby.game[creatorid][team][mob][number])
+                  randomstun(creatorid, team2, info.lobby.game[creatorid][team][mob][number])
                mobturn(creatorid, team, mob, number, t) 
           else:
             end(creatorid, team, mob, number, 0, 0)
@@ -293,6 +293,7 @@ def randomstun(creatorid, team2, mob):
                         typemob2=classtoemoji(target['type'])
                         emoj2= emojize(typemob2, use_aliases=True)                
                         mob['skilltext']=emoj1+mob['name']+emojskill+emoj2+target['name']+' "Оглушающий рык"'
+                        print('ОГЛУШЕНИЕ')
                       else:
                         randomstun(creatorid, team2, mob)
    
