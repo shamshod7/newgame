@@ -257,8 +257,6 @@ def skills(mob, creatorid, team, team2, number):
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
                t=mobdmg(mob, creatorid, team, team2, number)
                if t!=None and t!='None':
-                 typemob2=classtoemoji(t['type'])
-                 emoj2= emojize(typemob2, use_aliases=True)
                  x=random.randint(1,100)
                  if x<=40:
                   if len(info.lobby.game[creatorid][team2])>0:
@@ -267,10 +265,12 @@ def skills(mob, creatorid, team, team2, number):
                     if len(info.lobby.game[creatorid][team2][c])>0:
                       g=list(info.lobby.game[creatorid][team2][c].keys())                    
                       b=random.choice(g)
+                      typemob2=classtoemoji(info.lobby.game[creatorid][team2][c][b]['type'])
+                      emoj2= emojize(typemob2, use_aliases=True)
                       info.lobby.game[creatorid][team2][c][b]['stun']=1
                       if info.lobby.game[creatorid][team2][c][b]['ready']==1:
                         info.lobby.game[creatorid][team2][c][b]['stun']=2
-                      info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Оглушающий рык"'
+                      info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+info.lobby.game[creatorid][team2][c][b]['name']+' "Оглушающий рык"'
                  mobturn(creatorid, team, mob, number, t)   
         info.lobby.game[creatorid][team][mob][number]['ready']=1    
                     
