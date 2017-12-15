@@ -11,7 +11,7 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
-ban=['pyos']
+ban=[]
 
 
 def classtoemoji(classs):
@@ -114,37 +114,55 @@ def typetotext(name):
 
 def mobturn(creatorid, team, mob, number, t):
    if mob=='s_me4nik':
+    if t['shield']==0:
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
-     dmg=round(dmg, 2)
-     t['hp']-=dmg    
-     end(creatorid, team, mob, number, t, dmg)
+    else:
+     dmg=0
+    dmg=round(dmg, 2)
+    t['hp']-=dmg    
+    end(creatorid, team, mob, number, t, dmg)
         
    elif mob=='phoenix':
-     dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
+     if t['shield']==0:
+       dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
+     else:
+       dmg=0
      dmg=round(dmg, 2)
      t['hp']-=dmg
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='electromagnit':
-     dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
+     if t['shield']==0:
+       dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
+     else:
+       dmg=0
      dmg=round(dmg, 2)
      t['hp']-=dmg
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='manoed':
-     dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
+     if t['shield']==0:
+       dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
+     else:
+       dmg=0
      dmg=round (dmg, 2)
      t['hp']-=dmg    
      end(creatorid, team, mob, number, t, dmg)
    
-   elif mob=='pyos' or mob=='tiranozavr':    
-     dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['frombiodmg']
+   elif mob=='pyos' or mob=='tiranozavr': 
+     if t['shield']==0:
+       dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['frombiodmg']
+     else:
+       dmg=0
      dmg=round (dmg, 2)
      t['hp']-=dmg    
      end(creatorid, team, mob, number, t, dmg)
     
    elif mob=='s4upakabra':
-     dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+     if t['shield']==0:
+       dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+     else:
+       dmg=0
      dmg=round (dmg, 2)
      t['hp']-=dmg    
      info.lobby.game[creatorid][team][mob][number]['hp']+=dmg/2
@@ -261,7 +279,7 @@ def skills(mob, creatorid, team, team2, number):
                if t!=None and t!='None':
                  x=random.randint(1,100)
                  if x<=35:
-                    pass                                   
+                     info.lobby.game[creatorid][team][mob][number]['shield']=1                                  
                  mobturn(creatorid, team, mob, number, t)  
          info.lobby.game[creatorid][team][mob][number]['ready']=1
         
@@ -477,6 +495,7 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['skilltext']='None'
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['ready']=0
       info.lobby.game[creatorid]['t1mobs'][mob10][number10]['stun']-=1
+      info.lobby.game[creatorid]['t1mobs'][mob10][number10]['shield']=0
         
  for mob11 in info.lobby.game[creatorid]['t2mobs']:
     for number11 in info.lobby.game[creatorid]['t2mobs'][mob11]:
@@ -489,6 +508,7 @@ def endturn(creatorid):
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['skilltext']='None'
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['ready']=0
       info.lobby.game[creatorid]['t2mobs'][mob11][number11]['stun']-=1    
+      info.lobby.game[creatorid]['t2mobs'][mob11][number11]['shield']=0
  info.lobby.game[creatorid]['hod']+=1
  info.lobby.game[creatorid]['skills1']=''
  info.lobby.game[creatorid]['skills2']=''
@@ -1187,7 +1207,8 @@ def createmob(nameclass, x, namemob):
         'smert':0,
         'cachedmg':0,
         'skilltext':'None',
-        'stun':0
+        'stun':0,
+        'shield':0
         }
     
 def createmob1(nameclass, x, namemob):
@@ -1213,7 +1234,8 @@ def createmob1(nameclass, x, namemob):
         'cachedmg':0,
         'skilltext':'None',
         'ready':0,
-        'stun':0
+        'stun':0,
+        'shield':0
                 
         }
           }
