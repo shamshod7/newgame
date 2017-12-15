@@ -1019,7 +1019,7 @@ def beginmessage(message):
  a=0
  if message.from_user.id not in info.lobby.game:
   for id in info.lobby.game:
-    if message.chat.id in info.lobby.game[id]['chatid']:
+    if message.chat.id==info.lobby.game[id]['chatid']:
         a+=1
   if a>0:
     bot.send_message(message.chat.id, 'Игра уже идет в этом чате!')
