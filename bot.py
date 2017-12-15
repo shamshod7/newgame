@@ -264,7 +264,7 @@ def skills(mob, creatorid, team, team2, number):
                t=mobdmg(mob, creatorid, team, team2, number)
                x=random.randint(1,100)
                if x<=100:    
-                  randomstun(creatorid, team2, info.lobby.game[creatorid][team][mob][number])
+                  randomstun(creatorid, team2, info.lobby.game[creatorid][team][mob][number], 0)
                mobturn(creatorid, team, mob, number, t) 
           else:
             end(creatorid, team, mob, number, 0, 0)
