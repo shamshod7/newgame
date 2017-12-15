@@ -275,7 +275,7 @@ def skills(mob, creatorid, team, team2, number):
 
        
         
-def randomstun(creatorid, team2, mob):
+def randomstun(creatorid, team2, mob, x):
              typemob1=classtoemoji(mob['type'])
              emoj1=emojize(typemob1, use_aliases=True)
              emojskill=emojize(':sparkles:', use_aliases=True)
@@ -298,6 +298,12 @@ def randomstun(creatorid, team2, mob):
                         print('ОГЛУШЕНИЕ')
                       else:
                         randomstun(creatorid, team2, mob)
+                    else:
+                        if x<50:
+                          x+=1
+                          randomstun(creatorid, team2, mob, x)
+                        else:
+                            pass
    
 
                 
