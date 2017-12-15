@@ -30,15 +30,15 @@ def classtoemoji(classs):
 
 def end(creatorid, team, mob, number, t, dmg):
             if t!=0:
-              typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
               typemob2=classtoemoji(t['type'])
-              emoj1= emojize(typemob1, use_aliases=True)
-              emoj2= emojize(typemob2, use_aliases=True)
-              emojattack=emojize(':arrow_right:', use_aliases=True)
-              emojdie=emojize(':x:', use_aliases=True)
-              emojdmg=emojize(':broken_heart:', use_aliases=True)
-              emojhp=emojize(':green_heart:', use_aliases=True)
-              emojstun=emojize(':cyclone:', use_aliases=True)
+            typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
+            emoj1= emojize(typemob1, use_aliases=True)
+            emoj2= emojize(typemob2, use_aliases=True)
+            emojattack=emojize(':arrow_right:', use_aliases=True)
+            emojdie=emojize(':x:', use_aliases=True)
+            emojdmg=emojize(':broken_heart:', use_aliases=True)
+            emojhp=emojize(':green_heart:', use_aliases=True)
+            emojstun=emojize(':cyclone:', use_aliases=True)
             if team=='t1mobs':
                 if info.lobby.game[creatorid][team][mob][number]['stun']<1:
                  if t['hp']<1:
