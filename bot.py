@@ -286,7 +286,7 @@ def randomstun(creatorid, team2, mob):
                     if len(info.lobby.game[creatorid][team2][c])>0:
                       g=list(info.lobby.game[creatorid][team2][c].keys())                    
                       b=random.choice(g)
-                      info.lobby.game[creatorid][team2][c][b]=target
+                      target=info.lobby.game[creatorid][team2][c][b]
                       if target['smert']!=1:
                         target['stun']=1
                         if target['ready']==1:
