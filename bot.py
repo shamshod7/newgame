@@ -873,6 +873,7 @@ def fightstart(message):
                 bot.send_message(ids1, 'Вы штурмуете крепость! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates1'])
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
+            info.lobby.game[message.from_user.id]['thread']=btl
             print(info.lobby.game)
             info.lobby.game[message.from_user.id]['playing']=1
           else:
@@ -1037,7 +1038,8 @@ def createlobby(chatid, creatorid, fname):
     't1hod':0,
     'thronedamagemobs':'',
     'skills1':'',
-    'skills2':''
+    'skills2':'',
+    'thread':None
       
 
            }
