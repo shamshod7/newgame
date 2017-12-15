@@ -98,7 +98,7 @@ class Tiranozavr(object):
         self.skill=None
         
 
-class s4upakabra(object):
+class S4upakabra(object):
     def __init__(self):
         self.name='Чупакабра'
         self.hp=70
@@ -124,7 +124,7 @@ class s4upakabra(object):
 
 
 
-        
+s4upakabra=S4upakabra()        
 tiranozavr=Tiranozavr()        
 manoed=Manoed()        
 electromagnit=Electromagnit()
