@@ -298,7 +298,7 @@ def randomstun(creatorid, team2, mob, x):
                         mob['skilltext']=emoj1+mob['name']+emojskill+emoj2+target['name']+' "Оглушающий рык"'
                         print('ОГЛУШЕНИЕ')
                       else:
-                        randomstun(creatorid, team2, mob)
+                        randomstun(creatorid, team2, mob, x)
                     else:
                         if x<50:
                           x+=1
