@@ -264,19 +264,11 @@ def skills(mob, creatorid, team, team2, number):
                t=mobdmg(mob, creatorid, team, team2, number)
                if t!=None and t!='None':
                  x=random.randint(1,100)
-                 if x<=50:
-                  if len(info.lobby.game[creatorid][team2])>0:
-                    d=list(info.lobby.game[creatorid][team2].keys())
-                    c=random.choice(d)
-                    if len(info.lobby.game[creatorid][team2][c])>0:
-                      g=list(info.lobby.game[creatorid][team2][c].keys())                    
-                      b=random.choice(g)
-                      typemob2=classtoemoji(info.lobby.game[creatorid][team2][c][b]['type'])
-                      emoj2= emojize(typemob2, use_aliases=True)
-                      info.lobby.game[creatorid][team2][c][b]['stun']=1
-                      if info.lobby.game[creatorid][team2][c][b]['ready']==1:
-                        info.lobby.game[creatorid][team2][c][b]['stun']=2
-                      info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+info.lobby.game[creatorid][team2][c][b]['name']+' "Оглушающий рык"'
+                 if x<=50:    
+                      target=randomstun(creatorid, team2)
+                      typemob2=classtoemoji(target['type'])
+                      emoj2= emojize(typemob2, use_aliases=True)                
+                      info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+target['name']+' "Оглушающий рык"'
                  mobturn(creatorid, team, mob, number, t) 
           else:
             end(creatorid, team, mob, number, 0, 0)
@@ -287,7 +279,20 @@ def skills(mob, creatorid, team, team2, number):
 
        
         
-
+def randomstun(creatorid, team2):
+             if len(info.lobby.game[creatorid][team2])>0:
+                    d=list(info.lobby.game[creatorid][team2].keys())
+                    c=random.choice(d)
+                    if len(info.lobby.game[creatorid][team2][c])>0:
+                      g=list(info.lobby.game[creatorid][team2][c].keys())                    
+                      b=random.choice(g)
+                      if info.lobby.game[creatorid][team2][c][b]['smert']!=1:
+                        info.lobby.game[creatorid][team2][c][b]['stun']=1
+                        if info.lobby.game[creatorid][team2][c][b]['ready']==1:
+                            info.lobby.game[creatorid][team2][c][b]['stun']=2
+                        return info.lobby.game[creatorid][team2][c][b]
+                      else:
+                        randomstun(creatorid, team2)
    
 
                 
