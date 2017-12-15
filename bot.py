@@ -138,6 +138,7 @@ def mobturn(creatorid, team, mob, number, t):
      end(creatorid, team, mob, number, t, dmg)
    
    elif mob=='pyos' or mob=='tiranozavr':
+     print(str(info.lobby.game[creatorid][team][mob][number]['damage']))
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['frombiodmg']
      dmg=round (dmg, 2)
      t['hp']-=dmg    
