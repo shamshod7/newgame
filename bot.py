@@ -172,6 +172,8 @@ def skills(mob, creatorid, team, team2, number):
                 else:
                   info.lobby.game[creatorid][team][mob][number]['skilltext']='None'
                 mobturn(creatorid, team, mob, number, t)
+          else:
+            end(creatorid, team, mob, number, 0, 0)
          info.lobby.game[creatorid][team][mob][number]['ready']=1
 
                 
@@ -194,6 +196,8 @@ def skills(mob, creatorid, team, team2, number):
                 else:
                     skilltext=''
                 mobturn(creatorid, team, mob, number, t)
+          else:
+            end(creatorid, team, mob, number, 0, 0)
          info.lobby.game[creatorid][team][mob][number]['ready']=1
 
           
@@ -207,6 +211,8 @@ def skills(mob, creatorid, team, team2, number):
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
                 mobturn(creatorid, team, mob, number, t)
+          else:
+            end(creatorid, team, mob, number, 0, 0)
          info.lobby.game[creatorid][team][mob][number]['ready']=1
 
                 
@@ -232,6 +238,8 @@ def skills(mob, creatorid, team, team2, number):
                       else:
                         t['hp']-=a
                 mobturn(creatorid, team, mob, number, t)
+          else:
+            end(creatorid, team, mob, number, 0, 0)
          info.lobby.game[creatorid][team][mob][number]['ready']=1
 
 
@@ -244,10 +252,7 @@ def skills(mob, creatorid, team, team2, number):
                if t!=None and t!='None':
                  x=random.randint(1,100)
                  if x<=35:
-                    pass
-                    
-
-                   
+                    pass                                   
                  mobturn(creatorid, team, mob, number, t)  
          info.lobby.game[creatorid][team][mob][number]['ready']=1
         
@@ -271,7 +276,9 @@ def skills(mob, creatorid, team, team2, number):
                       if info.lobby.game[creatorid][team2][c][b]['ready']==1:
                         info.lobby.game[creatorid][team2][c][b]['stun']=2
                       info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+info.lobby.game[creatorid][team2][c][b]['name']+' "Оглушающий рык"'
-                 mobturn(creatorid, team, mob, number, t)   
+                 mobturn(creatorid, team, mob, number, t) 
+          else:
+            end(creatorid, team, mob, number, 0, 0)
         info.lobby.game[creatorid][team][mob][number]['ready']=1    
                     
                     
