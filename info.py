@@ -101,10 +101,10 @@ class Tiranozavr(object):
 class S4upakabra(object):
     def __init__(self):
         self.name='Чупакабра'
-        self.hp=70
+        self.hp=75
         self.mana=55
-        self.damage=80
-        self.cost=30
+        self.damage=90
+        self.cost=35
         self.type='dead'
         self.fromelectrodmg=0.7
         self.frombiodmg=1.5
