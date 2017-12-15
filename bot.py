@@ -280,9 +280,11 @@ def randomstun(creatorid, team2, mob):
              emoj1=emojize(typemob1, use_aliases=True)
              emojskill=emojize(':sparkles:', use_aliases=True)
              if len(info.lobby.game[creatorid][team2])>0:
+                print('>0')
                     d=list(info.lobby.game[creatorid][team2].keys())
                     c=random.choice(d)
                     if len(info.lobby.game[creatorid][team2][c])>0:
+                      print('>0 duble2')
                       g=list(info.lobby.game[creatorid][team2][c].keys())                    
                       b=random.choice(g)
                       target=info.lobby.game[creatorid][team2][c][b]
