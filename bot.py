@@ -320,7 +320,7 @@ def skills(mob, creatorid, team, team2, number):
 def randomstun(creatorid, team2, mob, x):
              typemob1=classtoemoji(mob['type'])
              emoj1=emojize(typemob1, use_aliases=True)
-             emojskill=emojize(':sparkles:', use_aliases=True)
+             emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
              if len(info.lobby.game[creatorid][team2])>0:
                     print('>0')
                     d=list(info.lobby.game[creatorid][team2].keys())
