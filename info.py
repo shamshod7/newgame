@@ -39,7 +39,7 @@ class Phoenix(object):
         self.name='Феникадзе'
         self.hp=25
         self.mana=30
-        self.damage=350
+        self.damage=250
         self.cost=40
         self.type='fire'
         self.fromelectrodmg=0.5
