@@ -7,7 +7,7 @@ class S_me4nik(object):
     def __init__(self):
         self.name='Скелет-мечник'
         self.hp=65
-        self.mana=0
+        self.mana=30
         self.damage=55
         self.cost=20
         self.type='dead'
@@ -23,7 +23,7 @@ class Pyos(object):
     def __init__(self):
         self.name='Pyos'
         self.hp=400
-        self.mana=0
+        self.mana=30
         self.damage=0
         self.cost=25
         self.type='bio'
@@ -38,7 +38,7 @@ class Phoenix(object):
     def __init__(self):
         self.name='Феникадзе'
         self.hp=25
-        self.mana=0
+        self.mana=30
         self.damage=350
         self.cost=40
         self.type='fire'
@@ -70,7 +70,7 @@ class Manoed(object):
     def __init__(self):
         self.name='Маноед'
         self.hp=135
-        self.mana=0
+        self.mana=30
         self.damage=45
         self.cost=30
         self.type='ghost'
@@ -97,6 +97,33 @@ class Tiranozavr(object):
         self.fromfiredmg=1.5
         self.skill=None
         
+
+class s4upakabra(object):
+    def __init__(self):
+        self.name='Чупакабра'
+        self.hp=70
+        self.mana=55
+        self.damage=80
+        self.cost=30
+        self.type='dead'
+        self.fromelectrodmg=0.7
+        self.frombiodmg=1.5
+        self.fromghostdmg=0.9
+        self.fromdeaddmg=1.0
+        self.fromfiredmg=1.0
+        self.skill=None
+
+
+
+
+
+
+
+
+
+
+
+
         
 tiranozavr=Tiranozavr()        
 manoed=Manoed()        
