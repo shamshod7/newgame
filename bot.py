@@ -183,7 +183,8 @@ def skills(mob, creatorid, team, team2, number):
     emojdmg=emojize(':broken_heart:', use_aliases=True)
     emojhp=emojize(':green_heart:', use_aliases=True)
     emojstun=emojize(':cyclone:', use_aliases=True)
-    emojskill=emojize(':sparkles:', use_aliases=True)
+    emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
+    emojshield=emojize(':shield:', use_aliases=True)
     if mob=='s_me4nik':
          if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
           if info.lobby.game[creatorid][team][mob][number]['stun']<1:
@@ -279,7 +280,8 @@ def skills(mob, creatorid, team, team2, number):
                if t!=None and t!='None':
                  x=random.randint(1,100)
                  if x<=35:
-                     info.lobby.game[creatorid][team][mob][number]['shield']=1                                  
+                     info.lobby.game[creatorid][team][mob][number]['shield']=1  
+                     info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emojshield
                  mobturn(creatorid, team, mob, number, t)  
          info.lobby.game[creatorid][team][mob][number]['ready']=1
         
