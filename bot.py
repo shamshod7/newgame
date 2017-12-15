@@ -520,10 +520,12 @@ def endturn(creatorid):
  for mobtothrone1 in info.lobby.game[creatorid]['t1mobs']:
     for numberthrone1 in info.lobby.game[creatorid]['t1mobs'][mobtothrone1]:
       if info.lobby.game[creatorid]['t1mobs'][mobtothrone1][numberthrone1]['smert']!=1:
+       if info.lobby.game[creatorid]['t1mobs'][mobtothrone1][numberthrone1]['stun']<1:
         livemob1+=1
  for mobtothrone2 in info.lobby.game[creatorid]['t2mobs']:
     for numberthrone2 in info.lobby.game[creatorid]['t2mobs'][mobtothrone2]:
       if info.lobby.game[creatorid]['t2mobs'][mobtothrone2][numberthrone2]['smert']!=1:
+       if info.lobby.game[creatorid]['t2mobs'][mobtothrone2][numberthrone2]['stun']<1:
         livemob2+=1
         
  if livemob1==0 and livemob2>0:
@@ -536,12 +538,13 @@ def endturn(creatorid):
       emojdmg=emojize(':broken_heart:', use_aliases=True)
       emojhp=emojize(':green_heart:', use_aliases=True)
       if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']!=1:
-       mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
-       mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
-       info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne1hp']-mobdmage)+"\n"
-       info.lobby.game[creatorid]['throne1hp']-=mobdmage
-       info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
-       info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']=0
+       if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['stun']<1:
+         mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
+         mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
+         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne1hp']-mobdmage)+"\n"
+         info.lobby.game[creatorid]['throne1hp']-=mobdmage
+         info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
+         info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']=0
    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Оборона" нанесли '+str(mobdmageall)+' урона по крепости команды "Штурм"! Теперь у неё '+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы погибли.'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
@@ -553,12 +556,13 @@ def endturn(creatorid):
       emojdmg=emojize(':broken_heart:', use_aliases=True)
       emojhp=emojize(':green_heart:', use_aliases=True)
       if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']!=1:
-       mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
-       mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
-       info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne2hp']-mobdmage)+"\n"
-       info.lobby.game[creatorid]['throne2hp']-=mobdmage 
-       info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
-       info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']=0
+       if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['stun']<1:
+         mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
+         mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
+         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne2hp']-mobdmage)+"\n"
+         info.lobby.game[creatorid]['throne2hp']-=mobdmage 
+         info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
+         info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']=0
     info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Штурм" нанесли '+str(mobdmageall)+' урона по крепости команды "Оборона"! Теперь у неё '+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы погибли.'
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
@@ -1012,7 +1016,14 @@ def helpmessage(message):
 
 @bot.message_handler(commands=['begin'])
 def beginmessage(message):
-  if message.from_user.id not in info.lobby.game:
+ a=0
+ if message.from_user.id not in info.lobby.game:
+  for id in info.lobby.game:
+    if message.chat.id in info.lobby.game[id]:
+        a+=1
+  if a>0:
+    bot.send_message(message.chat.id, 'Игра уже идет в этом чате!')
+  else:
    if message.chat.id<0:
     userapply=0
     try:
