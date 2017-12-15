@@ -279,7 +279,7 @@ def skills(mob, creatorid, team, team2, number):
                t=mobdmg(mob, creatorid, team, team2, number)
                if t!=None and t!='None':
                  x=random.randint(1,100)
-                 if x<=35:
+                 if x<=25:
                      info.lobby.game[creatorid][team][mob][number]['shield']=1  
                      info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emojshield
                  mobturn(creatorid, team, mob, number, t)  
