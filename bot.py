@@ -709,6 +709,19 @@ def inline(call):
       if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
         if call.from_user.id in info.lobby.game[id]['players']:  
           testturn(info.lobby.game[id]['creatorid']['selfid'], call.from_user.id)
+        
+        
+  elif call.data=='info':
+    for id in info.lobby.game:
+      alltvar=''
+      if call.from_user.id in info.lobby.game[id]['players']:
+        for tvar in info.lobby.game[id]['players'][call.from_user.id]['allmobs']:
+            a=nametoclass(info.lobby.game[id]['players'][call.from_user.id]['allmobs'][tvar])
+            alltvar+=a.name+"\n"
+        if call.from_user.id in info.lobby.game[id]['team1']:
+          bot.send_message(call.from_user.id, 'Ваша команда: '+info.lobby.game[id]['teammates1']+"\n"+"\n"+'Все доступные существа:'+"\n"+alltvar)
+        elif call.from_user.id in info.lobby.game[id]['team2']:  
+          bot.send_message(call.from_user.id, 'Ваша команда: '+info.lobby.game[id]['teammates2']+"\n"+"\n"+'Все доступные существа:'+"\n"+alltvar)
 
 
            
