@@ -131,7 +131,22 @@ class Golem(object):
 
 
 
-
+        
+        
+class Vsadnik(object):
+    def __init__(self):
+        self.name='Всадник без головы'
+        self.hp=200
+        self.mana=50
+        self.damage=35
+        self.cost=45
+        self.type='ghost'
+        self.fromelectrodmg=1.5
+        self.frombiodmg=0.75
+        self.fromghostdmg=1.0
+        self.fromdeaddmg=0.75
+        self.fromfiredmg=0.9
+        self.skill=None
 
 
 
