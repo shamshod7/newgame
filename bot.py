@@ -177,6 +177,21 @@ def mobturn(creatorid, team, mob, number, t):
      dmg=round (dmg, 2)
      t['hp']-=dmg    
      end(creatorid, team, mob, number, t, dmg) 
+        
+   elif mob=='vsadnik':
+    dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
+    if team=='t1mobs':
+        for mobs in info.lobby.game[creatorid]['t2mobs']:
+          for numbers in info.lobby.game[creatorid]['t2mobs'][mobs]:
+            if info.lobby.game[creatorid]['t2mobs'][mobs][numbers]['shield']!=1:
+                info.lobby.game[creatorid]['t2mobs'][mobs][numbers]['hp']-=dmg                
+    elif team=='t2mobs':
+        for mobs in info.lobby.game[creatorid]['t1mobs']:
+          for numbers in info.lobby.game[creatorid]['t1mobs'][mobs]:
+            if info.lobby.game[creatorid]['t1mobs'][mobs][numbers]['shield']!=1:
+                info.lobby.game[creatorid]['t1mobs'][mobs][numbers]['hp']-=dmg
+    end(creatorid, team, mob, number, t, dmg) 
+                
     
     
     
@@ -330,6 +345,19 @@ def skills(mob, creatorid, team, team2, number):
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
+                mobturn(creatorid, team, mob, number, t)
+          else:
+            end(creatorid, team, mob, number, 0, 0)
+         info.lobby.game[creatorid][team][mob][number]['ready']=1
+     
+    
+    elif mob=='vsadnik':
+         if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
+           if info.lobby.game[creatorid][team][mob][number]['target']==None:
+              t=mobdmg(mob, creatorid, team, team2, number)
+              if t!='None' and t!=None:
+                info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojdmg+'По всем'
                 mobturn(creatorid, team, mob, number, t)
           else:
             end(creatorid, team, mob, number, 0, 0)
@@ -513,7 +541,8 @@ def endturn(creatorid):
                   'pyos':{'count':0},
                   'tiranozavr':{'count':0},
                   's4upakabra':{'count':0},
-                  'golem':{'count':0}
+                  'golem':{'count':0},
+                  'vsadnik':{'count':0}
                                }                 
     info.lobby.game[creatorid]['players'][endid]
  for mob10 in info.lobby.game[creatorid]['t1mobs']:
@@ -640,6 +669,8 @@ def nametoclass(name):  #делает перевод названия сущ-в�
         x=info.s4upakabra
     elif name=='golem':
         x=info.golem
+    elif name=='vsadnik':
+        x=info.vsadnik
          
     return x
 
@@ -877,6 +908,23 @@ def inline(call):
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']=createportal('golem', info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']['count']+1)  
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Пылающий голем)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']['count'])+' таких порталов!')
+           else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            
+            
+  elif call.data=='vsadnik':
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+          if 'vsadnik' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
+           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.vsadnik.cost:
+            info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.vsadnik.cost
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']['count']==0:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']=createportal('vsadnik', 1)  
+            else:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']=createportal('vsadnik', info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']['count']+1)  
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Всадник без коня)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']['count'])+' таких порталов!')
            else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
    
@@ -1163,7 +1211,8 @@ def createlobby(chatid, creatorid, fname):
                   'pyos':{},
                   'tiranozavr':{},
                   's4upakabra':{},
-                  'golem':{}
+                  'golem':{},
+                  'vsadnik':{}
              },
     't2mobs':{'s_me4nik':{},
                   'phoenix':{},
@@ -1172,7 +1221,8 @@ def createlobby(chatid, creatorid, fname):
                   'pyos':{},
                   'tiranozavr':{},
                   's4upakabra':{},
-                  'golem':{}
+                  'golem':{},
+                  'vsadnik':{}
              },
     'resultst1':'Результаты монстров из команды "Штурм"'+"\n",
     'resultst2':'Результаты монстров из команды "Оборона"'+"\n",
@@ -1209,7 +1259,8 @@ def createuser(id, x, fname):
                   'pyos':{},
                   'tiranozavr':{},
                   's4upakabra':{},
-                  'golem':{}
+                  'golem':{},
+                  'vsadnik':{}
          },
          'portals':{'s_me4nik':{'count':0},
                   'phoenix':{'count':0},
@@ -1218,7 +1269,8 @@ def createuser(id, x, fname):
                   'pyos':{'count':0},
                   'tiranozavr':{'count':0},
                   's4upakabra':{'count':0},
-                  'golem':{'count':0}
+                  'golem':{'count':0},
+                  'vsadnik':{'count':0}
 
                    },
          'mana':60,
@@ -1226,7 +1278,7 @@ def createuser(id, x, fname):
          'manamax':500,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'pyos', 'tiranozavr', 's4upakabra', 'golem'],
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'pyos', 'tiranozavr', 's4upakabra', 'golem', 'vsadnik'],
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
@@ -1245,7 +1297,8 @@ def createuser(id, x, fname):
                   'manoed':{},
                   'tiranozavr':{},
                   's4upakabra':{},
-                  'golem':{}
+                  'golem':{},
+                  'vsadnik':{}
          },
          'portals':{'s_me4nik':{'count':0},
                   'phoenix':{'count':0},
@@ -1253,14 +1306,15 @@ def createuser(id, x, fname):
                   'manoed':{'count':0},
                   'tiranozavr':{'count':0},
                   's4upakabra':{'count':0},
-                  'golem':{'count':0}
+                  'golem':{'count':0},
+                  'vsadnik':{'count':0}
                    },
          'mana':60,
          'mobnumber':0,
          'manamax':500,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr', 's4upakabra', 'golem'],
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr', 's4upakabra', 'golem', 'vsadnik'],
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
