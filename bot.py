@@ -1194,7 +1194,7 @@ def createuser(id, x, fname):
                   'golem':{'count':0}
 
                    },
-         'mana':150,
+         'mana':60,
          'mobnumber':0,
          'manamax':500,
          'inlobby':x,
