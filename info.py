@@ -112,6 +112,22 @@ class S4upakabra(object):
         self.fromdeaddmg=1.0
         self.fromfiredmg=1.0
         self.skill=None
+        
+        
+class Golem(object):
+    def __init__(self):
+        self.name='Пылающий голем'
+        self.hp=900
+        self.mana=100
+        self.damage=100
+        self.cost=110
+        self.type='fire'
+        self.fromelectrodmg=0.5
+        self.frombiodmg=0.7
+        self.fromghostdmg=1.5
+        self.fromdeaddmg=1.2
+        self.fromfiredmg=1.0
+        self.skill=None
 
 
 
@@ -123,7 +139,7 @@ class S4upakabra(object):
 
 
 
-
+golem=Golem()
 s4upakabra=S4upakabra()        
 tiranozavr=Tiranozavr()        
 manoed=Manoed()        
