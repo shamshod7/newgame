@@ -1087,6 +1087,14 @@ def beginmessage(message):
    else:
     bot.send_message(message.from_user.id, 'Играть можно только в группах!')
     
+    
+@bot.message_handler(commands=['surrender'])
+def surrender(message):
+    for id in info.lobby.game:
+        if message.chat.id==info.lobby.game[id]['chatid']:
+            bot.send_message(message.chat.id, info.lobby.game[id]['players'][message.from_user.id]['fname']+' сдался!')
+            del info.lobby.game[id]['players'][message.from_user.id]
+    
   
   
 @bot.message_handler(content_types=['text'])
