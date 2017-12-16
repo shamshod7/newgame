@@ -1178,7 +1178,7 @@ def createuser(id, x, fname):
                   'tiranozavr':{'count':0},
                   's4upakabra':{'count':0}
                    },
-         'mana':150,
+         'mana':60,
          'mobnumber':0,
          'manamax':500,
          'inlobby':x,
