@@ -169,6 +169,16 @@ def mobturn(creatorid, team, mob, number, t):
      end(creatorid, team, mob, number, t, dmg)
     
     
+   elif mob=='golem':
+     if t['shield']==0:
+       dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
+     else:
+       dmg=0
+     dmg=round (dmg, 2)
+     t['hp']-=dmg    
+     end(creatorid, team, mob, number, t, dmg) 
+    
+    
     
     
    
@@ -311,6 +321,19 @@ def skills(mob, creatorid, team, team2, number):
           else:
             end(creatorid, team, mob, number, 0, 0)
         info.lobby.game[creatorid][team][mob][number]['ready']=1  
+        
+        
+        
+    elif mob=='golem':
+         if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
+           if info.lobby.game[creatorid][team][mob][number]['target']==None:
+              t=mobdmg(mob, creatorid, team, team2, number)
+              if t!='None' and t!=None:
+                mobturn(creatorid, team, mob, number, t)
+          else:
+            end(creatorid, team, mob, number, 0, 0)
+         info.lobby.game[creatorid][team][mob][number]['ready']=1
                     
                     
      
@@ -483,7 +506,8 @@ def endturn(creatorid):
                   'manoed':{'count':0},
                   'pyos':{'count':0},
                   'tiranozavr':{'count':0},
-                  's4upakabra':{'count':0}          
+                  's4upakabra':{'count':0},
+                  'golem':{'count':0}
                                }                 
     info.lobby.game[creatorid]['players'][endid]
  for mob10 in info.lobby.game[creatorid]['t1mobs']:
@@ -608,6 +632,8 @@ def nametoclass(name):  #делает перевод названия сущ-в�
         x=info.tiranozavr
     elif name=='s4upakabra':
         x=info.s4upakabra
+    elif name=='golem':
+        x=info.golem
          
     return x
 
@@ -818,6 +844,24 @@ def inline(call):
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['s4upakabra']=createportal('s4upakabra', info.lobby.game[id]['players'][call.from_user.id]['portals']['s4upakabra']['count']+1)  
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Чупакабра)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['s4upakabra']['count'])+' таких порталов!')
+           else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+          
+        
+        
+  elif call.data=='golem':
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+          if 'golem' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
+           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.golem.cost:
+            info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.golem.cost
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']['count']==0:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']=createportal('golem', 1)  
+            else:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']=createportal('golem', info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']['count']+1)  
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Пылающий голем)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']['count'])+' таких порталов!')
            else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
    
@@ -1091,7 +1135,8 @@ def createlobby(chatid, creatorid, fname):
                   'manoed':{},
                   'pyos':{},
                   'tiranozavr':{},
-                  's4upakabra':{}
+                  's4upakabra':{},
+                  'golem':{}
              },
     't2mobs':{'s_me4nik':{},
                   'phoenix':{},
@@ -1099,7 +1144,8 @@ def createlobby(chatid, creatorid, fname):
                   'manoed':{},
                   'pyos':{},
                   'tiranozavr':{},
-                  's4upakabra':{}
+                  's4upakabra':{},
+                  'golem':{}
              },
     'resultst1':'Результаты монстров из команды "Штурм"'+"\n",
     'resultst2':'Результаты монстров из команды "Оборона"'+"\n",
@@ -1135,7 +1181,8 @@ def createuser(id, x, fname):
                   'manoed':{},
                   'pyos':{},
                   'tiranozavr':{},
-                  's4upakabra':{}
+                  's4upakabra':{},
+                  'golem':{}
          },
          'portals':{'s_me4nik':{'count':0},
                   'phoenix':{'count':0},
@@ -1143,7 +1190,8 @@ def createuser(id, x, fname):
                   'manoed':{'count':0},
                   'pyos':{'count':0},
                   'tiranozavr':{'count':0},
-                  's4upakabra':{'count':0}
+                  's4upakabra':{'count':0},
+                  'golem':{'count':0}
 
                    },
          'mana':150,
@@ -1151,7 +1199,7 @@ def createuser(id, x, fname):
          'manamax':500,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'pyos', 'tiranozavr', 's4upakabra'],
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'pyos', 'tiranozavr', 's4upakabra', 'golem'],
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
@@ -1169,21 +1217,23 @@ def createuser(id, x, fname):
                   'electromagnit':{},
                   'manoed':{},
                   'tiranozavr':{},
-                  's4upakabra':{}
+                  's4upakabra':{},
+                  'golem':{}
          },
          'portals':{'s_me4nik':{'count':0},
                   'phoenix':{'count':0},
                   'electromagnit':{'count':0},
                   'manoed':{'count':0},
                   'tiranozavr':{'count':0},
-                  's4upakabra':{'count':0}
+                  's4upakabra':{'count':0},
+                  'golem':{'count':0}
                    },
          'mana':60,
          'mobnumber':0,
          'manamax':500,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr', 's4upakabra'],
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr', 's4upakabra', 'golem'],
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
