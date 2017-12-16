@@ -1325,7 +1325,7 @@ def battle(creatorid):
       info.lobby.game[creatorid]['timer']=t
     for key in info.lobby.game[creatorid]['players']:
       mobs(key)
-      if len(info.lobby.game[creatorid]['players']>2:
+      if len(info.lobby.game[creatorid]['players'])>2:
              for id in info.lobby.game[creatorid]['players']:
                info.lobby.game[creatorid]['players'][id]['manaregen']=30
       info.lobby.game[creatorid]['players'][key]['mana']+=info.lobby.game[creatorid]['players'][key]['manaregen']      
