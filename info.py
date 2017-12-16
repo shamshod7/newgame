@@ -135,7 +135,7 @@ class Golem(object):
         
 class Vsadnik(object):
     def __init__(self):
-        self.name='Всадник без головы'
+        self.name='Всадник без коня'
         self.hp=200
         self.mana=50
         self.damage=35
@@ -153,7 +153,7 @@ class Vsadnik(object):
 
 
 
-
+vsadnik=Vsadnik()
 golem=Golem()
 s4upakabra=S4upakabra()        
 tiranozavr=Tiranozavr()        
