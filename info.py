@@ -117,7 +117,7 @@ class S4upakabra(object):
 class Golem(object):
     def __init__(self):
         self.name='Пылающий голем'
-        self.hp=900
+        self.hp=600
         self.mana=100
         self.damage=100
         self.cost=110
