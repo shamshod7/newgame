@@ -139,7 +139,7 @@ class Vsadnik(object):
         self.hp=200
         self.mana=50
         self.damage=50
-        self.cost=40
+        self.cost=45
         self.type='ghost'
         self.fromelectrodmg=1.5
         self.frombiodmg=0.75
