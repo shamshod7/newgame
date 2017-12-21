@@ -745,7 +745,7 @@ def inline(call):
             info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
             
   elif call.data=='end':
-   t=threading.Timer(1.0, endt, args=[call.from_user.id])
+   t=threading.Timer(0.1, endt, args=[call.from_user.id])
    t.start()
 
         
@@ -1116,7 +1116,7 @@ def startmessage(message):
 @bot.message_handler(commands=['help'])
 def helpmessage(message):
  try:
-  bot.send_message(message.from_user.id, 'Чтобы сыграть в игру, добавьте меня в чат и напишите /begin для начала набора игроков. В одном чате можно запустить несколько игр, но один игрок может присутствовать только в одной из них'+"\n"+      
+  bot.send_message(message.from_user.id, 'Чтобы сыграть в игру, добавьте меня в чат и напишите /begin для начала набора игроков. Один игрок может присутствовать только в одной игре'+"\n"+      
                    'В этой игре вы играете за одного из магов, который обороняет свою крепость, или нападает на чужую! '+
                    'Чтобы атаковать врага, вы чертите на земле специальные символы, открывая портал, из которого появляется одно из ваших выбранных '+
                    'существ (для открытия портала требуется мана), которое вступает в бой с существами врагов, и разделавшись с ними, идет в атаку на крепость.'+
