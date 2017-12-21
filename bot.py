@@ -699,13 +699,13 @@ def mobs(callid):    #выбирает 3х рандомных мобов для 
                         
 
 
-def endt():
+def endt(callid):
    for id in info.lobby.game:
     if call.from_user.id in info.lobby.game[id]['players']:
-     if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
-      if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
-        if call.from_user.id in info.lobby.game[id]['players']:  
-          testturn(info.lobby.game[id]['creatorid']['selfid'], call.from_user.id)
+     if info.lobby.game[id]['players'][callid]['currentmessage']==info.lobby.game[id]['players'][callid]['lastmessage']:
+      if info.lobby.game[id]['players'][callid]['ready']!=1:
+        if callid in info.lobby.game[id]['players']:  
+          testturn(info.lobby.game[id]['creatorid']['selfid'], callid)
                         
                         
 @bot.callback_query_handler(func=lambda call:True)
@@ -745,7 +745,7 @@ def inline(call):
             info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
             
   elif call.data=='end':
-   t=threading.Timer(1.0, endt)
+   t=threading.Timer(1.0, endt, args=[call.from_user.id])
    t.start()
 
         
