@@ -1163,6 +1163,7 @@ def beginmessage(message):
 def surrender(message):
     for id in info.lobby.game:
         if message.chat.id==info.lobby.game[id]['chatid']:
+          if message.from_user.id in info.lobby.game[id]['players']:
             bot.send_message(message.chat.id, info.lobby.game[id]['players'][message.from_user.id]['fname']+' сдался!')
             del info.lobby.game[id]['players'][message.from_user.id]
             if message.from_user.id in info.lobby.game[id]['team1']:
