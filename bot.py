@@ -699,7 +699,15 @@ def mobs(callid):    #выбирает 3х рандомных мобов для 
                         
 
 
-
+def endt():
+   for id in info.lobby.game:
+    if call.from_user.id in info.lobby.game[id]['players']:
+     if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+      if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+        if call.from_user.id in info.lobby.game[id]['players']:  
+          testturn(info.lobby.game[id]['creatorid']['selfid'], call.from_user.id)
+                        
+                        
 @bot.callback_query_handler(func=lambda call:True)
 def inline(call):
   if call.data=='do':
@@ -737,12 +745,9 @@ def inline(call):
             info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
             
   elif call.data=='end':
-   for id in info.lobby.game:
-    if call.from_user.id in info.lobby.game[id]['players']:
-     if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
-      if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
-        if call.from_user.id in info.lobby.game[id]['players']:  
-          testturn(info.lobby.game[id]['creatorid']['selfid'], call.from_user.id)
+   t=threading.Timer(1.0, endt)
+   t.start()
+
         
         
   elif call.data=='info':
