@@ -701,7 +701,7 @@ def mobs(callid):    #выбирает 3х рандомных мобов для 
 
 def endt(callid):
    for id in info.lobby.game:
-    if call.from_user.id in info.lobby.game[id]['players']:
+    if callid in info.lobby.game[id]['players']:
      if info.lobby.game[id]['players'][callid]['currentmessage']==info.lobby.game[id]['players'][callid]['lastmessage']:
       if info.lobby.game[id]['players'][callid]['ready']!=1:
         if callid in info.lobby.game[id]['players']:  
