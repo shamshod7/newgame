@@ -1193,6 +1193,7 @@ def namemessage(message):
           
   
 def cancel(id, chatid):
+ if id in info.lobby.game:
   if info.lobby.game[id]['playing']==0:
     info.lobby.game[id].clear()
     del info.lobby.game[id]
