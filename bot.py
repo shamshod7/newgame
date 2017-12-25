@@ -11,7 +11,7 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
-ban=[]
+ban=['pyos']
 
 
 def classtoemoji(classs):
