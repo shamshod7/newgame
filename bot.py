@@ -784,7 +784,7 @@ def inline(call):
             Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob']+"\n"+manacost+str(nc1.cost)+"\n"+emojdmg+str(nc1.damage)+"\n"+emojhp+str(nc1.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]))
             Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob']+"\n"+manacost+str(nc2.cost)+"\n"+emojdmg+str(nc2.damage)+"\n"+emojhp+str(nc2.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]))
             Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
-            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard, resize_Keyboard=True)
+            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
          
@@ -947,9 +947,9 @@ def inline(call):
             
     
   
-def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
+def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown', resize_Keyboard=True):
     return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
-                                 parse_mode=parse_mode)
+                                 parse_mode=parse_mode,  resize_Keyboard=resize_Keyboard)
 
 @bot.message_handler(commands=['electro'])
 def electro(message):
