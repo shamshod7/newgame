@@ -11,7 +11,7 @@ from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
 
-ban=['pyos']
+ban=[]
 
 
 def classtoemoji(classs):
@@ -164,8 +164,9 @@ def mobturn(creatorid, team, mob, number, t):
      else:
        dmg=0
      dmg=round (dmg, 2)
-     t['hp']-=dmg    
-     info.lobby.game[creatorid][team][mob][number]['hp']+=dmg/2
+     t['hp']-=dmg  
+     if info.lobby.game[creatorid][team][mob][number]['hp']>0:
+       info.lobby.game[creatorid][team][mob][number]['hp']+=dmg/2
      end(creatorid, team, mob, number, t, dmg)
     
     
@@ -520,7 +521,7 @@ def endturn(creatorid):
  droplet=emojize(':droplet:', use_aliases=True)
  te=emojize(':busts_in_silhouette:', use_aliases=True)
  if len(info.lobby.game[creatorid]['team2'])>0 and len(info.lobby.game[creatorid]['team1'])>0:
-   bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!')
+   bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!'+"\n"+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n")
    print('Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!')
  else:
    if len(info.lobby.game[creatorid]['team2'])<1:
@@ -1058,6 +1059,7 @@ def fightstart(message):
                 bot.send_message(ids1, 'Вы штурмуете крепость! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates1'])
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
+            bot.send_message(441399484, 'Игра началась в каком-то чате!')
             info.lobby.game[message.from_user.id]['thread']=btl
             print(info.lobby.game)
             info.lobby.game[message.from_user.id]['playing']=1
