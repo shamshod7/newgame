@@ -779,7 +779,7 @@ def inline(call):
             emojdmg=emojize(':crossed_swords:', use_aliases=True)
             emojhp=emojize(':green_heart:', use_aliases=True)
             back=emojize(':back:', use_aliases=True) 
-            Keyboard=types.InlineKeyboardMarkup()
+            Keyboard=types.InlineKeyboardMarkup(resize_Keyboard=True)
             Keyboard.add(types.InlineKeyboardButton(text=emoj0+info.lobby.game[id]['players'][call.from_user.id]['name1mob']+"\n"+manacost+str(nc0.cost)+"\n"+emojdmg+str(nc0.damage)+"\n"+emojhp+str(nc0.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]))
             Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob']+"\n"+manacost+str(nc1.cost)+"\n"+emojdmg+str(nc1.damage)+"\n"+emojhp+str(nc1.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]))
             Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob']+"\n"+manacost+str(nc2.cost)+"\n"+emojdmg+str(nc2.damage)+"\n"+emojhp+str(nc2.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]))
@@ -947,9 +947,9 @@ def inline(call):
             
     
   
-def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown', resize_Keyboard=True):
+def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
     return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
-                                 parse_mode=parse_mode,  resize_Keyboard=resize_Keyboard)
+                                 parse_mode=parse_mode)
 
 @bot.message_handler(commands=['electro'])
 def electro(message):
