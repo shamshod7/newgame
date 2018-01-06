@@ -603,10 +603,10 @@ def endturn(creatorid):
          mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
          mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
          info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne1hp']-mobdmage)+"\n"
-         info.lobby.game[creatorid]['throne1hp']-=mobdmage
          info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
          info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']=0
-   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Оборона" нанесли '+str(mobdmageall)+' урона по крепости команды "Штурм"! Теперь у неё '+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы погибли.'    
+   info.lobby.game[creatorid]['throne1hp']-=1
+   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Оборона" подошли к вражеской крепости! Теперь у неё '+emojheart+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы погибли.'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
@@ -616,15 +616,16 @@ def endturn(creatorid):
       emojattack=emojize(':arrow_right:', use_aliases=True)
       emojdmg=emojize(':broken_heart:', use_aliases=True)
       emojhp=emojize(':green_heart:', use_aliases=True)
+      emojheart=emojize(':heart:', use_aliases=True)
       if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']!=1:
        if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['stun']<1:
          mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
          mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
          info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Крепость'+emojdmg+str(mobdmage)+emojhp+str(info.lobby.game[creatorid]['throne2hp']-mobdmage)+"\n"
-         info.lobby.game[creatorid]['throne2hp']-=mobdmage 
          info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
          info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']=0
-    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Штурм" нанесли '+str(mobdmageall)+' урона по крепости команды "Оборона"! Теперь у неё '+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы погибли.'
+    info.lobby.game[creatorid]['throne2hp']-=1
+    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Штурм" подошли к вражеской крепости! Теперь у неё '+emojheart+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы погибли.'
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
  elif livemob2>0 and livemob1>0:
@@ -1246,8 +1247,8 @@ def createlobby(chatid, creatorid, fname):
     'hod':1,
     'teammates1':'',
     'teammates2':'',
-    'throne1hp':1000,
-    'throne2hp':1000,
+    'throne1hp':5,
+    'throne2hp':5,
     'thronedamage':'',
     'manaplust1':0,
     'manaplust2':0,
@@ -1300,7 +1301,7 @@ def createuser(id, x, fname):
          'ready':0,
          'fname':fname,
          'currentmessage':'',
-         'manaregen':40
+         'manaregen':55
             }  
     else:  
       return{'selfid':id,
@@ -1336,7 +1337,7 @@ def createuser(id, x, fname):
          'ready':0,
          'fname':fname,
          'currentmessage':'',
-         'manaregen':40
+         'manaregen':55
             }  
   
 def createportal(name, x):  
@@ -1422,7 +1423,7 @@ def battle(creatorid):
       mobs(key)
       if len(info.lobby.game[creatorid]['players'])>2:
              for id in info.lobby.game[creatorid]['players']:
-               info.lobby.game[creatorid]['players'][id]['manaregen']=30
+               info.lobby.game[creatorid]['players'][id]['manaregen']=40
       info.lobby.game[creatorid]['players'][key]['mana']+=info.lobby.game[creatorid]['players'][key]['manaregen']      
       mana=emojize(':droplet:', use_aliases=True)
       go=emojize(':video_game:', use_aliases=True)
