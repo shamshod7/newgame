@@ -598,6 +598,7 @@ def endturn(creatorid):
       emojattack=emojize(':arrow_right:', use_aliases=True)
       emojdmg=emojize(':broken_heart:', use_aliases=True)
       emojhp=emojize(':green_heart:', use_aliases=True)
+      emojheart=emojize(':heart:', use_aliases=True)
       if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']!=1:
        if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['stun']<1:
          mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
