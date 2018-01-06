@@ -785,7 +785,7 @@ def inline(call):
             Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob']+"\n"+manacost+str(nc1.cost)+emojdmg+str(nc1.damage)+emojhp+str(nc1.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]))
             Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob']+"\n"+manacost+str(nc2.cost)+emojdmg+str(nc2.damage)+emojhp+str(nc2.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]))
             Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
-            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            msg=medit('Доступные вам существа в этом ходу:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
          
