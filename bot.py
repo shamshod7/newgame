@@ -776,13 +776,15 @@ def inline(call):
             emoj0=classtoemoji(nc0.type)
             emoj1=classtoemoji(nc1.type)
             emoj2=classtoemoji(nc2.type)
+            emojdmg=emojize(':crossed_swords:', use_aliases=True)
+            emojhp=emojize(':green_heart:', use_aliases=True)
             back=emojize(':back:', use_aliases=True) 
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text=emoj0+info.lobby.game[id]['players'][call.from_user.id]['name1mob']+"\n"+manacost+str(nc0.cost), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]))
-            Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob']+"\n"+manacost+str(nc1.cost), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]))
-            Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob']+"\n"+manacost+str(nc2.cost), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj0+info.lobby.game[id]['players'][call.from_user.id]['name1mob']+"\n"+manacost+str(nc0.cost)+"\n"+emojdmg+str(nc0.dmg)+"\n"+emojhp+str(nc0.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob']+"\n"+manacost+str(nc1.cost)+"\n"+emojdmg+str(nc1.dmg)+"\n"+emojhp+str(nc1.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob']+"\n"+manacost+str(nc2.cost)+"\n"+emojdmg+str(nc2.dmg)+"\n"+emojhp+str(nc2.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]))
             Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
-            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            msg=medit('В этом ходу вам доступны:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard, resize_Keyboard=True)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
          
