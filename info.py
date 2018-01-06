@@ -9,7 +9,7 @@ class S_me4nik(object):
         self.hp=65
         self.mana=30
         self.damage=55
-        self.cost=20
+        self.cost=30
         self.type='dead'
         self.fromelectrodmg=0.7
         self.frombiodmg=1.5
@@ -25,7 +25,7 @@ class Pyos(object):
         self.hp=400
         self.mana=30
         self.damage=50
-        self.cost=50
+        self.cost=75
         self.type='bio'
         self.fromelectrodmg=1.3
         self.frombiodmg=1.0
@@ -39,8 +39,8 @@ class Phoenix(object):
         self.name='Феникадзе'
         self.hp=25
         self.mana=30
-        self.damage=250
-        self.cost=50
+        self.damage=200
+        self.cost=70
         self.type='fire'
         self.fromelectrodmg=0.5
         self.frombiodmg=0.7
@@ -56,7 +56,7 @@ class Electromagnit(object):
         self.hp=180
         self.mana=80
         self.damage=70
-        self.cost=40
+        self.cost=60
         self.type='electro'
         self.fromelectrodmg=1.0
         self.frombiodmg=1.1
@@ -72,7 +72,7 @@ class Manoed(object):
         self.hp=135
         self.mana=30
         self.damage=45
-        self.cost=30
+        self.cost=45
         self.type='ghost'
         self.fromelectrodmg=1.5
         self.frombiodmg=0.75
@@ -88,7 +88,7 @@ class Tiranozavr(object):
         self.hp=260
         self.mana=30
         self.damage=120
-        self.cost=60
+        self.cost=90
         self.type='bio'
         self.fromelectrodmg=1.3
         self.frombiodmg=1.0
@@ -104,7 +104,7 @@ class S4upakabra(object):
         self.hp=75
         self.mana=55
         self.damage=90
-        self.cost=35
+        self.cost=50
         self.type='dead'
         self.fromelectrodmg=0.7
         self.frombiodmg=1.5
@@ -120,7 +120,7 @@ class Golem(object):
         self.hp=600
         self.mana=100
         self.damage=100
-        self.cost=110
+        self.cost=165
         self.type='fire'
         self.fromelectrodmg=0.5
         self.frombiodmg=0.7
@@ -139,7 +139,7 @@ class Vsadnik(object):
         self.hp=200
         self.mana=50
         self.damage=50
-        self.cost=45
+        self.cost=70
         self.type='ghost'
         self.fromelectrodmg=1.5
         self.frombiodmg=0.75
