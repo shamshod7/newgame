@@ -1423,7 +1423,7 @@ def battle(creatorid):
       mobs(key)
       if len(info.lobby.game[creatorid]['players'])>2:
              for id in info.lobby.game[creatorid]['players']:
-               info.lobby.game[creatorid]['players'][id]['manaregen']=40
+               info.lobby.game[creatorid]['players'][id]['manaregen']=30
       info.lobby.game[creatorid]['players'][key]['mana']+=info.lobby.game[creatorid]['players'][key]['manaregen']      
       mana=emojize(':droplet:', use_aliases=True)
       go=emojize(':video_game:', use_aliases=True)
