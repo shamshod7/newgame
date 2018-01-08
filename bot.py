@@ -1036,12 +1036,12 @@ def load(folder):
     
 @bot.message_handler(commands=['test'])
 def testmessage(m):
-    try:
+    if len(test.spisok)>0:
       base=load('test.py')
       print(base)
-    except:
-      spisok1=[]
-      save(spisok1, 'test.py')
+    else:
+      tst=[xer]
+      save(tst, 'test.py')
       base=load('test.py')
       print(base)
     if m.from_user.id not in base:
