@@ -1039,8 +1039,11 @@ def testmessage(m):
     base=load('test')
     if m.from_user.id not in base.spisok:
         base.spisok.append(m.from_user.id)
+        bot.send_message(m.from_user.id, 'Ваш id добавлен в список!')
         save(base, 'test.py')
         base.close()
+    else:
+        bot.send_message(m.from_user.id, 'Вы уже в списке!')
     
 
 
