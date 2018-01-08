@@ -1031,7 +1031,7 @@ def save(target, folder):
         
 def load(folder):
     import pickle
-    with open(folder, 'lb') as handle:
+    with open(folder, 'rb') as handle:
         return pickle.load(handle)
     
 @bot.message_handler(commands=['test'])
