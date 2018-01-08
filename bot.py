@@ -1036,6 +1036,9 @@ def load(folder):
     
 @bot.message_handler(commands=['test'])
 def testmessage(m):
+    if len(test.spisok==0):
+        spisok=[]
+        save(spisok, 'test.pickle')
     base=load('test.pickle')
     if m.from_user.id not in base.spisok:
         base.spisok.append(m.from_user.id)
