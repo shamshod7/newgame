@@ -11,7 +11,7 @@ from telebot import types
 from emoji import emojize
 token = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token)
-
+base=[]
 ban=[]
 
 
@@ -1030,15 +1030,19 @@ def save(target, folder):
         pickle.dump(target, handle)
         
         
-def load(folder):
-    import pickle
-    with open(folder, 'rb') as handle:
-        return pickle.load(handle)
+#def load(folder):
+#    import pickle
+#    with open(folder, 'rb') as handle:
+#        return pickle.load(handle)
+    
+def load():
+	import pickle
+	with open('test.py', 'rb') as handle:
+		data = pickle.load(handle)
+	base.append(data)
     
 @bot.message_handler(commands=['test'])
 def testmessage(m):
-    base=test.spisok
-    print(base)
     if m.from_user.id not in base:
         base.append(m.from_user.id)
         bot.send_message(m.from_user.id, 'Ваш id добавлен в список!')
@@ -1463,6 +1467,7 @@ def battle(creatorid):
 
 
 if __name__ == '__main__':
+  load()
   bot.polling(none_stop=True)
 
 
