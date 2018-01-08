@@ -1467,9 +1467,7 @@ def battle(creatorid):
 
 
 if __name__ == '__main__':
-  #load()
-  spisok=['xer']
-  save(spisok, 'test')
+  load()
   bot.polling(none_stop=True)
 
 
