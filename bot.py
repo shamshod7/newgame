@@ -1041,13 +1041,11 @@ def testmessage(m):
     except:
       spisok=[]
       save(spisok, 'test.pickle')
-      'test.pickle'.close()
       base=load('test.pickle')
     if m.from_user.id not in base:
         base.append(m.from_user.id)
         bot.send_message(m.from_user.id, 'Ваш id добавлен в список!')
         save(base, 'test.pickle')
-        'test.pickle'.close()
     else:
         bot.send_message(m.from_user.id, 'Вы уже в списке!')
     
