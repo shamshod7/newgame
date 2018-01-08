@@ -1036,10 +1036,10 @@ def load(folder):
     
 @bot.message_handler(commands=['test'])
 def testmessage(m):
-    base=load('test.py')
+    base=load('test')
     if m.from_user.id not in base.spisok:
         base.spisok.append(m.from_user.id)
-        save(base, 'test.py')
+        save(base, 'test')
         base.close()
     
 
