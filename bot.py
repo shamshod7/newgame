@@ -1037,17 +1037,17 @@ def load(folder):
 @bot.message_handler(commands=['test'])
 def testmessage(m):
     try:
-      base=load('test.pickle')
+      base=load('test.py')
       print(base)
     except:
       spisok1=[]
-      save(spisok1, 'test.pickle')
-      base=load('test.pickle')
+      save(spisok1, 'test.py')
+      base=load('test.py')
       print(base)
     if m.from_user.id not in base:
         base.append(m.from_user.id)
         bot.send_message(m.from_user.id, 'Ваш id добавлен в список!')
-        save(base, 'test.pickle')
+        save(base, 'test.py')
     else:
         bot.send_message(m.from_user.id, 'Вы уже в списке!')
     
