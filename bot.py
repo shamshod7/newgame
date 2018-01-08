@@ -1039,8 +1039,8 @@ def testmessage(m):
     try:
       base=load('test.pickle')
     except:
-      spisok=[]
-      save(spisok, 'test.pickle')
+      spisok1=[]
+      save(spisok1, 'test.pickle')
       base=load('test.pickle')
     if m.from_user.id not in base:
         base.append(m.from_user.id)
