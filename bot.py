@@ -1027,7 +1027,7 @@ def undead(message):
 def save(target, folder):
     import pickle
     with open(folder, 'wb') as handle:
-        pickle.dump(target, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(target, handle)
         
         
 def load(folder):
