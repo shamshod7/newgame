@@ -1037,14 +1037,8 @@ def load(folder):
     
 @bot.message_handler(commands=['test'])
 def testmessage(m):
-    if len(test.spisok)>0:
-      base=load('test.py')
-      print(base)
-    else:
-      tst=['xer']
-      save(tst, 'test.py')
-      base=load('test.py')
-      print(base)
+    base=load('test.py')
+    print(base)
     if m.from_user.id not in base:
         base.append(m.from_user.id)
         bot.send_message(m.from_user.id, 'Ваш id добавлен в список!')
