@@ -1034,12 +1034,12 @@ def load(folder):
     with open(folder, 'rb') as handle:
         return pickle.load(handle)
     
-@bot.message_handler(commands=['test'])
+@bot.message_handler(commands=['test.py'])
 def testmessage(m):
     base=load('test')
     if m.from_user.id not in base.spisok:
         base.spisok.append(m.from_user.id)
-        save(base, 'test')
+        save(base, 'test.py')
         base.close()
     
 
