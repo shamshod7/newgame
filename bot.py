@@ -1023,9 +1023,25 @@ def undead(message):
                     )
     
  
+def save(target, folder):
+    import pickle
+    with open(folder, 'wb') as handle:
+        pickle.dump(target, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        
+        
+def load(folder):
+    import pickle
+    with open(folder, 'wb') as handle:
+        return pickle.load(handle)
     
+@bot.message_handler(commands=['test'])
+def testmessage(m):
+    base=load(test.py)
+    if m.from_user.id not in base.spisok:
+        base.spisok.append(m.from_user.id)
+        save(base, test.py)
+        base.close()
     
-                     
 
 
 @bot.message_handler(commands=['fight'])
