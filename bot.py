@@ -1041,7 +1041,7 @@ def testmessage(m):
       base=load('test.py')
       print(base)
     else:
-      tst=[xer]
+      tst=['xer']
       save(tst, 'test.py')
       base=load('test.py')
       print(base)
