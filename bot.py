@@ -1043,7 +1043,6 @@ def testmessage(m):
         base.append(m.from_user.id)
         bot.send_message(m.from_user.id, 'Ваш id добавлен в список!')
         save(base, 'test.pickle')
-        base.close()
     else:
         bot.send_message(m.from_user.id, 'Вы уже в списке!')
     
