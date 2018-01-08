@@ -1037,7 +1037,7 @@ def save(target, folder):
     
 def load():
 	import pickle
-	with open('test.py', 'rb') as handle:
+	with open('test', 'rb') as handle:
 		data = pickle.load(handle)
 	base.append(data)
     
