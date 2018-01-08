@@ -1038,10 +1038,12 @@ def load(folder):
 def testmessage(m):
     try:
       base=load('test.pickle')
+      print(base)
     except:
       spisok1=[]
       save(spisok1, 'test.pickle')
       base=load('test.pickle')
+      print(base)
     if m.from_user.id not in base:
         base.append(m.from_user.id)
         bot.send_message(m.from_user.id, 'Ваш id добавлен в список!')
