@@ -22,7 +22,7 @@ class S_me4nik(object):
 class Pyos(object):
     def __init__(self):
         self.name='Pyos'
-        self.hp=400
+        self.hp=300
         self.mana=30
         self.damage=50
         self.cost=75
@@ -147,7 +147,9 @@ class Vsadnik(object):
         self.fromdeaddmg=0.75
         self.fromfiredmg=0.9
         self.skill=None
-
+        
+        
+        
 
 
 
