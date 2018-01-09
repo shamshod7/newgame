@@ -443,7 +443,7 @@ def randomeat(creatorid, team2, mob, x):
                       b=random.choice(g)
                       target=info.lobby.game[creatorid][team2][c][b]
                       if target['smert']!=1:
-                        mob['hp']+=target['hp']*0,4
+                        mob['hp']+=target['hp']*0.4
                         mob['hp']=round(mob['hp'], 2)
                         mob['damage']+=target['damage']
                         target['hp']=0
