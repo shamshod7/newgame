@@ -193,7 +193,18 @@ def mobturn(creatorid, team, mob, number, t):
             if info.lobby.game[creatorid]['t1mobs'][mobs][numbers]['shield']!=1:
                 info.lobby.game[creatorid]['t1mobs'][mobs][numbers]['hp']-=dmg
     end(creatorid, team, mob, number, t, dmg) 
+    
+    
+    
                 
+   elif mob=='soulcatcher':
+     if t['shield']==0:
+       dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+     else:
+       dmg=0
+     dmg=round (dmg, 2)
+     t['hp']-=dmg  
+     end(creatorid, team, mob, number, t, dmg)
     
     
     
@@ -364,6 +375,22 @@ def skills(mob, creatorid, team, team2, number):
           else:
             end(creatorid, team, mob, number, 0, 0)
          info.lobby.game[creatorid][team][mob][number]['ready']=1
+        
+        
+    elif mob=='soulcatcher':  
+        if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
+           if info.lobby.game[creatorid][team][mob][number]['target']==None:
+               t=mobdmg(mob, creatorid, team, team2, number)
+               x=random.randint(1,100)
+               if x<=15:    
+                  randomeat(creatorid, team2, info.lobby.game[creatorid][team][mob][number], 0)
+               if t!=None and t!='None':
+                   mobturn(creatorid, team, mob, number, t) 
+          else:
+            end(creatorid, team, mob, number, 0, 0)
+        info.lobby.game[creatorid][team][mob][number]['ready']=1  
+    
                     
                     
      
@@ -394,9 +421,41 @@ def randomstun(creatorid, team2, mob, x):
                       else:
                         randomstun(creatorid, team2, mob, x)
                     else:
-                        if x<50:
+                        if x<100:
                           x+=1
                           randomstun(creatorid, team2, mob, x)
+                        else:
+                            pass
+                        
+                        
+def randomeat(creatorid, team2, mob, x):
+             typemob1=classtoemoji(mob['type'])
+             emoj1=emojize(typemob1, use_aliases=True)
+             emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
+             emojeat=emojize(':japanese_ogre:', use_aliases=True)
+             if len(info.lobby.game[creatorid][team2])>0:
+                    print('>0')
+                    d=list(info.lobby.game[creatorid][team2].keys())
+                    c=random.choice(d)
+                    if len(info.lobby.game[creatorid][team2][c])>0:
+                      print('>0 duble2')
+                      g=list(info.lobby.game[creatorid][team2][c].keys())                    
+                      b=random.choice(g)
+                      target=info.lobby.game[creatorid][team2][c][b]
+                      if target['smert']!=1:
+                        mob['hp']+=target['hp']*0,4
+                        mob['hp']=round(mob['hp'], 2)
+                        mob['damage']+=target['damage']
+                        target['hp']=0
+                        typemob2=classtoemoji(target['type'])
+                        emoj2= emojize(typemob2, use_aliases=True)                
+                        mob['skilltext']=emoj1+mob['name']+emojeat+emoj2+target['name']+' "Изгнание"'
+                      else:
+                        randomeat(creatorid, team2, mob, x)
+                    else:
+                        if x<100:
+                          x+=1
+                          randomeat(creatorid, team2, mob, x)
                         else:
                             pass
    
@@ -678,6 +737,8 @@ def nametoclass(name):  #делает перевод названия сущ-в�
         x=info.golem
     elif name=='vsadnik':
         x=info.vsadnik
+    elif name=='soulcatcher':
+        x=info.soulcatcher
          
     return x
 
@@ -942,8 +1003,26 @@ def inline(call):
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Всадник без коня)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']['count'])+' таких порталов!')
            else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            
+            
+            
+       
    
-                
+  elif call.data=='soulcatcher':     
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+          if 'soulcatcher' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
+           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.soulcatcher.cost:
+            info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.soulcatcher.cost
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']['count']==0:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']=createportal('soulcatcher', 1)  
+            else:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']=createportal('soulcatcher', info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']['count']+1)  
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Пожиратель душ)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']['count'])+' таких порталов!')
+           else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
    
        
                  
@@ -1021,7 +1100,8 @@ def undead(message):
                      'Наносимый урон:'+"\n"+'По '+emojelectro+'электро: 150%'+"\n"+'По '+emojbio+'био: 110%'+"\n"+'По '+emojfire+'огненным: 120%'+"\n"+'По '+emojghost+'призракам: 75%'+"\n"+"\n"+  
                      'Получаемый урон:'+"\n"+'От '+emojelectro+'электро: 70%'+"\n"+'От '+emojbio+'био: 150%'+"\n"+'От '+emojfire+'огненных: 100%'+"\n"+'От '+emojghost+'призраков: 90%'+"\n"+"\n"+ 
                      'Скиллы:'+"\n"+'"Проклятье мертвецов" (присутствует у: Скелет-мечник) - имеет 25% шанс при атаке цели повысить получаемый ей урон от мертвецов на 60% (складывается от нескольких применений скилла по одной цели).'+"\n"+
-                     '"Кровожадность" (присутствует у: Чупакабра) - при атаке цели лечит себя на 50% нанесённого урона'
+                     '"Кровожадность" (присутствует у: Чупакабра) - при атаке цели лечит себя на 50% нанесённого урона (если в момент применения скилла хп больше нуля).'+"\n"+
+                     '"Изгнание" (присутствует у: Пожиратель душ (уникальный моб, выданный Василию за победу в турнире) - с шансом 15% изгоняет случайного вражеского монстра из этого мира, овладевая его душой - увеличивает свое хп на 40% от текущего хп противника, а так же добавляет к своему урону 100% от урона изгнанного.'
                     )
     
  
@@ -1123,10 +1203,10 @@ def startmessage(message):
 @bot.message_handler(commands=['help'])
 def helpmessage(message):
  try:
-  bot.send_message(message.from_user.id, 'Чтобы сыграть в игру, добавьте меня в чат и напишите /begin для начала набора игроков. Один игрок может присутствовать только в одной игре'+"\n"+      
+  bot.send_message(message.from_user.id, 'Чтобы сыграть в игру, добавьте меня в чат и напишите /begin для начала набора игроков. Один игрок может присутствовать только в одной игре. Создатель лобби автоматически в него помещается.'+"\n"+      
                    'В этой игре вы играете за одного из магов, который обороняет свою крепость, или нападает на чужую! (на балланс это не влияет). '+
                    'Чтобы атаковать врага, вы чертите на земле специальные символы, открывая портал, из которого появляется одно из ваших выбранных '+
-                   'существ (для открытия портала требуется мана), которое вступает в бой с существами врагов, и разделавшись с ними, идет в атаку на крепость. Если хотя бы одно существо подошло к вражеской крепости, она теряет 1 хп (всего хп 5).'+
+                   'существ (для открытия портала требуется мана, которая каждый ход регенерируется по 55 единиц (если в игре больше, чем 2 человека, то по 30)), которое вступает в бой с существами врагов, и разделавшись с ними, идет в атаку на крепость. Если хотя бы одно существо подошло к вражеской крепости, она теряет 1 хп (всего хп 5).'+
                    ' Все существа полностью самостоятельны, вам лишь нужно грамотно выбрать порталы для их появления.'+'В каждом раунде вам даются 3 случайно выбранных портала, которые вы можете открывать.'+'Можно играть команда на команду!'+"\n"+'Цель игры: уничтожить крепость соперника.'+"\n"+'Всего в игре есть 5 классов существ:'+"\n"+'электро, биологические, огненные, призрачные и мертвецы.'+"\n"+
                     'Чтобы узнать про каждый: /electro, /bio, /fire, /ghost, /undead. (От своего класса мобы всегда получают 100% урон)')
   if message.chat.id<0:
@@ -1306,7 +1386,49 @@ def createuser(id, x, fname):
          'fname':fname,
          'currentmessage':'',
          'manaregen':55
-            }  
+            } 
+    
+    elif id==441399484 or id==218485655:
+        return{'selfid':id,
+         'lastmessage':0,
+         'tvari':{'s_me4nik':{},
+                  'phoenix':{},
+                  'electromagnit':{},
+                  'manoed':{},
+                  'tiranozavr':{},
+                  's4upakabra':{},
+                  'golem':{},
+                  'vsadnik':{},
+                  'soulcatcher':{}
+         },
+         'portals':{'s_me4nik':{'count':0},
+                  'phoenix':{'count':0},
+                  'electromagnit':{'count':0},
+                  'manoed':{'count':0},
+                  'tiranozavr':{'count':0},
+                  's4upakabra':{'count':0},
+                  'golem':{'count':0},
+                  'vsadnik':{'count':0},
+                  'soulcatcher':{'count':0}
+
+                   },
+         'mana':60,
+         'mobnumber':0,
+         'manamax':500,
+         'inlobby':x,
+         'cash':'',
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr', 's4upakabra', 'golem', 'vsadnik', 'soulcatcher'],
+         'mobsinturn':[],
+         'name1mob':'',
+         'name2mob':'',
+         'name3mob':'',
+         'ready':0,
+         'fname':fname,
+         'currentmessage':'',
+         'manaregen':55
+            } 
+    
+    
     else:  
       return{'selfid':id,
          'lastmessage':0,
