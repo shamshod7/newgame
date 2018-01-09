@@ -138,7 +138,7 @@ class Vsadnik(object):
         self.name='Всадник без коня'
         self.hp=200
         self.mana=50
-        self.damage=50
+        self.damage=70
         self.cost=70
         self.type='ghost'
         self.fromelectrodmg=1.5
@@ -149,12 +149,29 @@ class Vsadnik(object):
         self.skill=None
         
         
+       
+class Soulcatcher(object):
+    def __init__(self):
+        self.name='Пожиратель душ'
+        self.hp=110
+        self.mana=50
+        self.damage=75
+        self.cost=70
+        self.type='dead'
+        self.fromelectrodmg=0.7
+        self.frombiodmg=1.5
+        self.fromghostdmg=0.9
+        self.fromdeaddmg=1.0
+        self.fromfiredmg=1.0
+        self.skill=None
+        
+        
         
 
 
 
 
-
+soulcatcher=Soulcatcher()
 vsadnik=Vsadnik()
 golem=Golem()
 s4upakabra=S4upakabra()        
