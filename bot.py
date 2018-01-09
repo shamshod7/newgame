@@ -1024,31 +1024,7 @@ def undead(message):
                     )
     
  
-def save(target, folder):
-    import pickle
-    with open(folder, 'wb') as handle:
-        pickle.dump(target, handle)
-        
-        
-#def load(folder):
-#    import pickle
-#    with open(folder, 'rb') as handle:
-#        return pickle.load(handle)
-    
-def load():
-	import pickle
-	with open('test', 'rb') as handle:
-		data = pickle.load(handle)
-	base.append(data)
-    
-@bot.message_handler(commands=['test'])
-def testmessage(m):
-    if m.from_user.id not in base:
-        base.append(m.from_user.id)
-        bot.send_message(m.from_user.id, 'Ваш id добавлен в список!')
-        save(base, 'test.py')
-    else:
-        bot.send_message(m.from_user.id, 'Вы уже в списке!')
+
     
 
 
@@ -1467,7 +1443,6 @@ def battle(creatorid):
 
 
 if __name__ == '__main__':
-  load()
   bot.polling(none_stop=True)
 
 
