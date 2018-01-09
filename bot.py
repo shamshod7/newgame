@@ -383,7 +383,7 @@ def skills(mob, creatorid, team, team2, number):
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
                t=mobdmg(mob, creatorid, team, team2, number)
                x=random.randint(1,100)
-               if x<=15:    
+               if x<=25:    
                   randomeat(creatorid, team2, info.lobby.game[creatorid][team][mob][number], 0)
                if t!=None and t!='None':
                    mobturn(creatorid, team, mob, number, t) 
@@ -443,7 +443,8 @@ def randomeat(creatorid, team2, mob, x):
                       b=random.choice(g)
                       target=info.lobby.game[creatorid][team2][c][b]
                       if target['smert']!=1:
-                        mob['hp']+=target['hp']*0.4
+                        if mob['hp']>0:
+                          mob['hp']+=target['hp']*0.5
                         mob['hp']=round(mob['hp'], 2)
                         mob['damage']+=target['damage']
                         target['hp']=0
