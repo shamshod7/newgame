@@ -1350,7 +1350,7 @@ def createlobby(chatid, creatorid, fname):
   
   
 def createuser(id, x, fname):
-    if id==197216910 or id==441399484:
+    if id==197216910:
         return{'selfid':id,
          'lastmessage':0,
          'tvari':{'s_me4nik':{},
@@ -1390,7 +1390,7 @@ def createuser(id, x, fname):
          'manaregen':55
             } 
     
-    elif id==441399484 or id==218485655:
+    elif id==218485655:   #vasiliy
         return{'selfid':id,
          'lastmessage':0,
          'tvari':{'s_me4nik':{},
