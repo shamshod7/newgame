@@ -604,7 +604,8 @@ def endturn(creatorid):
                   'tiranozavr':{'count':0},
                   's4upakabra':{'count':0},
                   'golem':{'count':0},
-                  'vsadnik':{'count':0}
+                  'vsadnik':{'count':0},
+                  'soulcatcher':{'count':0}
                                }                 
     info.lobby.game[creatorid]['players'][endid]
  for mob10 in info.lobby.game[creatorid]['t1mobs']:
@@ -1350,7 +1351,7 @@ def createlobby(chatid, creatorid, fname):
   
   
 def createuser(id, x, fname):
-    if id==197216910:
+    if id==197216910:#pyos
         return{'selfid':id,
          'lastmessage':0,
          'tvari':{'s_me4nik':{},
