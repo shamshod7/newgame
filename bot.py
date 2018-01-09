@@ -755,12 +755,13 @@ def inline(call):
         
         
   elif call.data=='info':
+    hp=emojize(':heart:', use_aliases=True)
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
         if call.from_user.id in info.lobby.game[id]['team1']:
-          bot.send_message(call.from_user.id, 'Ваша команда: '+info.lobby.game[id]['teammates1'])
+          bot.send_message(call.from_user.id, 'Ваша команда: '+info.lobby.game[id]['teammates1']+"\n"+'Хп вашего замка: '+hp+str(info.lobby.game[id]['throne1hp'])+"\n"+'Хп замка противников: '+hp+str(info.lobby.game[id]['throne2hp']))
         elif call.from_user.id in info.lobby.game[id]['team2']:  
-          bot.send_message(call.from_user.id, 'Ваша команда: '+info.lobby.game[id]['teammates2'])
+          bot.send_message(call.from_user.id, 'Ваша команда: '+info.lobby.game[id]['teammates2']+"\n"+'Хп вашего замка: '+hp+str(info.lobby.game[id]['throne2hp'])+"\n"+'Хп замка противников: '+hp+str(info.lobby.game[id]['throne1hp']))
 
 
            
