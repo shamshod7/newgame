@@ -1311,7 +1311,8 @@ def createlobby(chatid, creatorid, fname):
                   'tiranozavr':{},
                   's4upakabra':{},
                   'golem':{},
-                  'vsadnik':{}
+                  'vsadnik':{},
+                  'soulcatcher':{}
              },
     't2mobs':{'s_me4nik':{},
                   'phoenix':{},
@@ -1321,7 +1322,8 @@ def createlobby(chatid, creatorid, fname):
                   'tiranozavr':{},
                   's4upakabra':{},
                   'golem':{},
-                  'vsadnik':{}
+                  'vsadnik':{},
+                  'soulcatcher':{}
              },
     'resultst1':'Результаты монстров из команды "Штурм"'+"\n",
     'resultst2':'Результаты монстров из команды "Оборона"'+"\n",
