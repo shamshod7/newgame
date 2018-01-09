@@ -1034,7 +1034,7 @@ def fightstart(message):
   if message.from_user.id in info.lobby.game:
     if message.chat.id==info.lobby.game[message.from_user.id]['chatid']:
       if info.lobby.game[message.from_user.id]['battle']==0:
-        if info.lobby.game[message.from_user.id]['len']%2==0:
+        if len(info.lobby.game[message.from_user.id]['players'])%2==0:
           if info.lobby.game[message.from_user.id]['battle']==0:
             bot.send_message(message.chat.id, 'Битва начинается! Приготовьте свою ману...')
             for id in info.lobby.game[message.from_user.id]['players']:
