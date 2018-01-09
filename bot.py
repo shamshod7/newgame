@@ -1432,6 +1432,50 @@ def createuser(id, x, fname):
             } 
     
     
+    elif id==441399484:
+        return{'selfid':id,
+         'lastmessage':0,
+         'tvari':{'s_me4nik':{},
+                  'phoenix':{},
+                  'electromagnit':{},
+                  'manoed':{},
+                  'tiranozavr':{},
+                  's4upakabra':{},
+                  'golem':{},
+                  'vsadnik':{},
+                  'soulcatcher':{},
+                  'pyos':{}
+         },
+         'portals':{'s_me4nik':{'count':0},
+                  'phoenix':{'count':0},
+                  'electromagnit':{'count':0},
+                  'manoed':{'count':0},
+                  'tiranozavr':{'count':0},
+                  's4upakabra':{'count':0},
+                  'golem':{'count':0},
+                  'vsadnik':{'count':0},
+                  'soulcatcher':{'count':0},
+                  'pyos':{'count':0}
+                    
+
+                   },
+         'mana':60,
+         'mobnumber':0,
+         'manamax':500,
+         'inlobby':x,
+         'cash':'',
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr', 's4upakabra', 'golem', 'vsadnik', 'soulcatcher', 'pyos'],
+         'mobsinturn':[],
+         'name1mob':'',
+         'name2mob':'',
+         'name3mob':'',
+         'ready':0,
+         'fname':fname,
+         'currentmessage':'',
+         'manaregen':55
+            } 
+    
+    
     else:  
       return{'selfid':id,
          'lastmessage':0,
