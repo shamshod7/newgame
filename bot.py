@@ -784,12 +784,31 @@ def inline(call):
          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
           portal=emojize(':crystal_ball:', use_aliases=True)
           back=emojize(':back:', use_aliases=True) 
+          cast=emojize(':man_with_turban:', use_aliases=True)
           Keyboard=types.InlineKeyboardMarkup()
           Keyboard.add(types.InlineKeyboardButton(text=portal+"Открыть портал", callback_data='altar'))
+          Keyboard.add(types.InlineKeyboardButton(text=cast+"Наколдовать", callback_data='skills'))
           Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
           msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
+            
+            
+            
+  elif call.data=='skills':
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+            info=emojize(':question:', use_aliases=True)
+            back=emojize(':back:', use_aliases=True) 
+            Keyboard=types.InlineKeyboardMarkup()
+            Keyboard.add(types.InlineKeyboardButton(text="Бафф моба", callback_data='buff'), (text=info+"Инфо", callback_data='infobuff'))
+            Keyboard.add(types.InlineKeyboardButton(text="Огненный шар", callback_data='fireball'))  
+            Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
+            msg=medit('Выберите скилл:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            
+    
 
           
           
