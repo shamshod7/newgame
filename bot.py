@@ -434,11 +434,9 @@ def randomeat(creatorid, team2, mob, x):
              emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
              emojeat=emojize(':japanese_ogre:', use_aliases=True)
              if len(info.lobby.game[creatorid][team2])>0:
-                    print('>0')
                     d=list(info.lobby.game[creatorid][team2].keys())
                     c=random.choice(d)
                     if len(info.lobby.game[creatorid][team2][c])>0:
-                      print('>0 duble2')
                       g=list(info.lobby.game[creatorid][team2][c].keys())                    
                       b=random.choice(g)
                       target=info.lobby.game[creatorid][team2][c][b]
@@ -774,7 +772,49 @@ def endt(callid):
         if callid in info.lobby.game[id]['players']:  
           testturn(info.lobby.game[id]['creatorid']['selfid'], callid)
                         
-                        
+def buffcast(target, id):
+    
+    shield=random.randint(1, 100)
+    if shield<=30:
+      target['shield']=1
+    
+    hp=random.randint(1,100)
+    if hp<=35:
+      target['hp']+=30
+    
+    damage=random.randint(1,100)
+    if damage<=60:
+      target['damage']+=65
+    
+    die=random.randint(1,100)
+    if die<=5:
+        target['smert']=1
+    
+    
+    
+      
+            
+            
+def buffchoice(aidi, team):
+     d=list(team.keys())
+     c=random.choice(d)
+     alive=0
+     for mobs in team[c]:
+          if team[c][mobs]['smert']==0:
+             alive+=1
+     if alive>0:
+       g=list(team[c].keys())                    
+       b=random.choice(g)
+       target=team[c][b]
+       if target['smert']!=1:
+          buffcast(target)
+       else:
+          buffchoice()
+     else:
+         bot.send_message(aidi, 'У вас нет ни одного живого моба!')
+
+
+
 @bot.callback_query_handler(func=lambda call:True)
 def inline(call):
   if call.data=='do':
@@ -811,19 +851,26 @@ def inline(call):
     
   elif call.data=='infobuff':
     bot.send_message(call.from_user.id, 'Эта способность выбирает случайное ваше живое существо и имеет несколько эффектов:'+"\n"+
-                     '1. Существо получает неуязвимость до конца хода (шанс 30%);'+"\n"+
+                     '1. Существо получает неуязвимость до конца хода (исключение: скилл "Изгнание" моба "Пожиратель душ") (шанс 30%);'+"\n"+
                      '2. Урон существа увеличивается на 65; (шанс 60%);'+"\n"+
                      '3. Существо получает +70 хп (шанс 35%);'+"\n"+
-                     '4. Существо умирает (шанс 5%)'
+                     '4. Существо умирает (шанс 5%);'+"\n"+
+                     'Каждый эффект имеет независимый от других шанс, следовательно ни один из эффектов может не сработать'
                     )
     
   
-  elif call.data=='buff':
-    for id in info.lobby.game:
-      if call.from_user.id in info.lobby.game[id]['players']:
-        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
-          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
-            bot.send_message(call.from_user.id, 'В последующих обновлениях...')
+ # elif call.data=='buff':
+ #   for id in info.lobby.game:
+ #     if call.from_user.id in info.lobby.game[id]['players']:
+ #       if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+ #         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+ #           if call.from_user.id in info.lobby.game[id]['team1']:
+ #               buffchoice(call.from_user.id, info.lobby.game[id]['t1mobs'])
+ #           elif call.from_user.id in info.lobby.game[id]['team2']:
+ #               buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'])
+                
+
+
             
         
                      
@@ -1428,7 +1475,8 @@ def createuser(id, x, fname):
          'ready':0,
          'fname':fname,
          'currentmessage':'',
-         'manaregen':55
+         'manaregen':55,
+         'bufftext':''
             } 
     
     elif id==218485655:   #vasiliy
