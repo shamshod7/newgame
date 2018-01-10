@@ -1163,7 +1163,6 @@ def fightstart(message):
 @bot.message_handler(commands=['join'])
 def joinm(message):
   for key in info.lobby.game:
-    if info.lobby.game[key]['creatorid']['selfid']!=message.from_user.id:
       if info.lobby.game[key]['chatid']==message.chat.id:
        if info.lobby.game[key]['name']!='None':
          if message.from_user.id not in info.lobby.game[key]['players']:
