@@ -380,11 +380,11 @@ def skills(mob, creatorid, team, team2, number):
     elif mob=='soulcatcher':  
         if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
           if info.lobby.game[creatorid][team][mob][number]['stun']<1:
+           x=random.randint(1,100)
+           if x<=25:    
+              randomeat(creatorid, team2, info.lobby.game[creatorid][team][mob][number], 0)
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
                t=mobdmg(mob, creatorid, team, team2, number)
-               x=random.randint(1,100)
-               if x<=25:    
-                  randomeat(creatorid, team2, info.lobby.game[creatorid][team][mob][number], 0)
                if t!=None and t!='None':
                    mobturn(creatorid, team, mob, number, t) 
           else:
