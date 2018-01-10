@@ -809,6 +809,26 @@ def inline(call):
             msg=medit('Выберите скилл:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             
     
+  elif call.data=='infobuff':
+    bot.send_message(call.from_user.id, 'Эта способность выбирает случайное ваше живое существо и имеет несколько эффектов:'+"\n"+
+                     '1. Существо получает неуязвимость до конца хода (шанс 30%);'+"\n"+
+                     '2. Урон существа увеличивается на 65; (шанс 60%);'+"\n"+
+                     '3. Существо получает +70 хп (шанс 35%);'+"\n"+
+                     '4. Существо умирает (шанс 5%)'
+                    )
+    
+  
+  elif call.data=='buff':
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+            bot.send_message(call.from_user.id, 'В последующих обновлениях...')
+            
+        
+                     
+
+  
 
           
           
