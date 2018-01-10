@@ -800,10 +800,10 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
           if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
-            info=emojize(':question:', use_aliases=True)
+            infos=emojize(':question:', use_aliases=True)
             back=emojize(':back:', use_aliases=True) 
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="Бафф моба", callback_data='buff'), types.InlineKeyboardButton(text=info+"Инфо", callback_data='infobuff'))
+            Keyboard.add(types.InlineKeyboardButton(text="Бафф моба", callback_data='buff'), types.InlineKeyboardButton(text=infos+"Инфо", callback_data='infobuff'))
             Keyboard.add(types.InlineKeyboardButton(text="Огненный шар", callback_data='fireball'))  
             Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
             msg=medit('Выберите скилл:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
