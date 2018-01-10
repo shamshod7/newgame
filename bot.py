@@ -803,7 +803,7 @@ def inline(call):
             info=emojize(':question:', use_aliases=True)
             back=emojize(':back:', use_aliases=True) 
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="Бафф моба", callback_data='buff'), (text=info+"Инфо", callback_data='infobuff'))
+            Keyboard.add(types.InlineKeyboardButton(text="Бафф моба", callback_data='buff'), types.InlineKeyboardButton(text=info+"Инфо", callback_data='infobuff'))
             Keyboard.add(types.InlineKeyboardButton(text="Огненный шар", callback_data='fireball'))  
             Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
             msg=medit('Выберите скилл:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
