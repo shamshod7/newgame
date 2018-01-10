@@ -1260,6 +1260,7 @@ def surrender(message):
             elif message.from_user.id in info.lobby.game[id]['team2']:
                 del info.lobby.game[id]['team2'][message.from_user.id]
                 info.lobby.game[id]['len']-=1
+
     
   
   
