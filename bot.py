@@ -1061,7 +1061,7 @@ def inline(call):
     
   elif call.data=='goleminfo':
     bot.send_message(call.from_user.id, 
-        'Имя: Пылающий голем*'+"\n"+
+        'Имя: *Пылающий голем*'+"\n"+
         'Тип: '+emojfire+'Огненный'+"\n"+
         emojattack+'Урон: 100'+"\n"+
         emojhp+'Жизни: 600'+"\n"+
@@ -1085,7 +1085,7 @@ def inline(call):
     
   elif call.data=='soulinfo':
       bot.send_message(call.from_user.id, 
-        'Имя: Пожиратель душ'+"\n"+
+        'Имя: *Пожиратель душ*'+"\n"+
         'Тип: '+emojundead+'Мертвец'+"\n"+
         emojattack+'Урон: 75'+"\n"+
         emojhp+'Жизни: 110'+"\n"+
