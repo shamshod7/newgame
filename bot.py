@@ -216,7 +216,7 @@ def mobturn(creatorid, team, mob, number, t):
 def skills(mob, creatorid, team, team2, number):
     typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
     emoj1=emojize(typemob1, use_aliases=True)
-    emojattack=emojize(':arrow_right:', use_aliases=True)
+    emojattack=emojize(':crossed_swords:', use_aliases=True)
     emojdie=emojize(':x:', use_aliases=True)
     emojdmg=emojize(':broken_heart:', use_aliases=True)
     emojhp=emojize(':green_heart:', use_aliases=True)
@@ -232,7 +232,7 @@ def skills(mob, creatorid, team, team2, number):
                 typemob2=classtoemoji(t['type'])
                 emoj2= emojize(typemob2, use_aliases=True)
                 z=random.randint(1,100)
-                if z<=25:
+                if z<=40:
                   t['fromdeaddmg']+=0.6
                   info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проклятье мертвецов"'
                 else:
@@ -813,10 +813,56 @@ def buffchoice(aidi, team):
      else:
          bot.send_message(aidi, 'У вас нет ни одного живого моба!')
 
-
-
+def mobtoinfo(mob):
+    if mob=='s_me4nik':
+        inform='me4nikinfo'
+    elif mob=='pyos':
+        inform='pyosinfo'
+    elif mob=='phoenix':
+        inform='phoenixinfo'
+    elif mob=='electromagnit':
+        inform='magnitinfo'
+    elif mob=='manoed':
+        inform='manoedinfo'
+    elif mob=='tiranozavr':
+        inform='tiranozavrinfo'
+    elif mob=='s4upakabra':
+        inform='s4upakabrainfo'
+    elif mob=='golem':
+        inform='goleminfo'
+    elif mob=='vsadnik':
+        inform='vsadnikinfo'
+    elif mob=='soulcatcher':
+        inform='soulinfo'
+    return inform
+        
+            
+    # emojelectro=emojize(':zap:', use_aliases=True)
+    # emojbio=emojize(':evergreen_tree:', use_aliases=True)
+    # emojfire=emojize(':fire:', use_aliases=True)
+    # emojghost=emojize(':ghost:', use_aliases=True)
+    # emojundead=emojize(':skull:', use_aliases=True)
+    # emojattack=emojize(':crossed_swords:', use_aliases=True)
+    # emojhp=emojize(':heart:', use_aliases=True)
+    # emojmana=emojize(':droplet:', use_aliases=True)      
+      #  inform='Тип: '+emojundead+'Мертвец'+"\n"+
+      #  'Урон: '+emojattack+'55'+"\n"+
+      #  'Жизни: '+emojhp+'65'+"\n"+
+      #  'Стоимость: '+emojmana+'30'+"\n"+
+      #  'Скилл: Проклятье мертвецов (шанс: 40%): увеличивает урон по атакуемой цели от всех мертвецов на 60% (применяется перед атакой)'            
+            
 @bot.callback_query_handler(func=lambda call:True)
 def inline(call):
+  emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
+  emojelectro=emojize(':zap:', use_aliases=True)
+  emojbio=emojize(':evergreen_tree:', use_aliases=True)
+  emojfire=emojize(':fire:', use_aliases=True)
+  emojghost=emojize(':ghost:', use_aliases=True)
+  emojundead=emojize(':skull:', use_aliases=True)
+  emojattack=emojize(':crossed_swords:', use_aliases=True)
+  emojhp=emojize(':heart:', use_aliases=True)
+  emojmana=emojize(':droplet:', use_aliases=True) 
+  emojmanamob=emojize(':diamond_shape_with_a_dot_inside:', use_aliases=True)
   if call.data=='do':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
@@ -869,13 +915,6 @@ def inline(call):
  #           elif call.from_user.id in info.lobby.game[id]['team2']:
  #               buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'])
                 
-
-
-            
-        
-                     
-
-  
 
           
           
@@ -932,15 +971,109 @@ def inline(call):
             emojhp=emojize(':green_heart:', use_aliases=True)
             back=emojize(':back:', use_aliases=True) 
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text=emoj0+info.lobby.game[id]['players'][call.from_user.id]['name1mob']+"\n"+manacost+str(nc0.cost)+emojdmg+str(nc0.damage)+emojhp+str(nc0.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]))
-            Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob']+"\n"+manacost+str(nc1.cost)+emojdmg+str(nc1.damage)+emojhp+str(nc1.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]))
-            Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob']+"\n"+manacost+str(nc2.cost)+emojdmg+str(nc2.damage)+emojhp+str(nc2.hp), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj0+info.lobby.game[id]['players'][call.from_user.id]['name1mob']+"\n"+manacost+str(nc0.cost), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]),types.InlineKeyboardButton(text='Подробнее', callback_data=mobtoinfo(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0])))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob']+"\n"+manacost+str(nc1.cost), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]),types.InlineKeyboardButton(text='Подробнее', callback_data=mobtoinfo(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1])))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob']+"\n"+manacost+str(nc2.cost), callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]),types.InlineKeyboardButton(text='Подробнее', callback_data=mobtoinfo(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2])))
             Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
             msg=medit('Доступные вам существа в этом ходу:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
+            
+            
+  elif call.data=='me4nikinfo':
+    bot.send_message(call.from_user.id, 'Тип: '+emojundead+'Мертвец'+"\n"+
+        emojattack+'Урон: 55'+"\n"+
+        emojhp+'Жизни: 65'+"\n"+
+        emojmana+'Стоимость: 30'+"\n"+
+        emojmanamob+'Мана (собственная): 30'+"\n"+
+        emojskill+'Скилл: "Проклятье мертвецов" (шанс: 40%): увеличивает урон по атакуемой цели от всех мертвецов на 60% (применяется перед атакой)')
+    
+    
+  elif call.data=='pyosinfo':
+    bot.send_message(call.from_user.id, 'Тип: '+emojbio+'Био'+"\n"+
+        emojattack+'Урон: 50'+"\n"+
+        emojhp+'Жизни: 300'+"\n"+
+        emojmana+'Стоимость: 75'+"\n"+
+        emojmanamob+'Мана (собственная): 30'+"\n"+
+        emojskill+'Скилл: "Запрограммировать бота" (шанс 35%): Садится писать бота, и не замечает входящего в него урона (весь входящий урон блокируется)') 
+    
+  elif call.data=='phoenixinfo':
+    bot.send_message(call.from_user.id, 'Тип: '+emojfire+'Огненный'+"\n"+
+        emojattack+'Урон: 200'+"\n"+
+        emojhp+'Жизни: 25'+"\n"+
+        emojmana+'Стоимость: 60'+"\n"+
+        emojmanamob+'Мана (собственная): 30'+"\n"+
+        emojskill+'Скилл: Отсутствует') 
+    
+  elif call.data=='magnitinfo':
+    bot.send_message(call.from_user.id, 'Тип: '+emojelectro+'Электро'+"\n"+
+        emojattack+'Урон: 70'+"\n"+
+        emojhp+'Жизни: 180'+"\n"+
+        emojmana+'Стоимость: 60'+"\n"+
+        emojmanamob+'Мана (собственная): 80'+"\n"+
+        emojskill+'Скилл: "Разряд" (шанс 30%): бьёт разрядом по врагу, и отнимает у существа, которое атакует, 45 урона (урон может уйти в минус!)') 
          
-     
+        
+        
+  elif call.data=='manoedinfo':
+    bot.send_message(call.from_user.id, 'Тип: '+emojghost+'Призрачный'+"\n"+
+        emojattack+'Урон: 45'+"\n"+
+        emojhp+'Жизни: 135'+"\n"+
+        emojmana+'Стоимость: 45'+"\n"+
+        emojmanamob+'Мана (собственная): 30'+"\n"+
+        emojskill+'Скилл: "Проникновение" (шанс 60%): отнимает у цели до 70 единиц маны (у цели остается не меньше, чем 0), и наносит урон, соответствующий выжженной мане') 
+    
+    
+    
+  elif call.data=='tiranozavrinfo':
+    bot.send_message(call.from_user.id, 'Тип: '+emojbio+'Био'+"\n"+
+        emojattack+'Урон: 120'+"\n"+
+        emojhp+'Жизни: 260'+"\n"+
+        emojmana+'Стоимость: 90'+"\n"+
+        emojmanamob+'Мана (собственная): 30'+"\n"+
+        emojskill+'Скилл: "Оглушающий рык" (шанс 40%): рычит и оглушает случайного вражеского моба (если тот уже сходил до применения этого скилла, оглушение перейдет на следующий ход)') 
+    
+    
+    
+    elif call.data=='s4upakabrainfo':
+    bot.send_message(call.from_user.id, 'Тип: '+emojdead+'Мертвец'+"\n"+
+        emojattack+'Урон: 90'+"\n"+
+        emojhp+'Жизни: 75'+"\n"+
+        emojmana+'Стоимость: 50'+"\n"+
+        emojmanamob+'Мана (собственная): 55'+"\n"+
+        emojskill+'Скилл: "Кровожадность" (шанс: 100%): при атаке цели лечит себя на 50% нанесённого урона (если в момент применения скилла собственное хп больше нуля)')   
+  
+    
+    
+    elif call.data=='goleminfo':
+    bot.send_message(call.from_user.id, 'Тип: '+emojfire+'Огненный'+"\n"+
+        emojattack+'Урон: 100'+"\n"+
+        emojhp+'Жизни: 600'+"\n"+
+        emojmana+'Стоимость: 165'+"\n"+
+        emojmanamob+'Мана (собственная): 100'+"\n"+
+        emojskill+'Скилл: Отсутствует') 
+    
+    
+    
+    elif call.data=='vsadnikinfo':
+      bot.send_message(call.from_user.id, 'Тип: '+emojghost+'Призрачный'+"\n"+
+        emojattack+'Урон: 70'+"\n"+
+        emojhp+'Жизни: 200'+"\n"+
+        emojmana+'Стоимость: 70'+"\n"+
+        emojmanamob+'Мана (собственная): 50'+"\n"+
+        emojskill+'Скилл: "Призрачный меч" (шанс: 100%): атакуя одну цель, наносит такой же урон ВСЕМ существам противника') 
+    
+    
+    
+    elif call.data=='soulinfo':
+      bot.send_message(call.from_user.id, 'Тип: '+emojdead+'Мертвец'+"\n"+
+        emojattack+'Урон: 75'+"\n"+
+        emojhp+'Жизни: 110'+"\n"+
+        emojmana+'Стоимость: 70'+"\n"+
+        emojmanamob+'Мана (собственная): 50'+"\n"+
+        emojskill+'Скилл: "Изгнание" (шанс: 15%) - с шансом 15% изгоняет случайного вражеского монстра из этого мира (убивает), овладевая его душой - увеличивает свое хп на 40% от текущего хп противника, а так же добавляет к своему урону 100% от урона изгнанного') 
+    
+    
   elif call.data=='s_me4nik':
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
@@ -1173,7 +1306,8 @@ def ghost(message):
     bot.send_message(message.from_user.id, emojghost+'Призрачные:'+"\n"+'Монстры, имеющие полу-материальное тело, что позволяет им получать меньше повреждений от физического мира, но от электро-монстров урона они получают очень много'+"\n"+
                      'Наносимый урон:'+"\n"+'По '+emojundead+'мертвецам: 110%'+"\n"+'По '+emojelectro+'электро: 80%'+"\n"+'По '+emojbio+'био: 80%'+"\n"+'По '+emojfire+'огненным: 150%'+"\n"+"\n"+    
                      'Получаемый урон:'+"\n"+'От '+emojundead+'мертвецов: 75%'+"\n"+'От '+emojelectro+'электро: 150%'+"\n"+'От '+emojbio+'био: 75%'+"\n"+'От '+emojfire+'огненных: 90%'+"\n"+"\n"+ 
-                     'Скиллы:'+"\n"+'"Проникновение" (присутствует у: Маноед) - с шансом 45% отнимает у цели до 70 маны (у цели остается не меньше, чем 0), и наносит урон, соответствующий выжженной мане'
+                     'Скиллы:'+"\n"+'"Проникновение" (присутствует у: Маноед) - с шансом 45% отнимает у цели до 70 маны (у цели остается не меньше, чем 0), и наносит урон, соответствующий выжженной мане'+"\n"+
+                     '"Призрачный меч" (присутствует у: Всадник без коня) - атакуя одну цель, наносит такой же урон ВСЕМ существам противника'
                     )
     
     
