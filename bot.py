@@ -1035,7 +1035,7 @@ def inline(call):
     
     
     
-    elif call.data=='s4upakabrainfo':
+  elif call.data=='s4upakabrainfo':
     bot.send_message(call.from_user.id, 'Тип: '+emojdead+'Мертвец'+"\n"+
         emojattack+'Урон: 90'+"\n"+
         emojhp+'Жизни: 75'+"\n"+
@@ -1045,7 +1045,7 @@ def inline(call):
   
     
     
-    elif call.data=='goleminfo':
+  elif call.data=='goleminfo':
     bot.send_message(call.from_user.id, 'Тип: '+emojfire+'Огненный'+"\n"+
         emojattack+'Урон: 100'+"\n"+
         emojhp+'Жизни: 600'+"\n"+
@@ -1055,7 +1055,7 @@ def inline(call):
     
     
     
-    elif call.data=='vsadnikinfo':
+  elif call.data=='vsadnikinfo':
       bot.send_message(call.from_user.id, 'Тип: '+emojghost+'Призрачный'+"\n"+
         emojattack+'Урон: 70'+"\n"+
         emojhp+'Жизни: 200'+"\n"+
@@ -1065,7 +1065,7 @@ def inline(call):
     
     
     
-    elif call.data=='soulinfo':
+  elif call.data=='soulinfo':
       bot.send_message(call.from_user.id, 'Тип: '+emojdead+'Мертвец'+"\n"+
         emojattack+'Урон: 75'+"\n"+
         emojhp+'Жизни: 110'+"\n"+
