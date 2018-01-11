@@ -981,7 +981,9 @@ def inline(call):
             
             
   elif call.data=='me4nikinfo':
-    bot.send_message(call.from_user.id, 'Тип: '+emojundead+'Мертвец'+"\n"+
+    bot.send_message(call.from_user.id, 
+        'Имя: *Скелет-мечник*'+"\n"+
+        'Тип: '+emojundead+'Мертвец'+"\n"+
         emojattack+'Урон: 55'+"\n"+
         emojhp+'Жизни: 65'+"\n"+
         emojmana+'Стоимость: 30'+"\n"+
@@ -990,7 +992,9 @@ def inline(call):
     
     
   elif call.data=='pyosinfo':
-    bot.send_message(call.from_user.id, 'Тип: '+emojbio+'Био'+"\n"+
+    bot.send_message(call.from_user.id,
+        'Имя: *Pyos*'+"\n"+
+        'Тип: '+emojbio+'Био'+"\n"+
         emojattack+'Урон: 50'+"\n"+
         emojhp+'Жизни: 300'+"\n"+
         emojmana+'Стоимость: 75'+"\n"+
@@ -998,7 +1002,9 @@ def inline(call):
         emojskill+'Скилл: "Запрограммировать бота" (шанс 35%): Садится писать бота, и не замечает входящего в него урона (весь входящий урон блокируется)') 
     
   elif call.data=='phoenixinfo':
-    bot.send_message(call.from_user.id, 'Тип: '+emojfire+'Огненный'+"\n"+
+    bot.send_message(call.from_user.id, 
+        'Имя: *Феникадзе*'+"\n"+
+        'Тип: '+emojfire+'Огненный'+"\n"+
         emojattack+'Урон: 200'+"\n"+
         emojhp+'Жизни: 25'+"\n"+
         emojmana+'Стоимость: 60'+"\n"+
@@ -1006,7 +1012,9 @@ def inline(call):
         emojskill+'Скилл: Отсутствует') 
     
   elif call.data=='magnitinfo':
-    bot.send_message(call.from_user.id, 'Тип: '+emojelectro+'Электро'+"\n"+
+    bot.send_message(call.from_user.id,
+        'Имя: *Электромагнитень*'+"\n"+
+        'Тип: '+emojelectro+'Электро'+"\n"+
         emojattack+'Урон: 70'+"\n"+
         emojhp+'Жизни: 180'+"\n"+
         emojmana+'Стоимость: 60'+"\n"+
@@ -1016,7 +1024,9 @@ def inline(call):
         
         
   elif call.data=='manoedinfo':
-    bot.send_message(call.from_user.id, 'Тип: '+emojghost+'Призрачный'+"\n"+
+    bot.send_message(call.from_user.id,
+        'Имя: *Маноед*'+"\n"+
+        'Тип: '+emojghost+'Призрачный'+"\n"+
         emojattack+'Урон: 45'+"\n"+
         emojhp+'Жизни: 135'+"\n"+
         emojmana+'Стоимость: 45'+"\n"+
@@ -1026,7 +1036,9 @@ def inline(call):
     
     
   elif call.data=='tiranozavrinfo':
-    bot.send_message(call.from_user.id, 'Тип: '+emojbio+'Био'+"\n"+
+    bot.send_message(call.from_user.id,
+        'Имя: *Тиранозавр*'+"\n"+
+        'Тип: '+emojbio+'Био'+"\n"+
         emojattack+'Урон: 120'+"\n"+
         emojhp+'Жизни: 260'+"\n"+
         emojmana+'Стоимость: 90'+"\n"+
@@ -1036,7 +1048,9 @@ def inline(call):
     
     
   elif call.data=='s4upakabrainfo':
-    bot.send_message(call.from_user.id, 'Тип: '+emojundead+'Мертвец'+"\n"+
+    bot.send_message(call.from_user.id,
+        'Имя: *Чупакабра*'+"\n"+
+        'Тип: '+emojundead+'Мертвец'+"\n"+
         emojattack+'Урон: 90'+"\n"+
         emojhp+'Жизни: 75'+"\n"+
         emojmana+'Стоимость: 50'+"\n"+
@@ -1046,7 +1060,9 @@ def inline(call):
     
     
   elif call.data=='goleminfo':
-    bot.send_message(call.from_user.id, 'Тип: '+emojfire+'Огненный'+"\n"+
+    bot.send_message(call.from_user.id, 
+        'Имя: Пылающий голем*'+"\n"+
+        'Тип: '+emojfire+'Огненный'+"\n"+
         emojattack+'Урон: 100'+"\n"+
         emojhp+'Жизни: 600'+"\n"+
         emojmana+'Стоимость: 165'+"\n"+
@@ -1056,7 +1072,9 @@ def inline(call):
     
     
   elif call.data=='vsadnikinfo':
-      bot.send_message(call.from_user.id, 'Тип: '+emojghost+'Призрачный'+"\n"+
+      bot.send_message(call.from_user.id, 
+        'Имя: *Всадник без коня*'+"\n"+
+        'Тип: '+emojghost+'Призрачный'+"\n"+
         emojattack+'Урон: 70'+"\n"+
         emojhp+'Жизни: 200'+"\n"+
         emojmana+'Стоимость: 70'+"\n"+
@@ -1066,7 +1084,9 @@ def inline(call):
     
     
   elif call.data=='soulinfo':
-      bot.send_message(call.from_user.id, 'Тип: '+emojundead+'Мертвец'+"\n"+
+      bot.send_message(call.from_user.id, 
+        'Имя: Пожиратель душ'+"\n"+
+        'Тип: '+emojundead+'Мертвец'+"\n"+
         emojattack+'Урон: 75'+"\n"+
         emojhp+'Жизни: 110'+"\n"+
         emojmana+'Стоимость: 70'+"\n"+
