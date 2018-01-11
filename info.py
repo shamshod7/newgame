@@ -40,7 +40,7 @@ class Phoenix(object):
         self.hp=25
         self.mana=30
         self.damage=200
-        self.cost=70
+        self.cost=60
         self.type='fire'
         self.fromelectrodmg=0.5
         self.frombiodmg=0.7
