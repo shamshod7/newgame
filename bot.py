@@ -45,7 +45,7 @@ def end(creatorid, team, mob, number, t, dmg):
                  if t['hp']<1:
                   for id in info.lobby.game[creatorid]['team2']:
                     info.lobby.game[creatorid]['players'][id]['mana']+=3
-                    info.lobby.game[creatorid]['manaplust1']+=3
+                    info.lobby.game[creatorid]['manaplust1']+=8
                     info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"  
                  else:
                     info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
@@ -59,7 +59,7 @@ def end(creatorid, team, mob, number, t, dmg):
                  if t['hp']<1:
                    for id in info.lobby.game[creatorid]['team1']:
                     info.lobby.game[creatorid]['players'][id]['mana']+=3
-                    info.lobby.game[creatorid]['manaplust2']+=3
+                    info.lobby.game[creatorid]['manaplust2']+=8
                     info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"                 
                  else:
                     info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
