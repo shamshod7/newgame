@@ -871,6 +871,7 @@ def mobtoinfo(mob):
             
 @bot.callback_query_handler(func=lambda call:True)
 def inline(call):
+  emojarrow=emojize(':arrow_right:', use_aliases=True)
   emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
   emojelectro=emojize(':zap:', use_aliases=True)
   emojbio=emojize(':evergreen_tree:', use_aliases=True)
@@ -1006,7 +1007,10 @@ def inline(call):
         emojhp+'Жизни: 65'+"\n"+
         emojmana+'Стоимость: 30'+"\n"+
         emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: "Проклятье мертвецов" (шанс: 40%): увеличивает урон по атакуемой цели от всех мертвецов на 60% (применяется перед атакой)', parse_mode='markdown')
+        emojskill+'Скилл: "Проклятье мертвецов" (шанс: 40%): увеличивает урон по атакуемой цели от всех мертвецов на 60% (применяется перед атакой)'+"\n"+
+                    'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown'
+                    )
     
     
   elif call.data=='pyosinfo':
@@ -1017,7 +1021,9 @@ def inline(call):
         emojhp+'Жизни: 300'+"\n"+
         emojmana+'Стоимость: 75'+"\n"+
         emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: "Запрограммировать бота" (шанс 35%): Садится писать бота, и не замечает входящего в него урона (весь входящий урон блокируется)', parse_mode='markdown') 
+        emojskill+'Скилл: "Запрограммировать бота" (шанс 35%): Садится писать бота, и не замечает входящего в него урона (весь входящий урон блокируется)'+"\n"+
+                     'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
   elif call.data=='phoenixinfo':
     bot.send_message(call.from_user.id, 
@@ -1027,7 +1033,9 @@ def inline(call):
         emojhp+'Жизни: 25'+"\n"+
         emojmana+'Стоимость: 60'+"\n"+
         emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: Отсутствует', parse_mode='markdown') 
+        emojskill+'Скилл: Отсутствует'+"\n"+
+                     'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
   elif call.data=='magnitinfo':
     bot.send_message(call.from_user.id,
@@ -1037,7 +1045,9 @@ def inline(call):
         emojhp+'Жизни: 180'+"\n"+
         emojmana+'Стоимость: 60'+"\n"+
         emojmanamob+'Мана (собственная): 80'+"\n"+
-        emojskill+'Скилл: "Разряд" (шанс 30%): бьёт разрядом по врагу, и отнимает у существа, которое атакует, 45 урона (урон может уйти в минус!)', parse_mode='markdown') 
+        emojskill+'Скилл: "Разряд" (шанс 30%): бьёт разрядом по врагу, и отнимает у существа, которое атакует, 45 урона (урон может уйти в минус!)'+"\n"+
+                     'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
          
         
         
@@ -1049,7 +1059,9 @@ def inline(call):
         emojhp+'Жизни: 135'+"\n"+
         emojmana+'Стоимость: 45'+"\n"+
         emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: "Проникновение" (шанс 60%): отнимает у цели до 70 единиц маны (у цели остается не меньше, чем 0), и наносит урон, соответствующий выжженной мане', parse_mode='markdown') 
+        emojskill+'Скилл: "Проникновение" (шанс 60%): отнимает у цели до 70 единиц маны (у цели остается не меньше, чем 0), и наносит урон, соответствующий выжженной мане'+"\n"+
+                     'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
     
     
@@ -1061,7 +1073,9 @@ def inline(call):
         emojhp+'Жизни: 260'+"\n"+
         emojmana+'Стоимость: 90'+"\n"+
         emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: "Оглушающий рык" (шанс 40%): рычит и оглушает случайного вражеского моба (если тот уже сходил до применения этого скилла, оглушение перейдет на следующий ход)', parse_mode='markdown') 
+        emojskill+'Скилл: "Оглушающий рык" (шанс 40%): рычит и оглушает случайного вражеского моба (если тот уже сходил до применения этого скилла, оглушение перейдет на следующий ход)'+"\n"+
+                     'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
     
     
@@ -1073,7 +1087,9 @@ def inline(call):
         emojhp+'Жизни: 75'+"\n"+
         emojmana+'Стоимость: 50'+"\n"+
         emojmanamob+'Мана (собственная): 55'+"\n"+
-        emojskill+'Скилл: "Кровожадность" (шанс: 100%): при атаке цели лечит себя на 50% нанесённого урона (если в момент применения скилла собственное хп больше нуля)', parse_mode='markdown')   
+        emojskill+'Скилл: "Кровожадность" (шанс: 100%): при атаке цели лечит себя на 50% нанесённого урона (если в момент применения скилла собственное хп больше нуля)'+"\n"+
+                     'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown')   
   
     
     
@@ -1085,7 +1101,9 @@ def inline(call):
         emojhp+'Жизни: 600'+"\n"+
         emojmana+'Стоимость: 165'+"\n"+
         emojmanamob+'Мана (собственная): 100'+"\n"+
-        emojskill+'Скилл: Отсутствует', parse_mode='markdown') 
+        emojskill+'Скилл: Отсутствует'+"\n"+
+                     'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
     
     
@@ -1097,7 +1115,9 @@ def inline(call):
         emojhp+'Жизни: 200'+"\n"+
         emojmana+'Стоимость: 70'+"\n"+
         emojmanamob+'Мана (собственная): 50'+"\n"+
-        emojskill+'Скилл: "Призрачный меч" (шанс: 100%): атакуя одну цель, наносит такой же урон ВСЕМ существам противника', parse_mode='markdown') 
+        emojskill+'Скилл: "Призрачный меч" (шанс: 100%): атакуя одну цель, наносит такой же урон ВСЕМ существам противника'+"\n"+
+                       'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
     
     
@@ -1109,7 +1129,9 @@ def inline(call):
         emojhp+'Жизни: 110'+"\n"+
         emojmana+'Стоимость: 70'+"\n"+
         emojmanamob+'Мана (собственная): 50'+"\n"+
-        emojskill+'Скилл: "Изгнание" (шанс: 15%) - с шансом 15% изгоняет случайного вражеского монстра из этого мира (убивает), овладевая его душой - увеличивает свое хп на 40% от текущего хп противника, а так же добавляет к своему урону 100% от урона изгнанного', parse_mode='markdown') 
+        emojskill+'Скилл: "Изгнание" (шанс: 15%) - с шансом 15% изгоняет случайного вражеского монстра из этого мира (убивает), овладевая его душой - увеличивает свое хп на 40% от текущего хп противника, а так же добавляет к своему урону 100% от урона изгнанного'+"\n"+
+                       'Превосходство мобов друг над другом:+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
     
   elif call.data=='s_me4nik':
