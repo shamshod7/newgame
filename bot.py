@@ -579,6 +579,8 @@ def endturn(creatorid):
           livemobs2+=1
  droplet=emojize(':droplet:', use_aliases=True)
  te=emojize(':busts_in_silhouette:', use_aliases=True)
+ emojshield=emojize(':shield:', use_aliases=True)
+ emojshturm=emojize(':crossed_swords:', use_aliases=True)
  if info.lobby.game[creatorid]['manaplust2']>0:
    mana1='Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"
  else:
@@ -587,8 +589,16 @@ def endturn(creatorid):
     mana2='Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!'+"\n"
  else:
     mana2=''
+ if info.lobby.game[creatorid]['skills1']!='':
+   skills1='Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']
+ else:
+   skills1=''
+ if info.lobby.game[creatorid]['skills2']!='':
+   skills2='Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']
+ else:
+   skills2=''
  if len(info.lobby.game[creatorid]['team2'])>0 and len(info.lobby.game[creatorid]['team1'])>0:
-   bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+mana1+"\n"+'_________________________'+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+mana2+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n")
+   bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+emojshturm*7+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+skills1+"\n"+mana1+"\n"+emojshield*7+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+skills2+"\n"+mana2+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n")
    print('Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!')
  else:
    if len(info.lobby.game[creatorid]['team2'])<1:
