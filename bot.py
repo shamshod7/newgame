@@ -1375,6 +1375,7 @@ def fightstart(message):
     if message.chat.id==info.lobby.game[message.from_user.id]['chatid']:
       if info.lobby.game[message.from_user.id]['battle']==0:
         if len(info.lobby.game[message.from_user.id]['players'])%2==0:
+         if len(info.lobby.game[message.from_user.id]['players'])!=0:
           if info.lobby.game[message.from_user.id]['battle']==0:
             bot.send_message(message.chat.id, 'Битва начинается! Приготовьте свою ману...')
             for id in info.lobby.game[message.from_user.id]['players']:
@@ -1410,6 +1411,8 @@ def fightstart(message):
             info.lobby.game[message.from_user.id]['playing']=1
           else:
             bot.send_message(message.chat.id, 'Игра ('+info.lobby.game[message.from_user.id]['name']+') уже была запущена!')
+         else:
+            bot.send_message(message.chat.id, 'В лобби 0 игроков!')  
         else:
           bot.send_message(message.chat.id, 'Можно играть только при четном количестве игроков!')
 
