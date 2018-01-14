@@ -36,7 +36,7 @@ def end(creatorid, team, mob, number, t, dmg):
             typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
             emoj1= emojize(typemob1, use_aliases=True)
             emojattack=emojize(':crossed_swords:', use_aliases=True)
-            emojdie=emojize(':x:', use_aliases=True)
+            emojdie=emojize(':skull_and_crossbones:', use_aliases=True)
             emojdmg=emojize(':broken_heart:', use_aliases=True)
             emojhp=emojize(':green_heart:', use_aliases=True)
             emojstun=emojize(':cyclone:', use_aliases=True)
@@ -44,9 +44,9 @@ def end(creatorid, team, mob, number, t, dmg):
                 if info.lobby.game[creatorid][team][mob][number]['stun']<1:
                  if t['hp']<1:
                   for id in info.lobby.game[creatorid]['team2']:
-                    info.lobby.game[creatorid]['players'][id]['mana']+=3
+                    info.lobby.game[creatorid]['players'][id]['mana']+=8
                     info.lobby.game[creatorid]['manaplust1']+=8
-                    info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"  
+                    info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+' '+emojattack+' '+emoj2+t['name']+' '+emojdie+"\n"  
                  else:
                     info.lobby.game[creatorid]['resultst1']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdmg+str(dmg)+emojhp+str(t['hp'])+"\n"
                  if info.lobby.game[creatorid][team][mob][number]['skilltext']!='None':
@@ -58,7 +58,7 @@ def end(creatorid, team, mob, number, t, dmg):
                if info.lobby.game[creatorid][team][mob][number]['stun']<1:
                  if t['hp']<1:
                    for id in info.lobby.game[creatorid]['team1']:
-                    info.lobby.game[creatorid]['players'][id]['mana']+=3
+                    info.lobby.game[creatorid]['players'][id]['mana']+=8
                     info.lobby.game[creatorid]['manaplust2']+=8
                     info.lobby.game[creatorid]['resultst2']+=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojattack+emoj2+t['name']+emojdie+"\n"                 
                  else:
@@ -582,31 +582,31 @@ def endturn(creatorid):
  emojshield=emojize(':shield:', use_aliases=True)
  emojshturm=emojize(':crossed_swords:', use_aliases=True)
  if info.lobby.game[creatorid]['manaplust2']>0:
-   mana1='Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"
+   mana1='Полученная мана: '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+"\n"+"\n"
  else:
    mana1=''
  if info.lobby.game[creatorid]['manaplust1']>0:
-    mana2='Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!'+"\n"
+    mana2='Полученная мана: '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+"\n"+"\n"
  else:
     mana2=''
  if info.lobby.game[creatorid]['skills1']!='':
-   skills1='Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']
+   skills1='Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+"\n"
  else:
    skills1=''
  if info.lobby.game[creatorid]['skills2']!='':
-   skills2='Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']
+   skills2='Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+"\n"
  else:
    skills2=''
  if len(info.lobby.game[creatorid]['team2'])>0 and len(info.lobby.game[creatorid]['team1'])>0:
-   bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+emojshturm*7+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+skills1+"\n"+mana1+"\n"+emojshield*7+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+skills2+"\n"+mana2+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n")
+   bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда '+emojshturm+'"Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда '+emojshield+'"Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+emojshturm*7+':'+"\n"+skills1+info.lobby.game[creatorid]['resultst1']+"\n"+mana1+emojshield*7+':'+"\n"+skills2+info.lobby.game[creatorid]['resultst2']+"\n"+mana2+'Выжившие команды '+info.lobby.game[creatorid]['teammates1']+": "+str(livemobs1)+"\n"+'Выжившие команды '+info.lobby.game[creatorid]['teammates2']+": "+str(livemobs2)+"\n")
    print('Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!')
  else:
    if len(info.lobby.game[creatorid]['team2'])<1:
       info.lobby.game[creatorid]['throne2hp']-=2000
    elif len(info.lobby.game[creatorid]['team1'])<1:
       info.lobby.game[creatorid]['throne1hp']-=2000
- info.lobby.game[creatorid]['resultst1']='Результаты монстров из команды "Штурм":'+"\n"
- info.lobby.game[creatorid]['resultst2']='Результаты монстров из команды "Оборона":'+"\n"
+ info.lobby.game[creatorid]['resultst1']=''+"\n"
+ info.lobby.game[creatorid]['resultst2']=''+"\n"
  info.lobby.game[creatorid]['manaplust1']=0
  info.lobby.game[creatorid]['manaplust2']=0
  for endid in info.lobby.game[creatorid]['players']:
@@ -1577,6 +1577,7 @@ def cancel(id, chatid):
   
   
 def createlobby(chatid, creatorid, fname):
+  emojshield=emojize(':shield:', use_aliases=True)
   return{creatorid: {
     'name':'None',
     'chatid':chatid,
@@ -1610,8 +1611,8 @@ def createlobby(chatid, creatorid, fname):
                   'vsadnik':{},
                   'soulcatcher':{}
              },
-    'resultst1':'Результаты монстров из команды "Штурм"'+"\n",
-    'resultst2':'Результаты монстров из команды "Оборона"'+"\n",
+    'resultst1':''+"\n",
+    'resultst2':''+"\n",
     'readys':0,
     'launchtimer':0,
     'timer':None,
