@@ -36,7 +36,7 @@ def end(creatorid, team, mob, number, t, dmg):
             typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
             emoj1= emojize(typemob1, use_aliases=True)
             emojattack=emojize(':crossed_swords:', use_aliases=True)
-            emojdie=emojize(':skull_and_crossbones:', use_aliases=True)
+            emojdie=emojize(':x:', use_aliases=True)
             emojdmg=emojize(':broken_heart:', use_aliases=True)
             emojhp=emojize(':green_heart:', use_aliases=True)
             emojstun=emojize(':cyclone:', use_aliases=True)
