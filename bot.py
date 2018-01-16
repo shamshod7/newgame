@@ -682,10 +682,11 @@ def endturn(creatorid):
          mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
          mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
          info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Крепость'+"\n"
-         info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
-         info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']=0
+         info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']-=300
+         if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']<=0:
+            info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
    info.lobby.game[creatorid]['throne1hp']-=1
-   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Оборона" подошли к вражеской крепости! Теперь у неё '+emojheart+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы погибли.'    
+   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Оборона" подошли к вражеской крепости! Теперь у неё '+emojheart+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы получают 300 урона.'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
@@ -702,9 +703,11 @@ def endturn(creatorid):
          mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
          info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Крепость'+"\n"
          info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
-         info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']=0
+         info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']-=300
+         if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']<=0:
+            info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
     info.lobby.game[creatorid]['throne2hp']-=1
-    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Штурм" подошли к вражеской крепости! Теперь у неё '+emojheart+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы погибли.'
+    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Штурм" подошли к вражеской крепости! Теперь у неё '+emojheart+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы получают 300 урона.'
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
  elif livemob2>0 and livemob1>0:
