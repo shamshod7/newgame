@@ -819,9 +819,9 @@ def buffcast(target, id, chatid, namemob, team):
     if text=='':
         text='Не повезло! существо не получилго баффов'
     if team==info.lobby.game[chatid]['t1mobs']:
-      info.lobby.game[chatid]['skills1']+=you+' Вы '+cast+'"Бафф моба" ('+namemob+'):'+"\n"+text
+      info.lobby.game[chatid]['skills1']+=you+' Маги '+cast+'"Бафф моба" ('+namemob+'):'+"\n"+text
     elif team==info.lobby.game[chatid]['t2mobs']:
-        info.lobby.game[chatid]['skills2']+=you+' Вы '+cast+'"Бафф моба" ('+namemob+'):'+"\n"+text
+        info.lobby.game[chatid]['skills2']+=you+' Маги '+cast+'"Бафф моба" ('+namemob+'):'+"\n"+text
     return text
         
     
@@ -830,7 +830,7 @@ def buffcast(target, id, chatid, namemob, team):
       
             
             
-def buffchoice(aidi, team, chatid):
+def buffchoice(aidi, team, chatid, mana):
      d=list(team.keys())
      c=random.choice(d)
      alive=0
@@ -842,10 +842,14 @@ def buffchoice(aidi, team, chatid):
        b=random.choice(g)
        target=team[c][b]
        if target['smert']!=1:
+         if mana>=50:
+          mana-=50
           text=buffcast(target, aidi, chatid, target['name'], team)
           bot.send_message(aidi, 'Вы успешно скастовали бафф для моба ('+target['name']+')! Он получает:'+"\n"+text)
+         else:
+            bot.send_message(aidi, 'Недостаточно маны!')
        else:
-          buffchoice(aidi, team, chatid)
+          buffchoice(aidi, team, chatid, mana)
      else:
          bot.send_message(aidi, 'У вас нет ни одного живого моба!')
 
@@ -934,15 +938,11 @@ def inline(call):
       if call.from_user.id in info.lobby.game[id]['players']:
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
           if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
-            if info.lobby.game[id]['players'][call.from_user.id]['mana']>=50:
-                info.lobby.game[id]['players'][call.from_user.id]['mana']-=50
                 if call.from_user.id in info.lobby.game[id]['team1']:
-                    buffchoice(call.from_user.id, info.lobby.game[id]['t1mobs'], id)
+                    buffchoice(call.from_user.id, info.lobby.game[id]['t1mobs'], id, info.lobby.game[id]['players'][call.from_user.id]['mana'])
                 elif call.from_user.id in info.lobby.game[id]['team2']:
-                    buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'], id)
-                
-
-          
+                    buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'], id, info.lobby.game[id]['players'][call.from_user.id]['mana'])
+                 
           
           
   elif call.data=='menu':
