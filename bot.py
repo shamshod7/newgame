@@ -844,8 +844,8 @@ def buffchoice(aidi, team, chatid, mana):
        b=random.choice(g)
        target=team[c][b]
        if target['smert']!=1:
-         if mana>=50:
-          mana-=50
+         if mana['mana']>=50:
+          mana['mana']-=50
           text=buffcast(target, aidi, chatid, target['name'], team)
           bot.send_message(aidi, 'Вы успешно скастовали бафф для моба ('+target['name']+')! Он получает:'+"\n"+text)
          else:
@@ -943,7 +943,7 @@ def inline(call):
                 if call.from_user.id in info.lobby.game[id]['team1']:
                     buffchoice(call.from_user.id, info.lobby.game[id]['t1mobs'], id, info.lobby.game[id]['players'][call.from_user.id]['mana'])
                 elif call.from_user.id in info.lobby.game[id]['team2']:
-                    buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'], id, info.lobby.game[id]['players'][call.from_user.id]['mana'])
+                    buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'], id, info.lobby.game[id]['players'][call.from_user.id])
                  
           
           
