@@ -793,30 +793,44 @@ def endt(callid):
         if callid in info.lobby.game[id]['players']:  
           testturn(info.lobby.game[id]['creatorid']['selfid'], callid)
                         
-def buffcast(target, id):
-    
+def buffcast(target, id, chatid, namemob, team):
+    you=emojize(':smiling_imp:', use_aliases=True)
+    cast=emojize(':eight_spoked_asterisk:', use_aliases=True)
+    text=''
     shield=random.randint(1, 100)
     if shield<=30:
       target['shield']=1
+      text+='Щит (шанс был 30%)'+"\n"
     
     hp=random.randint(1,100)
     if hp<=35:
-      target['hp']+=30
+      target['hp']+=70
+      text+='+70 хп (шанс был 35%)'+"\n"
     
     damage=random.randint(1,100)
     if damage<=60:
       target['damage']+=65
+      text+='+65 урона (шанс был 60%)'+"\n"
     
     die=random.randint(1,100)
     if die<=5:
         target['smert']=1
+        text='Смерть (шанс был 5%)'+"\n"
+    if text=='':
+        text='Не повезло! существо не получилго баффов'
+    if team==info.lobby.game[chatid]['t1mobs']:
+      info.lobby.game[chatid]['skills1']+=you+' Вы '+cast+'"Бафф моба" ('+namemob+'):'+"\n"+text
+    elif team==info.lobby.game[chatid]['t2mobs']:
+        info.lobby.game[chatid]['skills2']+=you+' Вы '+cast+'"Бафф моба" ('+namemob+'):'+"\n"+text
+    return text
+        
     
     
     
       
             
             
-def buffchoice(aidi, team):
+def buffchoice(aidi, team, chatid):
      d=list(team.keys())
      c=random.choice(d)
      alive=0
@@ -828,9 +842,10 @@ def buffchoice(aidi, team):
        b=random.choice(g)
        target=team[c][b]
        if target['smert']!=1:
-          buffcast(target)
+          text=buffcast(target, aidi, chatid, target['name'], team)
+          bot.send_message(aidi, 'Вы успешно скастовали бафф для моба ('+target['name']+')! Он получает:'+"\n"+text)
        else:
-          buffchoice()
+          buffchoice(aidi, team, chatid)
      else:
          bot.send_message(aidi, 'У вас нет ни одного живого моба!')
 
@@ -857,20 +872,7 @@ def mobtoinfo(mob):
         inform='soulinfo'
     return inform
         
-            
-    # emojelectro=emojize(':zap:', use_aliases=True)
-    # emojbio=emojize(':evergreen_tree:', use_aliases=True)
-    # emojfire=emojize(':fire:', use_aliases=True)
-    # emojghost=emojize(':ghost:', use_aliases=True)
-    # emojundead=emojize(':skull:', use_aliases=True)
-    # emojattack=emojize(':crossed_swords:', use_aliases=True)
-    # emojhp=emojize(':heart:', use_aliases=True)
-    # emojmana=emojize(':droplet:', use_aliases=True)      
-      #  inform='Тип: '+emojundead+'Мертвец'+"\n"+
-      #  'Урон: '+emojattack+'55'+"\n"+
-      #  'Жизни: '+emojhp+'65'+"\n"+
-      #  'Стоимость: '+emojmana+'30'+"\n"+
-      #  'Скилл: Проклятье мертвецов (шанс: 40%): увеличивает урон по атакуемой цели от всех мертвецов на 60% (применяется перед атакой)'            
+                      
             
 @bot.callback_query_handler(func=lambda call:True)
 def inline(call):
@@ -910,9 +912,9 @@ def inline(call):
           if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
             infos=emojize(':question:', use_aliases=True)
             back=emojize(':back:', use_aliases=True) 
+            droplet=emojize(':droplet:', use_aliases=True)
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="Бафф моба", callback_data='buff'), types.InlineKeyboardButton(text=infos+"Инфо", callback_data='infobuff'))
-            Keyboard.add(types.InlineKeyboardButton(text="Огненный шар", callback_data='fireball'))  
+            Keyboard.add(types.InlineKeyboardButton(text="Бафф моба"+"\n"+droplet+'50', callback_data='buff'), types.InlineKeyboardButton(text=infos+"Инфо", callback_data='infobuff')) 
             Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
             msg=medit('Выберите скилл:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             
@@ -923,19 +925,21 @@ def inline(call):
                      '2. Урон существа увеличивается на 65; (шанс 60%);'+"\n"+
                      '3. Существо получает +70 хп (шанс 35%);'+"\n"+
                      '4. Существо умирает (шанс 5%);'+"\n"+
-                     'Каждый эффект имеет независимый от других шанс, следовательно ни один из эффектов может не сработать'
+                     'Каждый эффект имеет независимый от других шанс, следовательно ни один из эффектов может не сработать. Применяйте на свой страх и риск!'
                     )
     
   
- # elif call.data=='buff':
- #   for id in info.lobby.game:
- #     if call.from_user.id in info.lobby.game[id]['players']:
- #       if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
- #         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
- #           if call.from_user.id in info.lobby.game[id]['team1']:
- #               buffchoice(call.from_user.id, info.lobby.game[id]['t1mobs'])
- #           elif call.from_user.id in info.lobby.game[id]['team2']:
- #               buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'])
+  elif call.data=='buff':
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+          if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+            if info.lobby.game[id]['players'][call.from_user.id]['mana']>=50:
+                info.lobby.game[id]['players'][call.from_user.id]['mana']-=50
+                if call.from_user.id in info.lobby.game[id]['team1']:
+                    buffchoice(call.from_user.id, info.lobby.game[id]['t1mobs'], id)
+                elif call.from_user.id in info.lobby.game[id]['team2']:
+                    buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'], id)
                 
 
           
