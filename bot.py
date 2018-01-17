@@ -702,7 +702,6 @@ def endturn(creatorid):
          mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
          mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
          info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Крепость'+"\n"
-         info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
          info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']-=300
          if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']<=0:
             info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
