@@ -834,7 +834,7 @@ def buffchoice(aidi, team, chatid, mana):
      d=list(team.keys())
      c=random.choice(d)
      alive=0
-      for lists in team:
+     for lists in team:
         for mobs in team[lists]:
          if team[lists][mobs]['smert']==0:
              alive+=1
