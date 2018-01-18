@@ -55,8 +55,8 @@ class Electromagnit(object):
         self.name='Электромагнитень'
         self.hp=180
         self.mana=80
-        self.damage=70
-        self.cost=60
+        self.damage=60
+        self.cost=65
         self.type='electro'
         self.fromelectrodmg=1.0
         self.frombiodmg=1.1
