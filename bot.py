@@ -838,16 +838,19 @@ def buffchoice(aidi, team, chatid, mana):
          if team[lists][mobs]['smert']==0:
              alive+=1
      if alive>0:
-       g=list(team[c].keys())                    
-       b=random.choice(g)
-       target=team[c][b]
-       if target['smert']!=1:
-         if mana['mana']>=50:
-          mana['mana']-=50
-          text=buffcast(target, aidi, chatid, target['name'], team)
-          bot.send_message(aidi, 'Вы успешно скастовали бафф для моба ('+target['name']+')! Он получает:'+"\n"+text)
-         else:
+       g=list(team[c].keys())    
+       if len(g)>0:
+         b=random.choice(g)
+         target=team[c][b]
+         if target['smert']!=1:
+           if mana['mana']>=50:
+             mana['mana']-=50
+             text=buffcast(target, aidi, chatid, target['name'], team)
+             bot.send_message(aidi, 'Вы успешно скастовали бафф для моба ('+target['name']+')! Он получает:'+"\n"+text)
+           else:
             bot.send_message(aidi, 'Недостаточно маны!')
+         else:
+          buffchoice(aidi, team, chatid, mana)
        else:
           buffchoice(aidi, team, chatid, mana)
      else:
