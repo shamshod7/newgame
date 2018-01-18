@@ -816,7 +816,7 @@ def buffcast(target, id, chatid, namemob, team):
         target['smert']=1
         text='Смерть (шанс был 5%)'+"\n"
     if text=='':
-        text='Не повезло! существо не получилго баффов'
+        text='Не повезло! существо не получилго баффов'+"\n"
     if team==info.lobby.game[chatid]['t1mobs']:
       info.lobby.game[chatid]['skills1']+=you+' Маги '+cast+'"Бафф моба" ('+namemob+'):'+"\n"+text
     elif team==info.lobby.game[chatid]['t2mobs']:
