@@ -921,7 +921,7 @@ def inline(call):
             back=emojize(':back:', use_aliases=True) 
             droplet=emojize(':droplet:', use_aliases=True)
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="Бафф"+ "+droplet+'50', callback_data='buff'), types.InlineKeyboardButton(text=infos+"Инфо", callback_data='infobuff')) 
+            Keyboard.add(types.InlineKeyboardButton(text="Бафф "+droplet+'50', callback_data='buff'), types.InlineKeyboardButton(text=infos+"Инфо", callback_data='infobuff')) 
             Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
             msg=medit('Выберите скилл:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             
