@@ -942,7 +942,7 @@ def inline(call):
         if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
           if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
                 if call.from_user.id in info.lobby.game[id]['team1']:
-                    buffchoice(call.from_user.id, info.lobby.game[id]['t1mobs'], id, info.lobby.game[id]['players'][call.from_user.id]['mana'])
+                    buffchoice(call.from_user.id, info.lobby.game[id]['t1mobs'], id, info.lobby.game[id]['players'][call.from_user.id])
                 elif call.from_user.id in info.lobby.game[id]['team2']:
                     buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'], id, info.lobby.game[id]['players'][call.from_user.id])
                  
