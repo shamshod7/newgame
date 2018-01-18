@@ -88,7 +88,7 @@ class Tiranozavr(object):
         self.hp=260
         self.mana=30
         self.damage=120
-        self.cost=90
+        self.cost=100
         self.type='bio'
         self.fromelectrodmg=1.3
         self.frombiodmg=1.0
