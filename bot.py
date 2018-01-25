@@ -814,6 +814,7 @@ def buffcast(target, id, chatid, namemob, team):
     die=random.randint(1,100)
     if die<=5:
         target['smert']=1
+        target['hp']=0
         text='Смерть (шанс был 5%)'+"\n"
     if text=='':
         text='Не повезло! существо не получилго баффов'+"\n"
