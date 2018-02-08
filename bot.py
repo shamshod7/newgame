@@ -430,7 +430,11 @@ def randomlife(creatorid, team2, mob, x, team):
                         emoj2= emojize(typemob2, use_aliases=True)                
                         mob['skilltext']=emoj1+mob['name']+emojlife+emojskill+emoj2+target['name']+' "Воскрешение"'
                       else:
-                        randomlife(creatorid, team2, mob, x, team)
+                        if x<100:
+                          x+=1
+                          randomlife(creatorid, team2, mob, x, team)
+                        else:
+                          pass
                     else:
                       if x<100:
                         x+=1
