@@ -427,6 +427,7 @@ def randomlife(creatorid, team2, mob, x, team):
                       if target['smert']==1:
                         target['hp']=125
                         target['smert']=0
+                        target['ready']=0
                         typemob2=classtoemoji(target['type'])
                         emoj2= emojize(typemob2, use_aliases=True)                
                         mob['skilltext']=emoj1+mob['name']+emojlife+emojskill+emoj2+target['name']+' "Воскрешение"'
