@@ -1821,7 +1821,8 @@ def createuser(id, x, fname):
                   'golem':{},
                   'vsadnik':{},
                   'soulcatcher':{},
-                  'pyos':{}
+                  'pyos':{},
+                  'zombie':{}
          },
          'portals':{'s_me4nik':{'count':0},
                   'phoenix':{'count':0},
@@ -1832,16 +1833,16 @@ def createuser(id, x, fname):
                   'golem':{'count':0},
                   'vsadnik':{'count':0},
                   'soulcatcher':{'count':0},
-                  'pyos':{'count':0}
+                  'pyos':{'count':0},
+                  'zombie':{'count':0}
                     
-
                    },
          'mana':60,
          'mobnumber':0,
          'manamax':500,
          'inlobby':x,
          'cash':'',
-         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr', 's4upakabra', 'golem', 'vsadnik', 'soulcatcher', 'pyos'],
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr', 's4upakabra', 'golem', 'vsadnik', 'soulcatcher', 'pyos', 'zombie'],
          'mobsinturn':[],
          'name1mob':'',
          'name2mob':'',
@@ -1854,7 +1855,7 @@ def createuser(id, x, fname):
     
     
     
-    elif id==385049690:
+    elif id==385049690:  #griffit
         return{'selfid':id,
          'lastmessage':0,
          'tvari':{'s_me4nik':{},
