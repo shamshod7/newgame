@@ -415,7 +415,7 @@ def randomlife(creatorid, team2, mob, x, team):
              typemob1=classtoemoji(mob['type'])
              emoj1=emojize(typemob1, use_aliases=True)
              emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
-             emojlife=emojize(
+             emojlife=emojize(':black_heart:', use_aliases=True)
              if len(info.lobby.game[creatorid][team])>0:
                     d=list(info.lobby.game[creatorid][team].keys())
                     c=random.choice(d)
