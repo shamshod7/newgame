@@ -207,7 +207,7 @@ def mobturn(creatorid, team, mob, number, t):
      end(creatorid, team, mob, number, t, dmg)
     
     
-    elif mob=='zombie':
+   elif mob=='zombie':
      if t['shield']==0:
        dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
      else:
