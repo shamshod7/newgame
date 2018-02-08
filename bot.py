@@ -1193,7 +1193,7 @@ def inline(call):
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
         
         
-   elif call.data=='zombieinfo':
+  elif call.data=='zombieinfo':
      bot.send_message(call.from_user.id, 
         'Имя: *Зомби*'+"\n"+
         'Тип: '+emojundead+'Мертвец'+"\n"+
