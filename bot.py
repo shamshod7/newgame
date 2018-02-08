@@ -416,13 +416,13 @@ def randomlife(creatorid, team2, mob, x, team):
              emoj1=emojize(typemob1, use_aliases=True)
              emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
              emojlife=emojize(':black_heart:', use_aliases=True)
-             if len(info.lobby.game[creatorid][team])>0:
-                    d=list(info.lobby.game[creatorid][team].keys())
+             if len(team)>0:
+                    d=list(team.keys())
                     c=random.choice(d)
-                    if len(info.lobby.game[creatorid][team][c])>0:
-                      g=list(info.lobby.game[creatorid][team][c].keys())                    
+                    if len(team[c])>0:
+                      g=list(team[c].keys())                    
                       b=random.choice(g)
-                      target=info.lobby.game[creatorid][team][c][b]
+                      target=team[c][b]
                       if target['smert']==1:
                         target['hp']=125
                         target['smert']=0
