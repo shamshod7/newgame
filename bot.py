@@ -207,6 +207,15 @@ def mobturn(creatorid, team, mob, number, t):
      end(creatorid, team, mob, number, t, dmg)
     
     
+    elif mob=='zombie':
+     if t['shield']==0:
+       dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
+     else:
+       dmg=0
+     dmg=round (dmg, 2)
+     t['hp']-=dmg  
+     end(creatorid, team, mob, number, t, dmg)
+    
     
     
    
@@ -389,13 +398,46 @@ def skills(mob, creatorid, team, team2, number):
                    mobturn(creatorid, team, mob, number, t) 
           else:
             end(creatorid, team, mob, number, 0, 0)
-        info.lobby.game[creatorid][team][mob][number]['ready']=1  
+        info.lobby.game[creatorid][team][mob][number]['ready']=1 
+        
+    elif mob=='zombie':
+        if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
+          if info.lobby.game[creatorid][team][mob][number]['stun']<1:
+             x=random.randint(1,100)
+             if x<=40:    
+                randomlife(creatorid, team2, info.lobby.game[creatorid][team][mob][number], 0, info.lobby.game[creatorid][team])
     
                     
                     
      
 
-       
+def randomlife(creatorid, team2, mob, x, team):
+             typemob1=classtoemoji(mob['type'])
+             emoj1=emojize(typemob1, use_aliases=True)
+             emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
+             if len(info.lobby.game[creatorid][team])>0:
+                    d=list(info.lobby.game[creatorid][team].keys())
+                    c=random.choice(d)
+                    if len(info.lobby.game[creatorid][team][c])>0:
+                      g=list(info.lobby.game[creatorid][team][c].keys())                    
+                      b=random.choice(g)
+                      target=info.lobby.game[creatorid][team][c][b]
+                      if target['smert']==1:
+                        target['hp']=125
+                        target['smert']=0
+                        typemob2=classtoemoji(target['type'])
+                        emoj2= emojize(typemob2, use_aliases=True)                
+                        mob['skilltext']=emoj1+mob['name']+emojskill+emoj2+target['name']+' "Воскрешение"'
+                      else:
+                        randomlife(creatorid, team2, mob, x, team)
+                    else:
+                      if x<100:
+                        x+=1
+                        randomlife(creatorid, team2, mob, x, team)
+                      else:
+                          pass
+        
+        
         
 def randomstun(creatorid, team2, mob, x):
              typemob1=classtoemoji(mob['type'])
@@ -622,7 +664,8 @@ def endturn(creatorid):
                   's4upakabra':{'count':0},
                   'golem':{'count':0},
                   'vsadnik':{'count':0},
-                  'soulcatcher':{'count':0}
+                  'soulcatcher':{'count':0},
+                  'zombie':{'count':0}
                                }                 
     info.lobby.game[creatorid]['players'][endid]
  for mob10 in info.lobby.game[creatorid]['t1mobs']:
@@ -759,6 +802,8 @@ def nametoclass(name):  #делает перевод названия сущ-в�
         x=info.vsadnik
     elif name=='soulcatcher':
         x=info.soulcatcher
+    elif name=='zombie':
+        x=info.zombie
          
     return x
 
@@ -878,6 +923,8 @@ def mobtoinfo(mob):
         inform='vsadnikinfo'
     elif mob=='soulcatcher':
         inform='soulinfo'
+    elif mob=='zombie':
+        inform='zombieinfo'
     return inform
         
                       
@@ -1140,9 +1187,22 @@ def inline(call):
         emojhp+'Жизни: 110'+"\n"+
         emojmana+'Стоимость: 70'+"\n"+
         emojmanamob+'Мана (собственная): 50'+"\n"+
-        emojskill+'Скилл: "Изгнание" (шанс: 15%) - с шансом 15% изгоняет случайного вражеского монстра из этого мира (убивает), овладевая его душой - увеличивает свое хп на 40% от текущего хп противника, а так же добавляет к своему урону 100% от урона изгнанного'+"\n"+
+        emojskill+'Скилл: "Изгнание" (шанс: 15%) - Изгоняет случайного вражеского монстра из этого мира (убивает), овладевая его душой - увеличивает свое хп на 40% от текущего хп противника, а так же добавляет к своему урону 100% от урона изгнанного'+"\n"+
                        'Превосходство мобов друг над другом:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
+        
+        
+   elif call.data=='zombieinfo':
+     bot.send_message(call.from_user.id, 
+        'Имя: *Зомби*'+"\n"+
+        'Тип: '+emojundead+'Мертвец'+"\n"+
+        emojattack+'Урон: 25'+"\n"+
+        emojhp+'Жизни: 230'+"\n"+
+        emojmana+'Стоимость: 55'+"\n"+
+        emojmanamob+'Мана (собственная): 50'+"\n"+
+        emojskill+'Скилл: "Воскрешение" (шанс: 40%) - Воскрешает случайного союзного моба, погибшего в этом матче. Хп воскрешённого становится равно 100.'+"\n"+
+                       'Превосходство мобов друг над другом:'+"\n"+
+                    emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown')
     
     
   elif call.data=='s_me4nik':
@@ -1313,6 +1373,23 @@ def inline(call):
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']=createportal('soulcatcher', info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']['count']+1)  
             bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Пожиратель душ)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']['count'])+' таких порталов!')
+           else:
+            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            
+            
+  elif call.data=='zombie':          
+    for id in info.lobby.game:
+      if call.from_user.id in info.lobby.game[id]['players']:
+        if info.lobby.game[id]['players'][call.from_user.id]['currentmessage']==info.lobby.game[id]['players'][call.from_user.id]['lastmessage']:
+         if info.lobby.game[id]['players'][call.from_user.id]['ready']!=1:
+          if 'zombie' in info.lobby.game[id]['players'][call.from_user.id]['mobsinturn']:
+           if info.lobby.game[id]['players'][call.from_user.id]['mana']>=info.zombie.cost:
+            info.lobby.game[id]['players'][call.from_user.id]['mana']-=info.zombie.cost
+            if info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']['count']==0:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']=createportal('zombie', 1)  
+            else:
+              info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']=createportal('zombie', info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']['count']+1)  
+            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Зомби)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']['count'])+' таких порталов!')
            else:
             bot.send_message(call.from_user.id, 'Недостаточно маны!')
    
@@ -1609,7 +1686,8 @@ def createlobby(chatid, creatorid, fname):
                   's4upakabra':{},
                   'golem':{},
                   'vsadnik':{},
-                  'soulcatcher':{}
+                  'soulcatcher':{},
+                  'zombie':{}
              },
     't2mobs':{'s_me4nik':{},
                   'phoenix':{},
@@ -1620,7 +1698,8 @@ def createlobby(chatid, creatorid, fname):
                   's4upakabra':{},
                   'golem':{},
                   'vsadnik':{},
-                  'soulcatcher':{}
+                  'soulcatcher':{},
+                  'zombie':{}
              },
     'resultst1':''+"\n",
     'resultst2':''+"\n",
@@ -1647,7 +1726,7 @@ def createlobby(chatid, creatorid, fname):
   
   
 def createuser(id, x, fname):
-    if id==197216910:#pyos
+    if id==197216910:   #pyos
         return{'selfid':id,
          'lastmessage':0,
          'tvari':{'s_me4nik':{},
@@ -1729,7 +1808,7 @@ def createuser(id, x, fname):
             } 
     
     
-    elif id==441399484:
+    elif id==441399484:  #ya
         return{'selfid':id,
          'lastmessage':0,
          'tvari':{'s_me4nik':{},
@@ -1771,6 +1850,47 @@ def createuser(id, x, fname):
          'currentmessage':'',
          'manaregen':55
             } 
+    
+    
+    
+    elif id==385049690:
+        return{'selfid':id,
+         'lastmessage':0,
+         'tvari':{'s_me4nik':{},
+                  'phoenix':{},
+                  'electromagnit':{},
+                  'manoed':{},
+                  'tiranozavr':{},
+                  's4upakabra':{},
+                  'golem':{},
+                  'vsadnik':{},
+                  'zombie':{}
+         },
+         'portals':{'s_me4nik':{'count':0},
+                  'phoenix':{'count':0},
+                  'electromagnit':{'count':0},
+                  'manoed':{'count':0},
+                  'tiranozavr':{'count':0},
+                  's4upakabra':{'count':0},
+                  'golem':{'count':0},
+                  'vsadnik':{'count':0},
+                  'zombie':{'count':0}
+                   },
+         'mana':60,
+         'mobnumber':0,
+         'manamax':500,
+         'inlobby':x,
+         'cash':'',
+         'allmobs':['s_me4nik', 'electromagnit', 'phoenix', 'manoed', 'tiranozavr', 's4upakabra', 'golem', 'vsadnik', 'zombie'],
+         'mobsinturn':[],
+         'name1mob':'',
+         'name2mob':'',
+         'name3mob':'',
+         'ready':0,
+         'fname':fname,
+         'currentmessage':'',
+         'manaregen':55
+            }  
     
     
     else:  
