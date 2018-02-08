@@ -167,10 +167,33 @@ class Soulcatcher(object):
         
         
         
+  class Zombie(object):
+    def __init__(self):
+        self.name='Зомби'
+        self.hp=230
+        self.mana=50
+        self.damage=25
+        self.cost=55
+        self.type='dead'
+        self.fromelectrodmg=0.7
+        self.frombiodmg=1.5
+        self.fromghostdmg=0.9
+        self.fromdeaddmg=1.0
+        self.fromfiredmg=1.0
+        self.skill=None
+    
+    
+    
+    
+    
+
+        
+        
+        
 
 
 
-
+zombie=Zombie()
 soulcatcher=Soulcatcher()
 vsadnik=Vsadnik()
 golem=Golem()
