@@ -415,6 +415,7 @@ def randomlife(creatorid, team2, mob, x, team):
              typemob1=classtoemoji(mob['type'])
              emoj1=emojize(typemob1, use_aliases=True)
              emojskill=emojize(':eight_spoked_asterisk:', use_aliases=True)
+             emojlife=emojize(
              if len(info.lobby.game[creatorid][team])>0:
                     d=list(info.lobby.game[creatorid][team].keys())
                     c=random.choice(d)
@@ -427,7 +428,7 @@ def randomlife(creatorid, team2, mob, x, team):
                         target['smert']=0
                         typemob2=classtoemoji(target['type'])
                         emoj2= emojize(typemob2, use_aliases=True)                
-                        mob['skilltext']=emoj1+mob['name']+emojskill+emoj2+target['name']+' "Воскрешение"'
+                        mob['skilltext']=emoj1+mob['name']+emojlife+emojskill+emoj2+target['name']+' "Воскрешение"'
                       else:
                         randomlife(creatorid, team2, mob, x, team)
                     else:
