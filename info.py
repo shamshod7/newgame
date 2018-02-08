@@ -167,7 +167,7 @@ class Soulcatcher(object):
         
         
         
-  class Zombie(object):
+class Zombie(object):
     def __init__(self):
         self.name='Зомби'
         self.hp=230
