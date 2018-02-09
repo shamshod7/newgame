@@ -15,7 +15,6 @@ base=[]
 ban=[]
 
 
-
 def classtoemoji(classs):
     if classs=='dead':
         emoj=emojize(':skull:', use_aliases=True)
