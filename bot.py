@@ -587,7 +587,7 @@ def endturn(creatorid):
            if info.lobby.game[creatorid]['t1hod']==1:
             if info.lobby.game[creatorid]['t1mobs'][mob1][number111]['ready']!=1:
              skills(mob1, creatorid, 't1mobs', 't2mobs', number111)
-             if info.lobby.game['lifecast']==1:
+             if info.lobby.game[creatorid]['lifecast']==1:
                 allmobs+=1
                 info.lobby.game['lifecast']=0
              info.lobby.game[creatorid]['t1hod']=0
