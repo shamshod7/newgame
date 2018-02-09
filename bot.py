@@ -826,23 +826,21 @@ def nametoclass(name):  #делает перевод названия сущ-в�
 
 
 
-def mobs(callid):    #выбирает 3х рандомных мобов для возможности спавна
-    for id in info.lobby.game:
-      if callid in info.lobby.game[id]['players']:
-            while len(info.lobby.game[id]['players'][callid]['mobsinturn'])<3:
-              x=random.randint(1,len(info.lobby.game[id]['players'][callid]['allmobs']))
-              if info.lobby.game[id]['players'][callid]['allmobs'][x-1] not in info.lobby.game[id]['players'][callid]['mobsinturn']:
-               if info.lobby.game[id]['players'][callid]['allmobs'][x-1] not in ban:
-                info.lobby.game[id]['players'][callid]['mobsinturn'].append(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                if len(info.lobby.game[id]['players'][callid]['mobsinturn'])==1:
-                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                  info.lobby.game[id]['players'][callid]['name1mob']=y.name
-                elif len(info.lobby.game[id]['players'][callid]['mobsinturn'])==2:
-                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                  info.lobby.game[id]['players'][callid]['name2mob']=y.name
-                elif len(info.lobby.game[id]['players'][callid]['mobsinturn'])==3:
-                  y=nametoclass(info.lobby.game[id]['players'][callid]['allmobs'][x-1])
-                  info.lobby.game[id]['players'][callid]['name3mob']=y.name
+def mobs(callid, creatorid):    #выбирает 3х рандомных мобов для возможности спавна
+            while len(info.lobby.game[creatorid]['players'][callid]['mobsinturn'])<3:
+              x=random.randint(1,len(info.lobby.game[creatorid]['players'][callid]['allmobs']))
+              if info.lobby.game[creatorid]['players'][callid]['allmobs'][x-1] not in info.lobby.game[creatorid]['players'][callid]['mobsinturn']:
+               if info.lobby.game[creatorid]['players'][callid]['allmobs'][x-1] not in ban:
+                info.lobby.game[creatorid]['players'][callid]['mobsinturn'].append(info.lobby.game[creatorid]['players'][callid]['allmobs'][x-1])
+                if len(info.lobby.game[creatorid]['players'][callid]['mobsinturn'])==1:
+                  y=nametoclass(info.lobby.game[creatorid]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[creatorid]['players'][callid]['name1mob']=y.name
+                elif len(info.lobby.game[creatorid]['players'][callid]['mobsinturn'])==2:
+                  y=nametoclass(info.lobby.game[creatorid]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[creatorid]['players'][callid]['name2mob']=y.name
+                elif len(info.lobby.game[creatorid]['players'][callid]['mobsinturn'])==3:
+                  y=nametoclass(info.lobby.game[creatorid]['players'][callid]['allmobs'][x-1])
+                  info.lobby.game[creatorid]['players'][callid]['name3mob']=y.name
                         
 
 
@@ -2030,7 +2028,7 @@ def battle(creatorid):
       info.lobby.game[creatorid]['launchtimer']=1
       info.lobby.game[creatorid]['timer']=t
     for key in info.lobby.game[creatorid]['players']:
-      mobs(key)
+      mobs(key, creatorid)
       if len(info.lobby.game[creatorid]['players'])>2:
              for id in info.lobby.game[creatorid]['players']:
                info.lobby.game[creatorid]['players'][id]['manaregen']=30
