@@ -406,6 +406,13 @@ def skills(mob, creatorid, team, team2, number):
              x=random.randint(1,100)
              if x<=40:    
                 randomlife(creatorid, team2, info.lobby.game[creatorid][team][mob][number], 0, info.lobby.game[creatorid][team])
+             if info.lobby.game[creatorid][team][mob][number]['target']==None:
+               t=mobdmg(mob, creatorid, team, team2, number)
+               if t!=None and t!='None':
+                   mobturn(creatorid, team, mob, number, t) 
+          else:
+            end(creatorid, team, mob, number, 0, 0)
+        info.lobby.game[creatorid][team][mob][number]['ready']=1 
     
                     
                     
