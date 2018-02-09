@@ -173,7 +173,7 @@ class Zombie(object):
         self.hp=230
         self.mana=50
         self.damage=25
-        self.cost=55
+        self.cost=65
         self.type='dead'
         self.fromelectrodmg=0.7
         self.frombiodmg=1.5
