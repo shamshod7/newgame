@@ -437,7 +437,7 @@ def randomlife(creatorid, team2, mob, x, team):
                         typemob2=classtoemoji(target['type'])
                         emoj2= emojize(typemob2, use_aliases=True)                
                         mob['skilltext']=emoj1+mob['name']+emojlife+emojskill+emoj2+target['name']+' "Воскрешение"'
-                        info.lobby.game['lifecast']=1
+                        info.lobby.game[creatorid]['lifecast']+=1
                       else:
                         if x<100:
                           x+=1
@@ -593,8 +593,8 @@ def endturn(creatorid):
            if info.lobby.game[creatorid]['t1hod']==1:
             if info.lobby.game[creatorid]['t1mobs'][mob1][number111]['ready']!=1:
              skills(mob1, creatorid, 't1mobs', 't2mobs', number111)
-             if info.lobby.game[creatorid]['lifecast']==1:
-                allmobs+=1
+             if info.lobby.game[creatorid]['lifecast']>0:
+                allmobs+=info.lobby.game[creatorid]['lifecast']
                 info.lobby.game['lifecast']=0
              info.lobby.game[creatorid]['t1hod']=0
              e=0       
