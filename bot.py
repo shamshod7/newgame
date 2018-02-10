@@ -2027,6 +2027,7 @@ def battle(creatorid):
       t.start()
       info.lobby.game[creatorid]['launchtimer']=1
       info.lobby.game[creatorid]['timer']=t
+      print(info.lobby.game[creatorid]['players'])
     for key in info.lobby.game[creatorid]['players']:
       mobs(key, creatorid)
       if len(info.lobby.game[creatorid]['players'])>2:
