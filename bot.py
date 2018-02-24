@@ -855,13 +855,13 @@ def buffcast(target, id, chatid, namemob, team):
     
     hp=random.randint(1,100)
     if hp<=35:
-      target['hp']+=70
-      text+='+70 хп (шанс был 35%)'+"\n"
+      target['hp']+=4
+      text+='+4 хп (шанс был 35%)'+"\n"
     
     damage=random.randint(1,100)
     if damage<=60:
-      target['damage']+=65
-      text+='+65 урона (шанс был 60%)'+"\n"
+      target['damage']+=3
+      text+='+3 урона (шанс был 60%)'+"\n"
     
     die=random.randint(1,100)
     if die<=5:
