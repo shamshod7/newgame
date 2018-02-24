@@ -11,9 +11,9 @@ class S_me4nik(object):
         self.damage=1
         self.cost=30
         self.type='dead'
-        self.fromelectrodmg=0.7
-        self.frombiodmg=1.5
-        self.fromghostdmg=0.9
+        self.fromelectrodmg=1.0
+        self.frombiodmg=2.0
+        self.fromghostdmg=1.0
         self.fromdeaddmg=1.0
         self.fromfiredmg=1.0
         self.skill=None
@@ -27,11 +27,11 @@ class Pyos(object):
         self.damage=1
         self.cost=75
         self.type='bio'
-        self.fromelectrodmg=1.3
+        self.fromelectrodmg=1.0
         self.frombiodmg=1.0
-        self.fromghostdmg=0.8
-        self.fromdeaddmg=1.1
-        self.fromfiredmg=1.5
+        self.fromghostdmg=1.0
+        self.fromdeaddmg=1.0
+        self.fromfiredmg=2.0
         self.skill=None
         
 class Phoenix(object):
@@ -42,11 +42,11 @@ class Phoenix(object):
         self.damage=6
         self.cost=60
         self.type='fire'
-        self.fromelectrodmg=0.5
-        self.frombiodmg=0.7
-        self.fromghostdmg=1.5
-        self.fromdeaddmg=1.2
-        self.fromfiredmg=1.0
+        self.fromelectrodmg=1
+        self.frombiodmg=1
+        self.fromghostdmg=2
+        self.fromdeaddmg=1
+        self.fromfiredmg=1
         self.skill=None
         
         
@@ -59,10 +59,10 @@ class Electromagnit(object):
         self.cost=65
         self.type='electro'
         self.fromelectrodmg=1.0
-        self.frombiodmg=1.1
-        self.fromghostdmg=0.8
-        self.fromdeaddmg=1.5
-        self.fromfiredmg=0.5
+        self.frombiodmg=1.0
+        self.fromghostdmg=1
+        self.fromdeaddmg=2
+        self.fromfiredmg=1
         self.skill=None
         
         
@@ -74,11 +74,11 @@ class Manoed(object):
         self.damage=2
         self.cost=45
         self.type='ghost'
-        self.fromelectrodmg=1.5
-        self.frombiodmg=0.75
+        self.fromelectrodmg=2
+        self.frombiodmg=1
         self.fromghostdmg=1.0
-        self.fromdeaddmg=0.75
-        self.fromfiredmg=0.9
+        self.fromdeaddmg=1
+        self.fromfiredmg=1
         self.skill=None
         
         
@@ -90,11 +90,11 @@ class Tiranozavr(object):
         self.damage=3
         self.cost=100
         self.type='bio'
-        self.fromelectrodmg=1.3
+        self.fromelectrodmg=1
         self.frombiodmg=1.0
-        self.fromghostdmg=0.8
-        self.fromdeaddmg=1.1
-        self.fromfiredmg=1.5
+        self.fromghostdmg=1
+        self.fromdeaddmg=1
+        self.fromfiredmg=2
         self.skill=None
         
 
@@ -106,9 +106,9 @@ class S4upakabra(object):
         self.damage=4
         self.cost=50
         self.type='dead'
-        self.fromelectrodmg=0.7
-        self.frombiodmg=1.5
-        self.fromghostdmg=0.9
+        self.fromelectrodmg=1
+        self.frombiodmg=2
+        self.fromghostdmg=1
         self.fromdeaddmg=1.0
         self.fromfiredmg=1.0
         self.skill=None
@@ -122,11 +122,11 @@ class Golem(object):
         self.damage=2
         self.cost=165
         self.type='fire'
-        self.fromelectrodmg=0.5
-        self.frombiodmg=0.7
-        self.fromghostdmg=1.5
-        self.fromdeaddmg=1.2
-        self.fromfiredmg=1.0
+        self.fromelectrodmg=1
+        self.frombiodmg=1
+        self.fromghostdmg=2
+        self.fromdeaddmg=1
+        self.fromfiredmg=1
         self.skill=None
 
 
@@ -141,11 +141,11 @@ class Vsadnik(object):
         self.damage=3
         self.cost=70
         self.type='ghost'
-        self.fromelectrodmg=1.5
-        self.frombiodmg=0.75
+        self.fromelectrodmg=2
+        self.frombiodmg=1
         self.fromghostdmg=1.0
-        self.fromdeaddmg=0.75
-        self.fromfiredmg=0.9
+        self.fromdeaddmg=1
+        self.fromfiredmg=1
         self.skill=None
         
         
@@ -158,9 +158,9 @@ class Soulcatcher(object):
         self.damage=3
         self.cost=70
         self.type='dead'
-        self.fromelectrodmg=0.7
-        self.frombiodmg=1.5
-        self.fromghostdmg=0.9
+        self.fromelectrodmg=1
+        self.frombiodmg=2
+        self.fromghostdmg=1
         self.fromdeaddmg=1.0
         self.fromfiredmg=1.0
         self.skill=None
@@ -175,9 +175,9 @@ class Zombie(object):
         self.damage=1
         self.cost=65
         self.type='dead'
-        self.fromelectrodmg=0.7
-        self.frombiodmg=1.5
-        self.fromghostdmg=0.9
+        self.fromelectrodmg=1
+        self.frombiodmg=2
+        self.fromghostdmg=1
         self.fromdeaddmg=1.0
         self.fromfiredmg=1.0
         self.skill=None
