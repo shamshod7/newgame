@@ -167,7 +167,7 @@ def mobturn(creatorid, team, mob, number, t):
      dmg=round (dmg, 0)
      t['hp']-=dmg  
      if info.lobby.game[creatorid][team][mob][number]['hp']>0:
-       info.lobby.game[creatorid][team][mob][number]['hp']+=dmg/2
+       info.lobby.game[creatorid][team][mob][number]['hp']+=2
      end(creatorid, team, mob, number, t, dmg)
     
     
@@ -242,8 +242,8 @@ def skills(mob, creatorid, team, team2, number):
                 typemob2=classtoemoji(t['type'])
                 emoj2= emojize(typemob2, use_aliases=True)
                 z=random.randint(1,100)
-                if z<=40:
-                  t['fromdeaddmg']+=0.6
+                if z<=25:
+                  t['fromdeaddmg']+=1
                   info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проклятье мертвецов"'
                 else:
                   info.lobby.game[creatorid][team][mob][number]['skilltext']='None'
@@ -267,7 +267,7 @@ def skills(mob, creatorid, team, team2, number):
                 emoj2= emojize(typemob2, use_aliases=True)
                 z=random.randint(1,100)
                 if z<=35:
-                    t['damage']-=45  
+                    t['damage']-=2
                     info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Разряд"'
                 else:
                     skilltext=''
@@ -310,9 +310,9 @@ def skills(mob, creatorid, team, team2, number):
                       if b<0:
                         t['mana']-=b
                         a+=b
-                        t['hp']-=a
+                        t['hp']-=1
                       else:
-                        t['hp']-=a
+                        t['hp']-=1
                 mobturn(creatorid, team, mob, number, t)
           else:
             end(creatorid, team, mob, number, 0, 0)
@@ -405,7 +405,7 @@ def skills(mob, creatorid, team, team2, number):
         if info.lobby.game[creatorid][team][mob][number]['smert']!=1:
           if info.lobby.game[creatorid][team][mob][number]['stun']<1:
              x=random.randint(1,100)
-             if x<=40:    
+             if x<=35:    
                 randomlife(creatorid, team2, info.lobby.game[creatorid][team][mob][number], 0, info.lobby.game[creatorid][team])
              if info.lobby.game[creatorid][team][mob][number]['target']==None:
                t=mobdmg(mob, creatorid, team, team2, number)
