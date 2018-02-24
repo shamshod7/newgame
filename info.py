@@ -6,9 +6,9 @@ class Lobby(object):
 class S_me4nik(object):
     def __init__(self):
         self.name='Скелет-мечник'
-        self.hp=65
+        self.hp=2
         self.mana=30
-        self.damage=55
+        self.damage=1
         self.cost=30
         self.type='dead'
         self.fromelectrodmg=0.7
@@ -22,9 +22,9 @@ class S_me4nik(object):
 class Pyos(object):
     def __init__(self):
         self.name='Pyos'
-        self.hp=300
+        self.hp=9
         self.mana=30
-        self.damage=50
+        self.damage=1
         self.cost=75
         self.type='bio'
         self.fromelectrodmg=1.3
@@ -37,9 +37,9 @@ class Pyos(object):
 class Phoenix(object):
     def __init__(self):
         self.name='Феникадзе'
-        self.hp=25
+        self.hp=1
         self.mana=30
-        self.damage=200
+        self.damage=6
         self.cost=60
         self.type='fire'
         self.fromelectrodmg=0.5
@@ -53,9 +53,9 @@ class Phoenix(object):
 class Electromagnit(object):
     def __init__(self):
         self.name='Электромагнитень'
-        self.hp=180
+        self.hp=6
         self.mana=80
-        self.damage=60
+        self.damage=3
         self.cost=65
         self.type='electro'
         self.fromelectrodmg=1.0
@@ -69,9 +69,9 @@ class Electromagnit(object):
 class Manoed(object):
     def __init__(self):
         self.name='Маноед'
-        self.hp=135
+        self.hp=4
         self.mana=30
-        self.damage=45
+        self.damage=2
         self.cost=45
         self.type='ghost'
         self.fromelectrodmg=1.5
@@ -85,9 +85,9 @@ class Manoed(object):
 class Tiranozavr(object):  
     def __init__(self):
         self.name='Тиранозавр'
-        self.hp=260
+        self.hp=7
         self.mana=30
-        self.damage=120
+        self.damage=3
         self.cost=100
         self.type='bio'
         self.fromelectrodmg=1.3
@@ -101,9 +101,9 @@ class Tiranozavr(object):
 class S4upakabra(object):
     def __init__(self):
         self.name='Чупакабра'
-        self.hp=75
+        self.hp=3
         self.mana=55
-        self.damage=90
+        self.damage=4
         self.cost=50
         self.type='dead'
         self.fromelectrodmg=0.7
@@ -117,9 +117,9 @@ class S4upakabra(object):
 class Golem(object):
     def __init__(self):
         self.name='Пылающий голем'
-        self.hp=600
+        self.hp=13
         self.mana=100
-        self.damage=100
+        self.damage=2
         self.cost=165
         self.type='fire'
         self.fromelectrodmg=0.5
@@ -136,9 +136,9 @@ class Golem(object):
 class Vsadnik(object):
     def __init__(self):
         self.name='Всадник без коня'
-        self.hp=200
+        self.hp=6
         self.mana=50
-        self.damage=70
+        self.damage=3
         self.cost=70
         self.type='ghost'
         self.fromelectrodmg=1.5
@@ -153,9 +153,9 @@ class Vsadnik(object):
 class Soulcatcher(object):
     def __init__(self):
         self.name='Пожиратель душ'
-        self.hp=110
+        self.hp=5
         self.mana=50
-        self.damage=75
+        self.damage=3
         self.cost=70
         self.type='dead'
         self.fromelectrodmg=0.7
@@ -170,9 +170,9 @@ class Soulcatcher(object):
 class Zombie(object):
     def __init__(self):
         self.name='Зомби'
-        self.hp=230
+        self.hp=7
         self.mana=50
-        self.damage=25
+        self.damage=1
         self.cost=65
         self.type='dead'
         self.fromelectrodmg=0.7
