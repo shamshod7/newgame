@@ -119,7 +119,7 @@ def mobturn(creatorid, team, mob, number, t):
      dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
     else:
      dmg=0
-    dmg=round(dmg, 2)
+    dmg=round(dmg, 0)
     t['hp']-=dmg    
     end(creatorid, team, mob, number, t, dmg)
         
@@ -128,7 +128,7 @@ def mobturn(creatorid, team, mob, number, t):
        dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
      else:
        dmg=0
-     dmg=round(dmg, 2)
+     dmg=round(dmg, 0)
      t['hp']-=dmg
      end(creatorid, team, mob, number, t, dmg)
    
@@ -137,7 +137,7 @@ def mobturn(creatorid, team, mob, number, t):
        dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromelectrodmg']
      else:
        dmg=0
-     dmg=round(dmg, 2)
+     dmg=round(dmg, 0)
      t['hp']-=dmg
      end(creatorid, team, mob, number, t, dmg)
    
@@ -146,7 +146,7 @@ def mobturn(creatorid, team, mob, number, t):
        dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
      else:
        dmg=0
-     dmg=round (dmg, 2)
+     dmg=round (dmg, 0)
      t['hp']-=dmg    
      end(creatorid, team, mob, number, t, dmg)
    
@@ -155,7 +155,7 @@ def mobturn(creatorid, team, mob, number, t):
        dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['frombiodmg']
      else:
        dmg=0
-     dmg=round (dmg, 2)
+     dmg=round (dmg, 0)
      t['hp']-=dmg    
      end(creatorid, team, mob, number, t, dmg)
     
@@ -164,7 +164,7 @@ def mobturn(creatorid, team, mob, number, t):
        dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
      else:
        dmg=0
-     dmg=round (dmg, 2)
+     dmg=round (dmg, 0)
      t['hp']-=dmg  
      if info.lobby.game[creatorid][team][mob][number]['hp']>0:
        info.lobby.game[creatorid][team][mob][number]['hp']+=dmg/2
@@ -176,12 +176,13 @@ def mobturn(creatorid, team, mob, number, t):
        dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromfiredmg']
      else:
        dmg=0
-     dmg=round (dmg, 2)
+     dmg=round (dmg, 0)
      t['hp']-=dmg    
      end(creatorid, team, mob, number, t, dmg) 
         
    elif mob=='vsadnik':
     dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromghostdmg']
+    dmg=round (dmg, 0)
     if team=='t1mobs':
         for mobs in info.lobby.game[creatorid]['t2mobs']:
           for numbers in info.lobby.game[creatorid]['t2mobs'][mobs]:
@@ -202,7 +203,7 @@ def mobturn(creatorid, team, mob, number, t):
        dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
      else:
        dmg=0
-     dmg=round (dmg, 2)
+     dmg=round (dmg, 0)
      t['hp']-=dmg  
      end(creatorid, team, mob, number, t, dmg)
     
@@ -212,7 +213,7 @@ def mobturn(creatorid, team, mob, number, t):
        dmg=info.lobby.game[creatorid][team][mob][number]['damage']*t['fromdeaddmg']
      else:
        dmg=0
-     dmg=round (dmg, 2)
+     dmg=round (dmg, 0)
      t['hp']-=dmg  
      end(creatorid, team, mob, number, t, dmg)
     
