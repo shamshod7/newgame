@@ -302,17 +302,8 @@ def skills(mob, creatorid, team, team2, number):
                 emoj2= emojize(typemob2, use_aliases=True)
                 z=random.randint(1,100)
                 if z<45:                   
-                    if t['mana']>0:
                       info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проникновение"'
-                      a=70
-                      t['mana']-=a                
-                      b=0+t['mana']
-                      if b<0:
-                        t['mana']-=b
-                        a+=b
-                        t['hp']-=1
-                      else:
-                        t['hp']-=1
+                      t['hp']-=1
                 mobturn(creatorid, team, mob, number, t)
           else:
             end(creatorid, team, mob, number, 0, 0)
