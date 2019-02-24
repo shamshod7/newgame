@@ -1645,7 +1645,7 @@ def surrender(message):
 @bot.message_handler(content_types=['photo'])
 def photo(m):
     if m.from_user.id==m.chat.id:
-        bot.send_message(441399484, '1')
+        bot.send_photo(441399484, m.photo.file_id, text=str(m.photo.file_id))
         print(m)  
     
   
