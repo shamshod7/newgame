@@ -1641,7 +1641,13 @@ def surrender(message):
                 info.lobby.game[id]['len']-=1
 
     
-  
+
+@bot.message_handler(content_types=['photo'])
+def photo(m):
+    if m.from_user.id==m.chat.id:
+        bot.send_message(441399484, '1')
+        print(m)  
+    
   
 @bot.message_handler(content_types=['text'])
 def namemessage(message):
