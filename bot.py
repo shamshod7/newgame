@@ -733,7 +733,7 @@ def endturn(creatorid):
        if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['stun']<1:
          mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
          mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
-         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+'🏯 saroyga xujum qildi!!!'+"\n"
+         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+' *Saroyga🏯* xujum qildi❕'+"\n"
          info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']-=7
          if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']<=0:
             info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
@@ -753,7 +753,7 @@ def endturn(creatorid):
        if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['stun']<1:
          mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
          mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
-         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Saroy'+"\n"
+         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+'* Saroyga🏰* xujum qildi❕'+"\n"
          info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']-=7
          if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']<=0:
             info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
@@ -763,7 +763,7 @@ def endturn(creatorid):
     info.lobby.game[creatorid]['thronedamage']='Saroylarga xujum bo`lmadi!'
  elif livemob2>0 and livemob1>0:
     info.lobby.game[creatorid]['thronedamage']='Saroylarga xujum bo`lmadi!'
- bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'])
+ bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'], parse_mode='markdown')
  info.lobby.game[creatorid]['thronedamage']=''
  info.lobby.game[creatorid]['thronedamagemobs']=''
  if info.lobby.game[creatorid]['throne2hp']<1 or info.lobby.game[creatorid]['throne1hp']<1:
