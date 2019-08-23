@@ -1567,7 +1567,6 @@ def joinm(message):
 @bot.message_handler(commands=['cancel'])
 def cancelmessage(message):
   if message.from_user.id:
-    if info.lobby.game[message.from_user.id]['playing']==0:
       cancel(message.from_user.id, message.chat.id)
     else:
       bot.send_message(message.chat.id, 'Игра уже была запущена!')
