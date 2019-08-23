@@ -1520,12 +1520,12 @@ def fightstart(message):
                 bot.send_message(ids2, 'Вы в обороне! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates2'])
             for ids1 in info.lobby.game[message.from_user.id]['team1']:
                 bot.send_message(ids1, 'Вы штурмуете крепость! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates1'])
-            btl=threading.Thread(target=battle, args=[message.chat.id])
+            btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
             bot.send_message(441399484, 'Игра началась в каком-то чате!')
-            info.lobby.game[message.chat.id]['thread']=btl
+            info.lobby.game[message.from_user.id]['thread']=btl
             print(info.lobby.game)
-            info.lobby.game[message.chat.id]['playing']=1
+            info.lobby.game[message.from_user.id]['playing']==1
           else:
             bot.send_message(message.chat.id, 'Игра ('+info.lobby.game[message.from_user.id]['name']+') уже была запущена!')
          else:
@@ -1619,7 +1619,7 @@ def beginmessage(message):
       print(info.lobby.game)
       bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
       info.lobby.game[message.from_user.id]['naming']=1
-      lobbycancel=threading.Timer(30.0, cancel, args=[message.from_user.id, message.chat.id])
+      lobbycancel=threading.Timer(300.0, cancel, args=[message.from_user.id, message.chat.id])
       lobbycancel.start()
         
    else:
@@ -1641,13 +1641,7 @@ def surrender(message):
                 info.lobby.game[id]['len']-=1
 
     
-
-@bot.message_handler(content_types=['photo'])
-def photo(m):
-    if m.from_user.id==m.chat.id:
-        bot.send_photo(441399484, m.photo[0].file_id, caption=str(m.photo[0].file_id))
-        print(m)  
-    
+  
   
 @bot.message_handler(content_types=['text'])
 def namemessage(message):
@@ -2048,6 +2042,5 @@ def battle(creatorid):
 
 if __name__ == '__main__':
   bot.polling(none_stop=True)
-
 
 
