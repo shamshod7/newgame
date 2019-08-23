@@ -1568,8 +1568,6 @@ def joinm(message):
 def cancelmessage(message):
   if message.from_user.id:
       cancel(message.from_user.id, message.chat.id)
-    else:
-      bot.send_message(message.chat.id, 'Игра уже была запущена!')
 
 @bot.message_handler(commands=['start'])
 def startmessage(message):
