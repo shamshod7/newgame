@@ -371,7 +371,7 @@ def skills(mob, creatorid, team, team2, number):
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
-                info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojdmg+'Hammaga'
+                info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojdmg+''
                 mobturn(creatorid, team, mob, number, t)
           else:
             end(creatorid, team, mob, number, 0, 0)
@@ -733,7 +733,7 @@ def endturn(creatorid):
        if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['stun']<1:
          mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
          mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
-         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Saroy'+"\n"
+         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+'🏯 saroyga xujum qildi!!!'+"\n"
          info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']-=7
          if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']<=0:
             info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
