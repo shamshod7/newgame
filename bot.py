@@ -1525,7 +1525,7 @@ def fightstart(message):
             bot.send_message(441399484, 'Игра началась в каком-то чате!')
             info.lobby.game[message.from_user.id]['thread']=btl
             print(info.lobby.game)
-            info.lobby.game[message.from_user.id]['playing']==1
+            info.lobby.game[message.chat.id]['playing']==1
           else:
             bot.send_message(message.chat.id, 'Игра ('+info.lobby.game[message.from_user.id]['name']+') уже была запущена!')
          else:
@@ -1566,6 +1566,7 @@ def joinm(message):
 
 @bot.message_handler(commands=['cancel'])
 def cancelmessage(message):
+  if message.from_user.id in info.lobby.game:
     if info.lobby.game[message.from_user.id]['playing']==0:
       cancel(message.from_user.id, message.chat.id)
     else:
@@ -1617,7 +1618,7 @@ def beginmessage(message):
       info.lobby.game.update(createdlobby)
       print(info.lobby.game)
       bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
-      info.lobby.game[message.from_user.id]['naming']=0
+      info.lobby.game[message.from_user.id]['naming']==1
       lobbycancel=threading.Timer(30.0, cancel, args=[message.from_user.id, message.chat.id])
       lobbycancel.start()
         
