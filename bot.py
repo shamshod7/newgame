@@ -961,7 +961,7 @@ def inline(call):
           Keyboard.add(types.InlineKeyboardButton(text=portal+"Portalni ochish", callback_data='altar'))
           Keyboard.add(types.InlineKeyboardButton(text=cast+"Sexrlash", callback_data='skills'))
           Keyboard.add(types.InlineKeyboardButton(text=back+"Bosh menyu", callback_data='menu'))
-          msg=medit(caption='Harakatni tanlang', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+          msg=medit('Harakatni tanlang', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
             
@@ -2022,8 +2022,8 @@ def battle(creatorid):
       Keyboard=types.InlineKeyboardMarkup()       
       Keyboard.add(types.InlineKeyboardButton(text=go+"Harakatlar", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text=infos+"Men haqimdagi ma`lumot", callback_data='info'))
-      Keyboard.add(types.InlineKeyboardButton(text=end+"Yurishni yakunlash", callback_data='end'))   
-      msg=bot.send_document(key,test.terrorid,caption='Bosh Menyu:'+"\n"+mana+'Mana: '+str(info.lobby.game[creatorid]['players'][key]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][key]['manamax']),reply_markup=Keyboard)
+      Keyboard.add(types.InlineKeyboardButton(text=end+"Yurishni yakunlash", callback_data='end'))     
+      msg=bot.send_message(key, 'Bosh Menyu:'+"\n"+mana+'Mana: '+str(info.lobby.game[creatorid]['players'][key]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][key]['manamax']),reply_markup=Keyboard)
       info.lobby.game[creatorid]['players'][key]['lastmessage']=msg.message_id
       info.lobby.game[creatorid]['players'][key]['currentmessage']=msg.message_id
        
@@ -2031,5 +2031,4 @@ def battle(creatorid):
 
 if __name__ == '__main__':
   bot.polling(none_stop=True)
-
 
