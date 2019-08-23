@@ -772,7 +772,7 @@ def endturn(creatorid):
     print('"Xujum" guruhi g`alabasi!')
     del info.lobby.game[creatorid]
    elif info.lobby.game[creatorid]['throne2hp']>info.lobby.game[creatorid]['throne1hp']:
-    bot.send_document(info.lobby.game[creatorid]['chatid'],test.terrorid,caption='"Himoya" guruhi g`alaba qozondi!')    
+    bot.send_document(info.lobby.game[creatorid]['chatid'],test.dogid,caption='"Himoya" guruhi g`alaba qozondi!')    
     print('"Himoya" guruhi g`alabasi!')
     timer=threading.Timer(4.0, delete, args=[creatorid])
     timer.start()
@@ -1606,7 +1606,7 @@ def beginmessage(message):
       createdlobby=createlobby(message.chat.id, message.from_user.id, message.from_user.first_name)
       info.lobby.game.update(createdlobby)
       print(info.lobby.game)
-      bot.send_document(message.chat.id,test.ratid,caption="*O`yin yaratildi! Keyingi jo`natadigan xatingiz bilan uni nomlang!*"+"\n"+"*Agarda siz o`yinni to`xtatmoqchi bo`lsaz* /cancel *tugmasini bosing.*"+"\n"+"*O`yin 20 daqiqadan so`ng avtomatik o`chiriladi!*", parse_mode='markdown')   
+      bot.send_document(message.chat.id,test.dragoid,caption="*O`yin yaratildi! Keyingi jo`natadigan xatingiz bilan uni nomlang!*"+"\n"+"*Agarda siz o`yinni to`xtatmoqchi bo`lsaz* /cancel *tugmasini bosing.*"+"\n"+"*O`yin 20 daqiqadan so`ng avtomatik o`chiriladi!*", parse_mode='markdown')   
       info.lobby.game[message.from_user.id]['naming']=1
       lobbycancel=threading.Timer(1200.0, cancel, args=[message.from_user.id, message.chat.id])
       lobbycancel.start()
