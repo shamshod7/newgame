@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+x# -*- coding: utf-8 -*-
 import redis
 import os
 import telebot
@@ -1567,7 +1567,7 @@ def joinm(message):
 @bot.message_handler(commands=['cancel'])
 def cancelmessage(message):
   if message.from_user.id:
-      cancel(message.from_user.id, message.chat.id)
+      lobbycancel(cancel, args=[message.from_user.id, message.chat.id])
 
 @bot.message_handler(commands=['start'])
 def startmessage(message):
