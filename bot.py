@@ -101,17 +101,17 @@ def mobdmg(mob, creatorid, team, team2, number):
 
 def typetotext(name):
     if name=='dead':
-        text='Мертвец'
+        text='O`liklar'
     elif name=='electro':
-        text='Электро'
+        text='Elektro'
     elif name=='fire':
-        text='Огненный'
+        text='Olovlilar'
     elif name=='bio':
-        text='Биологический'
+        text='Biologik'
     elif name=='ghost':
-        text='Призрачный'
+        text='Ruxlar'
     return text
-        
+          
 
 def mobturn(creatorid, team, mob, number, t):
    if mob=='s_me4nik':
@@ -222,7 +222,7 @@ def mobturn(creatorid, team, mob, number, t):
    
         
     
-    
+     
 def skills(mob, creatorid, team, team2, number):
     typemob1=classtoemoji(info.lobby.game[creatorid][team][mob][number]['type'])
     emoj1=emojize(typemob1, use_aliases=True)
@@ -244,7 +244,7 @@ def skills(mob, creatorid, team, team2, number):
                 z=random.randint(1,100)
                 if z<=25:
                   t['fromdeaddmg']+=1
-                  info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проклятье мертвецов"'
+                  info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "O`liklar Lanati"'
                 else:
                   info.lobby.game[creatorid][team][mob][number]['skilltext']='None'
                 mobturn(creatorid, team, mob, number, t)
@@ -268,7 +268,7 @@ def skills(mob, creatorid, team, team2, number):
                 z=random.randint(1,100)
                 if z<=35:
                     t['damage']-=2
-                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Разряд"'
+                    info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Quvvat"'
                 else:
                     skilltext=''
                 mobturn(creatorid, team, mob, number, t)
@@ -302,7 +302,7 @@ def skills(mob, creatorid, team, team2, number):
                 emoj2= emojize(typemob2, use_aliases=True)
                 z=random.randint(1,100)
                 if z<45:                   
-                      info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Проникновение"'
+                      info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojskill+emoj2+t['name']+' "Ichiga Kirish"'
                       t['hp']-=1
                 mobturn(creatorid, team, mob, number, t)
           else:
@@ -371,7 +371,7 @@ def skills(mob, creatorid, team, team2, number):
            if info.lobby.game[creatorid][team][mob][number]['target']==None:
               t=mobdmg(mob, creatorid, team, team2, number)
               if t!='None' and t!=None:
-                info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojdmg+'По всем'
+                info.lobby.game[creatorid][team][mob][number]['skilltext']=emoj1+info.lobby.game[creatorid][team][mob][number]['name']+emojdmg+'Hammaga'
                 mobturn(creatorid, team, mob, number, t)
           else:
             end(creatorid, team, mob, number, 0, 0)
@@ -428,7 +428,7 @@ def randomlife(creatorid, team2, mob, x, team):
                         target['ready']=0
                         typemob2=classtoemoji(target['type'])
                         emoj2= emojize(typemob2, use_aliases=True)                
-                        mob['skilltext']=emoj1+mob['name']+emojlife+emojskill+emoj2+target['name']+' "Воскрешение"'
+                        mob['skilltext']=emoj1+mob['name']+emojlife+emojskill+emoj2+target['name']+' "Qayta tirilish"'
                         info.lobby.game[creatorid]['lifecast']+=1
                       else:
                         if x<100:
@@ -464,8 +464,8 @@ def randomstun(creatorid, team2, mob, x):
                             target['stun']=2
                         typemob2=classtoemoji(target['type'])
                         emoj2= emojize(typemob2, use_aliases=True)                
-                        mob['skilltext']=emoj1+mob['name']+emojskill+emoj2+target['name']+' "Оглушающий рык"'
-                        print('ОГЛУШЕНИЕ')
+                        mob['skilltext']=emoj1+mob['name']+emojskill+emoj2+target['name']+' "Karaxtlovchi Nara"'
+                        print('Karaxtlash')
                       else:
                         randomstun(creatorid, team2, mob, x)
                     else:
@@ -496,7 +496,7 @@ def randomeat(creatorid, team2, mob, x):
                         target['hp']=0
                         typemob2=classtoemoji(target['type'])
                         emoj2= emojize(typemob2, use_aliases=True)                
-                        mob['skilltext']=emoj1+mob['name']+emojeat+emoj2+target['name']+' "Изгнание"'
+                        mob['skilltext']=emoj1+mob['name']+emojeat+emoj2+target['name']+' "Haydash"'
                       else:
                         randomeat(creatorid, team2, mob, x)
                     else:
@@ -514,10 +514,10 @@ def testturn(creatorid, id):
   info.lobby.game[creatorid]['readys']+=1
   info.lobby.game[creatorid]['players'][id]['ready']=1
   if info.lobby.game[creatorid]['readys']!=len(info.lobby.game[creatorid]['players']):
-    msg=medit('Ожидание других игроков...', id, info.lobby.game[creatorid]['players'][id]['lastmessage'])
+    msg=medit('Boshqa oyinchilarni kutamiz...', id, info.lobby.game[creatorid]['players'][id]['lastmessage'])
     info.lobby.game[creatorid]['players'][id]['currentmessage']=msg.message_id
   else:
-    msg=medit('Ожидание других игроков...', id, info.lobby.game[creatorid]['players'][id]['lastmessage'])
+    msg=medit('Boshcha oyinchilarni kutamiz...', id, info.lobby.game[creatorid]['players'][id]['lastmessage'])
     info.lobby.game[creatorid]['players'][id]['currentmessage']=msg.message_id
     
     endturn(creatorid)
@@ -532,7 +532,7 @@ def testturn(creatorid, id):
 def endturn(creatorid):
  for ids in info.lobby.game[creatorid]['players']:
   if info.lobby.game[creatorid]['players'][ids]['ready']!=1:
-    msg=medit('Время вышло!', ids, info.lobby.game[creatorid]['players'][ids]['lastmessage'])
+    msg=medit('Vaqt tugadi!', ids, info.lobby.game[creatorid]['players'][ids]['lastmessage'])
  for id in info.lobby.game[creatorid]['team1']:
      for name in info.lobby.game[creatorid]['players'][id]['allmobs']:
         if name in info.lobby.game[creatorid]['players'][id]['portals']:
@@ -633,24 +633,24 @@ def endturn(creatorid):
  emojshield=emojize(':shield:', use_aliases=True)
  emojshturm=emojize(':crossed_swords:', use_aliases=True)
  if info.lobby.game[creatorid]['manaplust2']>0:
-   mana1='Полученная мана: '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+"\n"+"\n"
+   mana1='Olingan mana: '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+"\n"+"\n"
  else:
    mana1=''
  if info.lobby.game[creatorid]['manaplust1']>0:
-    mana2='Полученная мана: '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+"\n"+"\n"
+    mana2='Olingan mana: '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+"\n"+"\n"
  else:
     mana2=''
  if info.lobby.game[creatorid]['skills1']!='':
-   skills1="\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+"\n"
+   skills1="\n"+'Ishlatilgan kuchlar:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+"\n"
  else:
    skills1=''
  if info.lobby.game[creatorid]['skills2']!='':
-   skills2="\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+"\n"
+   skills2="\n"+'Ishlatilgan kuchlar:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+"\n"
  else:
    skills2=''
  if len(info.lobby.game[creatorid]['team2'])>0 and len(info.lobby.game[creatorid]['team1'])>0:
-   bot.send_message(info.lobby.game[creatorid]['chatid'],'Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда '+emojshturm+'"Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда '+emojshield+'"Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+emojshturm*7+':'+info.lobby.game[creatorid]['resultst1']+skills1+mana1+emojshield*7+':'+info.lobby.game[creatorid]['resultst2']+skills2+mana2+'Выжившие команды '+info.lobby.game[creatorid]['teammates1']+": "+str(livemobs1)+"\n"+'Выжившие команды '+info.lobby.game[creatorid]['teammates2']+": "+str(livemobs2)+"\n")
-   print('Ход '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Команда "Штурм": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Команда "Оборона": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+'Кол-во выживших существ команды "Штурм": '+str(livemobs1)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' маны за своих убитых существ!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Примененные скиллы:'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+'Кол-во выживших существ команды "Оборона": '+str(livemobs2)+"\n"+'Каждый игрок команды получил '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' маны за своих убитых существ!')
+   bot.send_message(info.lobby.game[creatorid]['chatid'],'Yurish '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Guruh '+emojshturm+'"Xujum": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Guruh '+emojshield+'"Himoya": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+emojshturm*7+':'+info.lobby.game[creatorid]['resultst1']+skills1+mana1+emojshield*7+':'+info.lobby.game[creatorid]['resultst2']+skills2+mana2+'Tirik qolgan guruhlar: '+info.lobby.game[creatorid]['teammates1']+": "+str(livemobs1)+"\n"+'Tirik qolgan guruhlar: '+info.lobby.game[creatorid]['teammates2']+": "+str(livemobs2)+"\n")
+   print('Yurish '+str(info.lobby.game[creatorid]['hod'])+':'+"\n"+te+'Guruh "Xujum": '+info.lobby.game[creatorid]['teammates1']+"\n"+te+'Guruh "Himoya": '+info.lobby.game[creatorid]['teammates2']+"\n"+"\n"+info.lobby.game[creatorid]['resultst1']+"\n"+'Ishlatilgan kuchlar:'+"\n"+info.lobby.game[creatorid]['skills1']+"\n"+'"Xujum" guruhining tirik qolgan mavjudotlari soni: '+str(livemobs1)+"\n"+'Guruhni har bir azosi '+droplet+str(info.lobby.game[creatorid]['manaplust2']/len(info.lobby.game[creatorid]['team2']))+' o`zlari o`ldirgan maxluqlar uchun mana oldi!'+"\n"+"\n"+info.lobby.game[creatorid]['resultst2']+"\n"+'Ishlatilgan kuchlar'+"\n"+info.lobby.game[creatorid]['skills2']+"\n"+'"Himoya" guruhida tirik qolgan o`yinchilar: '+str(livemobs2)+"\n"+'Guruhning har bir azosi '+droplet+str(info.lobby.game[creatorid]['manaplust1']/len(info.lobby.game[creatorid]['team1']))+' o`zi o`ldirgan maxluqlar uchun mana oldi!')
  else:
    if len(info.lobby.game[creatorid]['team2'])<1:
       info.lobby.game[creatorid]['throne2hp']-=2000
@@ -733,12 +733,12 @@ def endturn(creatorid):
        if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['stun']<1:
          mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
          mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
-         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Крепость'+"\n"
+         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+throne+'Saroy'+"\n"
          info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']-=7
          if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']<=0:
             info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
    info.lobby.game[creatorid]['throne1hp']-=1
-   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Оборона" подошли к вражеской крепости! Теперь у неё '+emojheart+str(info.lobby.game[creatorid]['throne1hp'])+' хп! А все атакующие её мобы получают 7 урона.'    
+   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'"Himoya" guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda '+emojheart+str(info.lobby.game[creatorid]['throne1hp'])+' ta Jon qoldi! Hujum qilgan barcha maxluqlar 7 zarba oldi.'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
@@ -753,27 +753,27 @@ def endturn(creatorid):
        if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['stun']<1:
          mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
          mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
-         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Крепость'+"\n"
+         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+throne+'Saroy'+"\n"
          info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']-=7
          if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']<=0:
             info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
     info.lobby.game[creatorid]['throne2hp']-=1
-    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'Мобы из команды "Штурм" подошли к вражеской крепости! Теперь у неё '+emojheart+str(info.lobby.game[creatorid]['throne2hp'])+' хп! А все атакующие её мобы получают 7 урона.'
+    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'"Xujum" guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda '+emojheart+str(info.lobby.game[creatorid]['throne2hp'])+' ta Jon qoldi! Hujum qilgan barcha maxluqlar 7 zarba oldi.'
  elif livemob2==0 and livemob1==0:
-    info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
+    info.lobby.game[creatorid]['thronedamage']='Saroylarga xujum bo`lmadi!'
  elif livemob2>0 and livemob1>0:
-    info.lobby.game[creatorid]['thronedamage']='Урона по крепостям нанесено не было!'
+    info.lobby.game[creatorid]['thronedamage']='Saroylarga xujum bo`lmadi!'
  bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'])
  info.lobby.game[creatorid]['thronedamage']=''
  info.lobby.game[creatorid]['thronedamagemobs']=''
  if info.lobby.game[creatorid]['throne2hp']<1 or info.lobby.game[creatorid]['throne1hp']<1:
    if info.lobby.game[creatorid]['throne2hp']<info.lobby.game[creatorid]['throne1hp']:
-    bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды "Штурм"!')
-    print('Победа команды "Штурм"!')
+    bot.send_message(info.lobby.game[creatorid]['chatid'], '"Xujum" guruhi g`alaba qozondi!')
+    print('"Xujum" guruhi g`alabasi!')
     del info.lobby.game[creatorid]
    elif info.lobby.game[creatorid]['throne2hp']>info.lobby.game[creatorid]['throne1hp']:
-    bot.send_message(info.lobby.game[creatorid]['chatid'], 'Победа команды "Оборона"!')
-    print('Победа команды "Оборона"!')
+    bot.send_message(info.lobby.game[creatorid]['chatid'], '"Himoya" guruhi g`alaba qozondi!')
+    print('"Himoya" guruhi g`alabasi!')
     timer=threading.Timer(4.0, delete, args=[creatorid])
     timer.start()
  else:
@@ -851,29 +851,29 @@ def buffcast(target, id, chatid, namemob, team):
     shield=random.randint(1, 100)
     if shield<=30:
       target['shield']=1
-      text+='Щит (шанс был 30%)'+"\n"
+      text+='Qalqon (Ehtimol 30% edi)'+"\n"
     
     hp=random.randint(1,100)
     if hp<=35:
       target['hp']+=4
-      text+='+4 хп (шанс был 35%)'+"\n"
+      text+='+4 xp Jon (Ehtimol 35% edi)'+"\n"
     
     damage=random.randint(1,100)
     if damage<=60:
       target['damage']+=3
-      text+='+3 урона (шанс был 60%)'+"\n"
+      text+='+3 zarb kuchi (Ehtimol 60% edi)'+"\n"
     
     die=random.randint(1,100)
     if die<=5:
         target['smert']=1
         target['hp']=0
-        text='Смерть (шанс был 5%)'+"\n"
+        text='O`lim (Ehtimol 5% edi)'+"\n"
     if text=='':
-        text='Не повезло! существо не получилго баффов'+"\n"
+        text='Omad kelmadi! Mavjudotga kuchayish bera olmadingiz'+"\n"
     if team==info.lobby.game[chatid]['t1mobs']:
-      info.lobby.game[chatid]['skills1']+=you+' Маги '+cast+'"Бафф моба" ('+namemob+'):'+"\n"+text
+      info.lobby.game[chatid]['skills1']+=you+' Sexr '+cast+'"Kuchayish" ('+namemob+'):'+"\n"+text
     elif team==info.lobby.game[chatid]['t2mobs']:
-        info.lobby.game[chatid]['skills2']+=you+' Маги '+cast+'"Бафф моба" ('+namemob+'):'+"\n"+text
+        info.lobby.game[chatid]['skills2']+=you+' Sexr '+cast+'"Kuchayish" ('+namemob+'):'+"\n"+text
     return text
         
     
@@ -899,15 +899,15 @@ def buffchoice(aidi, team, chatid, mana):
            if mana['mana']>=50:
              mana['mana']-=50
              text=buffcast(target, aidi, chatid, target['name'], team)
-             bot.send_message(aidi, 'Вы успешно скастовали бафф для моба ('+target['name']+')! Он получает:'+"\n"+text)
+             bot.send_message(aidi, 'Siz mavjudotga kuchayishni omadli berdingiz ('+target['name']+')! U oldi:'+"\n"+text)
            else:
-            bot.send_message(aidi, 'Недостаточно маны!')
+            bot.send_message(aidi, 'Mana yetarli emas!')
          else:
           buffchoice(aidi, team, chatid, mana)
        else:
           buffchoice(aidi, team, chatid, mana)
      else:
-         bot.send_message(aidi, 'У вас нет ни одного живого моба!')
+         bot.send_message(aidi, 'Sizda bitta ham tirik mavjudot yo`q!')
 
 def mobtoinfo(mob):
     if mob=='s_me4nik':
@@ -958,10 +958,10 @@ def inline(call):
           back=emojize(':back:', use_aliases=True) 
           cast=emojize(':man_with_turban:', use_aliases=True)
           Keyboard=types.InlineKeyboardMarkup()
-          Keyboard.add(types.InlineKeyboardButton(text=portal+"Открыть портал", callback_data='altar'))
-          Keyboard.add(types.InlineKeyboardButton(text=cast+"Наколдовать", callback_data='skills'))
-          Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
-          msg=medit('Выберите действие', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+          Keyboard.add(types.InlineKeyboardButton(text=portal+"Portalni ochish", callback_data='altar'))
+          Keyboard.add(types.InlineKeyboardButton(text=cast+"Sexrlash", callback_data='skills'))
+          Keyboard.add(types.InlineKeyboardButton(text=back+"Bosh menyu", callback_data='menu'))
+          msg=medit('Harakatni tanlang', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
             
@@ -976,18 +976,18 @@ def inline(call):
             back=emojize(':back:', use_aliases=True) 
             droplet=emojize(':droplet:', use_aliases=True)
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text="Бафф "+droplet+'50', callback_data='buff'), types.InlineKeyboardButton(text=infos+"Инфо", callback_data='infobuff')) 
-            Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
-            msg=medit('Выберите скилл:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            Keyboard.add(types.InlineKeyboardButton(text="Kuchayish "+droplet+'50', callback_data='buff'), types.InlineKeyboardButton(text=infos+"Info", callback_data='infobuff')) 
+            Keyboard.add(types.InlineKeyboardButton(text=back+"Bosh menyu", callback_data='menu'))
+            msg=medit('Kuchni tanlang:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             
     
   elif call.data=='infobuff':
-    bot.send_message(call.from_user.id, 'Эта способность выбирает случайное ваше живое существо и имеет несколько эффектов:'+"\n"+
-                     '1. Существо получает неуязвимость до конца хода (исключение: скилл "Изгнание" моба "Пожиратель душ") (шанс 30%);'+"\n"+
-                     '2. Урон существа увеличивается на 65; (шанс 60%);'+"\n"+
-                     '3. Существо получает +70 хп (шанс 35%);'+"\n"+
-                     '4. Существо умирает (шанс 5%);'+"\n"+
-                     'Каждый эффект имеет независимый от других шанс, следовательно ни один из эффектов может не сработать. Применяйте на свой страх и риск!'
+    bot.send_message(call.from_user.id, 'Bu qobiliyatni sizning taqribiy mavjudotlaringizdan biri oladi va quyidagi xususiyatlarga ega:'+"\n"+
+                     '1. Mavjudot yurish yakunigacha o`lmaslik xususiyatini oladi ("Qora Ajal" ning "Haydash" kuchi ta`sir etganda ishlamaydi) (ehtimol 30%);'+"\n"+
+                     '2. Mavjudot kuchi 65 ga ortadi; (ehtimol 60%);'+"\n"+
+                     '3. Mavjudot +70 xp Jon oladi (ehtimol 35%);'+"\n"+
+                     '4. Mavjudot o`ladi (ehtimol 5%);'+"\n"+
+                     'Bu kuchlar bir biriga bog`liq bo`lmagan holda tushadi, lekin bular hech biri ishlamasligi ham mumkin. Omadingizga qarab tavakkal qilishingiz mumkin!'
                     )
     
   
@@ -1000,7 +1000,6 @@ def inline(call):
                     buffchoice(call.from_user.id, info.lobby.game[id]['t1mobs'], id, info.lobby.game[id]['players'][call.from_user.id])
                 elif call.from_user.id in info.lobby.game[id]['team2']:
                     buffchoice(call.from_user.id, info.lobby.game[id]['t2mobs'], id, info.lobby.game[id]['players'][call.from_user.id])
-                 
           
           
   elif call.data=='menu':
@@ -1013,10 +1012,10 @@ def inline(call):
             end=emojize(':white_check_mark:', use_aliases=True)
             infos=emojize(':question:', use_aliases=True)
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text=go+"Действия", callback_data='do'))
-            Keyboard.add(types.InlineKeyboardButton(text=infos+"Инфо обо мне", callback_data='info'))  
-            Keyboard.add(types.InlineKeyboardButton(text=end+"Окончить ход", callback_data='end'))
-            msg=medit('Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            Keyboard.add(types.InlineKeyboardButton(text=go+"Harakatlar", callback_data='do'))
+            Keyboard.add(types.InlineKeyboardButton(text=infos+"Men haqimda ma`lumot", callback_data='info'))  
+            Keyboard.add(types.InlineKeyboardButton(text=end+"Yurishni yakunlash", callback_data='end'))
+            msg=medit('Bosh Menyu:'+"\n"+mana+'Mana: '+str(info.lobby.game[id]['players'][call.from_user.id]['mana'])+'/'+str(info.lobby.game[id]['players'][call.from_user.id]['manamax']), call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
             
@@ -1031,9 +1030,9 @@ def inline(call):
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
         if call.from_user.id in info.lobby.game[id]['team1']:
-          bot.send_message(call.from_user.id, 'Ваша команда: '+info.lobby.game[id]['teammates1']+"\n"+'Хп вашего замка: '+hp+str(info.lobby.game[id]['throne1hp'])+"\n"+'Хп замка противников: '+hp+str(info.lobby.game[id]['throne2hp']))
+          bot.send_message(call.from_user.id, 'Sizning guruhingiz: '+info.lobby.game[id]['teammates1']+"\n"+'Sizning Saroyingiz Joni: '+hp+str(info.lobby.game[id]['throne1hp'])+"\n"+'Dushman Saroyi Joni: '+hp+str(info.lobby.game[id]['throne2hp']))
         elif call.from_user.id in info.lobby.game[id]['team2']:  
-          bot.send_message(call.from_user.id, 'Ваша команда: '+info.lobby.game[id]['teammates2']+"\n"+'Хп вашего замка: '+hp+str(info.lobby.game[id]['throne2hp'])+"\n"+'Хп замка противников: '+hp+str(info.lobby.game[id]['throne1hp']))
+          bot.send_message(call.from_user.id, 'Sizning guruhingiz: '+info.lobby.game[id]['teammates2']+"\n"+'Sizning Saroyingiz Joni: '+hp+str(info.lobby.game[id]['throne2hp'])+"\n"+'Dushman Saroyi Joni: '+hp+str(info.lobby.game[id]['throne1hp']))
 
 
            
@@ -1055,160 +1054,160 @@ def inline(call):
             emojhp=emojize(':green_heart:', use_aliases=True)
             back=emojize(':back:', use_aliases=True) 
             Keyboard=types.InlineKeyboardMarkup()
-            Keyboard.add(types.InlineKeyboardButton(text=emoj0+info.lobby.game[id]['players'][call.from_user.id]['name1mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]),types.InlineKeyboardButton(text='Цена: '+manacost+str(nc0.cost), callback_data='no'),types.InlineKeyboardButton(text='Инфо', callback_data=mobtoinfo(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0])))
-            Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]),types.InlineKeyboardButton(text='Цена: '+manacost+str(nc1.cost), callback_data='no'),types.InlineKeyboardButton(text='Инфо', callback_data=mobtoinfo(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1])))
-            Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]),types.InlineKeyboardButton(text='Цена: '+manacost+str(nc2.cost), callback_data='no'),types.InlineKeyboardButton(text='Инфо', callback_data=mobtoinfo(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2])))
-            Keyboard.add(types.InlineKeyboardButton(text=back+"Главное меню", callback_data='menu'))
-            msg=medit('Доступные вам существа в этом ходу:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+            Keyboard.add(types.InlineKeyboardButton(text=emoj0+info.lobby.game[id]['players'][call.from_user.id]['name1mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0]),types.InlineKeyboardButton(text='Narx: '+manacost+str(nc0.cost), callback_data='no'),types.InlineKeyboardButton(text='Info', callback_data=mobtoinfo(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][0])))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj1+info.lobby.game[id]['players'][call.from_user.id]['name2mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1]),types.InlineKeyboardButton(text='Narx: '+manacost+str(nc1.cost), callback_data='no'),types.InlineKeyboardButton(text='Info', callback_data=mobtoinfo(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][1])))
+            Keyboard.add(types.InlineKeyboardButton(text=emoj2+info.lobby.game[id]['players'][call.from_user.id]['name3mob'], callback_data=info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2]),types.InlineKeyboardButton(text='Narx: '+manacost+str(nc2.cost), callback_data='no'),types.InlineKeyboardButton(text='Info', callback_data=mobtoinfo(info.lobby.game[id]['players'][call.from_user.id]['mobsinturn'][2])))
+            Keyboard.add(types.InlineKeyboardButton(text=back+"Bosh Menyu", callback_data='menu'))
+            msg=medit('Chaqirish imkoniyati bor mavjudotlar:', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
             info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id 
             info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
             
             
   elif call.data=='me4nikinfo':
     bot.send_message(call.from_user.id, 
-        'Имя: *Скелет-мечник*'+"\n"+
-        'Тип: '+emojundead+'Мертвец'+"\n"+
-        emojattack+'Урон: 55'+"\n"+
-        emojhp+'Жизни: 65'+"\n"+
-        emojmana+'Стоимость: 30'+"\n"+
-        emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: "Проклятье мертвецов" (шанс: 40%): увеличивает урон по атакуемой цели от всех мертвецов на 60% (применяется перед атакой)'+"\n"+
-                    'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Skilet-qilichboz*'+"\n"+
+        'Tip: '+emojundead+'O`liklar'+"\n"+
+        emojattack+'Zarb: 55'+"\n"+
+        emojhp+'Jon: 65'+"\n"+
+        emojmana+'Narx: 30'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 30'+"\n"+
+        emojskill+'Kuch: "O`liklar lanati" (ehtimol: 40%): nishonga hujum qilayotgan barcha maxluqlar 60% ga kuchi ortadi (hujumdan oldin ishlatiladi)'+"\n"+
+                    'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown'
                     )
     
     
   elif call.data=='pyosinfo':
     bot.send_message(call.from_user.id,
-        'Имя: *Pyos*'+"\n"+
-        'Тип: '+emojbio+'Био'+"\n"+
-        emojattack+'Урон: 50'+"\n"+
-        emojhp+'Жизни: 300'+"\n"+
-        emojmana+'Стоимость: 75'+"\n"+
-        emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: "Запрограммировать бота" (шанс 35%): Садится писать бота, и не замечает входящего в него урона (весь входящий урон блокируется)'+"\n"+
-                     'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Pyos*'+"\n"+
+        'Tip: '+emojbio+'Bio'+"\n"+
+        emojattack+'Zarb: 50'+"\n"+
+        emojhp+'Jon: 300'+"\n"+
+        emojmana+'Narx: 75'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 30'+"\n"+
+        emojskill+'Kuch: "Bot programmasini buzish" (ehtimol 35%): hujum qilayotgan mavjudot o`zidan o`zi zarb oladi (qabul qilayotgan barcha zarb bloklanadi)'+"\n"+
+                     'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
   elif call.data=='phoenixinfo':
     bot.send_message(call.from_user.id, 
-        'Имя: *Феникадзе*'+"\n"+
-        'Тип: '+emojfire+'Огненный'+"\n"+
-        emojattack+'Урон: 200'+"\n"+
-        emojhp+'Жизни: 25'+"\n"+
-        emojmana+'Стоимость: 60'+"\n"+
-        emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: Отсутствует'+"\n"+
-                     'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Feniks*'+"\n"+
+        'Тип: '+emojfire+'Olovli'+"\n"+
+        emojattack+'Zarb: 200'+"\n"+
+        emojhp+'Jon: 25'+"\n"+
+        emojmana+'Narx: 60'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 30'+"\n"+
+        emojskill+'Kuch: Yoq'+"\n"+
+                     'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
   elif call.data=='magnitinfo':
     bot.send_message(call.from_user.id,
-        'Имя: *Электромагнитень*'+"\n"+
-        'Тип: '+emojelectro+'Электро'+"\n"+
-        emojattack+'Урон: 70'+"\n"+
-        emojhp+'Жизни: 180'+"\n"+
-        emojmana+'Стоимость: 60'+"\n"+
-        emojmanamob+'Мана (собственная): 80'+"\n"+
-        emojskill+'Скилл: "Разряд" (шанс 30%): бьёт разрядом по врагу, и отнимает у существа, которое атакует, 45 урона (урон может уйти в минус!)'+"\n"+
-                     'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Elektromagniten*'+"\n"+
+        'Tip: '+emojelectro+'Elektro'+"\n"+
+        emojattack+'Zarb: 70'+"\n"+
+        emojhp+'Jon: 180'+"\n"+
+        emojmana+'Narx: 60'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 80'+"\n"+
+        emojskill+'Kuch: "Quvvat" (ehtimol 30%): dushmanni tok uradi va uning 45 zarb kuchini tortib oladi (zarb minusga ham ketishi mumkin!)'+"\n"+
+                     'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
          
         
         
   elif call.data=='manoedinfo':
     bot.send_message(call.from_user.id,
-        'Имя: *Маноед*'+"\n"+
-        'Тип: '+emojghost+'Призрачный'+"\n"+
-        emojattack+'Урон: 45'+"\n"+
-        emojhp+'Жизни: 135'+"\n"+
-        emojmana+'Стоимость: 45'+"\n"+
-        emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: "Проникновение" (шанс 60%): отнимает у цели до 70 единиц маны (у цели остается не меньше, чем 0), и наносит урон, соответствующий выжженной мане'+"\n"+
-                     'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Monoed*'+"\n"+
+        'Tip: '+emojghost+'Ruxlar'+"\n"+
+        emojattack+'Zarb: 45'+"\n"+
+        emojhp+'Jon: 135'+"\n"+
+        emojmana+'Narx: 45'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 30'+"\n"+
+        emojskill+'Kuch: "Ichiga kirish" (ehtimol 60%): nishondan 70 qism mana olib qo`yadi (0 dan kam bo`lmagan mana qoladi), tortib olgan manasi miqdorida zarb yetkazadi.'+"\n"+
+                     'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
     
     
   elif call.data=='tiranozavrinfo':
     bot.send_message(call.from_user.id,
-        'Имя: *Тиранозавр*'+"\n"+
-        'Тип: '+emojbio+'Био'+"\n"+
-        emojattack+'Урон: 120'+"\n"+
-        emojhp+'Жизни: 260'+"\n"+
-        emojmana+'Стоимость: 90'+"\n"+
-        emojmanamob+'Мана (собственная): 30'+"\n"+
-        emojskill+'Скилл: "Оглушающий рык" (шанс 40%): рычит и оглушает случайного вражеского моба (если тот уже сходил до применения этого скилла, оглушение перейдет на следующий ход)'+"\n"+
-                     'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Tiranozarv*'+"\n"+
+        'Tip: '+emojbio+'Bio'+"\n"+
+        emojattack+'Zarb: 120'+"\n"+
+        emojhp+'Jon: 260'+"\n"+
+        emojmana+'Narx: 90'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 30'+"\n"+
+        emojskill+'Kuch: "Karaxtlovchi Nara" (ehtimol 40%): baqiradi va taqribiy dushmanlardan birini karaxtlaydi (agarda avval karaxt bo`lgan sexr keyingi yurishga o`tadi)'+"\n"+
+                     'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
     
     
   elif call.data=='s4upakabrainfo':
     bot.send_message(call.from_user.id,
-        'Имя: *Чупакабра*'+"\n"+
-        'Тип: '+emojundead+'Мертвец'+"\n"+
-        emojattack+'Урон: 90'+"\n"+
-        emojhp+'Жизни: 75'+"\n"+
-        emojmana+'Стоимость: 50'+"\n"+
-        emojmanamob+'Мана (собственная): 55'+"\n"+
-        emojskill+'Скилл: "Кровожадность" (шанс: 100%): при атаке цели лечит себя на 50% нанесённого урона (если в момент применения скилла собственное хп больше нуля)'+"\n"+
-                     'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Chupakabra*'+"\n"+
+        'Tip: '+emojundead+'O`liklar'+"\n"+
+        emojattack+'Zarb: 90'+"\n"+
+        emojhp+'Jon: 75'+"\n"+
+        emojmana+'Narx: 50'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 55'+"\n"+
+        emojskill+'Kuch: "Qonxo`rlik" (ehtimol: 100%): hujum vaqtida yetkazgan zarbini 50% ga o`z jonini to`ldirib oladi (kuchni ishlatish vaqtida joni 0xp dan ko`p bo`lishi lozim)'+"\n"+
+                     'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown')   
   
     
     
   elif call.data=='goleminfo':
     bot.send_message(call.from_user.id, 
-        'Имя: *Пылающий голем*'+"\n"+
-        'Тип: '+emojfire+'Огненный'+"\n"+
-        emojattack+'Урон: 100'+"\n"+
-        emojhp+'Жизни: 600'+"\n"+
-        emojmana+'Стоимость: 165'+"\n"+
-        emojmanamob+'Мана (собственная): 100'+"\n"+
-        emojskill+'Скилл: Отсутствует'+"\n"+
-                     'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Olovli golem*'+"\n"+
+        'Tip: '+emojfire+'Olovlilar'+"\n"+
+        emojattack+'Zarb: 100'+"\n"+
+        emojhp+'Jon: 600'+"\n"+
+        emojmana+'Narx: 165'+"\n"+
+        emojmanamob+'Mana (xususiy): 100'+"\n"+
+        emojskill+'Kuch: Yoq'+"\n"+
+                     'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
-    
+      
     
     
   elif call.data=='vsadnikinfo':
       bot.send_message(call.from_user.id, 
-        'Имя: *Всадник без коня*'+"\n"+
-        'Тип: '+emojghost+'Призрачный'+"\n"+
-        emojattack+'Урон: 70'+"\n"+
-        emojhp+'Жизни: 200'+"\n"+
-        emojmana+'Стоимость: 70'+"\n"+
-        emojmanamob+'Мана (собственная): 50'+"\n"+
-        emojskill+'Скилл: "Призрачный меч" (шанс: 100%): атакуя одну цель, наносит такой же урон ВСЕМ существам противника'+"\n"+
-                       'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Boshsiz Chavandoz*'+"\n"+
+        'Tip: '+emojghost+'Ruxlar'+"\n"+
+        emojattack+'Zarb: 70'+"\n"+
+        emojhp+'Joni: 200'+"\n"+
+        emojmana+'Narx: 70'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 50'+"\n"+
+        emojskill+'Kuchi: "Ruxsimon qilich" (ehtimol: 100%): bitta nishonga xujum qilib HAMMA dushmanlarga zarb yetkazadi'+"\n"+
+                       'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
     
     
     
   elif call.data=='soulinfo':
       bot.send_message(call.from_user.id, 
-        'Имя: *Пожиратель душ*'+"\n"+
-        'Тип: '+emojundead+'Мертвец'+"\n"+
-        emojattack+'Урон: 75'+"\n"+
-        emojhp+'Жизни: 110'+"\n"+
-        emojmana+'Стоимость: 70'+"\n"+
-        emojmanamob+'Мана (собственная): 50'+"\n"+
-        emojskill+'Скилл: "Изгнание" (шанс: 15%) - Изгоняет случайного вражеского монстра из этого мира (убивает), овладевая его душой - увеличивает свое хп на 40% от текущего хп противника, а так же добавляет к своему урону 100% от урона изгнанного'+"\n"+
-                       'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Qora Ajal*'+"\n"+
+        'Tip: '+emojundead+'O`liklar'+"\n"+
+        emojattack+'Zarbi: 75'+"\n"+
+        emojhp+'Joni: 110'+"\n"+
+        emojmana+'Narxi: 70'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 50'+"\n"+
+        emojskill+'Kuch: "Haydash" (ehtimol: 15%) - Taqribiy dushman maxluqini narigi dunyoga haydab yuboradi (o`ldiradi), uning yuragiga ega bo`lib - o`z jonini 40% ni dushman joni hisobiga to`ldiradi, shuningdek 100% uning zarb kuchini oladi.'+"\n"+
+                       'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown') 
         
         
   elif call.data=='zombieinfo':
      bot.send_message(call.from_user.id, 
-        'Имя: *Зомби*'+"\n"+
-        'Тип: '+emojundead+'Мертвец'+"\n"+
-        emojattack+'Урон: 25'+"\n"+
-        emojhp+'Жизни: 230'+"\n"+
-        emojmana+'Стоимость: 65'+"\n"+
-        emojmanamob+'Мана (собственная): 50'+"\n"+
-        emojskill+'Скилл: "Воскрешение" (шанс: 40%) - Воскрешает случайного союзного моба, погибшего в этом матче. Хп воскрешённого становится равно 100.'+"\n"+
-                       'Превосходство мобов друг над другом:'+"\n"+
+        'Nomi: *Zombi*'+"\n"+
+        'Tip: '+emojundead+'O`liklar'+"\n"+
+        emojattack+'Zarbi: 25'+"\n"+
+        emojhp+'Joni: 230'+"\n"+
+        emojmana+'Narxi: 65'+"\n"+
+        emojmanamob+'Mana (shaxsiy): 50'+"\n"+
+        emojskill+'Kuch: "Qayta Tirilish" (ehtimol: 40%) - Jangda o`lgan taqribiy do`st maxluqni o`ldiradi. Tirilganning joni 100 xp ga teng bo`ladi.'+"\n"+
+                       'Maxluqlar bir biridan ustunligi:'+"\n"+
                     emojelectro+emojarrow+emojghost+emojarrow+emojfire+emojarrow+emojbio+emojarrow+emojundead+emojarrow+emojelectro, parse_mode='markdown')
     
     
@@ -1224,9 +1223,9 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']=createportal('s_me4nik', info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Скелет-мечник)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Skilet-qilichboz)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['s_me4nik']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
             
             
   elif call.data=='phoenix':
@@ -1241,9 +1240,9 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal('phoenix', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']=createportal('phoenix', info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Феникадзе)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Feniks)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['phoenix']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
             
   elif call.data=='electromagnit':
      for id in info.lobby.game:
@@ -1257,9 +1256,9 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal('electromagnit', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']=createportal('electromagnit', info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Электромагнитень)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Elektromagniten)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['electromagnit']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
             
   elif call.data=='manoed': 
     for id in info.lobby.game:
@@ -1273,9 +1272,9 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']=createportal('manoed', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']=createportal('manoed', info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Маноед)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Monoed)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['manoed']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
             
             
   elif call.data=='pyos':
@@ -1290,9 +1289,9 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['pyos']=createportal('pyos', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['pyos']=createportal('pyos', info.lobby.game[id]['players'][call.from_user.id]['portals']['pyos']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Pyos)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['pyos']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Pyos)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['pyos']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
             
   elif call.data=='tiranozavr':
     for id in info.lobby.game:
@@ -1306,9 +1305,9 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']=createportal('tiranozavr', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']=createportal('tiranozavr', info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Тиранозавр)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Tiranozavr)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['tiranozavr']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
             
             
             
@@ -1324,9 +1323,9 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['s4upakabra']=createportal('s4upakabra', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['s4upakabra']=createportal('s4upakabra', info.lobby.game[id]['players'][call.from_user.id]['portals']['s4upakabra']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Чупакабра)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['s4upakabra']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Chupakabra)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['s4upakabra']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
           
         
         
@@ -1342,9 +1341,9 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']=createportal('golem', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']=createportal('golem', info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Пылающий голем)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Olovli Golem)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['golem']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
             
             
   elif call.data=='vsadnik':
@@ -1359,14 +1358,11 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']=createportal('vsadnik', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']=createportal('vsadnik', info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Всадник без коня)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Boshsiz chavondoz)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['vsadnik']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
             
-            
-            
-       
-   
+              
   elif call.data=='soulcatcher':     
     for id in info.lobby.game:
       if call.from_user.id in info.lobby.game[id]['players']:
@@ -1379,9 +1375,9 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']=createportal('soulcatcher', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']=createportal('soulcatcher', info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Пожиратель душ)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz (Qora ajal)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['soulcatcher']['count'])+' ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
             
             
   elif call.data=='zombie':          
@@ -1396,18 +1392,15 @@ def inline(call):
               info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']=createportal('zombie', 1)  
             else:
               info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']=createportal('zombie', info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']['count']+1)  
-            bot.send_message(call.from_user.id, 'Вы успешно призвали портал (Зомби)!'+"\n"+'Теперь у вас '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']['count'])+' таких порталов!')
+            bot.send_message(call.from_user.id, 'Siz portalni omadli ochdingiz(Zombi)!'+"\n"+'Endi sizda '+str(info.lobby.game[id]['players'][call.from_user.id]['portals']['zombie']['count'])+'ta shunday portal bor!')
            else:
-            bot.send_message(call.from_user.id, 'Недостаточно маны!')
+            bot.send_message(call.from_user.id, 'Mana yetarli emas!')
    
-       
                  
-            
-    
-  
 def medit(message_text,chat_id, message_id,reply_markup=None,parse_mode='Markdown'):
     return bot.edit_message_text(chat_id=chat_id,message_id=message_id,text=message_text,reply_markup=reply_markup,
                                  parse_mode=parse_mode)
+
 
 @bot.message_handler(commands=['electro'])
 def electro(message):
@@ -1416,10 +1409,10 @@ def electro(message):
     emojfire=emojize(':fire:', use_aliases=True)
     emojghost=emojize(':ghost:', use_aliases=True)
     emojundead=emojize(':skull:', use_aliases=True)
-    bot.send_message(message.from_user.id, emojelectro+'Электро:'+"\n"+'Оболочка этих монстров состоит из плоти, а внутренности отсутствуют. Вместо них внутри монстра присутствует электричество, заполняющее всё тело и контролирующее его. У существ этого типа есть свой запас маны, за счёт которого они и удерживают электричество в теле.'+"\n"+
-                    'Наносимый урон:'+"\n"+'По '+emojbio+'био: 100%'+"\n"+'По '+emojfire+'огненным: 100%'+"\n"+'По '+emojghost+'призрачным: 200%'+"\n"+'По '+emojundead+'мертвецам: 100%'+"\n"+"\n"+
-                     'Получаемый урон:'+"\n"+'От '+emojbio+'био: 100%'+"\n"+'От '+emojfire+'огненных: 100%'+"\n"+'От '+emojghost+'призрачных: 100%'+"\n"+'От '+emojundead+'мертвецов: 200%'+"\n"+"\n"+
-                     'Скиллы:'+"\n"+'"Разряд" (присутствует у: Электромагнитень) - бьёт разрядом по врагу, и с 30% шансом отнимает у существа, которое атакует, 45 урона (урон может уйти в минус!)'
+    bot.send_message(message.from_user.id, emojelectro+'Elektro maxluqlar:'+"\n"+'Tanasini teri o`rab turadi lekin ichki azolari yo`q. Uni o`rnini elektr toki to`ldirib turadi. Bu mavjudotlar o`zining shaxsiy manasi orqali ichidagi elektr toki doimiyligini ta`minlaydi.'+"\n"+
+                    'Zarb yetkazishi:'+"\n"+'= '+emojbio+'bio: 100%'+"\n"+'= '+emojfire+'olovlilar: 100%'+"\n"+'= '+emojghost+'ruxlar: 200%'+"\n"+'= '+emojundead+'o`liklar: 100%'+"\n"+"\n"+
+                     'Qabul qiluvchi zarbi:'+"\n"+'= '+emojbio+'bio: 100%'+"\n"+'= '+emojfire+'olovlilar: 100%'+"\n"+'= '+emojghost+'ruxlar: 100%'+"\n"+'= '+emojundead+'o`liklar: 200%'+"\n"+"\n"+
+                     'Kuchlar:'+"\n"+'"Quvvat" (Elektromagnitenda bor) - dushmanga tok bilan hujum qiladi va 30% ehtimollikda hujum qilayotgan mavjudotning o`zi o`ziga 45 zarb yetkazadi (Zarb minusga ham ketishi mumkin)'
                     )
     
     
@@ -1430,11 +1423,11 @@ def bio(message):
     emojfire=emojize(':fire:', use_aliases=True)
     emojghost=emojize(':ghost:', use_aliases=True)
     emojundead=emojize(':skull:', use_aliases=True)
-    bot.send_message(message.from_user.id, emojbio+'Биологические:'+"\n"+'Существа, состоящие из плоти и крови. Имеют стандартный набор свойств, олицетворяющих живое существо в людском мире.'+"\n"+
-                     'Наносимый урон:'+"\n"+'По '+emojfire+'огненным: 100%'+"\n"+'По '+emojghost+'призрачным: 100%'+"\n"+'По '+emojundead+'мертвецам: 200%'+"\n"+'По '+emojelectro+'электро: 100%'+"\n"+"\n"+
-                     'Получаемый урон:'+"\n"+'От '+emojfire+'огненных: 200%'+"\n"+'От '+emojghost+'призрачных: 100%'+"\n"+'От '+emojundead+'мертвецов: 100%'+"\n"+'От '+emojelectro+'электро: 100%'+"\n"+"\n"+
-                     'Скиллы:'+"\n"+'"Запрограммировать бота" (присутствует у: Pyos (Уникальный моб Пйоса)) - с 35% шансом садится писать бота, и не замечает входящего в него урона (весь входящий урон блокируется)'+"\n"+
-                     '"Оглушающий рык" (присутствует у: Тиранозавр) - рычит, и с 40% шансом оглушает случайного вражеского моба (если тот уже сходил до применения этого скилла, оглушение перейдет на следующий ход)'
+    bot.send_message(message.from_user.id, emojbio+'Biologik maxluqlar:'+"\n"+'Haqiqiy jon va qondan iborat mavjudotlar bo`lib, odamlar dunyosidagi standart mavjudotlar sifatlariga ega.'+"\n"+
+                     'Zarb yetkazishi:'+"\n"+'= '+emojfire+'olovlilar: 100%'+"\n"+'= '+emojghost+'ruxlar: 100%'+"\n"+'= '+emojundead+'o`liklar: 200%'+"\n"+'= '+emojelectro+'elektro: 100%'+"\n"+"\n"+
+                     'Qabul qiluvchi zarbi:'+"\n"+'= '+emojfire+'olovlilar: 200%'+"\n"+'= '+emojghost+'ruxlar: 100%'+"\n"+'= '+emojundead+'o`liklar: 100%'+"\n"+'= '+emojelectro+'elektro: 100%'+"\n"+"\n"+
+                     'Kuchlari:'+"\n"+'"Bot programmasini buzish" (Pyosda bor) - 35% ehtimollikda dushman o`zidan o`zi zarba yeydi (barcha qabul qilingan zarblar bloklanadi)'+"\n"+
+                     '"Karaxtlovchi nara" (Tironozavrda) - 40% ehtimol bilan baqirig`i taqribiy bir o`yinchini karaxt qilib qo`yadi (agar u allaqachon karxt bo`lgan bo`lsa sexr keyingi yurishda ta`sir etadi)'
                     )
     
     
@@ -1445,10 +1438,10 @@ def fire(message):
     emojfire=emojize(':fire:', use_aliases=True)
     emojghost=emojize(':ghost:', use_aliases=True)
     emojundead=emojize(':skull:', use_aliases=True)
-    bot.send_message(message.from_user.id, emojfire+'Огненные:'+"\n"+'Существа, сформированные из огня в подземном мире, где температура достигает очень высоких величин. Портал призывает их прямо оттуда, чтобы они не успели угаснуть.'+"\n"+
-                     'Наносимый урон:'+"\n"+'По '+emojghost+'призрачным: 100%'+"\n"+'По '+emojundead+'мертвецам: 100%'+"\n"+'По '+emojelectro+'электро: 100%'+"\n"+'По '+emojbio+'био: 200%'+"\n"+"\n"+
-                     'Получаемый урон:'+"\n"+'От '+emojghost+'призрачных: 200%'+"\n"+'От '+emojundead+'мертвецов: 100%'+"\n"+'От '+emojelectro+'электро: 100%'+"\n"+'От '+emojbio+'био: 100%'+"\n"+"\n"+
-                     'Скиллы:'+"\n"+'Пока что ни у одного существа типа "огненные" скиллов нет.'
+    bot.send_message(message.from_user.id, emojfire+'Olovlilar'+"\n"+'Xarorat juda yuqori bo`lgan yer osti dunyosida vujudga kelishgan. Ular sovib qolishmasliklari uchun ular to`g`ridan to`g`ri portal orqali chiqishadi.'+"\n"+
+                     'Zarb yetkazishi:'+"\n"+'= '+emojghost+'ruxlar: 100%'+"\n"+'= '+emojundead+'o`liklar: 100%'+"\n"+'= '+emojelectro+'elektro: 100%'+"\n"+'= '+emojbio+'bio: 200%'+"\n"+"\n"+
+                     'Qabul qiluvchi zarbi:'+"\n"+'= '+emojghost+'ruxlar: 200%'+"\n"+'= '+emojundead+'o`liklar: 100%'+"\n"+'= '+emojelectro+'elektro: 100%'+"\n"+'= '+emojbio+'bio: 100%'+"\n"+"\n"+
+                     'Kuchlari:'+"\n"+'Hozircha hech bir mo`jizaviy kuchga ega emas.'
                     )
     
 @bot.message_handler(commands=['ghost'])
@@ -1458,11 +1451,11 @@ def ghost(message):
     emojfire=emojize(':fire:', use_aliases=True)
     emojghost=emojize(':ghost:', use_aliases=True)
     emojundead=emojize(':skull:', use_aliases=True)
-    bot.send_message(message.from_user.id, emojghost+'Призрачные:'+"\n"+'Монстры, имеющие полу-материальное тело, что позволяет им получать меньше повреждений от физического мира, но от электро-монстров урона они получают очень много'+"\n"+
-                     'Наносимый урон:'+"\n"+'По '+emojundead+'мертвецам: 100%'+"\n"+'По '+emojelectro+'электро: 100%'+"\n"+'По '+emojbio+'био: 100%'+"\n"+'По '+emojfire+'огненным: 200%'+"\n"+"\n"+    
-                     'Получаемый урон:'+"\n"+'От '+emojundead+'мертвецов: 100%'+"\n"+'От '+emojelectro+'электро: 200%'+"\n"+'От '+emojbio+'био: 100%'+"\n"+'От '+emojfire+'огненных: 100%'+"\n"+"\n"+ 
-                     'Скиллы:'+"\n"+'"Проникновение" (присутствует у: Маноед) - с шансом 45% отнимает у цели 1 дополнительное хп.'+"\n"+
-                     '"Призрачный меч" (присутствует у: Всадник без коня) - атакуя одну цель, наносит такой же урон ВСЕМ существам противника'
+    bot.send_message(message.from_user.id, emojghost+'Ruxlar:'+"\n"+'Narigi dunyodan chaqirilgan yarimjon maxluqotlar bo`lib, jismoniy zarbdan kam zarar oladi. Lekin elektromaxluqlar ularga kuchli zarar yetkaza oladi.'+"\n"+
+                     'Zarb yetkazishi:'+"\n"+'= '+emojundead+'o`liklar: 100%'+"\n"+'= '+emojelectro+'elektro: 100%'+"\n"+'= '+emojbio+'bio: 100%'+"\n"+'= '+emojfire+'olovlilar: 200%'+"\n"+"\n"+    
+                     'Qabul qiluvchi zarari:'+"\n"+'= '+emojundead+'o`liklar: 100%'+"\n"+'= '+emojelectro+'elektro: 200%'+"\n"+'= '+emojbio+'bio: 100%'+"\n"+'= '+emojfire+'olovlilar: 100%'+"\n"+"\n"+ 
+                     'Kuchlari:'+"\n"+'"Tanaga kirish" (Monoedda bor) - 45% ehtimollikda dushmanni qo`shimcha 1xp jonini olib qo`yadi.'+"\n"+
+                     '"Ruxsimon qilich" (Boshsiz chavandozda bor) - bitta nishonga hujum qilish orqali HAMMA maxluqlarga zarb yetkazishi mumkin.'
                     )
     
     
@@ -1473,19 +1466,16 @@ def undead(message):
     emojfire=emojize(':fire:', use_aliases=True)
     emojghost=emojize(':ghost:', use_aliases=True)
     emojundead=emojize(':skull:', use_aliases=True)
-    bot.send_message(message.from_user.id, emojundead+'Мертвецы:'+"\n"+'Существа, которые уже мертвы, и поэтому самый действенный способ убить их - физическое уничтожение частей тела.'+"\n"+
-                     'Наносимый урон:'+"\n"+'По '+emojelectro+'электро: 200%'+"\n"+'По '+emojbio+'био: 100%'+"\n"+'По '+emojfire+'огненным: 100%'+"\n"+'По '+emojghost+'призракам: 100%'+"\n"+"\n"+  
-                     'Получаемый урон:'+"\n"+'От '+emojelectro+'электро: 100%'+"\n"+'От '+emojbio+'био: 200%'+"\n"+'От '+emojfire+'огненных: 100%'+"\n"+'От '+emojghost+'призраков: 100%'+"\n"+"\n"+ 
-                     'Скиллы:'+"\n"+'"Проклятье мертвецов" (присутствует у: Скелет-мечник) - имеет 25% шанс при атаке цели повысить получаемый ей урон от мертвецов на 60% (складывается от нескольких применений скилла по одной цели).'+"\n"+
-                     '"Кровожадность" (присутствует у: Чупакабра) - при атаке цели лечит себя на 50% нанесённого урона (если в момент применения скилла хп больше нуля).'+"\n"+
-                     '"Изгнание" (присутствует у: Пожиратель душ (уникальный моб, выданный Василию за победу в турнире) - с шансом 15% изгоняет случайного вражеского монстра из этого мира, овладевая его душой - увеличивает свое хп на 40% от текущего хп противника, а так же добавляет к своему урону 100% от урона изгнанного.'
+    bot.send_message(message.from_user.id, emojundead+'O`liklar:'+"\n"+'Ushba mavjudotlar allaqachon o`lib bo`lishgan ularni rostakamiga o`ldirishning yagona yo`li ularning jismoniy tanalarini yo`q qilishdir.'+"\n"+
+                     'Zarb yetkazishi:'+"\n"+'= '+emojelectro+'elektro: 200%'+"\n"+'= '+emojbio+'bio: 100%'+"\n"+'= '+emojfire+'olovlilar: 100%'+"\n"+'= '+emojghost+'ruxlar: 100%'+"\n"+"\n"+  
+                     'Qabul qiluvchi zarari:'+"\n"+'= '+emojelectro+'elektro: 100%'+"\n"+'= '+emojbio+'bio: 200%'+"\n"+'= '+emojfire+'olovlilar: 100%'+"\n"+'= '+emojghost+'ruxlar: 100%'+"\n"+"\n"+ 
+                     'Kuchlari:'+"\n"+'"O`liklar lanati" (Skilet-qilichbozda bor) - 25% ehtimollikda o`liklar zarbini 60% ga kuchaytirish imkoniyatiga ega.'+"\n"+
+                     '"Qonxo`rlik" (Chupakabrada bor) - hujum qilayotganda yetkazgan zarbini 50% ga o`zini davolab olishi mumkin (kuch ishlatilganda jon 0dan ko`p bo`lishi lozim).'+"\n"+
+                     '"Haydash" (Qora Ajalda bor) - 15% ehtimollikda taqribiy dushman maxluqini bu dunyodan haydab yuboradi. Uning hayotiga ega bo`lib jonining 40% ini o`ziniki qilib oladi. Shuningdek uning zarb kuchini 100% o`ziniki qilib oladi!'
                     )
     
  
-
     
-
-
 @bot.message_handler(commands=['fight'])
 def fightstart(message):
   if message.from_user.id in info.lobby.game:
@@ -1494,7 +1484,7 @@ def fightstart(message):
         if len(info.lobby.game[message.from_user.id]['players'])%2==0:
          if len(info.lobby.game[message.from_user.id]['players'])!=0:
           if info.lobby.game[message.from_user.id]['battle']==0:
-            bot.send_message(message.chat.id, 'Битва начинается! Приготовьте свою ману...')
+            bot.send_message(message.chat.id, 'O`yin boshlanayadbi! O`z Manangiz tayorlang......')
             for id in info.lobby.game[message.from_user.id]['players']:
               if len(info.lobby.game[message.from_user.id]['team1'])==len(info.lobby.game[message.from_user.id]['team2']):
                 a=random.randint(1,2)
@@ -1517,27 +1507,23 @@ def fightstart(message):
             lenofteam2=len(info.lobby.game[message.from_user.id]['teammates2'])
             info.lobby.game[message.from_user.id]['teammates2']=info.lobby.game[message.from_user.id]['teammates2'][:(lenofteam2-2)]
             for ids2 in info.lobby.game[message.from_user.id]['team2']:
-                bot.send_message(ids2, 'Вы в обороне! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates2'])
+                bot.send_message(ids2, 'Siz saroy himoyachisisiz! Sizning komandangiz: '+info.lobby.game[message.from_user.id]['teammates2'])
             for ids1 in info.lobby.game[message.from_user.id]['team1']:
-                bot.send_message(ids1, 'Вы штурмуете крепость! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates1'])
+                bot.send_message(ids1, 'Siz saroyga xujumchisisiz! Sizning komandangiz: '+info.lobby.game[message.from_user.id]['teammates1'])
             btl=threading.Thread(target=battle, args=[message.from_user.id])
             btl.start()
-            bot.send_message(441399484, 'Игра началась в каком-то чате!')
+            bot.send_message(441399484, 'Qaysidir chatda o`yin boshlandi!')
             info.lobby.game[message.from_user.id]['thread']=btl
             print(info.lobby.game)
             info.lobby.game[message.from_user.id]['playing']=1
           else:
-            bot.send_message(message.chat.id, 'Игра ('+info.lobby.game[message.from_user.id]['name']+') уже была запущена!')
+            bot.send_message(message.chat.id, 'O`yin - ('+info.lobby.game[message.from_user.id]['name']+') allaqachon boshlangandi!')
          else:
-            bot.send_message(message.chat.id, 'В лобби 0 игроков!')  
+            bot.send_message(message.chat.id, 'O`yinda 0 ta o`yinchi!')  
         else:
-          bot.send_message(message.chat.id, 'Можно играть только при четном количестве игроков!')
+          bot.send_message(message.chat.id, 'Faqatgina juft o`yinchilar soni bilan o`yinni boshlash mumkin!')
 
-          
-          
-                     
-  
-
+       
 @bot.message_handler(commands=['join'])
 def joinm(message):
   for key in info.lobby.game:
@@ -1551,49 +1537,46 @@ def joinm(message):
                x+=1
            if x<1:        
               try:
-               bot.send_message(message.from_user.id, 'Вы успешно присоединились!')
+               bot.send_message(message.from_user.id, 'Siz o`yinga omadli qo`shildingiz!')
                info.lobby.game[key]['players'][message.from_user.id]=createuser(message.from_user.id, 1, message.from_user.first_name)
                info.lobby.game[key]['players'][message.from_user.id]['cash']=info.lobby.game[id]['name']
                info.lobby.game[key]['len']+=1
-               bot.send_message(message.chat.id, 'Вы успешно присоединились в игру ('+str(info.lobby.game[key]['players'][message.from_user.id]['cash'])+')! Для начала игры её создатель должен нажать /fight')
+               bot.send_message(message.chat.id, 'Siz o`yinga omadli qo`shildingiz ('+str(info.lobby.game[key]['players'][message.from_user.id]['cash'])+')! O`yin boshlanishi uchun uni boshlagan odam /fight tugmasini bosishi lozim!')
               except:
-                bot.send_message(message.chat.id, 'Для начала надо начать разговор с @MagicWarsBot !')
+                bot.send_message(message.chat.id, 'O`yinga qo`shilish uchun @WarsUzBot bilan bog`lan!')
            else:  
                 pass
 
-
            
-
 @bot.message_handler(commands=['cancel'])
 def cancelmessage(message):
   if message.from_user.id in info.lobby.game:
     if info.lobby.game[message.from_user.id]['playing']==0:
       cancel(message.from_user.id, message.chat.id)
     else:
-      bot.send_message(message.chat.id, 'Игра уже была запущена!')
+      bot.send_message(message.chat.id, 'O`yin allaqachon boshlangan!')
 
 @bot.message_handler(commands=['start'])
 def startmessage(message):
   m=message.from_user.id
-  bot.send_message(m, 'Приветствую тебя в игре "MagicWars! Здесь тебе предстоит научиться создавать свои мистические войска и сражаться с друзьями'+
-                  ', а так же изучать особенности каждого своего воина! Жми /help, чтобы узнать всё в подробностях') 
+  bot.send_message(m, '"Sexrli Janglar" o`yiniga hush kelibsiz! Bu yerda siz o`z mo`jizaviy qo`shiningizni yaratib do`stlaringiz bilan kurashishingiz mumkin.'+
+                  ' Buning uchun esa har bir mavjudotlarni hususiyatlarini o`rganib chiqing! To`liq ma`lumot uchun /help tugmasini bosing!') 
                   
                    
 
 @bot.message_handler(commands=['help'])
 def helpmessage(message):
  try:
-  bot.send_message(message.from_user.id, 'Чтобы сыграть в игру, добавьте меня в чат и напишите /begin для начала набора игроков. Один игрок может присутствовать только в одной игре. Создатель лобби автоматически в него помещается.'+"\n"+      
-                   'В этой игре вы играете за одного из магов, который обороняет свою крепость, или нападает на чужую! (на балланс это не влияет). '+
-                   'Чтобы атаковать врага, вы чертите на земле специальные символы, открывая портал, из которого появляется одно из ваших выбранных '+
-                   'существ (для открытия портала требуется мана, которая каждый ход регенерируется по 55 единиц (если в игре больше, чем 2 человека, то по 30)), которое вступает в бой с существами врагов, и разделавшись с ними, идет в атаку на крепость. Если хотя бы одно существо подошло к вражеской крепости, она теряет 1 хп (всего хп 5).'+
-                   ' Все существа полностью самостоятельны, вам лишь нужно грамотно выбрать порталы для их появления.'+'В каждом раунде вам даются 3 случайно выбранных портала, которые вы можете открывать.'+'Можно играть команда на команду!'+"\n"+'Цель игры: уничтожить крепость соперника.'+"\n"+'Всего в игре есть 5 классов существ:'+"\n"+'электро, биологические, огненные, призрачные и мертвецы.'+"\n"+
-                    'Чтобы узнать про каждый: /electro, /bio, /fire, /ghost, /undead. (От своего класса мобы всегда получают 100% урон)')
+  bot.send_message(message.from_user.id, 'Bu o`yinni o`nash uchun botni guruhga qo`shing va /begin tugmasini bosing. Bir o`yinchi faqat bitta o`yinda mavjud bo`lishi mumkin. O`yinni boshlagan odam avtomatik uni azosiga aylanadi.'+"\n"+      
+                   'Bu o`yinda siz saroyni himoya qiluvchi yoki dushmanga hujum qiluvchi afsungarlardan biri bo`lasiz (kuchlar teng bo`ladi). '+
+                   'Dushmanga hujum qilish uchun sexrli belgilar chizib portal ochasiz. Portaldan siz tanlagan mo`jizaviy mavjudotlardan biri chiqadi'+
+                   '(Portalni ochish uchun Mana-Sexr kerak bo`ladi. Mana har yurishda 55taga ko`payadi (Agarda o`yinda 2tadan ko`p odam bo`lsa 30tadan ko`payadi). Chiqargan mo`jizaviy mavjudotlaringiz dushman saroyiga hujum qilishadi. Agarda 1ta bo`lsa ham mavjudot dushman darvozasiga yetib borsa saroy 1ta jonini yo`qotadi (Umumiy 5ta).'+
+                   'Barcha mavjudotlar o`z xususiyatiga ega. Sizning vazifangiz ularni aql bilan tanlash.'+'Har bir yurishda sizga taqribiy 3ta portal beriladi va ularni tanlab o`ziz hohlagan mavjudotni chiqarasiz.'+'Guruhga qarshi guruh o`ynashi mumkin!'+"\n"+'O`yindan maqsad: Dushman saroyini yo`q qilish.'+"\n"+'O`yinda 5ta klass mavjudotlar bor:'+"\n"+'Elektromaxluqlar, Biologik mutantlar, Olovli maxluqlar, Ruhsimon maxluqlar va O`liksimon maxluqlar.'+"\n"+
+                    'Ularni har biri bilan tanishish uchun bos: /electro, /bio, /fire, /ghost, /undead. (Bir xil mavjudotlar doimo bir biriga 100% zarar yetkazadi)')
   if message.chat.id<0:
-        bot.send_message(message.chat.id, 'Отправил сообщение тебе в лс')
+        bot.send_message(message.chat.id, 'Sizga shaxsiy xat jo`natildi')
  except:
-        bot.send_message(message.chat.id, 'Для начала надо начать разговор с @MagicWarsBot !')
-
+        bot.send_message(message.chat.id, 'O`yinga qo`shilish uchun @WarsUzBot bilan bog`lan!')
 
 
 @bot.message_handler(commands=['begin'])
@@ -1604,26 +1587,26 @@ def beginmessage(message):
     if message.chat.id==info.lobby.game[id]['chatid']:
         a+=1
   if a>0:
-    bot.send_message(message.chat.id, 'Игра уже идет в этом чате!')
+    bot.send_message(message.chat.id, 'O`yin guruhda allaqachon ketayabdi!')
   else:
    if message.chat.id<0:
     userapply=0
     try:
-      bot.send_message(message.from_user.id, 'Вы создали лобби!')
+      bot.send_message(message.from_user.id, 'Siz o`yinga omadli qo`shildingiz!')
       userapply=1
     except:
-      bot.send_message(message.chat.id, 'Для начала надо начать разговор с @MagicWarsBot !')
+      bot.send_message(message.chat.id, 'O`yinga qo`shilish uchun @WarsUzBot bilan bog`laning!')
     if userapply==1:
       createdlobby=createlobby(message.chat.id, message.from_user.id, message.from_user.first_name)
       info.lobby.game.update(createdlobby)
       print(info.lobby.game)
-      bot.send_message(message.chat.id, 'Лобби создано! Назовите его, отправив название следующим сообщением.'+"\n"+'Если вы хотите отменить игру - нажмите /cancel.'+"\n"+'Игра автоматически удалится через 5 минут!')
+      bot.send_message(message.chat.id, 'O`yin yaratildi! Keyingi jo`natadigan xatingiz bilan uni nomlang!'+"\n"+'Agarda siz o`yinni to`xtatmoqchi bo`lsaz  /cancel tugmasini bosing.'+"\n"+'O`yin 20 daqiqadan so`ng avtomatik o`chiriladi!')
       info.lobby.game[message.from_user.id]['naming']=1
-      lobbycancel=threading.Timer(300.0, cancel, args=[message.from_user.id, message.chat.id])
+      lobbycancel=threading.Timer(1200.0, cancel, args=[message.from_user.id, message.chat.id])
       lobbycancel.start()
         
    else:
-    bot.send_message(message.from_user.id, 'Играть можно только в группах!')
+    bot.send_message(message.from_user.id, 'Faqat guruhlardagina o`ynash mumkin!')
     
     
 @bot.message_handler(commands=['surrender'])
@@ -1631,7 +1614,7 @@ def surrender(message):
     for id in info.lobby.game:
         if message.chat.id==info.lobby.game[id]['chatid']:
           if message.from_user.id in info.lobby.game[id]['players']:
-            bot.send_message(message.chat.id, info.lobby.game[id]['players'][message.from_user.id]['fname']+' сдался!')
+            bot.send_message(message.chat.id, info.lobby.game[id]['players'][message.from_user.id]['fname']+' taslim bo`ldi!')
             del info.lobby.game[id]['players'][message.from_user.id]
             if message.from_user.id in info.lobby.game[id]['team1']:
                 del info.lobby.game[id]['team1'][message.from_user.id]
@@ -1652,19 +1635,20 @@ def namemessage(message):
          if message.text!='None':
           if message.chat.id==info.lobby.game[message.from_user.id]['chatid']:
             info.lobby.game[message.from_user.id]['name']=message.text
-            bot.send_message(message.chat.id, 'Вы назвали лобби! ('+message.text+').'+"\n"+'Ожидайте игроков (/join для присоединения).')
+            bot.send_message(message.chat.id, 'Siz o`yinga yangi nom berdingiz: ('+message.text+').'+"\n"+'O`yinchilarni kutyabmiz ( /join tugmasini bosing o`yinga qo`shilish uchun).')
             info.lobby.game[message.from_user.id]['naming']=0  
          else:
-          bot.send_message(message.chat.id, 'Недопустимое имя!')
+          bot.send_message(message.chat.id, 'Ruxsat etilmaydigan nom!')
         else:
-          bot.send_message(message.chat.id, 'Длина названия не должна превышать 30 символов!')
-          
+          bot.send_message(message.chat.id, 'Nomning uzunligi 30ta belgidan oshmasligi lozim!')
+                
   
 def cancel(id, chatid):
+ if id in info.lobby.game:
   if info.lobby.game[id]['playing']==0:
     info.lobby.game[id].clear()
     del info.lobby.game[id]
-    bot.send_message(chatid, 'Лобби удалено!')
+    bot.send_message(chatid, 'O`yin to`xtatildi!')
   
   
 
@@ -2030,10 +2014,10 @@ def battle(creatorid):
       end=emojize(':white_check_mark:', use_aliases=True)
       infos=emojize(':question:', use_aliases=True)
       Keyboard=types.InlineKeyboardMarkup()       
-      Keyboard.add(types.InlineKeyboardButton(text=go+"Действия", callback_data='do'))
-      Keyboard.add(types.InlineKeyboardButton(text=infos+"Инфо обо мне", callback_data='info'))
-      Keyboard.add(types.InlineKeyboardButton(text=end+"Окончить ход", callback_data='end'))     
-      msg=bot.send_message(key, 'Главное меню:'+"\n"+mana+'Мана: '+str(info.lobby.game[creatorid]['players'][key]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][key]['manamax']),reply_markup=Keyboard)
+      Keyboard.add(types.InlineKeyboardButton(text=go+"Harakatlar", callback_data='do'))
+      Keyboard.add(types.InlineKeyboardButton(text=infos+"Men haqimdagi ma`lumot", callback_data='info'))
+      Keyboard.add(types.InlineKeyboardButton(text=end+"Yurishni yakunlash", callback_data='end'))     
+      msg=bot.send_message(key, 'Bosh Menyu:'+"\n"+mana+'Mana: '+str(info.lobby.game[creatorid]['players'][key]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][key]['manamax']),reply_markup=Keyboard)
       info.lobby.game[creatorid]['players'][key]['lastmessage']=msg.message_id
       info.lobby.game[creatorid]['players'][key]['currentmessage']=msg.message_id
        
