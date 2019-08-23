@@ -1520,10 +1520,10 @@ def fightstart(message):
                 bot.send_message(ids2, 'Вы в обороне! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates2'])
             for ids1 in info.lobby.game[message.from_user.id]['team1']:
                 bot.send_message(ids1, 'Вы штурмуете крепость! Ваша команда: '+info.lobby.game[message.from_user.id]['teammates1'])
-            btl=threading.Thread(target=battle, args=[message.from_user.id])
+            btl=threading.Thread(target=battle, args=[message.chat.id])
             btl.start()
             bot.send_message(441399484, 'Игра началась в каком-то чате!')
-            info.lobby.game[message.from_user.id]['thread']=btl
+            info.lobby.game[message.chat.id]['thread']=btl
             print(info.lobby.game)
             info.lobby.game[message.chat.id]['playing']=1
           else:
