@@ -961,7 +961,7 @@ def inline(call):
           Keyboard.add(types.InlineKeyboardButton(text=portal+"Portalni ochish", callback_data='altar'))
           Keyboard.add(types.InlineKeyboardButton(text=cast+"Sexrlash", callback_data='skills'))
           Keyboard.add(types.InlineKeyboardButton(text=back+"Bosh menyu", callback_data='menu'))
-          msg=medit(test.terrorid,caption='Harakatni tanlang', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
+          msg=medit(caption='Harakatni tanlang', call.from_user.id, info.lobby.game[id]['players'][call.from_user.id]['lastmessage'], reply_markup=Keyboard)
           info.lobby.game[id]['players'][call.from_user.id]['currentmessage']=msg.message_id
           info.lobby.game[id]['players'][call.from_user.id]['lastmessage']=msg.message_id
             
