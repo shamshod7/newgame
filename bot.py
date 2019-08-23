@@ -768,11 +768,11 @@ def endturn(creatorid):
  info.lobby.game[creatorid]['thronedamagemobs']=''
  if info.lobby.game[creatorid]['throne2hp']<1 or info.lobby.game[creatorid]['throne1hp']<1:
    if info.lobby.game[creatorid]['throne2hp']<info.lobby.game[creatorid]['throne1hp']:
-    bot.send_message(info.lobby.game[creatorid]['chatid'], '"Xujum" guruhi g`alaba qozondi!')
+    bot.send_document(info.lobby.game[creatorid]['chatid'],test.ratid,caption='"Xujum" guruhi g`alaba qozondi!')    
     print('"Xujum" guruhi g`alabasi!')
     del info.lobby.game[creatorid]
    elif info.lobby.game[creatorid]['throne2hp']>info.lobby.game[creatorid]['throne1hp']:
-    bot.send_message(info.lobby.game[creatorid]['chatid'], '"Himoya" guruhi g`alaba qozondi!')
+    bot.send_document(info.lobby.game[creatorid]['chatid'],test.ratid,caption='"Himoya" guruhi g`alaba qozondi!')    
     print('"Himoya" guruhi g`alabasi!')
     timer=threading.Timer(4.0, delete, args=[creatorid])
     timer.start()
