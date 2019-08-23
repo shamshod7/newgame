@@ -2022,8 +2022,8 @@ def battle(creatorid):
       Keyboard=types.InlineKeyboardMarkup()       
       Keyboard.add(types.InlineKeyboardButton(text=go+"Harakatlar", callback_data='do'))
       Keyboard.add(types.InlineKeyboardButton(text=infos+"Men haqimdagi ma`lumot", callback_data='info'))
-      Keyboard.add(types.InlineKeyboardButton(text=end+"Yurishni yakunlash", callback_data='end'))     
-      msg=bot.send_message(key, 'Bosh Menyu:'+"\n"+mana+'Mana: '+str(info.lobby.game[creatorid]['players'][key]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][key]['manamax']),reply_markup=Keyboard)
+      Keyboard.add(types.InlineKeyboardButton(text=end+"Yurishni yakunlash", callback_data='end'))   
+      msg=bot.send_document(key,test.terrorid,caption='Bosh Menyu:'+"\n"+mana+'Mana: '+str(info.lobby.game[creatorid]['players'][key]['mana'])+'/'+str(info.lobby.game[creatorid]['players'][key]['manamax']),reply_markup=Keyboard)
       info.lobby.game[creatorid]['players'][key]['lastmessage']=msg.message_id
       info.lobby.game[creatorid]['players'][key]['currentmessage']=msg.message_id
        
