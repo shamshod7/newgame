@@ -768,11 +768,11 @@ def endturn(creatorid):
  info.lobby.game[creatorid]['thronedamagemobs']=''
  if info.lobby.game[creatorid]['throne2hp']<1 or info.lobby.game[creatorid]['throne1hp']<1:
    if info.lobby.game[creatorid]['throne2hp']<info.lobby.game[creatorid]['throne1hp']:
-    bot.send_document(info.lobby.game[creatorid]['chatid'],test.ratid,caption='"Xujum" guruhi g`alaba qozondi!')    
+    bot.send_document(info.lobby.game[creatorid]['chatid'],test.masterid,caption='"Xujum" guruhi g`alaba qozondi!')    
     print('"Xujum" guruhi g`alabasi!')
     del info.lobby.game[creatorid]
    elif info.lobby.game[creatorid]['throne2hp']>info.lobby.game[creatorid]['throne1hp']:
-    bot.send_document(info.lobby.game[creatorid]['chatid'],test.ratid,caption='"Himoya" guruhi g`alaba qozondi!')    
+    bot.send_document(info.lobby.game[creatorid]['chatid'],test.terrorid,caption='"Himoya" guruhi g`alaba qozondi!')    
     print('"Himoya" guruhi g`alabasi!')
     timer=threading.Timer(4.0, delete, args=[creatorid])
     timer.start()
@@ -1484,7 +1484,7 @@ def fightstart(message):
         if len(info.lobby.game[message.from_user.id]['players'])%2==0:
          if len(info.lobby.game[message.from_user.id]['players'])!=0:
           if info.lobby.game[message.from_user.id]['battle']==0:
-            bot.send_document(message.chat.id,test.ratid,caption='O`yin boshlanayadbi! O`z Manangiz tayorlang......')
+            bot.send_document(message.chat.id,test.newid,caption='O`yin boshlanayadbi! O`z Manangiz tayorlang......')
             for id in info.lobby.game[message.from_user.id]['players']:
               if len(info.lobby.game[message.from_user.id]['team1'])==len(info.lobby.game[message.from_user.id]['team2']):
                 a=random.randint(1,2)
