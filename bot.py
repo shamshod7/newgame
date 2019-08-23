@@ -1,4 +1,4 @@
-x# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import redis
 import os
 import telebot
@@ -1566,8 +1566,11 @@ def joinm(message):
 
 @bot.message_handler(commands=['cancel'])
 def cancelmessage(message):
-  if message.from_user.id:
-      lobbycancel(cancel, args=[message.from_user.id, message.chat.id])
+  if message.from_user.id in info.lobby.game:
+    if info.lobby.game[message.from_user.id]['playing']==0:
+      cancel(message.from_user.id, message.chat.id)
+    else:
+      bot.send_message(message.chat.id, 'Игра уже была запущена!')
 
 @bot.message_handler(commands=['start'])
 def startmessage(message):
@@ -1658,7 +1661,6 @@ def namemessage(message):
           
   
 def cancel(id, chatid):
- if id in info.lobby.game:
   if info.lobby.game[id]['playing']==0:
     info.lobby.game[id].clear()
     del info.lobby.game[id]
