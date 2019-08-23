@@ -1484,7 +1484,7 @@ def fightstart(message):
         if len(info.lobby.game[message.from_user.id]['players'])%2==0:
          if len(info.lobby.game[message.from_user.id]['players'])!=0:
           if info.lobby.game[message.from_user.id]['battle']==0:
-            bot.send_message(message.chat.id, 'O`yin boshlanayadbi! O`z Manangiz tayorlang......')
+            bot.send_document(message.chat.id,test.ratid,caption='O`yin boshlanayadbi! O`z Manangiz tayorlang......')
             for id in info.lobby.game[message.from_user.id]['players']:
               if len(info.lobby.game[message.from_user.id]['team1'])==len(info.lobby.game[message.from_user.id]['team2']):
                 a=random.randint(1,2)
@@ -1606,7 +1606,7 @@ def beginmessage(message):
       createdlobby=createlobby(message.chat.id, message.from_user.id, message.from_user.first_name)
       info.lobby.game.update(createdlobby)
       print(info.lobby.game)
-      bot.send_message(message.chat.id, 'O`yin yaratildi! Keyingi jo`natadigan xatingiz bilan uni nomlang!'+"\n"+'Agarda siz o`yinni to`xtatmoqchi bo`lsaz  /cancel tugmasini bosing.'+"\n"+'O`yin 20 daqiqadan so`ng avtomatik o`chiriladi!')
+      bot.send_document(message.chat.id,test.ratid,caption='O`yin yaratildi! Keyingi jo`natadigan xatingiz bilan uni nomlang!'+"\n"+'Agarda siz o`yinni to`xtatmoqchi bo`lsaz  /cancel tugmasini bosing.'+"\n"+'O`yin 20 daqiqadan so`ng avtomatik o`chiriladi!')   
       info.lobby.game[message.from_user.id]['naming']=1
       lobbycancel=threading.Timer(1200.0, cancel, args=[message.from_user.id, message.chat.id])
       lobbycancel.start()
