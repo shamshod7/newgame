@@ -1560,7 +1560,7 @@ def cancelmessage(message):
 @bot.message_handler(commands=["rathunt"])
 def start_game(message):
   m=message.from_user.id
-  bot.send_document(m,test.ratid,caption="Qo`shilish uchun /join knopkasini bosing. O`yin bekor qilinishiga 5 daqiqa qoldi.")
+  bot.send_document(m,test.dogid,caption="Qo`shilish uchun /join knopkasini bosing. O`yin bekor qilinishiga 5 daqiqa qoldi.")
     
 @bot.message_handler(commands=['start'])
 def startmessage(message):
