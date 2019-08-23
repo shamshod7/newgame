@@ -738,7 +738,7 @@ def endturn(creatorid):
          if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']<=0:
             info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
    info.lobby.game[creatorid]['throne1hp']-=1
-   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'"Himoya" guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda '+emojheart+str(info.lobby.game[creatorid]['throne1hp'])+' ta Jon qoldi! Hujum qilgan barcha maxluqlar 7 zarba oldi.'    
+   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'*"🛡Himoya🏰"* guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda *'+emojheart+str(info.lobby.game[creatorid]['throne1hp'])+' jon* qoldi! Hujum qilgan barcha maxluqlar *7 zarba⛓* oldi.'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
@@ -758,7 +758,7 @@ def endturn(creatorid):
          if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']<=0:
             info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
     info.lobby.game[creatorid]['throne2hp']-=1
-    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'"Xujum" guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda '+emojheart+str(info.lobby.game[creatorid]['throne2hp'])+' ta Jon qoldi! Hujum qilgan barcha maxluqlar 7 zarba oldi.'
+    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'*"⚔️Xujum🏯"* guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda *'+emojheart+str(info.lobby.game[creatorid]['throne2hp'])+' jon* qoldi! Hujum qilgan barcha maxluqlar *7 zarba⛓* oldi.'
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Saroylarga xujum bo`lmadi!'
  elif livemob2>0 and livemob1>0:
