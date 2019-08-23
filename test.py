@@ -1,9 +1,9 @@
 import os
 
 ratid = 'https://i.gifer.com/I3ZZ.gif' #xz
-newid = 'http://img1.joyreactor.cc/pics/post/Хоббит-Арда-фэндомы-Саурон-1745899.gif' #fight
-terrorid = 'https://66.media.tumblr.com/f493d98acfddfc4aceb7059de14de460/tumblr_pfmi6cj8fQ1rj78ymo1_1280.gif' #xz
-masterid = 'https://66.media.tumblr.com/6ebee24c225f390d3a33ca716c66c150/tumblr_inline_ohzzdr5WTM1uy5jr6_500.gif' #xujum yangilanadi
+newid = 'https://i.pinimg.com/originals/c6/60/9c/c6609cda7e25cc9297b5d346f542200b.gif' #fight
+terrorid = 'https://66.media.tumblr.com/f493d98acfddfc4aceb7059de14de460/tumblr_pfmi6cj8fQ1rj78ymo1_1280.gif' #lich
+masterid = 'https://66.media.tumblr.com/6ebee24c225f390d3a33ca716c66c150/tumblr_inline_ohzzdr5WTM1uy5jr6_500.gif' #xujum
 dragoid = 'https://vignette.wikia.nocookie.net/anime-characters-fight/images/c/cd/Медив07.gif/revision/latest?cb=20180401092135&path-prefix=ru' #begin
 dogid = 'https://vignette.wikia.nocookie.net/anime-characters-fight/images/5/55/Медив03.gif/revision/latest?cb=20180401192844&path-prefix=ru' #himoya
 rhinoid = 'AgADAgADbqoxG2TrgUkhECUTDgcfAkRsUw8ABGx3RFITYKWUotoFAAEC'
