@@ -1542,7 +1542,7 @@ def joinm(message):
                info.lobby.game[key]['players'][message.from_user.id]['cash']=info.lobby.game[id]['name']
                info.lobby.game[key]['len']+=1
                bot.send_message(message.chat.id, 'Siz o`yinga omadli qo`shildingiz ('+str(info.lobby.game[key]['players'][message.from_user.id]['cash'])+')! O`yin boshlanishi uchun uni boshlagan odam /fight tugmasini bosishi lozim!')
-    if info.lobby.game[message.from_user.id]['playing']==0:
+    if info.lobby.game[message.from_user.id]['playing']==0: 
     else:
       bot.send_message(message.chat.id, 'O`yin allaqachon boshlangan!')         
               except:
