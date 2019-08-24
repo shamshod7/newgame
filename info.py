@@ -5,7 +5,7 @@ class Lobby(object):
      
 class S_me4nik(object):
     def __init__(self):
-        self.name='Скелет-мечник'
+        self.name='Skilet-Qilichboz'
         self.hp=2
         self.mana=30
         self.damage=1
@@ -36,7 +36,7 @@ class Pyos(object):
         
 class Phoenix(object):
     def __init__(self):
-        self.name='Феникадзе'
+        self.name='Feniks'
         self.hp=1
         self.mana=30
         self.damage=6
@@ -52,7 +52,7 @@ class Phoenix(object):
         
 class Electromagnit(object):
     def __init__(self):
-        self.name='Электромагнитень'
+        self.name='Elektromagniten'
         self.hp=6
         self.mana=80
         self.damage=3
@@ -68,7 +68,7 @@ class Electromagnit(object):
         
 class Manoed(object):
     def __init__(self):
-        self.name='Маноед'
+        self.name='Monoed'
         self.hp=4
         self.mana=30
         self.damage=2
@@ -84,7 +84,7 @@ class Manoed(object):
         
 class Tiranozavr(object):  
     def __init__(self):
-        self.name='Тиранозавр'
+        self.name='Tiranozavr'
         self.hp=7
         self.mana=30
         self.damage=3
@@ -100,7 +100,7 @@ class Tiranozavr(object):
 
 class S4upakabra(object):
     def __init__(self):
-        self.name='Чупакабра'
+        self.name='Chupakabra'
         self.hp=3
         self.mana=55
         self.damage=4
@@ -116,11 +116,11 @@ class S4upakabra(object):
         
 class Golem(object):
     def __init__(self):
-        self.name='Пылающий голем'
+        self.name='Olovli Golem'
         self.hp=13
         self.mana=100
         self.damage=2
-        self.cost=165
+        self.cost=150
         self.type='fire'
         self.fromelectrodmg=1
         self.frombiodmg=1
@@ -135,7 +135,7 @@ class Golem(object):
         
 class Vsadnik(object):
     def __init__(self):
-        self.name='Всадник без коня'
+        self.name='Boshsiz CHavandoz'
         self.hp=6
         self.mana=50
         self.damage=3
@@ -152,7 +152,7 @@ class Vsadnik(object):
        
 class Soulcatcher(object):
     def __init__(self):
-        self.name='Пожиратель душ'
+        self.name='Qora Ajal'
         self.hp=5
         self.mana=50
         self.damage=3
@@ -169,7 +169,7 @@ class Soulcatcher(object):
         
 class Zombie(object):
     def __init__(self):
-        self.name='Зомби'
+        self.name='Zombi'
         self.hp=7
         self.mana=50
         self.damage=1
