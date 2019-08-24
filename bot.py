@@ -1543,11 +1543,11 @@ def joinm(message):
                info.lobby.game[key]['len']+=1
                bot.send_message(message.chat.id, 'Siz o`yinga omadli qo`shildingiz ('+str(info.lobby.game[key]['players'][message.from_user.id]['cash'])+')! O`yin boshlanishi uchun uni boshlagan odam /fight tugmasini bosishi lozim!')
                elif info.lobby.game[message.from_user.id]['playing']==0:              
-               bot.send_message(message.chat.id, 'O`yin boshlanmagan yoki allaqachon bo`layabdi.')            
+                   bot.send_message(message.chat.id, 'O`yin boshlanmagan yoki allaqachon bo`layabdi.')            
               except:
                 bot.send_message(message.chat.id, 'O`yinga qo`shilish uchun @WarsUzBot bilan bog`lan!')
-           else:   
-                    pass
+           else:  
+                pass
 
            
 @bot.message_handler(commands=['cancel'])
