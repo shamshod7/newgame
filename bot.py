@@ -733,12 +733,12 @@ def endturn(creatorid):
        if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['stun']<1:
          mobdmageall+=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
          mobdmage=info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['damage']
-         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+' *Saroyga🏯* xujum qildi❕'+"\n"
+         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['name']+emojattack+' Saroyga🏯 xujum qildi❕'+"\n"
          info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']-=7
          if info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['hp']<=0:
             info.lobby.game[creatorid]['t2mobs'][mbs][nmbs]['smert']=1
    info.lobby.game[creatorid]['throne1hp']-=1
-   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'*🛡Himoya🏰* guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda *'+emojheart+str(info.lobby.game[creatorid]['throne1hp'])+' jon* qoldi! Hujum qilgan barcha maxluqlar *7 zarba⛓* oldi.'    
+   info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'🛡Himoya🏰 guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda '+emojheart+str(info.lobby.game[creatorid]['throne1hp'])+' jon qoldi! Hujum qilgan barcha maxluqlar 7 zarba⛓ oldi.'    
  elif livemob2==0 and livemob1>0:
     for mbs2 in info.lobby.game[creatorid]['t1mobs']:
      for nmbs2 in info.lobby.game[creatorid]['t1mobs'][mbs2]:
@@ -753,17 +753,17 @@ def endturn(creatorid):
        if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['stun']<1:
          mobdmageall+=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
          mobdmage=info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['damage']
-         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+'* Saroyga🏰* xujum qildi❕'+"\n"
+         info.lobby.game[creatorid]['thronedamagemobs']+=emoj1+info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['name']+emojattack+' Saroyga🏰 xujum qildi❕'+"\n"
          info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']-=7
          if info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['hp']<=0:
             info.lobby.game[creatorid]['t1mobs'][mbs2][nmbs2]['smert']=1
     info.lobby.game[creatorid]['throne2hp']-=1
-    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'*⚔️Xujum🏯* guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda *'+emojheart+str(info.lobby.game[creatorid]['throne2hp'])+' jon* qoldi! Hujum qilgan barcha maxluqlar *7 zarba⛓* oldi.'
+    info.lobby.game[creatorid]['thronedamage']=info.lobby.game[creatorid]['thronedamagemobs']+"\n"+'⚔️Xujum🏯 guruhi maxluqlari dushman saroyiga xujum qilishdi ! Endi unda '+emojheart+str(info.lobby.game[creatorid]['throne2hp'])+' jon qoldi! Hujum qilgan barcha maxluqlar 7 zarba⛓ oldi.'
  elif livemob2==0 and livemob1==0:
     info.lobby.game[creatorid]['thronedamage']='Saroylarga xujum bo`lmadi!'
  elif livemob2>0 and livemob1>0:
     info.lobby.game[creatorid]['thronedamage']='Saroylarga xujum bo`lmadi!'
- bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'], parse_mode='markdown')
+ bot.send_message(info.lobby.game[creatorid]['chatid'], info.lobby.game[creatorid]['thronedamage'])
  info.lobby.game[creatorid]['thronedamage']=''
  info.lobby.game[creatorid]['thronedamagemobs']=''
  if info.lobby.game[creatorid]['throne2hp']<1 or info.lobby.game[creatorid]['throne1hp']<1:
@@ -1484,7 +1484,7 @@ def fightstart(message):
         if len(info.lobby.game[message.from_user.id]['players'])%2==0:
          if len(info.lobby.game[message.from_user.id]['players'])!=0:
           if info.lobby.game[message.from_user.id]['battle']==0:
-            bot.send_document(message.chat.id,test.newid,caption='*📯O`yin boshlanayadbi! O`z Manangizni💧 tayorlang......*', parse_mode='markdown')
+            bot.send_document(message.chat.id,test.newid,caption="*📯O'yin boshlanayabdi! 💧O'z Manangizni tayyorlang......*", parse_mode='markdown')
             for id in info.lobby.game[message.from_user.id]['players']:
               if len(info.lobby.game[message.from_user.id]['team1'])==len(info.lobby.game[message.from_user.id]['team2']):
                 a=random.randint(1,2)
@@ -1606,7 +1606,7 @@ def beginmessage(message):
       createdlobby=createlobby(message.chat.id, message.from_user.id, message.from_user.first_name)
       info.lobby.game.update(createdlobby)
       print(info.lobby.game)
-      bot.send_document(message.chat.id,test.dragoid,caption="*O`yin yaratildi! Keyingi jo`natadigan xatingiz bilan uni nomlang!*"+"\n"+"*Agarda siz o`yinni to`xtatmoqchi bo`lsaz* /cancel *tugmasini bosing.*"+"\n"+"*O`yin 20 daqiqadan so`ng avtomatik o`chiriladi!*", parse_mode='markdown')   
+      bot.send_document(message.chat.id,test.dragoid,caption="*🧙‍♂O`yin yaratildi! Keyingi jo`natadigan xatingiz bilan uni nomlang!*"+"\n"+"*🔮Agarda siz o`yinni to`xtatmoqchi bo`lsaz* /cancel *tugmasini bosing.*"+"\n"+"*⏳O`yin 20 daqiqadan so`ng avtomatik o`chiriladi!*", parse_mode='markdown')   
       info.lobby.game[message.from_user.id]['naming']=1
       lobbycancel=threading.Timer(1200.0, cancel, args=[message.from_user.id, message.chat.id])
       lobbycancel.start()
@@ -1641,7 +1641,7 @@ def namemessage(message):
          if message.text!='None':
           if message.chat.id==info.lobby.game[message.from_user.id]['chatid']:
             info.lobby.game[message.from_user.id]['name']=message.text
-            bot.send_message(message.chat.id, 'Siz o`yinga yangi nom berdingiz: ('+message.text+').'+"\n"+'O`yinchilarni kutyabmiz ( /join tugmasini bosing o`yinga qo`shilish uchun).')
+            bot.send_message(message.chat.id, "🎴Siz o'yinga yangi nom berdingiz: *"+message.text+"*❕"+"\n"+"O'yinchilarni kutyabmiz...\nO'yinga qo'shilish uchun /join tugmasini bosing.", parse_mode='markdown')
             info.lobby.game[message.from_user.id]['naming']=0  
          else:
           bot.send_message(message.chat.id, 'Ruxsat etilmaydigan nom!')
