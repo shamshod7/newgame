@@ -1546,8 +1546,8 @@ def joinm(message):
                bot.send_message(message.chat.id, 'O`yin boshlanmagan yoki allaqachon bo`layabdi.')            
               except:
                 bot.send_message(message.chat.id, 'O`yinga qo`shilish uchun @WarsUzBot bilan bog`lan!')
-           else:  
-                pass
+           else:   
+                    pass
 
            
 @bot.message_handler(commands=['cancel'])
